@@ -206,10 +206,10 @@ let create_logoff_msg ( engine : fix_engine_state ) =
 ;;
 
 (** Create a heartbeat message *)
-let create_heartbeat_msg ( engine, tr_id : fix_engine_state * string option) =
+let create_heartbeat_msg ( engine, tr_id : fix_engine_state * int option) =
     let msg_data = Full_FIX_Admin_Msg (
         Full_Msg_Heartbeat {
-            hb_test_req_id = tr_id;
+            hb_test_req_id = Some 0; (*tr_id; TODO *)
         }
     ) in 
     create_outbound_fix_msg ( 

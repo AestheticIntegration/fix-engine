@@ -19,7 +19,7 @@ open Parse_full_tags;;
 
 let parse_msg_heartbeat_data msg = (
     check_duplicate_tags msg    @@ fun () ->
-    opt msg "112" parse_string  @@ fun msg hb_test_req_id ->
+    opt msg "112" parse_int  @@ fun msg hb_test_req_id ->
     ParseSuccess { hb_test_req_id
     } , msg
     ) |> check_unknown_tags 
@@ -124,7 +124,7 @@ let parse_msg_sequence_reset_data msg = (
 
 let parse_msg_test_request_data msg = (
     check_duplicate_tags msg   @@ fun () ->
-    req msg "112" parse_string @@ fun msg test_req_id -> 
+    req msg "112" parse_int @@ fun msg test_req_id -> 
     ParseSuccess
     { test_req_id 
     } , msg

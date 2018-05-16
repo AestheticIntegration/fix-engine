@@ -21,7 +21,7 @@ open Full_message_tags;;
 
 (** Heartbeat message data. *)
 type full_msg_heartbeat_data = {
-    hb_test_req_id                        : string option;                (** Tag 112: Required when the heartbeat is forced by a test request *)
+    hb_test_req_id                        : int option;                (** Tag 112: Required when the heartbeat is forced by a test request *)
 }
 ;;
 
@@ -85,7 +85,7 @@ type full_msg_sequence_reset_data = {
 
 (** Test Request message data.  *)
 type full_msg_test_request_data = {
-    test_req_id                           : string;                       (** Tag 112 *)
+    test_req_id                           : int;                       (** Tag 112 *)
 }
 ;;
 
