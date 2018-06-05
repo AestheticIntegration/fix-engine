@@ -13,23 +13,50 @@
 *)
 
 (**  Splits a stream of characters into a stream of key*value pairs. *)
-let split_into_key_value (spliton : char) ( stream : char Stream.t ) : (string * string) Stream.t =
+let split_into_key_value_inner (spliton : char) ( stream : char Stream.t ) : (string * string) Stream.t =
     let current = ref [] in
+    let saved = ref [] in
     let listref_to_string lst =
-        !lst |> List.rev |> String.concat "" in
-    let rec next i =
-        try 
-            let c = Stream.next stream in
-            if c = spliton then (
-                let entry = listref_to_string current in
+        let ans = !lst |> List.rev |> String.concat "" in
+        ans in
+    let isValidMessageEntryOrEOL c s = 
+        if !s = [] then None else
+        let res = Scanf.sscanf (listref_to_string s) " %s@=%s " (fun k v -> Some (k,v)) in  
+        match (Stream.peek stream) with
+        None -> 
+          res
+        | _ -> 
+            (match Scanf.sscanf (listref_to_string c) " %s@=%s " (fun k v -> Some(k,v)) with
+                Some (_,"") -> None
+              | _ -> 
+                res)      
+    in
+    let rec next i =    
+      try  
+        let c = Stream.next stream in
+          if (c = spliton) then (
+              match isValidMessageEntryOrEOL current saved with
+              None ->
+                saved := if (!saved = []) then !current else (!current @ (Char.escaped c :: !saved));
                 current := [];
-                Scanf.sscanf entry " %s@=%s " (fun k v -> Some (k,v))
-            ) else (
-                current := Char.escaped c :: !current;
                 next i
-            )
-        with Stream.Failure -> None in
+             | x -> 
+                saved := !current;
+                current := [];
+                x
+          ) else (
+             current := Char.escaped c :: !current;
+             next i
+          )
+      with Stream.Failure -> None
+    in
     Stream.from next
+;;
+
+let split_into_key_value (spliton : char) ( stream : char Stream.t ) : (string * string) Stream.t = 
+    let result = ref [] in
+    Stream.iter (fun value -> result := value :: !result) stream;
+    split_into_key_value_inner spliton (Stream.of_list (List.rev (spliton::!result)))
 ;;
 
 (** Splits a stream of key-value paris into stream of messages. *)
