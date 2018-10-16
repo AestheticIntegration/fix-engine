@@ -3,5 +3,5 @@
   (public_name string_factory)
   (wrapped false)
   (flags (:standard -open Imandra_prelude))
-  (libraries venue_prelude venue_types)
+  (libraries imandra-prelude venue_types)
 )

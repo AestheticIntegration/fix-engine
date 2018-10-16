@@ -2,5 +2,6 @@
   (name        protocol)
   (public_name protocol)
   (wrapped  false)
-  (libraries protocol_exts)
+  (flags (:standard -open Imandra_prelude))
+  (libraries imandra-prelude protocol_exts)
 )

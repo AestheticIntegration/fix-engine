@@ -2,5 +2,6 @@
   (name        core_pp)
   (public_name core_pp)
   (wrapped  false)
-  (libraries core yojson)
+  (flags (:standard -open Imandra_prelude))
+  (libraries imandra-prelude core yojson)
 )

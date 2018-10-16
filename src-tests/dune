@@ -3,11 +3,12 @@
   (public_name test)
   (wrapped  false)
   (modules test_cache)
-  (libraries yojson protocol_pp core_printer)
+  (flags (:standard -open Imandra_prelude))
+  (libraries imandra-prelude yojson protocol_pp core_printer)
 )
 
 (executable
   (name test_runner) 
-  (libraries threads cmdliner lwt.unix fix_simulation protocol_pp core_printer)
+  (libraries imandra-prelude threads cmdliner lwt.unix fix_simulation protocol_pp core_printer)
   (modules test_runner config_parser)
 )

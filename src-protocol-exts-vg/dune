@@ -2,5 +2,6 @@
   (name        protocol_exts_vg)
   (public_name protocol_exts_vg)
   (wrapped  false)
-  (libraries core core_time_defaults)
+  (flags (:standard -open Imandra_prelude))
+  (libraries imandra-prelude core core_time_defaults)
 )

@@ -2,5 +2,6 @@
   (name        fix_engine)
   (public_name fix_engine)
   (wrapped  false)
-  (libraries protocol core_utils)
+  (flags (:standard -open Imandra_prelude))
+  (libraries imandra-prelude protocol core_utils)
 )

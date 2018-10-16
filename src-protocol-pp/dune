@@ -2,5 +2,6 @@
   (name        protocol_pp)
   (public_name protocol_pp)
   (wrapped  false)
-  (libraries yojson protocol_exts_pp protocol fix_engine core_utils)
+  (flags (:standard -open Imandra_prelude))
+  (libraries imandra-prelude yojson protocol_exts_pp protocol fix_engine core_utils)
 )

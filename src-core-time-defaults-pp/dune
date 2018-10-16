@@ -2,7 +2,9 @@
   (name        core_time_defaults_pp)
   (public_name core_time_defaults_pp)
   (wrapped  false)
+  (flags (:standard -open Imandra_prelude))
   (libraries 
+      imandra-prelude
       core_time_defaults
       core_pp
       core

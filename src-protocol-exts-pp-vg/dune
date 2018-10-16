@@ -2,5 +2,6 @@
   (name        protocol_exts_pp_vg)
   (public_name protocol_exts_pp_vg)
   (wrapped  false)
-  (libraries yojson core_pp core_time_defaults_pp protocol_exts_vg)
+  (flags (:standard -open Imandra_prelude))
+  (libraries imandra-prelude yojson core_pp core_time_defaults_pp protocol_exts_vg)
 )

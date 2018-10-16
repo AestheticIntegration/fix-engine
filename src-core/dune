@@ -2,4 +2,6 @@
   (name        core)
   (public_name core)
   (wrapped  false)
+  (flags (:standard -open Imandra_prelude))
+  (libraries imandra-prelude)
 )
