@@ -1,5 +1,28 @@
+(rule
+  (targets numeric.ml)
+  (deps numeric.iml)
+   (action
+    (with-stdout-to numeric.ml
+       (run imandra_extract  numeric.iml))))
+       
+(rule
+  (targets datetime.ml)
+  (deps datetime.iml)
+   (action
+    (with-stdout-to datetime.ml
+       (run imandra_extract  datetime.iml))))
+       
+(rule
+  (targets imandra_utils.ml)
+  (deps imandra_utils.iml)
+   (action
+    (with-stdout-to imandra_utils.ml
+       (run imandra_extract  imandra_utils.iml))))
+
 (library
   (name        core)
   (public_name core)
   (wrapped  false)
+  (flags :standard -open Imandra_prelude -warn-error -a)
+  (libraries imandra-base.prelude )
 )

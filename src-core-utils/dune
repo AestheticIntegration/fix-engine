@@ -1,5 +1,15 @@
+(rule
+  (targets fix_version.ml)
+  (deps fix_version.iml)
+   (action
+    (with-stdout-to fix_version.ml
+       (run imandra_extract fix_version.iml))))
+
+
 (library
   (name        core_utils)
   (public_name core_utils)
   (wrapped  false)
+  (flags :standard -open Imandra_prelude -warn-error -a)
+  (libraries imandra-base.prelude )
 )

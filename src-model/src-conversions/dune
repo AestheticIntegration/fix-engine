@@ -1,7 +1,28 @@
+(rule
+  (targets enum_converter.ml)
+  (deps enum_converter.iml)
+   (action
+    (with-stdout-to enum_converter.ml
+       (run imandra_extract enum_converter.iml))))
+
+(rule
+  (targets repeating_groups_converter.ml)
+  (deps repeating_groups_converter.iml)
+   (action
+    (with-stdout-to repeating_groups_converter.ml
+       (run imandra_extract repeating_groups_converter.iml))))
+
+(rule
+  (targets type_converter.ml)
+  (deps type_converter.iml)
+   (action
+    (with-stdout-to type_converter.ml
+       (run imandra_extract type_converter.iml))))
+
 (library
   (name conversions)
   (public_name conversions)
   (wrapped false)
   (flags (:standard -open Imandra_prelude))
-  (libraries venue_prelude core core_time_defaults protocol_exts venue_types)
+  (libraries core core_time_defaults protocol_exts venue_types imandra-base.prelude)
 )

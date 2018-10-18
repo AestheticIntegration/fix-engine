@@ -1,8 +1,14 @@
+(rule
+  (targets timeDefaults.ml)
+  (deps timeDefaults.iml)
+   (action
+    (with-stdout-to timeDefaults.ml
+       (run imandra_extract timeDefaults.iml))))
+
 (library
   (name        core_time_defaults)
   (public_name core_time_defaults)
   (wrapped  false)
-  (libraries 
-      core
-    )
+  (flags :standard -open Imandra_prelude -warn-error -a)
+  (libraries core imandra-base.prelude)
 )

@@ -1,6 +1,14 @@
+(rule
+  (targets core_printer.ml)
+  (deps core_printer.iml)
+   (action
+    (with-stdout-to core_printer.ml
+       (run imandra_extract core_printer.iml))))
+
 (library
   (name        core_printer)
   (public_name core_printer)
   (wrapped  false)
-  (libraries core_pp core_time_defaults_pp core yojson)
+  (flags :standard -open Imandra_prelude -warn-error -a)
+  (libraries core_pp core_time_defaults_pp core yojson imandra-base.prelude )
 )
