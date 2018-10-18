@@ -1,0 +1,27 @@
+(** Parse tag-value session into a JSON object. *)
+(***
+
+    Aesthetic Integration Limited
+    Copyright (c) 2014 - 2018
+
+    wire_to_json.ml
+
+*)
+
+
+let () = if Array.length Sys.argv < 2 then 
+    print_string "Usage : wire_to_json input_file.fix\n"
+else
+    let messages = ref [] in
+    let () = open_in Sys.argv.(1)
+        |> Stream.of_channel
+        |> Parser_utils.split_into_key_value '|'
+        |> Parser_utils.split_into_messages
+        |> Stream.iter (fun x -> messages := x::!messages)
+        in 
+    !messages
+        |> List.map Parse_full_messages.parse_top_level_msg 
+        |> List.map Full_messages_json.full_top_level_msg_to_json
+        |> ( fun x -> `Assoc [ ("messages", `List x ) ] )
+        |> Yojson.pretty_to_string
+        |> print_string
