@@ -1,9 +1,31 @@
+(rule
+  (targets config_parser.ml)
+  (deps config_parser.iml)
+   (action
+    (with-stdout-to config_parser.ml
+       (run imandra_extract config_parser.iml))))
+
+(rule
+  (targets test_cache.ml)
+  (deps test_cache.iml)
+   (action
+    (with-stdout-to test_cache.ml
+       (run imandra_extract test_cache.iml))))
+
+(rule
+  (targets test_runner.ml)
+  (deps test_runner.iml)
+   (action
+    (with-stdout-to test_runner.ml
+       (run imandra_extract test_runner.iml))))
+
 (library
   (name        test)
   (public_name test)
   (wrapped  false)
   (modules test_cache)
-  (libraries yojson protocol_pp core_printer)
+  (flags (:standard -open Imandra_prelude))
+  (libraries imandra-base.prelude yojson protocol_pp core_printer)
 )
 
 (executable

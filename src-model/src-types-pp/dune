@@ -34,11 +34,11 @@
        (run imandra_extract model_messages_json.iml))))
 
 (rule
-  (targets model_repeaging_groups_json.ml)
-  (deps model_repeaging_groups_json.iml)
+  (targets model_repeating_groups_json.ml)
+  (deps model_repeating_groups_json.iml)
    (action
-    (with-stdout-to model_repeaging_groups_json.ml
-       (run imandra_extract model_repeaging_groups_json.iml))))
+    (with-stdout-to model_repeating_groups_json.ml
+       (run imandra_extract model_repeating_groups_json.iml))))
 
 (library
   (name types_pp)
