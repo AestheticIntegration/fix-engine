@@ -10,7 +10,6 @@
 *)
 
 open Datetime
-open Base_types
 open Numeric
 open Fix_engine
 open Fix_engine_json
@@ -18,7 +17,8 @@ open Full_admin_messages
 open Full_app_messages
 open Full_app_records
 open Full_messages
-open Fix_global
+open Fix_global_state
+open Fix_engine_state
 
 let pe = print_endline;;
 

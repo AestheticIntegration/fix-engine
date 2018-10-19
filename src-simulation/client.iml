@@ -87,8 +87,8 @@ let run_client fixhost fixport config zmqpub zmqrep =
     let () = ZMQ.Socket.bind zmqrepsocket zmqrep in    
     let zmqrepsocket = Lwt_zmq.Socket.of_socket zmqrepsocket in
     (* Creating the address *)
-    let addr = Unix.( (gethostbyname fixhost).h_addr_list.(0) ) in      
-    let addr = Unix.( ADDR_INET( addr , fixport ) ) in
+    let addr = Caml_unix.( (gethostbyname fixhost).h_addr_list.(0i) ) in      
+    let addr = Caml_unix.( ADDR_INET( addr , fixport ) ) in
     let () = [
         "(*********                   FIX Engine Client                           *********)";
         "(*********  (c)Copyright Aesthetic Integration Limited., 2014 - 2018     *********)\n";
@@ -110,7 +110,7 @@ let mkconfig compid hostid targetid reset =
         target_id = targetid;
         pub_callback = None;
         reset_seq = reset;
-        timer = 1.0;
+        timer = 1.0p;
     }
 ;;
 
@@ -120,7 +120,7 @@ let () =
         Arg.(value & opt string "localhost" & info ["fix-host"] ~docv:"FIXHOST" ~doc)
         in
     let fixport = let doc = "Port for the FIX connection" in 
-        Arg.(value & opt int 9880 & info ["fix-port"] ~docv:"FIXPORT" ~doc)
+        Arg.(value & opt int 9880i & info ["fix-port"] ~docv:"FIXPORT" ~doc)
         in
     let compid = let doc = "FIX Client ID" in
         Arg.(value & opt string "IMANDRA" & info ["compid"] ~docv:"COMPID" ~doc)

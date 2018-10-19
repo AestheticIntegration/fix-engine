@@ -20,8 +20,8 @@ let read_file filename =
 ;;
 
 let parse_config_line cfgstr =
-    if Bytes.length cfgstr <= 1 then None else
-    let payload = Bytes.(sub cfgstr 1 (length cfgstr - 1) |> to_string) in
+    if Z.of_int (Bytes.length cfgstr) <= 1 then None else
+    let payload = Bytes.(sub cfgstr (Z.to_int 1) (Z.to_int (Z.of_int (length cfgstr) - 1)) |> to_string) in
     let parse_action = function
         | "CONNECT" | "CONNECT\r" -> Connect 
         | "DISCONNECT" | "DISCONNECT\r" -> Disconnect 
@@ -35,7 +35,7 @@ let parse_config_line cfgstr =
             |> Parser_utils.split_into_messages
             |> Stream.next
         in
-    match Bytes.get cfgstr 0 with
+    match Bytes.get cfgstr 0i with
         | ' ' | '#' -> None
         | 'e' -> Some (  ExpectAction  (parse_action payload) )
         | 'i' -> Some (InitiateAction  (parse_action payload) )
@@ -48,7 +48,7 @@ let parse_file filename =
     read_file filename
         |> List.map Bytes.of_string
         |> List.map parse_config_line
-        |> List.filter (fun x -> x != None)
+        |> List.filter (fun x -> x <> None)
         |> List.map (function Some x -> x | None -> failwith "Internal error in parse_file.")
 ;;
  

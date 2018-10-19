@@ -6,8 +6,8 @@ let split_into_key_value (spliton : char) ( stream : char Lwt_stream.t ) : (stri
     let get_key_value (chlist : char list) : string * string =
         List.fold_left (fun ((k,v),f) char -> match char with
             | '=' -> ((k,v), true)
-            |  c  -> if f then (( k, v ^ String.make 1 c ), f)
-                          else (( k ^ String.make 1 c, v ), f)   
+            |  c  -> if f then (( k, v ^ String.make 1i c ), f)
+                          else (( k ^ String.make 1i c, v ), f)   
             ) (("", ""), false) chlist
         |> fst
         in

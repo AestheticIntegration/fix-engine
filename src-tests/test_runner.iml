@@ -6,16 +6,16 @@ let (>>=) = Lwt.(>>=);;
 
 let get_current_utctimstamp ?offset:(offset=0) () =    
     let open Datetime in
-    let dtime = Unix.gettimeofday () in 
-    let dtime = dtime +. (1000. *. float_of_int offset) in
-    let tm = Unix.gmtime dtime in
-    let msec = int_of_float (1000. *. (dtime -. floor dtime)) in
-    {   utc_timestamp_year   = tm.Unix.tm_year + 1900
-    ;   utc_timestamp_month  = tm.Unix.tm_mon + 1
-    ;   utc_timestamp_day    = tm.Unix.tm_mday
-    ;   utc_timestamp_hour   = tm.Unix.tm_hour
-    ;   utc_timestamp_minute = tm.Unix.tm_min
-    ;   utc_timestamp_second = tm.Unix.tm_sec
+    let dtime = Caml_unix.gettimeofday () in 
+    let dtime = (Q.of_float dtime) +. (1000. *. (Real.of_int offset)) in
+    let tm = Caml_unix.gmtime (Q.to_float dtime) in
+    let msec =  Z.of_float (Q.to_float (1000. *. dtime -. (Q.of_float (floor (Q.to_float dtime))))) in
+    {   utc_timestamp_year   = (Z.of_int tm.Caml_unix.tm_year) + 1900
+    ;   utc_timestamp_month  = (Z.of_int tm.Caml_unix.tm_mon) + 1
+    ;   utc_timestamp_day    = (Z.of_int tm.Caml_unix.tm_mday)
+    ;   utc_timestamp_hour   = (Z.of_int tm.Caml_unix.tm_hour)
+    ;   utc_timestamp_minute = (Z.of_int tm.Caml_unix.tm_min)
+    ;   utc_timestamp_second = (Z.of_int tm.Caml_unix.tm_sec)
     ;   utc_timestamp_millisec = Some (msec)
     }
 ;;
@@ -30,9 +30,9 @@ let prepare_packet msg =
     let msg_body = msg 
         |> List.filter ( function "8",_ |"9",_ |"10",_ -> false| _ -> true) in
     (* Getting current values from the mesage *)
-    let begin_string = try List.assoc "8" msg with _ -> "FIX.4.4" in
-    let body_length  = try List.assoc "9" msg with _ -> "0" in
-    let checksum     = try List.assoc "10"msg with _ -> "0" in
+    let begin_string = try Caml.List.assoc "8" msg with _ -> "FIX.4.4" in
+    let body_length  = try Caml.List.assoc "9" msg with _ -> "0" in
+    let checksum     = try Caml.List.assoc "10"msg with _ -> "0" in
     (* Computing body length if zero *)
     let body_length = match body_length with
         | "0" -> Encode_full_messages.get_body_length msg_body
@@ -46,7 +46,7 @@ let prepare_packet msg =
     (* Computing checksum if zero *)
     let checksum = match checksum with
         | "0" -> Encode_full_messages.get_checksum msg
-              |> Printf.sprintf "%03u"
+              |> (fun x -> Printf.sprintf  "%03u" (Z.to_int x))
         |  _  -> checksum
         in
     msg @ [ ( "10" ,  checksum )] 
@@ -59,10 +59,10 @@ let prepare_message msg (src, tagret)=
     let time = get_current_utctimstamp () in
     let fill_placeholder (k,v) = 
         if String.length v < 5 then (k,v) else
-        if String.sub v 0 5 <> "<TIME" then (k,v) else 
+        if (match String.sub v 0 5 with None -> true | Some x -> x <> "<TIME") then (k,v) else 
         begin
             let adds = Scanf.sscanf v "<TIME%s@>" id in
-            let adds = if adds = "" then 0 else Scanf.sscanf adds "%d" id in
+            let adds = if adds = "" then 0 else (Z.of_int (Scanf.sscanf adds "%d" id)) in
             let time = get_current_utctimstamp ~offset:adds () 
                        |> normalise_utctimestamp_milli in
             ( k , Core_printer.fix_utctimestamp_to_string time ) 
@@ -88,16 +88,17 @@ let check_expected_compatible received expected =
         Lwt_io.printf "  Error: received message doesn't have \"35\" key.\n"
     else 
     let rv , ev = List.assoc "35" received , List.assoc "35" expected in
-    if rv <> ev then
-        Lwt_io.printf "  Error: received a wrong message type \"%s\" instead of expected \"%s\".\n" rv ev
-    else
+    let rv_x = (match rv with None -> ""| Some rv_x -> rv_x) in 
+    let ev_x = (match ev with None -> ""| Some ev_x -> ev_x) in 
+        if rv_x <> ev_x then
+        Lwt_io.printf "  Error: received a wrong message type \"%s\" instead of expected \"%s\".\n" rv_x ev_x    else
     expected |> Lwt_list.iter_s (fun (ek, ev) ->
         if (ek = "9") || (ek = "10") then Lwt.return_unit else
         if (ek = "58") then Lwt.return_unit else (* NOTE: Ignoring Text<58> tag for now *)
         if not ( List.mem_assoc ek received ) then
             Lwt_io.printf "  Error: expected key \"%s\" not present in the received message.\n" ek
         else begin
-            let rv = List.assoc ek received in  
+            let rv = Caml.List.assoc ek received in  
             if rv = ev then Lwt.return_unit else
             match Parse_datetime.parse_UTCTimestamp_milli rv, Parse_datetime.parse_UTCTimestamp_milli ev  with
             | Some _rt, Some _et -> Lwt.return_unit 
@@ -113,12 +114,12 @@ let check_expected_compatible received expected =
     
 let get_type_and_seqnum msg =
     let msgtype = try 
-        let msgtype = List.assoc "35" msg in
+        let msgtype = Caml.List.assoc "35" msg in
         match Parse_full_tags.parse_full_msg_tag msgtype with None -> "?"
         | Some ( Full_message_tags.Full_Admin_Msg_Tag tag) -> Full_admin_tags_json.full_admin_msg_tag_to_string tag 
         | Some ( Full_message_tags.Full_App_Msg_Tag   tag) -> Full_app_tags_json.full_app_msg_tag_to_string tag
     with _ -> "?" in
-    let seqnum = try List.assoc "34" msg with _ -> "?" in 
+    let seqnum = try Caml.List.assoc "34" msg with _ -> "?" in 
     msgtype , seqnum
 ;;
     
@@ -154,13 +155,13 @@ let perform_action  (instream, outch) act =
             Lwt_io.close outch >>= fun () ->
             Lwt.return_unit    
         end
-    end >>= fun () -> Lwt_unix.sleep 0.1
+    end >>= fun () -> Lwt_unix.sleep 0.1p
 
 let setup_client msgs =
-    let addr = Unix.( ADDR_INET( inet_addr_loopback , 9880 ) ) in
+    let addr = Caml_unix.( ADDR_INET( inet_addr_loopback , 9880i ) ) in
     Lwt.catch begin fun () ->
         Lwt_io.printl "Starting connection" >>= fun () -> 
-        let fd = Lwt_unix.(socket PF_INET SOCK_STREAM 0 ) in
+        let fd = Lwt_unix.(socket PF_INET SOCK_STREAM 0i ) in
         Lwt_io.with_connection ~fd:fd addr begin fun (inch, outch) ->
             Lwt_io.printl "Connnected to localhost:9880 ..." >>= fun() ->
             let instream = Message_stream.from_channel inch in
@@ -196,6 +197,6 @@ let () =
     let info = 
         Term.info "test_runner" ~version:"%%VERSION%%" ~doc ~exits:Term.default_exits 
         in
-    let def_fname = Arg.(value & pos 0 string "" & info []) in
+    let def_fname = Arg.(value & pos 0i string "" & info []) in
     Term.exit @@ Term.eval (Term. (const def_reader $ def_fname ), info)
 ;;

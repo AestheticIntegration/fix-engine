@@ -73,8 +73,8 @@ let fix_engine_state_to_json s =
         ( "target_comp_id"                              , `String s.fe_target_comp_id                           );
         ( "incoming_int_msgs"                           , int_inc_msg_opt_to_json s.incoming_int_msg            );
         ( "outgoing_int_msgs"                           , int_out_msg_opt_to_json s.outgoing_int_msg            );
-        ( "incoming_seq_num"                            , `Int s.incoming_seq_num                               );
-        ( "outgoing_seq_num"                            , `Int s.outgoing_seq_num                               );
+        ( "incoming_seq_num"                            , `Int (Z.to_int s.incoming_seq_num)                              );
+        ( "outgoing_seq_num"                            , `Int (Z.to_int s.outgoing_seq_num)                           );
         ( "incoming_fix_msgs"                           , full_top_level_msg_opt_to_json s.incoming_fix_msg     );
         ( "outgoing_fix_msgs"                           , full_top_level_msg_opt_to_json s.outgoing_fix_msg     );
         ( "cache"                                       , full_msg_list_to_json s.fe_cache                      );

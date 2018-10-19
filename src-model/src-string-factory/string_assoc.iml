@@ -11,8 +11,8 @@ module StringAssoc = struct
 
   
   let init_tbl () =
-    let h' = (Hashtbl.create (List.length string_pairs) : t) in
-    let () = List.iter (fun (k,v) -> (Hashtbl.add h') k v) 
+    let h' = (Hashtbl.create (Z.to_int (List.length string_pairs)) : t) in
+    let () = Caml.List.iter (fun (k,v) -> (Hashtbl.add h') k v) 
     string_pairs in
     h := Some h'
 

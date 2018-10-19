@@ -76,7 +76,7 @@ let get_body_length msg =
 let get_checksum msg =
     let checksum s = 
         let rec chsum i v =
-            if i < 0 then v else chsum (i - 1) (Char.code s.[i] + v)  in
+            if i < 0 then v else chsum (i - 1) (Z.of_int (Char.code s.[Z.to_int i]) + v)  in
         chsum (String.length s - 1) 0 
     in
     let rec scan n msg = match msg with
@@ -92,7 +92,7 @@ let prepare_packet msg_body =
               ; ( "9"   , get_body_length msg_body |> encode_int )
               ] @ msg_body
               in             
-    msg @ [ ( "10" , get_checksum msg |> encode_checksum )] 
+    msg @ [ ( "10" , get_checksum msg |> Z.to_int |> encode_checksum )] 
 ;;
 
 let encode_full_valid_msg x =

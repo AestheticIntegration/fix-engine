@@ -15,6 +15,6 @@ let enc_opt (f) (x)  =
 let enc_repeat (f) (tag) (lst)  =
     (match lst with
         | [] -> []
-        | lst -> ((tag,(lst |> List.length) |> (enc_req encode_int)) :: ((lst |> (List.map f)) |> List.concat))
+        | lst -> ((tag,(lst |> List.length) |> (enc_req encode_int)) :: ((lst |> (List.map f)) |> Caml.List.concat))
     )
 ;;

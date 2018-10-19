@@ -38,7 +38,7 @@
   (public_name fix_simulation)
   (wrapped  false)
   (modules (:standard \ server client))
-  (flags (:standard -open Imandra_prelude))
+  (flags (:standard -open Imandra_prelude -open Unix))
   (libraries 
        lwt.unix
         venue

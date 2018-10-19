@@ -1,3 +1,4 @@
+
 type config = {
   comp_id        : string;
   host_id        : string option;
@@ -23,15 +24,15 @@ let create_session_msg   t = t.initmsg
 
 let get_current_utctimstamp () =    
   let open Datetime in
-  let dtime = Unix.gettimeofday () in 
-  let tm = Unix.gmtime dtime in
-  let msec = int_of_float (1000000. *. (dtime -. floor dtime)) in
-  {  utc_timestamp_year   = tm.Unix.tm_year + 1900
-  ;  utc_timestamp_month  = tm.Unix.tm_mon + 1
-  ;  utc_timestamp_day    = tm.Unix.tm_mday
-  ;  utc_timestamp_hour   = tm.Unix.tm_hour
-  ;  utc_timestamp_minute = tm.Unix.tm_min
-  ;  utc_timestamp_second = tm.Unix.tm_sec
+  let dtime = Caml_unix.gettimeofday () in 
+  let tm = Caml_unix.gmtime dtime in
+  let msec = Z.of_float (Real.to_float (1000000. *. ((Q.of_float dtime) -. (Q.of_float (floor dtime))))) in
+  {  utc_timestamp_year   = (Z.of_int tm.Caml_unix.tm_year) + 1900
+  ;  utc_timestamp_month  = (Z.of_int tm.Caml_unix.tm_mon) + 1
+  ;  utc_timestamp_day    = (Z.of_int tm.Caml_unix.tm_mday)
+  ;  utc_timestamp_hour   = (Z.of_int tm.Caml_unix.tm_hour)
+  ;  utc_timestamp_minute = (Z.of_int tm.Caml_unix.tm_min)
+  ;  utc_timestamp_second = (Z.of_int tm.Caml_unix.tm_sec)
   ;  utc_timestamp_millisec = Some (msec)
 }
 
@@ -48,16 +49,16 @@ let read_int file =
     let () = close_in chn in
     int_of_string num
   with
-    _exn -> 0
+    _exn -> 0i
 ;;
 
 let read_seqns dir =
-  if not(Sys.file_exists dir) then 
-    let () = Unix.(mkdir dir 0o775) in (0,0)  
+  if not(Caml_sys.file_exists dir) then 
+    let () = Caml_unix.(mkdir dir (Z.to_int 0o775)) in (0,0)  
   else
     let seqin  = read_int Filename.(concat dir "seqin" ) in
     let seqout = read_int Filename.(concat dir "seqout") in
-    (seqin, seqout)
+    (Z.of_int seqin, Z.of_int seqout)
 ;;
 
 let make_engine_state session_dir config =
@@ -89,7 +90,7 @@ let do_timechange mailbox =
 (** Heartbeat thread  *)
 
 let rec heartbeat_thread mailbox =
-  Lwt_unix.sleep (1.0) >>= fun () -> 
+  Lwt_unix.sleep (Q.to_float 1.0) >>= fun () -> 
   do_timechange mailbox >>= fun () -> 
   heartbeat_thread mailbox
 ;;
@@ -97,7 +98,7 @@ let rec heartbeat_thread mailbox =
 
 let write_seqn session_dir fname msg =
   let open Full_messages in
-  if msg == Garbled then Lwt.return_unit else
+  if msg = Garbled then Lwt.return_unit else
   let seqn = match msg with 
     | ValidMsg data -> data.full_msg_header.h_msg_seq_num
     | SessionRejectedMsg data -> data.srej_msg_msg_seq_num                       
@@ -106,11 +107,11 @@ let write_seqn session_dir fname msg =
     in
     let filename = Filename.(concat session_dir fname) in 
     Lwt_io.(open_file ~mode:output filename) >>= fun fch ->
-    Lwt_io.write fch (string_of_int seqn) >>= fun () ->
+    Lwt_io.write fch (String.of_int seqn) >>= fun () ->
     Lwt_io.close fch
 ;;
 
-let log_flags = Unix.[O_WRONLY; O_APPEND; O_CREAT];;
+let log_flags = Caml_unix.[O_WRONLY; O_APPEND; O_CREAT];;
 let store_senging_time msg = 
     let open Full_messages in
     match msg with 
@@ -144,7 +145,7 @@ let send_msg session_dir outch fmsg =
   match fmsg with
   | Full_messages.ValidMsg msg -> begin
     let wire = Encode_full_messages.encode_full_valid_msg msg in
-    let log = String.map (function '\001' -> '|' | c -> c) wire ^ "\n" in
+    let log = Caml.String.map (function '\001' -> '|' | c -> c) wire ^ "\n" in
     Lwt_io.(open_file ~flags:log_flags ~mode:output filename) >>= fun fch ->              
     Lwt_io.write fch log                      >>= fun () ->
     Lwt_io.close fch                          >>= fun () ->    

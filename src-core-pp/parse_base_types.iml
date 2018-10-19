@@ -21,9 +21,9 @@ let parse_char (str: string) : string option =
     Some str
 
 let parse_int ( str : string ) : int option = 
-    if String.get str 0 = '+' then None else
+    if String.get str (Z.to_int 0) = '+' then None else
     try 
-        Some(int_of_string str) 
+        Some  (Z.of_int (int_of_string str))
     with _ -> None
 ;;
 
@@ -36,13 +36,13 @@ let parse_bool ( str : string) : bool option =
 
 (** Convert string to fix_float type. *)
 let parse_float (str: string) : fix_float_6 option =
-    if String.get str 0 = '+' then None else
+    if String.get str (Z.to_int 0) = '+' then None else
     let whole, tail = Scanf.sscanf str "%d%s" (fun w f -> (w,f)) in
-    if (tail = "") || (tail = ".") then Some (Float_6 ( whole * 1000000 )) else
-    if String.get tail 0 != '.' then None else
+    if (tail = "") || (tail = ".") then Some (Float_6 ( Z.of_int whole * 1000000 )) else
+    if String.get tail (Z.to_int 0) <> '.' then None else
     let fraction = Scanf.sscanf tail ".%d" (fun t -> t) in
     if (String.length tail - 1) <= 6 then
-    Some (Float_6 (whole * 10000 + fraction))
+    Some (Float_6 (Z.of_int whole * 10000 + Z.of_int fraction))
     else None
 ;;
 

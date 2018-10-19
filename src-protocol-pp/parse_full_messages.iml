@@ -105,7 +105,7 @@ let check_first_three_tags ( msg : (string * string) list ) : string option =
 
 let check_tags_are_integers ( msg : (string * string) list ) : bool =
     List.for_all ( fun (k,_v) ->
-        try int_of_string k > 0 with _ -> false
+        try Z.of_string k > 0 with _ -> false
     ) msg
 ;;
 
@@ -126,7 +126,7 @@ let valid_body_length ( msg : (string * string) list ) : bool =
         in
     match msg with 
         | ("8", _ ) :: ("9", bl) :: _ -> 
-            ( try body_length = int_of_string bl with _ -> false )
+            ( try body_length = Z.of_string bl with _ -> false )
         | _ -> false
 ;;
 
@@ -137,7 +137,7 @@ let valid_body_length ( msg : (string * string) list ) : bool =
 let valid_checksum ( msg : (string * string) list ) : bool  =
     let checksum s = 
         let rec chsum i v =
-            if i < 0 then v else chsum (i - 1) (Char.code s.[i] + v)  in
+            if i < 0 then v else chsum (i - 1) (Z.of_int (Char.code s.[Z.to_int i]) + v)  in
         chsum (String.length s - 1) 0 
         in
     let checksum, msg_checksum =
@@ -147,7 +147,7 @@ let valid_checksum ( msg : (string * string) list ) : bool  =
             | [] -> ( n mod 256 , "") in 
         scan 0 msg
         in
-    try checksum = int_of_string msg_checksum with _ -> false
+    try checksum = Z.of_string msg_checksum with _ -> false
 ;;
 
 (**
@@ -163,21 +163,22 @@ let message_basic_check msg =
 
 let make_session_reject reason tagstr msg =
     if not (List.mem_assoc "34" msg ) then Garbled else
-    match ( List.assoc "34" msg |> parse_int ) with None -> Garbled | Some seq_num ->
-    let msg_tag = List.assoc "35" msg |> parse_full_msg_tag in
-    let field_tag = match msg_tag with 
-        | None -> None 
-        | Some _msg_tag -> parse_full_field_tag tagstr 
-        in
-    SessionRejectedMsg {
-        srej_msg_msg_seq_num   = seq_num   ;
-        srej_msg_field_tag     = field_tag ;     
-        srej_msg_msg_type      = msg_tag;
-        srej_msg_reject_reason = Some reason ;
-        srej_text              = None ;              
-        srej_encoded_text_len  = None ;
-        srej_encoded_text      = None ;      
-    }
+    match ( List.assoc "34" msg) with None -> Garbled | Some x -> 
+       (match parse_int x with None -> Garbled | Some seq_num ->
+            (match ( List.assoc "35" msg) with None -> Garbled | Some y -> (let msg_tag = parse_full_msg_tag y in
+            let field_tag = match msg_tag with 
+                | None -> None 
+                | Some _msg_tag -> parse_full_field_tag tagstr 
+            in
+            SessionRejectedMsg {
+                srej_msg_msg_seq_num   = seq_num   ;
+                srej_msg_field_tag     = field_tag ;     
+                srej_msg_msg_type      = msg_tag;
+                srej_msg_reject_reason = Some reason ;
+                srej_text              = None ;              
+                srej_encoded_text_len  = None ;
+                srej_encoded_text      = None ;      
+    })))
 ;;
 
 let parse_top_level_msg msg =

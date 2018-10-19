@@ -18,8 +18,8 @@ let split_into_key_value (spliton : char) ( stream : char Lwt_stream.t ) : (stri
     let get_key_value (chlist : char list) : string * string =
         List.fold_left (fun ((k,v),f) char -> match char with
             | '=' -> ((k,v), true)
-            |  c  -> if f then (( k, v ^ String.make 1 c ), f)
-                          else (( k ^ String.make 1 c, v ), f)   
+            |  c  -> if f then (( k, v ^ String.make 1i c ), f)
+                          else (( k ^ String.make 1i c, v ), f)   
             ) (("", ""), false) chlist
         |> fst
         in
@@ -48,24 +48,24 @@ let split_into_messages (stream : (string * string) Lwt_stream.t) =
 
 let get_current_utctimstamp () =    
     let open Datetime in
-    let dtime = Unix.gettimeofday () in 
-    let tm = Unix.gmtime dtime in
-    let msec = int_of_float (1000. *. (dtime -. floor dtime)) in
-    {   utc_timestamp_year   = tm.Unix.tm_year + 1900
-    ;   utc_timestamp_month  = tm.Unix.tm_mon + 1
-    ;   utc_timestamp_day    = tm.Unix.tm_mday
-    ;   utc_timestamp_hour   = tm.Unix.tm_hour
-    ;   utc_timestamp_minute = tm.Unix.tm_min
-    ;   utc_timestamp_second = tm.Unix.tm_sec
-    ;   utc_timestamp_millisec = Some (msec)
+    let dtime = Caml_unix.gettimeofday () in 
+    let tm = Caml_unix.gmtime dtime in
+    let msec =  Q.to_int (1000. *. ((Q.of_float dtime) -. (Q.of_float (floor dtime)))) in
+    {   utc_timestamp_year   = (Z.of_int tm.Caml_unix.tm_year) + 1900
+    ;   utc_timestamp_month  = (Z.of_int tm.Caml_unix.tm_mon) + 1
+    ;   utc_timestamp_day    = Z.of_int tm.Caml_unix.tm_mday
+    ;   utc_timestamp_hour   = Z.of_int tm.Caml_unix.tm_hour
+    ;   utc_timestamp_minute = Z.of_int tm.Caml_unix.tm_min
+    ;   utc_timestamp_second = Z.of_int tm.Caml_unix.tm_sec
+    ;   utc_timestamp_millisec = Some (Z.of_int msec)
     }
 ;;
 
 let engine_state = 
     let open Fix_engine_state in
     { init_fix_engine_state with
-    fe_comp_id = String_utils.string_to_fix_string "IMANDRA";
-    fe_target_comp_id = String_utils.string_to_fix_string "BANZAI";
+    fe_comp_id = "IMANDRA";
+    fe_target_comp_id = "BANZAI";
     fe_curr_time = get_current_utctimstamp ();
     fe_max_num_logons_sent = 10;
     fe_application_up = true }
@@ -94,7 +94,7 @@ let do_timechange mailbox =
 
 let rec heartbeat_thread mailbox =
     let open Fix_engine_state in
-    Lwt_unix.sleep (1.0) >>= fun () -> 
+    Lwt_unix.sleep (1.0p) >>= fun () -> 
     do_timechange mailbox >>= fun () -> 
     heartbeat_thread mailbox
 ;;
@@ -126,8 +126,8 @@ let f (inch, outch) =
 ;;
 
 let server_thread =
-    let addr = Unix.( ADDR_INET( inet_addr_loopback , 9880 ) ) in
-    let server = Lwt_io.establish_server addr f in
+    let addr = Caml_unix.( ADDR_INET( inet_addr_loopback , 9880i ) ) in
+    let server = Lwt_io.establish_server addr in
     print_endline "Started server on localhost:9880 ...";
     fst (Lwt.wait ())
 ;;
