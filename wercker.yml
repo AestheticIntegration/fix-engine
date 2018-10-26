@@ -16,7 +16,7 @@ build:
           opam install dune
           make opam1-setup
           curl -s "https://storage.googleapis.com/imandra-client/imandra_client_$(curl -s -L "https://storage.googleapis.com/imandra-installer/last-version").tar.gz" > imandra_extract.tgz
-          tar xzvf imandra_extract.tg`
+          tar xzvf imandra_extract.tgz
           ln -s ./bin/imandra_extract /home/opam/.opam/4.06/bin/
           opam pin add https://github.com/AestheticIntegration/imandra-prelude.git
           make
