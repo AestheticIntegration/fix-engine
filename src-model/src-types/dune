@@ -46,5 +46,5 @@
   (public_name venue_types)
   (wrapped false)
   (flags (:standard -open Imandra_prelude))
-  (libraries core core_time_defaults imandra-base.prelude)
+  (libraries core core_time_defaults imandra-prelude)
 )

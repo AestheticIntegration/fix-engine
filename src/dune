@@ -31,5 +31,5 @@
   (public_name fix_engine)
   (wrapped  false)
   (flags :standard -open Imandra_prelude -warn-error -a)
-  (libraries imandra-base.prelude protocol core_utils)
+  (libraries imandra-prelude protocol core_utils)
 )

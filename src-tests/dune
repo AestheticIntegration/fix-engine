@@ -25,7 +25,7 @@
   (wrapped  false)
   (modules test_cache)
   (flags (:standard -open Imandra_prelude))
-  (libraries imandra-base.prelude yojson protocol_pp core_printer)
+  (libraries imandra-prelude yojson protocol_pp core_printer)
 )
 
 (executable

@@ -115,5 +115,5 @@
   (public_name protocol_pp)
   (wrapped  false)
   (flags (:standard -open Imandra_prelude))
-  (libraries imandra-base.prelude core_time_defaults_pp yojson protocol_exts_pp protocol fix_engine core_utils)
+  (libraries imandra-prelude core_time_defaults_pp yojson protocol_exts_pp protocol fix_engine core_utils)
 )

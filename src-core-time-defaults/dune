@@ -10,5 +10,5 @@
   (public_name core_time_defaults)
   (wrapped  false)
   (flags :standard -open Imandra_prelude -warn-error -a)
-  (libraries core imandra-base.prelude)
+  (libraries core imandra-prelude)
 )

@@ -74,5 +74,5 @@
   (public_name protocol_exts_pp_vg)
   (wrapped  false)
   (flags (:standard -open Imandra_prelude))
-  (libraries imandra-base.prelude core_time_defaults yojson core_pp core_time_defaults_pp protocol_exts_vg)
+  (libraries imandra-prelude core_time_defaults yojson core_pp core_time_defaults_pp protocol_exts_vg)
 )

@@ -45,5 +45,5 @@
   (public_name types_pp)
   (wrapped false)
   (flags (:standard -open Imandra_prelude))
-  (libraries imandra-base.prelude core_pp core_time_defaults protocol_exts_pp string_factory venue_types yojson)
+  (libraries imandra-prelude core_pp core_time_defaults protocol_exts_pp string_factory venue_types yojson)
 )

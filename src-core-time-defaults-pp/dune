@@ -25,5 +25,5 @@
   (public_name core_time_defaults_pp)
   (wrapped  false)
   (flags :standard -open Imandra_prelude -warn-error -a)
-  (libraries core_pp core_time_defaults core yojson imandra-base.prelude )
+  (libraries core_pp core_time_defaults core yojson imandra-prelude )
 )

@@ -52,5 +52,5 @@
   (public_name core_pp)
   (wrapped  false)
   (flags :standard -open Imandra_prelude -warn-error -a)
-  (libraries core yojson imandra-base.prelude )
+  (libraries core yojson imandra-prelude )
 )

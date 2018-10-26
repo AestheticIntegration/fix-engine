@@ -48,7 +48,7 @@
         core_time_defaults_pp
         protocol_pp
         conversions    
-        imandra-base.prelude
+        imandra-prelude
   )
 )
 
@@ -62,7 +62,7 @@
       fix_simulation
       protocol_pp
       conversions
-      imandra-base.prelude
+      imandra-prelude
   )
 )
 
@@ -81,6 +81,6 @@
       cmdliner
       ZMQ
       lwt-zmq
-      imandra-base.prelude
+      imandra-prelude
   )
 )

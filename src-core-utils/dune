@@ -11,5 +11,5 @@
   (public_name core_utils)
   (wrapped  false)
   (flags :standard -open Imandra_prelude -warn-error -a)
-  (libraries imandra-base.prelude )
+  (libraries imandra-prelude )
 )

@@ -39,5 +39,5 @@
   (public_name protocol)
   (wrapped  false)
   (flags (:standard -open Imandra_prelude))
-  (libraries imandra-base.prelude core_time_defaults protocol_exts)
+  (libraries imandra-prelude core_time_defaults protocol_exts)
 )
