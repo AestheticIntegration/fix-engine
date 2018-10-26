@@ -15,7 +15,7 @@ build:
           opam update
           opam install dune
           make opam1-setup
-          curl -s "https://storage.googleapis.com/imandra-installer/install.sh" > install.sh
+          curl -s "https://storage.googleapis.com/imandra-installer/install.sh" > /home/opam/install.sh
           echo -e "/usr/local/bin\n" | sh /home/opam/install.sh -n
           opam pin add https://github.com/AestheticIntegration/imandra-prelude.git
           make
