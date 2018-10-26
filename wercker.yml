@@ -18,7 +18,7 @@ build:
           curl -s "https://storage.googleapis.com/imandra-client/imandra_client_$(curl -s -L "https://storage.googleapis.com/imandra-installer/last-version").tar.gz" > imandra_extract.tgz
           tar xzvf imandra_extract.tgz
           mkdir binToExtract
-          echo "ocamlrun $(pwd)/imandra_extract $@" > binToExtract/imandra_extract
+          echo "ocamlrun $(pwd)/bin/imandra_extract $@" > binToExtract/imandra_extract
           chmod a+x binToExtract/imandra_extract
           export PATH=$PATH:$(pwd)/binToExtract/
           
