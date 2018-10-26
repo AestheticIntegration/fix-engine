@@ -15,5 +15,5 @@ build:
           opam install dune
           make opam1-setup
           curl -s "https://storage.googleapis.com/imandra-installer/install.sh" > ./install.sh
-          xterm -e "sh ./install.sh -n"
+          sh ./install.sh -n
           make
