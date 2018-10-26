@@ -10,6 +10,7 @@ build:
         name: dune make
         code: |          
           set -ex
+          apt-get update && apt-get install -y libgmp-dev zlib1g-dev
           export OPAMROOT=/home/opam/.opam
           opam update
           opam install dune
