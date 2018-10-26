@@ -14,5 +14,6 @@ build:
           opam update
           opam install dune
           make opam1-setup
-          curl -s "https://storage.googleapis.com/imandra-client/imandra_client_$(curl -s -L "https://storage.googleapis.com/imandra-installer/last-version").tar.gz" | tar xzvf
+          curl -s "https://storage.googleapis.com/imandra-client/imandra_client_$(curl -s -L "https://storage.googleapis.com/imandra-installer/last-version").tar.gz" > imandra_extract.tgz
+          tar xzvf imandra_extract.tgz
           make
