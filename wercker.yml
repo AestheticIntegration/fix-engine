@@ -14,5 +14,6 @@ build:
           opam update
           opam install dune
           make opam1-setup
-          sh <(curl -s "https://storage.googleapis.com/imandra-installer/install.sh")
+          curl -s "https://storage.googleapis.com/imandra-installer/install.sh"
+          sh ./install.sh
           make
