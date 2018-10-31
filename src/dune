@@ -3,28 +3,28 @@
   (deps fix_engine_state.iml)
    (action
     (with-stdout-to fix_engine_state.ml
-       (run imandra_extract  fix_engine_state.iml))))
+       (run imandra-extract  fix_engine_state.iml))))
 
 (rule
   (targets fix_engine_transitions.ml)
   (deps fix_engine_transitions.iml)
    (action
     (with-stdout-to fix_engine_transitions.ml
-       (run imandra_extract  fix_engine_transitions.iml))))
+       (run imandra-extract  fix_engine_transitions.iml))))
 
 (rule
   (targets fix_engine_utils.ml)
   (deps fix_engine_utils.iml)
    (action
     (with-stdout-to fix_engine_utils.ml
-       (run imandra_extract  fix_engine_utils.iml))))
+       (run imandra-extract  fix_engine_utils.iml))))
 
 (rule
   (targets fix_engine.ml)
   (deps fix_engine.iml)
    (action
     (with-stdout-to fix_engine.ml
-       (run imandra_extract  fix_engine.iml))))
+       (run imandra-extract  fix_engine.iml))))
 
 (library
   (name        fix_engine)

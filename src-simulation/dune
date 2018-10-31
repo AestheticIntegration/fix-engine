@@ -3,35 +3,35 @@
   (deps client.iml)
    (action
     (with-stdout-to client.ml
-       (run imandra_extract client.iml))))
+       (run imandra-extract client.iml))))
 
 (rule
   (targets fix_connection.ml)
   (deps fix_connection.iml)
    (action
     (with-stdout-to fix_connection.ml
-       (run imandra_extract fix_connection.iml))))
+       (run imandra-extract fix_connection.iml))))
 
 (rule
   (targets fix_global_state.ml)
   (deps fix_global_state.iml)
    (action
     (with-stdout-to fix_global_state.ml
-       (run imandra_extract fix_global_state.iml))))
+       (run imandra-extract fix_global_state.iml))))
 
 (rule
   (targets message_stream.ml)
   (deps message_stream.iml)
    (action
     (with-stdout-to message_stream.ml
-       (run imandra_extract message_stream.iml))))
+       (run imandra-extract message_stream.iml))))
   
 (rule
   (targets server.ml)
   (deps server.iml)
    (action
     (with-stdout-to server.ml
-       (run imandra_extract server.iml))))
+       (run imandra-extract server.iml))))
 
 (library
   (name        fix_simulation)

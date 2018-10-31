@@ -3,21 +3,21 @@
   (deps numeric.iml)
    (action
     (with-stdout-to numeric.ml
-       (run imandra_extract  numeric.iml))))
+       (run imandra-extract  numeric.iml))))
        
 (rule
   (targets datetime.ml)
   (deps datetime.iml)
    (action
     (with-stdout-to datetime.ml
-       (run imandra_extract  datetime.iml))))
+       (run imandra-extract  datetime.iml))))
        
 (rule
   (targets imandra_utils.ml)
   (deps imandra_utils.iml)
    (action
     (with-stdout-to imandra_utils.ml
-       (run imandra_extract  imandra_utils.iml))))
+       (run imandra-extract  imandra_utils.iml))))
 
 (library
   (name        core)

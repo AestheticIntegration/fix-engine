@@ -3,49 +3,49 @@
   (deps base_types_json.iml)
    (action
     (with-stdout-to base_types_json.ml
-       (run imandra_extract  base_types_json.iml))))
+       (run imandra-extract  base_types_json.iml))))
 
 (rule
   (targets datetime_json.ml)
   (deps datetime_json.iml)
    (action
     (with-stdout-to datetime_json.ml
-       (run imandra_extract datetime_json.iml))))
+       (run imandra-extract datetime_json.iml))))
 
 (rule
   (targets encode_base_types.ml)
   (deps encode_base_types.iml)
    (action
     (with-stdout-to encode_base_types.ml
-       (run imandra_extract encode_base_types.iml))))
+       (run imandra-extract encode_base_types.iml))))
 
 (rule
   (targets encode_datetime.ml)
   (deps encode_datetime.iml)
    (action
     (with-stdout-to encode_datetime.ml
-       (run imandra_extract encode_datetime.iml))))
+       (run imandra-extract encode_datetime.iml))))
 
 (rule
   (targets parse_base_types.ml)
   (deps parse_base_types.iml)
    (action
     (with-stdout-to parse_base_types.ml
-       (run imandra_extract parse_base_types.iml))))
+       (run imandra-extract parse_base_types.iml))))
 
 (rule
   (targets parse_datetime.ml)
   (deps parse_datetime.iml)
    (action
     (with-stdout-to parse_datetime.ml
-       (run imandra_extract parse_datetime.iml))))
+       (run imandra-extract parse_datetime.iml))))
 
 (rule
   (targets parser_utils.ml)
   (deps parser_utils.iml)
    (action
     (with-stdout-to parser_utils.ml
-       (run imandra_extract parser_utils.iml))))
+       (run imandra-extract parser_utils.iml))))
 
 (library
   (name        core_pp)

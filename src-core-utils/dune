@@ -3,7 +3,7 @@
   (deps fix_version.iml)
    (action
     (with-stdout-to fix_version.ml
-       (run imandra_extract fix_version.iml))))
+       (run imandra-extract fix_version.iml))))
 
 
 (library

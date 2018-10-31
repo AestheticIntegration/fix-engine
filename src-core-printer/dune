@@ -3,7 +3,7 @@
   (deps core_printer.iml)
    (action
     (with-stdout-to core_printer.ml
-       (run imandra_extract core_printer.iml))))
+       (run imandra-extract core_printer.iml))))
 
 (library
   (name        core_printer)

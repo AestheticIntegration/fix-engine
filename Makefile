@@ -3,7 +3,7 @@
 build:
 	@echo "src-protocol-exts-pp-vg" > dune-ignore 
 	@echo "src-protocol-exts-vg" >> dune-ignore 
-	dune build @install
+	dune build @install --profile release
 	rm dune-ignore
 
 build_vgs:

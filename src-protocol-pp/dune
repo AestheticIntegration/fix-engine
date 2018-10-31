@@ -3,112 +3,112 @@
   (deps encode_admin_enums.iml)
    (action
     (with-stdout-to encode_admin_enums.ml
-       (run imandra_extract encode_admin_enums.iml))))
+       (run imandra-extract encode_admin_enums.iml))))
 
 (rule
   (targets encode_admin_messages.ml)
   (deps encode_admin_messages.iml)
    (action
     (with-stdout-to encode_admin_messages.ml
-       (run imandra_extract encode_admin_messages.iml))))
+       (run imandra-extract encode_admin_messages.iml))))
 
 (rule
   (targets encode_admin_tags.ml)
   (deps encode_admin_tags.iml)
    (action
     (with-stdout-to encode_admin_tags.ml
-       (run imandra_extract encode_admin_tags.iml))))
+       (run imandra-extract encode_admin_tags.iml))))
 
 (rule
   (targets encode_full_messages.ml)
   (deps encode_full_messages.iml)
    (action
     (with-stdout-to encode_full_messages.ml
-       (run imandra_extract encode_full_messages.iml))))
+       (run imandra-extract encode_full_messages.iml))))
 
 (rule
   (targets encode_full_tags.ml)
   (deps encode_full_tags.iml)
    (action
     (with-stdout-to encode_full_tags.ml
-       (run imandra_extract encode_full_tags.iml))))
+       (run imandra-extract encode_full_tags.iml))))
 
 (rule
   (targets fix_engine_json.ml)
   (deps fix_engine_json.iml)
    (action
     (with-stdout-to fix_engine_json.ml
-       (run imandra_extract fix_engine_json.iml))))
+       (run imandra-extract fix_engine_json.iml))))
 
 (rule
   (targets full_admin_enums_json.ml)
   (deps full_admin_enums_json.iml)
    (action
     (with-stdout-to full_admin_enums_json.ml
-       (run imandra_extract full_admin_enums_json.iml))))
+       (run imandra-extract full_admin_enums_json.iml))))
 
 (rule
   (targets full_admin_messages_json.ml)
   (deps full_admin_messages_json.iml)
    (action
     (with-stdout-to full_admin_messages_json.ml
-       (run imandra_extract full_admin_messages_json.iml))))
+       (run imandra-extract full_admin_messages_json.iml))))
 
 (rule
   (targets full_admin_tags_json.ml)
   (deps full_admin_tags_json.iml)
    (action
     (with-stdout-to full_admin_tags_json.ml
-       (run imandra_extract full_admin_tags_json.iml))))
+       (run imandra-extract full_admin_tags_json.iml))))
 
 (rule
   (targets full_message_tags_json.ml)
   (deps full_message_tags_json.iml)
    (action
     (with-stdout-to full_message_tags_json.ml
-       (run imandra_extract full_message_tags_json.iml))))
+       (run imandra-extract full_message_tags_json.iml))))
 
 (rule
   (targets full_messages_json.ml)
   (deps full_messages_json.iml)
    (action
     (with-stdout-to full_messages_json.ml
-       (run imandra_extract full_messages_json.iml))))
+       (run imandra-extract full_messages_json.iml))))
 
 (rule
   (targets parse_admin_enums.ml)
   (deps parse_admin_enums.iml)
    (action
     (with-stdout-to parse_admin_enums.ml
-       (run imandra_extract parse_admin_enums.iml))))
+       (run imandra-extract parse_admin_enums.iml))))
 
 (rule
   (targets parse_admin_messages.ml)
   (deps parse_admin_messages.iml)
    (action
     (with-stdout-to parse_admin_messages.ml
-       (run imandra_extract parse_admin_messages.iml))))
+       (run imandra-extract parse_admin_messages.iml))))
 
 (rule
   (targets parse_admin_tags.ml)
   (deps parse_admin_tags.iml)
    (action
     (with-stdout-to parse_admin_tags.ml
-       (run imandra_extract parse_admin_tags.iml))))
+       (run imandra-extract parse_admin_tags.iml))))
 
 (rule
   (targets parse_full_messages.ml)
   (deps parse_full_messages.iml)
    (action
     (with-stdout-to parse_full_messages.ml
-       (run imandra_extract parse_full_messages.iml))))
+       (run imandra-extract parse_full_messages.iml))))
 
 (rule
   (targets parse_full_tags.ml)
   (deps parse_full_tags.iml)
    (action
     (with-stdout-to parse_full_tags.ml
-       (run imandra_extract parse_full_tags.iml))))
+       (run imandra-extract parse_full_tags.iml))))
 
 (library
   (name        protocol_pp)

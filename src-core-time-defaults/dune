@@ -3,7 +3,7 @@
   (deps timeDefaults.iml)
    (action
     (with-stdout-to timeDefaults.ml
-       (run imandra_extract timeDefaults.iml))))
+       (run imandra-extract timeDefaults.iml))))
 
 (library
   (name        core_time_defaults)

@@ -3,14 +3,14 @@
   (deps act_checks.iml)
    (action
     (with-stdout-to act_checks.ml
-       (run imandra_extract act_checks.iml))))
+       (run imandra-extract act_checks.iml))))
 
 (rule
   (targets act_process.ml)
   (deps act_process.iml)
    (action
     (with-stdout-to act_process.ml
-       (run imandra_extract act_process.iml))))
+       (run imandra-extract act_process.iml))))
 
 
 (rule
@@ -18,56 +18,56 @@
   (deps msg_check_fields.iml)
    (action
     (with-stdout-to msg_check_fields.ml
-       (run imandra_extract msg_check_fields.iml))))
+       (run imandra-extract msg_check_fields.iml))))
 
 (rule
   (targets msg_check_types.ml)
   (deps msg_check_types.iml)
    (action
     (with-stdout-to msg_check_types.ml
-       (run imandra_extract msg_check_types.iml))))
+       (run imandra-extract msg_check_types.iml))))
 
 (rule
   (targets msg_check_validate.ml)
   (deps msg_check_validate.iml)
    (action
     (with-stdout-to msg_check_validate.ml
-       (run imandra_extract msg_check_validate.iml))))
+       (run imandra-extract msg_check_validate.iml))))
 
 (rule
   (targets msg_defaults.ml)
   (deps msg_defaults.iml)
    (action
     (with-stdout-to msg_defaults.ml
-       (run imandra_extract msg_defaults.iml))))
+       (run imandra-extract msg_defaults.iml))))
 
 (rule
   (targets msg_process.ml)
   (deps msg_process.iml)
    (action
     (with-stdout-to msg_process.ml
-       (run imandra_extract msg_process.iml))))
+       (run imandra-extract msg_process.iml))))
 
 (rule
   (targets msg_receive.ml)
   (deps msg_receive.iml)
    (action
     (with-stdout-to msg_receive.ml
-       (run imandra_extract msg_receive.iml))))
+       (run imandra-extract msg_receive.iml))))
 
 (rule
   (targets msg_reject.ml)
   (deps msg_reject.iml)
    (action
     (with-stdout-to msg_reject.ml
-       (run imandra_extract msg_reject.iml))))
+       (run imandra-extract msg_reject.iml))))
 
 (rule
   (targets venue.ml)
   (deps venue.iml)
    (action
     (with-stdout-to venue.ml
-       (run imandra_extract venue.iml))))
+       (run imandra-extract venue.iml))))
 
 (library
   (name venue)
