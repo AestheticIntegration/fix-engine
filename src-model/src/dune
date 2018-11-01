@@ -1,7 +1,7 @@
 (library
   (name venue)
-  (public_name venue)
+  (public_name fix-engine.venue)
   (wrapped false)
   (flags (:standard -open Imandra_prelude))
-  (libraries venue_prelude core core_time_defaults venue_types)
+  (libraries fix-engine.venue_prelude fix-engine.core fix-engine.core_time_defaults fix-engine.venue_types)
 )

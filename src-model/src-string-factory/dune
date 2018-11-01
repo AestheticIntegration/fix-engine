@@ -1,7 +1,7 @@
 (library
   (name string_factory)
-  (public_name string_factory)
+  (public_name fix-engine.string_factory)
   (wrapped false)
   (flags (:standard -open Imandra_prelude))
-  (libraries venue_prelude venue_types)
+  (libraries fix-engine.venue_prelude fix-engine.venue_types)
 )

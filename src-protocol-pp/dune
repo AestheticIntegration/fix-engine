@@ -1,6 +1,6 @@
 (library
   (name        protocol_pp)
-  (public_name protocol_pp)
+  (public_name fix-engine.protocol_pp)
   (wrapped  false)
-  (libraries core_time_defaults_pp yojson protocol_exts_pp protocol fix_engine core_utils)
+  (libraries fix-engine.core_time_defaults_pp yojson fix-engine.protocol_exts_pp fix-engine.protocol fix-engine.fix_engine fix-engine.core_utils)
 )

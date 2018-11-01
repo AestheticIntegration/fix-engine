@@ -1,6 +1,6 @@
 (library
   (name        protocol_exts_pp_vg)
-  (public_name protocol_exts_pp_vg)
+  (public_name fix-engine.protocol_exts_pp_vg)
   (wrapped  false)
-  (libraries core_time_defaults yojson core_pp core_time_defaults_pp protocol_exts_vg)
+  (libraries fix-engine.core_time_defaults yojson fix-engine.core_pp fix-engine.core_time_defaults_pp fix-engine.protocol_exts_vg)
 )

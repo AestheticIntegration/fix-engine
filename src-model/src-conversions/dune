@@ -1,7 +1,7 @@
 (library
   (name conversions)
-  (public_name conversions)
+  (public_name fix-engine.conversions)
   (wrapped false)
   (flags (:standard -open Imandra_prelude))
-  (libraries venue_prelude core core_time_defaults protocol_exts venue_types)
+  (libraries fix-engine.venue_prelude fix-engine.core fix-engine.core_time_defaults fix-engine.protocol_exts fix-engine.venue_types)
 )

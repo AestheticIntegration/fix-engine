@@ -1,17 +1,17 @@
 (library
   (name        fix_simulation)
-  (public_name fix_simulation)
+  (public_name fix-engine.fix_simulation)
   (wrapped  false)
   (modules (:standard \ server client))
   (libraries 
        lwt.unix
-        venue
-        fix_engine
-        core_pp
-        core_time_defaults
-        core_time_defaults_pp
-        protocol_pp
-        conversions    
+        fix-engine.venue
+        fix-engine.fix_engine
+        fix-engine.core_pp
+        fix-engine.core_time_defaults
+        fix-engine.core_time_defaults_pp
+        fix-engine.protocol_pp
+        fix-engine.conversions    
   )
 )
 
@@ -20,11 +20,11 @@
   (modules server)
   (libraries 
       lwt.unix
-      venue
-      fix_engine
-      fix_simulation
-      protocol_pp
-      conversions
+      fix-engine.venue
+      fix-engine.fix_engine
+      fix-engine.fix_simulation
+      fix-engine.protocol_pp
+      fix-engine.conversions
   )
 )
 
@@ -34,12 +34,12 @@
   (libraries 
       yojson
       lwt.unix
-      venue
-      fix_engine
-      fix_simulation
-      conversions
-      protocol_pp
-      types_pp
+      fix-engine.venue
+      fix-engine.fix_engine
+      fix-engine.fix_simulation
+      fix-engine.conversions
+      fix-engine.protocol_pp
+      fix-engine.types_pp
       cmdliner
       ZMQ
       lwt-zmq

@@ -1,6 +1,6 @@
 (library
   (name        core_pp)
-  (public_name core_pp)
+  (public_name fix-engine.core_pp)
   (wrapped  false)
-  (libraries decoders-yojson decoders core yojson)
+  (libraries decoders-yojson decoders fix-engine.core yojson)
 )

@@ -1,11 +1,11 @@
 (library
   (name        core_time_defaults_pp)
-  (public_name core_time_defaults_pp)
+  (public_name fix-engine.core_time_defaults_pp)
   (wrapped  false)
   (libraries 
-      core_time_defaults
-      core_pp
-      core
+      fix-engine.core_time_defaults
+      fix-engine.core_pp
+      fix-engine.core
       yojson
     )
 )

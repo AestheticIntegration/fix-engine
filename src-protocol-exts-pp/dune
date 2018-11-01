@@ -1,7 +1,7 @@
 (library
   (name protocol_exts_pp)
-  (public_name protocol_exts_pp)
+  (public_name fix-engine.protocol_exts_pp)
   (wrapped false)
   (flags (:standard -open Imandra_prelude))
-  (libraries venue_prelude core_pp protocol_exts yojson core_time_defaults_pp)
+  (libraries fix-engine.venue_prelude fix-engine.core_pp fix-engine.protocol_exts yojson fix-engine.core_time_defaults_pp)
 )

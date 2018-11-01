@@ -1,6 +1,6 @@
 (library
   (name        protocol_exts_vg)
-  (public_name protocol_exts_vg)
+  (public_name fix-engine.protocol_exts_vg)
   (wrapped  false)
-  (libraries core core_time_defaults)
+  (libraries fix-engine.core fix-engine.core_time_defaults)
 )

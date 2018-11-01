@@ -1,6 +1,6 @@
 (library
   (name        protocol)
-  (public_name protocol)
+  (public_name fix-engine.protocol)
   (wrapped  false)
-  (libraries core_time_defaults protocol_exts)
+  (libraries fix-engine.core_time_defaults fix-engine.protocol_exts)
 )

@@ -1,5 +1,5 @@
 (library
   (name        core_utils)
-  (public_name core_utils)
+  (public_name fix-engine.core_utils)
   (wrapped  false)
 )

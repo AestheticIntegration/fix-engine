@@ -1,5 +1,5 @@
 (library
   (name venue_prelude)
-  (public_name venue_prelude)
+  (public_name fix-engine.venue_prelude)
   (wrapped false)
 )

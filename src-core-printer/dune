@@ -1,6 +1,6 @@
 (library
   (name        core_printer)
-  (public_name core_printer)
+  (public_name fix-engine.core_printer)
   (wrapped  false)
-  (libraries core_pp core_time_defaults_pp core yojson)
+  (libraries fix-engine.core_pp fix-engine.core_time_defaults_pp fix-engine.core yojson)
 )

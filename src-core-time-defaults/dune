@@ -1,8 +1,8 @@
 (library
   (name        core_time_defaults)
-  (public_name core_time_defaults)
+  (public_name fix-engine.core_time_defaults)
   (wrapped  false)
   (libraries 
-      core
+      fix-engine.core
     )
 )

@@ -1,13 +1,13 @@
 (library
   (name        test)
-  (public_name test)
+  (public_name fix-engine.test)
   (wrapped  false)
   (modules test_cache)
-  (libraries yojson protocol_pp core_printer)
+  (libraries yojson fix-engine.protocol_pp fix-engine.core_printer)
 )
 
 (executable
   (name test_runner) 
-  (libraries threads cmdliner lwt.unix fix_simulation protocol_pp core_printer)
+  (libraries threads cmdliner lwt.unix fix-engine.fix_simulation fix-engine.protocol_pp fix-engine.core_printer)
   (modules test_runner config_parser)
 )
