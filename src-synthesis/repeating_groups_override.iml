@@ -1,0 +1,190 @@
+(* Aesthetic Integration copyright 2018 *)
+open Model_repeating_groups;;
+
+let rec count_somes (x)  : int =
+    (match x with
+        | [] -> 0
+        | None :: m -> (count_somes m)
+        | Some _ :: m -> ((+) 1 (count_somes m))
+    )
+;;
+
+let gen_fix_rg_inner_securityaltidgrp_override (x : model_fix_rec_securityaltidgrp) (y : bool)  : model_fix_rec_securityaltidgrp =
+    let m = count_somes (x.rg_SecurityAltIDGrp_element_0 :: (x.rg_SecurityAltIDGrp_element_1 :: (x.rg_SecurityAltIDGrp_element_2 :: (x.rg_SecurityAltIDGrp_element_3 :: (x.rg_SecurityAltIDGrp_element_4 :: []))))) in
+    {
+        mod_f_SecurityAltIDGrp_NoSecurityAltID = if ((&&) ((=) m 0) y) then
+            None
+        else
+            (Some m);
+        rg_SecurityAltIDGrp_element_0 = x.rg_SecurityAltIDGrp_element_0;
+        rg_SecurityAltIDGrp_element_1 = x.rg_SecurityAltIDGrp_element_1;
+        rg_SecurityAltIDGrp_element_2 = x.rg_SecurityAltIDGrp_element_2;
+        rg_SecurityAltIDGrp_element_3 = x.rg_SecurityAltIDGrp_element_3;
+        rg_SecurityAltIDGrp_element_4 = x.rg_SecurityAltIDGrp_element_4
+    }
+;;
+
+let gen_fix_rg_inner_execsgrp_override (x : model_fix_rec_execsgrp) (y : bool)  : model_fix_rec_execsgrp =
+    let m = count_somes (x.rg_ExecsGrp_element_0 :: (x.rg_ExecsGrp_element_1 :: (x.rg_ExecsGrp_element_2 :: (x.rg_ExecsGrp_element_3 :: (x.rg_ExecsGrp_element_4 :: []))))) in
+    {
+        mod_f_ExecsGrp_NoExecs = if ((&&) ((=) m 0) y) then
+            None
+        else
+            (Some m);
+        rg_ExecsGrp_element_0 = x.rg_ExecsGrp_element_0;
+        rg_ExecsGrp_element_1 = x.rg_ExecsGrp_element_1;
+        rg_ExecsGrp_element_2 = x.rg_ExecsGrp_element_2;
+        rg_ExecsGrp_element_3 = x.rg_ExecsGrp_element_3;
+        rg_ExecsGrp_element_4 = x.rg_ExecsGrp_element_4
+    }
+;;
+
+let gen_fix_rg_inner_mktxcostanalysisgrp_override (x : model_fix_rec_mktxcostanalysisgrp) (y : bool)  : model_fix_rec_mktxcostanalysisgrp =
+    let m = count_somes (x.rg_MKTXCostAnalysisGrp_element_0 :: (x.rg_MKTXCostAnalysisGrp_element_1 :: (x.rg_MKTXCostAnalysisGrp_element_2 :: (x.rg_MKTXCostAnalysisGrp_element_3 :: (x.rg_MKTXCostAnalysisGrp_element_4 :: []))))) in
+    {
+        mod_f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis = if ((&&) ((=) m 0) y) then
+            None
+        else
+            (Some m);
+        rg_MKTXCostAnalysisGrp_element_0 = x.rg_MKTXCostAnalysisGrp_element_0;
+        rg_MKTXCostAnalysisGrp_element_1 = x.rg_MKTXCostAnalysisGrp_element_1;
+        rg_MKTXCostAnalysisGrp_element_2 = x.rg_MKTXCostAnalysisGrp_element_2;
+        rg_MKTXCostAnalysisGrp_element_3 = x.rg_MKTXCostAnalysisGrp_element_3;
+        rg_MKTXCostAnalysisGrp_element_4 = x.rg_MKTXCostAnalysisGrp_element_4
+    }
+;;
+
+let gen_fix_rg_inner_regulatorytradeidsgrp_override (x : model_fix_rec_regulatorytradeidsgrp) (y : bool)  : model_fix_rec_regulatorytradeidsgrp =
+    let m = count_somes (x.rg_RegulatoryTradeIDsGrp_element_0 :: (x.rg_RegulatoryTradeIDsGrp_element_1 :: (x.rg_RegulatoryTradeIDsGrp_element_2 :: (x.rg_RegulatoryTradeIDsGrp_element_3 :: (x.rg_RegulatoryTradeIDsGrp_element_4 :: []))))) in
+    {
+        mod_f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs = if ((&&) ((=) m 0) y) then
+            None
+        else
+            (Some m);
+        rg_RegulatoryTradeIDsGrp_element_0 = x.rg_RegulatoryTradeIDsGrp_element_0;
+        rg_RegulatoryTradeIDsGrp_element_1 = x.rg_RegulatoryTradeIDsGrp_element_1;
+        rg_RegulatoryTradeIDsGrp_element_2 = x.rg_RegulatoryTradeIDsGrp_element_2;
+        rg_RegulatoryTradeIDsGrp_element_3 = x.rg_RegulatoryTradeIDsGrp_element_3;
+        rg_RegulatoryTradeIDsGrp_element_4 = x.rg_RegulatoryTradeIDsGrp_element_4
+    }
+;;
+
+let gen_fix_rg_inner_legsgrp_override (x : model_fix_rec_legsgrp) (y : bool)  : model_fix_rec_legsgrp =
+    let m = count_somes (x.rg_LegsGrp_element_0 :: (x.rg_LegsGrp_element_1 :: (x.rg_LegsGrp_element_2 :: (x.rg_LegsGrp_element_3 :: (x.rg_LegsGrp_element_4 :: []))))) in
+    {
+        mod_f_LegsGrp_NoLegs = if ((&&) ((=) m 0) y) then
+            None
+        else
+            (Some m);
+        rg_LegsGrp_element_0 = x.rg_LegsGrp_element_0;
+        rg_LegsGrp_element_1 = x.rg_LegsGrp_element_1;
+        rg_LegsGrp_element_2 = x.rg_LegsGrp_element_2;
+        rg_LegsGrp_element_3 = x.rg_LegsGrp_element_3;
+        rg_LegsGrp_element_4 = x.rg_LegsGrp_element_4
+    }
+;;
+
+let gen_fix_rg_inner_dealersgrp_override (x : model_fix_rec_dealersgrp) (y : bool)  : model_fix_rec_dealersgrp =
+    let m = count_somes (x.rg_DealersGrp_element_0 :: (x.rg_DealersGrp_element_1 :: (x.rg_DealersGrp_element_2 :: (x.rg_DealersGrp_element_3 :: (x.rg_DealersGrp_element_4 :: []))))) in
+    {
+        mod_f_DealersGrp_NoDealers = if ((&&) ((=) m 0) y) then
+            None
+        else
+            (Some m);
+        rg_DealersGrp_element_0 = x.rg_DealersGrp_element_0;
+        rg_DealersGrp_element_1 = x.rg_DealersGrp_element_1;
+        rg_DealersGrp_element_2 = x.rg_DealersGrp_element_2;
+        rg_DealersGrp_element_3 = x.rg_DealersGrp_element_3;
+        rg_DealersGrp_element_4 = x.rg_DealersGrp_element_4
+    }
+;;
+
+let gen_fix_rg_inner_trdregpublicationsgrp_override (x : model_fix_rec_trdregpublicationsgrp) (y : bool)  : model_fix_rec_trdregpublicationsgrp =
+    let m = count_somes (x.rg_TrdRegPublicationsGrp_element_0 :: (x.rg_TrdRegPublicationsGrp_element_1 :: (x.rg_TrdRegPublicationsGrp_element_2 :: (x.rg_TrdRegPublicationsGrp_element_3 :: (x.rg_TrdRegPublicationsGrp_element_4 :: []))))) in
+    {
+        mod_f_TrdRegPublicationsGrp_NoTrdRegPublications = if ((&&) ((=) m 0) y) then
+            None
+        else
+            (Some m);
+        rg_TrdRegPublicationsGrp_element_0 = x.rg_TrdRegPublicationsGrp_element_0;
+        rg_TrdRegPublicationsGrp_element_1 = x.rg_TrdRegPublicationsGrp_element_1;
+        rg_TrdRegPublicationsGrp_element_2 = x.rg_TrdRegPublicationsGrp_element_2;
+        rg_TrdRegPublicationsGrp_element_3 = x.rg_TrdRegPublicationsGrp_element_3;
+        rg_TrdRegPublicationsGrp_element_4 = x.rg_TrdRegPublicationsGrp_element_4
+    }
+;;
+
+let gen_fix_rg_inner_partysubidsgrp_override (x : model_fix_rec_partysubidsgrp) (y : bool)  : model_fix_rec_partysubidsgrp =
+    let m = count_somes (x.rg_PartySubIDsGrp_element_0 :: (x.rg_PartySubIDsGrp_element_1 :: (x.rg_PartySubIDsGrp_element_2 :: (x.rg_PartySubIDsGrp_element_3 :: (x.rg_PartySubIDsGrp_element_4 :: []))))) in
+    {
+        mod_f_PartySubIDsGrp_NoPartySubIDs = if ((&&) ((=) m 0) y) then
+            None
+        else
+            (Some m);
+        rg_PartySubIDsGrp_element_0 = x.rg_PartySubIDsGrp_element_0;
+        rg_PartySubIDsGrp_element_1 = x.rg_PartySubIDsGrp_element_1;
+        rg_PartySubIDsGrp_element_2 = x.rg_PartySubIDsGrp_element_2;
+        rg_PartySubIDsGrp_element_3 = x.rg_PartySubIDsGrp_element_3;
+        rg_PartySubIDsGrp_element_4 = x.rg_PartySubIDsGrp_element_4
+    }
+;;
+
+let gen_fix_rg_inner_legallocsgrp_override (x : model_fix_rec_legallocsgrp) (y : bool)  : model_fix_rec_legallocsgrp =
+    let m = count_somes (x.rg_LegAllocsGrp_element_0 :: (x.rg_LegAllocsGrp_element_1 :: (x.rg_LegAllocsGrp_element_2 :: (x.rg_LegAllocsGrp_element_3 :: (x.rg_LegAllocsGrp_element_4 :: []))))) in
+    {
+        mod_f_LegAllocsGrp_NoLegAllocs = if ((&&) ((=) m 0) y) then
+            None
+        else
+            (Some m);
+        rg_LegAllocsGrp_element_0 = x.rg_LegAllocsGrp_element_0;
+        rg_LegAllocsGrp_element_1 = x.rg_LegAllocsGrp_element_1;
+        rg_LegAllocsGrp_element_2 = x.rg_LegAllocsGrp_element_2;
+        rg_LegAllocsGrp_element_3 = x.rg_LegAllocsGrp_element_3;
+        rg_LegAllocsGrp_element_4 = x.rg_LegAllocsGrp_element_4
+    }
+;;
+
+let gen_fix_rg_inner_allocsgrp_override (x : model_fix_rec_allocsgrp) (y : bool)  : model_fix_rec_allocsgrp =
+    let m = count_somes (x.rg_AllocsGrp_element_0 :: (x.rg_AllocsGrp_element_1 :: (x.rg_AllocsGrp_element_2 :: (x.rg_AllocsGrp_element_3 :: (x.rg_AllocsGrp_element_4 :: []))))) in
+    {
+        mod_f_AllocsGrp_NoAllocs = if ((&&) ((=) m 0) y) then
+            None
+        else
+            (Some m);
+        rg_AllocsGrp_element_0 = x.rg_AllocsGrp_element_0;
+        rg_AllocsGrp_element_1 = x.rg_AllocsGrp_element_1;
+        rg_AllocsGrp_element_2 = x.rg_AllocsGrp_element_2;
+        rg_AllocsGrp_element_3 = x.rg_AllocsGrp_element_3;
+        rg_AllocsGrp_element_4 = x.rg_AllocsGrp_element_4
+    }
+;;
+
+let gen_fix_rg_inner_partyidsgrp_override (x : model_fix_rec_partyidsgrp) (y : bool)  : model_fix_rec_partyidsgrp =
+    let m = count_somes (x.rg_PartyIDsGrp_element_0 :: (x.rg_PartyIDsGrp_element_1 :: (x.rg_PartyIDsGrp_element_2 :: (x.rg_PartyIDsGrp_element_3 :: (x.rg_PartyIDsGrp_element_4 :: []))))) in
+    {
+        mod_f_PartyIDsGrp_NoPartyIDs = if ((&&) ((=) m 0) y) then
+            None
+        else
+            (Some m);
+        rg_PartyIDsGrp_element_0 = x.rg_PartyIDsGrp_element_0;
+        rg_PartyIDsGrp_element_1 = x.rg_PartyIDsGrp_element_1;
+        rg_PartyIDsGrp_element_2 = x.rg_PartyIDsGrp_element_2;
+        rg_PartyIDsGrp_element_3 = x.rg_PartyIDsGrp_element_3;
+        rg_PartyIDsGrp_element_4 = x.rg_PartyIDsGrp_element_4
+    }
+;;
+
+let gen_fix_rg_inner_ordersgrp_override (x : model_fix_rec_ordersgrp) (y : bool)  : model_fix_rec_ordersgrp =
+    let m = count_somes (x.rg_OrdersGrp_element_0 :: (x.rg_OrdersGrp_element_1 :: (x.rg_OrdersGrp_element_2 :: (x.rg_OrdersGrp_element_3 :: (x.rg_OrdersGrp_element_4 :: []))))) in
+    {
+        mod_f_OrdersGrp_NoOrders = if ((&&) ((=) m 0) y) then
+            None
+        else
+            (Some m);
+        rg_OrdersGrp_element_0 = x.rg_OrdersGrp_element_0;
+        rg_OrdersGrp_element_1 = x.rg_OrdersGrp_element_1;
+        rg_OrdersGrp_element_2 = x.rg_OrdersGrp_element_2;
+        rg_OrdersGrp_element_3 = x.rg_OrdersGrp_element_3;
+        rg_OrdersGrp_element_4 = x.rg_OrdersGrp_element_4
+    }
+;;

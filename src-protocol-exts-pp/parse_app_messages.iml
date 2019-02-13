@@ -7,146 +7,248 @@ open Parse_base_types;;
 open Parse_datetime;;
 open Parser_utils.Parser;;
 
-let parse_ExecutionReport (msg)  =
-    (repeating msg "453" parse_Parties (fun msg f_ExecutionReport_Parties -> repeating msg "382" parse_ContraGrp (fun msg f_ExecutionReport_ContraGrp -> repeating msg "711" parse_UndInstrmtGrp (fun msg f_ExecutionReport_UndInstrmtGrp -> repeating msg "232" parse_Stipulations (fun msg f_ExecutionReport_Stipulations -> repeating msg "518" parse_ContAmtGrp (fun msg f_ExecutionReport_ContAmtGrp -> repeating msg "555" parse_InstrmtLegExecGrp (fun msg f_ExecutionReport_InstrmtLegExecGrp -> repeating msg "136" parse_MiscFeesGrp (fun msg f_ExecutionReport_MiscFeesGrp -> check_duplicate_tags msg (fun () -> block msg parse_Instrument (fun msg f_ExecutionReport_Instrument -> block msg parse_FinancingDetails (fun msg f_ExecutionReport_FinancingDetails -> block msg parse_OrderQtyData (fun msg f_ExecutionReport_OrderQtyData -> block msg parse_PegInstructions (fun msg f_ExecutionReport_PegInstructions -> block msg parse_DiscretionInstructions (fun msg f_ExecutionReport_DiscretionInstructions -> block msg parse_CommissionData (fun msg f_ExecutionReport_CommissionData -> block msg parse_SpreadOrBenchmarkCurveData (fun msg f_ExecutionReport_SpreadOrBenchmarkCurveData -> block msg parse_YieldData (fun msg f_ExecutionReport_YieldData -> opt msg "37" parse_string (fun msg f_ExecutionReport_OrderID -> opt msg "198" parse_string (fun msg f_ExecutionReport_SecondaryOrderID -> opt msg "526" parse_string (fun msg f_ExecutionReport_SecondaryClOrdID -> opt msg "527" parse_string (fun msg f_ExecutionReport_SecondaryExecID -> opt msg "11" parse_string (fun msg f_ExecutionReport_ClOrdID -> opt msg "41" parse_string (fun msg f_ExecutionReport_OrigClOrdID -> opt msg "583" parse_string (fun msg f_ExecutionReport_ClOrdLinkID -> opt msg "693" parse_string (fun msg f_ExecutionReport_QuoteRespID -> opt msg "790" parse_string (fun msg f_ExecutionReport_OrdStatusReqID -> opt msg "584" parse_string (fun msg f_ExecutionReport_MassStatusReqID -> opt msg "911" parse_int (fun msg f_ExecutionReport_TotNumReports -> opt msg "912" parse_bool (fun msg f_ExecutionReport_LastRptRequested -> opt msg "229" parse_LocalMktDate (fun msg f_ExecutionReport_TradeOriginationDate -> opt msg "66" parse_string (fun msg f_ExecutionReport_ListID -> opt msg "548" parse_string (fun msg f_ExecutionReport_CrossID -> opt msg "551" parse_string (fun msg f_ExecutionReport_OrigCrossID -> opt msg "549" parse_CrossType (fun msg f_ExecutionReport_CrossType -> opt msg "17" parse_string (fun msg f_ExecutionReport_ExecID -> opt msg "19" parse_string (fun msg f_ExecutionReport_ExecRefID -> opt msg "150" parse_ExecType (fun msg f_ExecutionReport_ExecType -> opt msg "39" parse_OrdStatus (fun msg f_ExecutionReport_OrdStatus -> opt msg "636" parse_WorkingIndicator (fun msg f_ExecutionReport_WorkingIndicator -> opt msg "103" parse_OrdRejReason (fun msg f_ExecutionReport_OrdRejReason -> opt msg "378" parse_ExecRestatementReason (fun msg f_ExecutionReport_ExecRestatementReason -> opt msg "1" parse_string (fun msg f_ExecutionReport_Account -> opt msg "660" parse_AcctIDSource (fun msg f_ExecutionReport_AcctIDSource -> opt msg "581" parse_AccountType (fun msg f_ExecutionReport_AccountType -> opt msg "589" parse_DayBookingInst (fun msg f_ExecutionReport_DayBookingInst -> opt msg "590" parse_BookingUnit (fun msg f_ExecutionReport_BookingUnit -> opt msg "591" parse_PreallocMethod (fun msg f_ExecutionReport_PreallocMethod -> opt msg "63" parse_SettlType (fun msg f_ExecutionReport_SettlType -> opt msg "64" parse_LocalMktDate (fun msg f_ExecutionReport_SettlDate -> opt msg "544" parse_CashMargin (fun msg f_ExecutionReport_CashMargin -> opt msg "635" parse_ClearingFeeIndicator (fun msg f_ExecutionReport_ClearingFeeIndicator -> opt msg "54" parse_Side (fun msg f_ExecutionReport_Side -> opt msg "854" parse_QtyType (fun msg f_ExecutionReport_QtyType -> opt msg "40" parse_OrdType (fun msg f_ExecutionReport_OrdType -> opt msg "423" parse_PriceType (fun msg f_ExecutionReport_PriceType -> opt msg "44" parse_float (fun msg f_ExecutionReport_Price -> opt msg "99" parse_float (fun msg f_ExecutionReport_StopPx -> opt msg "839" parse_float (fun msg f_ExecutionReport_PeggedPrice -> opt msg "845" parse_float (fun msg f_ExecutionReport_DiscretionPrice -> opt msg "847" parse_TargetStrategy (fun msg f_ExecutionReport_TargetStrategy -> opt msg "848" parse_string (fun msg f_ExecutionReport_TargetStrategyParameters -> opt msg "849" parse_float (fun msg f_ExecutionReport_ParticipationRate -> opt msg "850" parse_float (fun msg f_ExecutionReport_TargetStrategyPerformance -> opt msg "15" parse_Currency (fun msg f_ExecutionReport_Currency -> opt msg "376" parse_string (fun msg f_ExecutionReport_ComplianceID -> opt msg "377" parse_SolicitedFlag (fun msg f_ExecutionReport_SolicitedFlag -> opt msg "59" parse_TimeInForce (fun msg f_ExecutionReport_TimeInForce -> opt msg "168" parse_UTCTimestamp_milli (fun msg f_ExecutionReport_EffectiveTime -> opt msg "432" parse_LocalMktDate (fun msg f_ExecutionReport_ExpireDate -> opt msg "126" parse_UTCTimestamp_milli (fun msg f_ExecutionReport_ExpireTime -> opt msg "18" parse_ExecInst (fun msg f_ExecutionReport_ExecInst -> opt msg "528" parse_OrderCapacity (fun msg f_ExecutionReport_OrderCapacity -> opt msg "529" parse_OrderRestrictions (fun msg f_ExecutionReport_OrderRestrictions -> opt msg "582" parse_CustOrderCapacity (fun msg f_ExecutionReport_CustOrderCapacity -> opt msg "32" parse_float (fun msg f_ExecutionReport_LastQty -> opt msg "652" parse_float (fun msg f_ExecutionReport_UnderlyingLastQty -> opt msg "31" parse_float (fun msg f_ExecutionReport_LastPx -> opt msg "651" parse_float (fun msg f_ExecutionReport_UnderlyingLastPx -> opt msg "669" parse_float (fun msg f_ExecutionReport_LastParPx -> opt msg "194" parse_float (fun msg f_ExecutionReport_LastSpotRate -> opt msg "195" parse_float (fun msg f_ExecutionReport_LastForwardPoints -> opt msg "30" parse_Exchange (fun msg f_ExecutionReport_LastMkt -> opt msg "336" parse_string (fun msg f_ExecutionReport_TradingSessionID -> opt msg "625" parse_string (fun msg f_ExecutionReport_TradingSessionSubID -> opt msg "943" parse_string (fun msg f_ExecutionReport_TimeBracket -> opt msg "29" parse_LastCapacity (fun msg f_ExecutionReport_LastCapacity -> opt msg "151" parse_float (fun msg f_ExecutionReport_LeavesQty -> opt msg "14" parse_float (fun msg f_ExecutionReport_CumQty -> opt msg "6" parse_float (fun msg f_ExecutionReport_AvgPx -> opt msg "424" parse_float (fun msg f_ExecutionReport_DayOrderQty -> opt msg "425" parse_float (fun msg f_ExecutionReport_DayCumQty -> opt msg "426" parse_float (fun msg f_ExecutionReport_DayAvgPx -> opt msg "427" parse_GTBookingInst (fun msg f_ExecutionReport_GTBookingInst -> opt msg "75" parse_LocalMktDate (fun msg f_ExecutionReport_TradeDate -> opt msg "60" parse_UTCTimestamp_milli (fun msg f_ExecutionReport_TransactTime -> opt msg "113" parse_ReportToExch (fun msg f_ExecutionReport_ReportToExch -> opt msg "381" parse_float (fun msg f_ExecutionReport_GrossTradeAmt -> opt msg "157" parse_int (fun msg f_ExecutionReport_NumDaysInterest -> opt msg "230" parse_LocalMktDate (fun msg f_ExecutionReport_ExDate -> opt msg "158" parse_float (fun msg f_ExecutionReport_AccruedInterestRate -> opt msg "159" parse_float (fun msg f_ExecutionReport_AccruedInterestAmt -> opt msg "738" parse_float (fun msg f_ExecutionReport_InterestAtMaturity -> opt msg "920" parse_float (fun msg f_ExecutionReport_EndAccruedInterestAmt -> opt msg "921" parse_float (fun msg f_ExecutionReport_StartCash -> opt msg "922" parse_float (fun msg f_ExecutionReport_EndCash -> opt msg "258" parse_TradedFlatSwitch (fun msg f_ExecutionReport_TradedFlatSwitch -> opt msg "259" parse_LocalMktDate (fun msg f_ExecutionReport_BasisFeatureDate -> opt msg "260" parse_float (fun msg f_ExecutionReport_BasisFeaturePrice -> opt msg "238" parse_float (fun msg f_ExecutionReport_Concession -> opt msg "237" parse_float (fun msg f_ExecutionReport_TotalTakedown -> opt msg "118" parse_float (fun msg f_ExecutionReport_NetMoney -> opt msg "119" parse_float (fun msg f_ExecutionReport_SettlCurrAmt -> opt msg "120" parse_Currency (fun msg f_ExecutionReport_SettlCurrency -> opt msg "155" parse_float (fun msg f_ExecutionReport_SettlCurrFxRate -> opt msg "156" parse_SettlCurrFxRateCalc (fun msg f_ExecutionReport_SettlCurrFxRateCalc -> opt msg "21" parse_HandlInst (fun msg f_ExecutionReport_HandlInst -> opt msg "110" parse_float (fun msg f_ExecutionReport_MinQty -> opt msg "111" parse_float (fun msg f_ExecutionReport_MaxFloor -> opt msg "77" parse_PositionEffect (fun msg f_ExecutionReport_PositionEffect -> opt msg "210" parse_float (fun msg f_ExecutionReport_MaxShow -> opt msg "775" parse_BookingType (fun msg f_ExecutionReport_BookingType -> opt msg "58" parse_string (fun msg f_ExecutionReport_Text -> opt msg "354" parse_int (fun msg f_ExecutionReport_EncodedTextLen -> opt msg "355" parse_string (fun msg f_ExecutionReport_EncodedText -> opt msg "193" parse_LocalMktDate (fun msg f_ExecutionReport_SettlDate2 -> opt msg "192" parse_float (fun msg f_ExecutionReport_OrderQty2 -> opt msg "641" parse_float (fun msg f_ExecutionReport_LastForwardPoints2 -> opt msg "442" parse_MultiLegReportingType (fun msg f_ExecutionReport_MultiLegReportingType -> opt msg "480" parse_CancellationRights (fun msg f_ExecutionReport_CancellationRights -> opt msg "481" parse_MoneyLaunderingStatus (fun msg f_ExecutionReport_MoneyLaunderingStatus -> opt msg "513" parse_string (fun msg f_ExecutionReport_RegistID -> opt msg "494" parse_string (fun msg f_ExecutionReport_Designation -> opt msg "483" parse_UTCTimestamp_milli (fun msg f_ExecutionReport_TransBkdTime -> opt msg "515" parse_UTCTimestamp_milli (fun msg f_ExecutionReport_ExecValuationPoint -> opt msg "484" parse_ExecPriceType (fun msg f_ExecutionReport_ExecPriceType -> opt msg "485" parse_float (fun msg f_ExecutionReport_ExecPriceAdjustment -> opt msg "638" parse_PriorityIndicator (fun msg f_ExecutionReport_PriorityIndicator -> opt msg "639" parse_float (fun msg f_ExecutionReport_PriceImprovement -> opt msg "851" parse_LastLiquidityInd (fun msg f_ExecutionReport_LastLiquidityInd -> opt msg "797" parse_bool (fun msg f_ExecutionReport_CopyMsgIndicator -> (ParseSuccess {
-        f_ExecutionReport_Parties = f_ExecutionReport_Parties;
-        f_ExecutionReport_ContraGrp = f_ExecutionReport_ContraGrp;
-        f_ExecutionReport_UndInstrmtGrp = f_ExecutionReport_UndInstrmtGrp;
-        f_ExecutionReport_Stipulations = f_ExecutionReport_Stipulations;
-        f_ExecutionReport_ContAmtGrp = f_ExecutionReport_ContAmtGrp;
-        f_ExecutionReport_InstrmtLegExecGrp = f_ExecutionReport_InstrmtLegExecGrp;
-        f_ExecutionReport_MiscFeesGrp = f_ExecutionReport_MiscFeesGrp;
-        f_ExecutionReport_Instrument = f_ExecutionReport_Instrument;
-        f_ExecutionReport_FinancingDetails = f_ExecutionReport_FinancingDetails;
-        f_ExecutionReport_OrderQtyData = f_ExecutionReport_OrderQtyData;
-        f_ExecutionReport_PegInstructions = f_ExecutionReport_PegInstructions;
-        f_ExecutionReport_DiscretionInstructions = f_ExecutionReport_DiscretionInstructions;
-        f_ExecutionReport_CommissionData = f_ExecutionReport_CommissionData;
-        f_ExecutionReport_SpreadOrBenchmarkCurveData = f_ExecutionReport_SpreadOrBenchmarkCurveData;
-        f_ExecutionReport_YieldData = f_ExecutionReport_YieldData;
-        f_ExecutionReport_OrderID = f_ExecutionReport_OrderID;
-        f_ExecutionReport_SecondaryOrderID = f_ExecutionReport_SecondaryOrderID;
-        f_ExecutionReport_SecondaryClOrdID = f_ExecutionReport_SecondaryClOrdID;
-        f_ExecutionReport_SecondaryExecID = f_ExecutionReport_SecondaryExecID;
-        f_ExecutionReport_ClOrdID = f_ExecutionReport_ClOrdID;
-        f_ExecutionReport_OrigClOrdID = f_ExecutionReport_OrigClOrdID;
-        f_ExecutionReport_ClOrdLinkID = f_ExecutionReport_ClOrdLinkID;
-        f_ExecutionReport_QuoteRespID = f_ExecutionReport_QuoteRespID;
-        f_ExecutionReport_OrdStatusReqID = f_ExecutionReport_OrdStatusReqID;
-        f_ExecutionReport_MassStatusReqID = f_ExecutionReport_MassStatusReqID;
-        f_ExecutionReport_TotNumReports = f_ExecutionReport_TotNumReports;
-        f_ExecutionReport_LastRptRequested = f_ExecutionReport_LastRptRequested;
-        f_ExecutionReport_TradeOriginationDate = f_ExecutionReport_TradeOriginationDate;
-        f_ExecutionReport_ListID = f_ExecutionReport_ListID;
-        f_ExecutionReport_CrossID = f_ExecutionReport_CrossID;
-        f_ExecutionReport_OrigCrossID = f_ExecutionReport_OrigCrossID;
-        f_ExecutionReport_CrossType = f_ExecutionReport_CrossType;
-        f_ExecutionReport_ExecID = f_ExecutionReport_ExecID;
-        f_ExecutionReport_ExecRefID = f_ExecutionReport_ExecRefID;
-        f_ExecutionReport_ExecType = f_ExecutionReport_ExecType;
-        f_ExecutionReport_OrdStatus = f_ExecutionReport_OrdStatus;
-        f_ExecutionReport_WorkingIndicator = f_ExecutionReport_WorkingIndicator;
-        f_ExecutionReport_OrdRejReason = f_ExecutionReport_OrdRejReason;
-        f_ExecutionReport_ExecRestatementReason = f_ExecutionReport_ExecRestatementReason;
-        f_ExecutionReport_Account = f_ExecutionReport_Account;
-        f_ExecutionReport_AcctIDSource = f_ExecutionReport_AcctIDSource;
-        f_ExecutionReport_AccountType = f_ExecutionReport_AccountType;
-        f_ExecutionReport_DayBookingInst = f_ExecutionReport_DayBookingInst;
-        f_ExecutionReport_BookingUnit = f_ExecutionReport_BookingUnit;
-        f_ExecutionReport_PreallocMethod = f_ExecutionReport_PreallocMethod;
-        f_ExecutionReport_SettlType = f_ExecutionReport_SettlType;
-        f_ExecutionReport_SettlDate = f_ExecutionReport_SettlDate;
-        f_ExecutionReport_CashMargin = f_ExecutionReport_CashMargin;
-        f_ExecutionReport_ClearingFeeIndicator = f_ExecutionReport_ClearingFeeIndicator;
-        f_ExecutionReport_Side = f_ExecutionReport_Side;
-        f_ExecutionReport_QtyType = f_ExecutionReport_QtyType;
-        f_ExecutionReport_OrdType = f_ExecutionReport_OrdType;
-        f_ExecutionReport_PriceType = f_ExecutionReport_PriceType;
-        f_ExecutionReport_Price = f_ExecutionReport_Price;
-        f_ExecutionReport_StopPx = f_ExecutionReport_StopPx;
-        f_ExecutionReport_PeggedPrice = f_ExecutionReport_PeggedPrice;
-        f_ExecutionReport_DiscretionPrice = f_ExecutionReport_DiscretionPrice;
-        f_ExecutionReport_TargetStrategy = f_ExecutionReport_TargetStrategy;
-        f_ExecutionReport_TargetStrategyParameters = f_ExecutionReport_TargetStrategyParameters;
-        f_ExecutionReport_ParticipationRate = f_ExecutionReport_ParticipationRate;
-        f_ExecutionReport_TargetStrategyPerformance = f_ExecutionReport_TargetStrategyPerformance;
-        f_ExecutionReport_Currency = f_ExecutionReport_Currency;
-        f_ExecutionReport_ComplianceID = f_ExecutionReport_ComplianceID;
-        f_ExecutionReport_SolicitedFlag = f_ExecutionReport_SolicitedFlag;
-        f_ExecutionReport_TimeInForce = f_ExecutionReport_TimeInForce;
-        f_ExecutionReport_EffectiveTime = f_ExecutionReport_EffectiveTime;
-        f_ExecutionReport_ExpireDate = f_ExecutionReport_ExpireDate;
-        f_ExecutionReport_ExpireTime = f_ExecutionReport_ExpireTime;
-        f_ExecutionReport_ExecInst = f_ExecutionReport_ExecInst;
-        f_ExecutionReport_OrderCapacity = f_ExecutionReport_OrderCapacity;
-        f_ExecutionReport_OrderRestrictions = f_ExecutionReport_OrderRestrictions;
-        f_ExecutionReport_CustOrderCapacity = f_ExecutionReport_CustOrderCapacity;
-        f_ExecutionReport_LastQty = f_ExecutionReport_LastQty;
-        f_ExecutionReport_UnderlyingLastQty = f_ExecutionReport_UnderlyingLastQty;
-        f_ExecutionReport_LastPx = f_ExecutionReport_LastPx;
-        f_ExecutionReport_UnderlyingLastPx = f_ExecutionReport_UnderlyingLastPx;
-        f_ExecutionReport_LastParPx = f_ExecutionReport_LastParPx;
-        f_ExecutionReport_LastSpotRate = f_ExecutionReport_LastSpotRate;
-        f_ExecutionReport_LastForwardPoints = f_ExecutionReport_LastForwardPoints;
-        f_ExecutionReport_LastMkt = f_ExecutionReport_LastMkt;
-        f_ExecutionReport_TradingSessionID = f_ExecutionReport_TradingSessionID;
-        f_ExecutionReport_TradingSessionSubID = f_ExecutionReport_TradingSessionSubID;
-        f_ExecutionReport_TimeBracket = f_ExecutionReport_TimeBracket;
-        f_ExecutionReport_LastCapacity = f_ExecutionReport_LastCapacity;
-        f_ExecutionReport_LeavesQty = f_ExecutionReport_LeavesQty;
-        f_ExecutionReport_CumQty = f_ExecutionReport_CumQty;
-        f_ExecutionReport_AvgPx = f_ExecutionReport_AvgPx;
-        f_ExecutionReport_DayOrderQty = f_ExecutionReport_DayOrderQty;
-        f_ExecutionReport_DayCumQty = f_ExecutionReport_DayCumQty;
-        f_ExecutionReport_DayAvgPx = f_ExecutionReport_DayAvgPx;
-        f_ExecutionReport_GTBookingInst = f_ExecutionReport_GTBookingInst;
-        f_ExecutionReport_TradeDate = f_ExecutionReport_TradeDate;
-        f_ExecutionReport_TransactTime = f_ExecutionReport_TransactTime;
-        f_ExecutionReport_ReportToExch = f_ExecutionReport_ReportToExch;
-        f_ExecutionReport_GrossTradeAmt = f_ExecutionReport_GrossTradeAmt;
-        f_ExecutionReport_NumDaysInterest = f_ExecutionReport_NumDaysInterest;
-        f_ExecutionReport_ExDate = f_ExecutionReport_ExDate;
-        f_ExecutionReport_AccruedInterestRate = f_ExecutionReport_AccruedInterestRate;
-        f_ExecutionReport_AccruedInterestAmt = f_ExecutionReport_AccruedInterestAmt;
-        f_ExecutionReport_InterestAtMaturity = f_ExecutionReport_InterestAtMaturity;
-        f_ExecutionReport_EndAccruedInterestAmt = f_ExecutionReport_EndAccruedInterestAmt;
-        f_ExecutionReport_StartCash = f_ExecutionReport_StartCash;
-        f_ExecutionReport_EndCash = f_ExecutionReport_EndCash;
-        f_ExecutionReport_TradedFlatSwitch = f_ExecutionReport_TradedFlatSwitch;
-        f_ExecutionReport_BasisFeatureDate = f_ExecutionReport_BasisFeatureDate;
-        f_ExecutionReport_BasisFeaturePrice = f_ExecutionReport_BasisFeaturePrice;
-        f_ExecutionReport_Concession = f_ExecutionReport_Concession;
-        f_ExecutionReport_TotalTakedown = f_ExecutionReport_TotalTakedown;
-        f_ExecutionReport_NetMoney = f_ExecutionReport_NetMoney;
-        f_ExecutionReport_SettlCurrAmt = f_ExecutionReport_SettlCurrAmt;
-        f_ExecutionReport_SettlCurrency = f_ExecutionReport_SettlCurrency;
-        f_ExecutionReport_SettlCurrFxRate = f_ExecutionReport_SettlCurrFxRate;
-        f_ExecutionReport_SettlCurrFxRateCalc = f_ExecutionReport_SettlCurrFxRateCalc;
-        f_ExecutionReport_HandlInst = f_ExecutionReport_HandlInst;
-        f_ExecutionReport_MinQty = f_ExecutionReport_MinQty;
-        f_ExecutionReport_MaxFloor = f_ExecutionReport_MaxFloor;
-        f_ExecutionReport_PositionEffect = f_ExecutionReport_PositionEffect;
-        f_ExecutionReport_MaxShow = f_ExecutionReport_MaxShow;
-        f_ExecutionReport_BookingType = f_ExecutionReport_BookingType;
-        f_ExecutionReport_Text = f_ExecutionReport_Text;
-        f_ExecutionReport_EncodedTextLen = f_ExecutionReport_EncodedTextLen;
-        f_ExecutionReport_EncodedText = f_ExecutionReport_EncodedText;
-        f_ExecutionReport_SettlDate2 = f_ExecutionReport_SettlDate2;
-        f_ExecutionReport_OrderQty2 = f_ExecutionReport_OrderQty2;
-        f_ExecutionReport_LastForwardPoints2 = f_ExecutionReport_LastForwardPoints2;
-        f_ExecutionReport_MultiLegReportingType = f_ExecutionReport_MultiLegReportingType;
-        f_ExecutionReport_CancellationRights = f_ExecutionReport_CancellationRights;
-        f_ExecutionReport_MoneyLaunderingStatus = f_ExecutionReport_MoneyLaunderingStatus;
-        f_ExecutionReport_RegistID = f_ExecutionReport_RegistID;
-        f_ExecutionReport_Designation = f_ExecutionReport_Designation;
-        f_ExecutionReport_TransBkdTime = f_ExecutionReport_TransBkdTime;
-        f_ExecutionReport_ExecValuationPoint = f_ExecutionReport_ExecValuationPoint;
-        f_ExecutionReport_ExecPriceType = f_ExecutionReport_ExecPriceType;
-        f_ExecutionReport_ExecPriceAdjustment = f_ExecutionReport_ExecPriceAdjustment;
-        f_ExecutionReport_PriorityIndicator = f_ExecutionReport_PriorityIndicator;
-        f_ExecutionReport_PriceImprovement = f_ExecutionReport_PriceImprovement;
-        f_ExecutionReport_LastLiquidityInd = f_ExecutionReport_LastLiquidityInd;
-        f_ExecutionReport_CopyMsgIndicator = f_ExecutionReport_CopyMsgIndicator
+let parse_NewOrderSingle (msg)  =
+    (repeating msg "9690" parse_DealersGrp (fun msg f_NewOrderSingle_DealersGrp -> repeating msg "78" parse_AllocsGrp (fun msg f_NewOrderSingle_AllocsGrp -> check_duplicate_tags msg (fun () -> block msg parse_Parties (fun msg f_NewOrderSingle_Parties -> block msg parse_Instrument (fun msg f_NewOrderSingle_Instrument -> block msg parse_SpreadorBenchmarkCurveData (fun msg f_NewOrderSingle_SpreadorBenchmarkCurveData -> opt msg "11112" parse_string (fun msg f_NewOrderSingle_ClOrdID -> opt msg "15" parse_string (fun msg f_NewOrderSingle_Currency -> opt msg "21" parse_HandlInst (fun msg f_NewOrderSingle_HandlInst -> opt msg "18" parse_ExecInst (fun msg f_NewOrderSingle_ExecInst -> opt msg "38" parse_float (fun msg f_NewOrderSingle_OrderQty -> opt msg "40" parse_char (fun msg f_NewOrderSingle_OrdType -> opt msg "44" parse_float (fun msg f_NewOrderSingle_Price -> opt msg "54" parse_Side (fun msg f_NewOrderSingle_Side -> opt msg "60" parse_UTCTimestamp_milli (fun msg f_NewOrderSingle_TransactTime -> opt msg "63" parse_SettlType (fun msg f_NewOrderSingle_SettlType -> opt msg "64" parse_LocalMktDate (fun msg f_NewOrderSingle_SettlDate -> opt msg "528" parse_OrderCapacity (fun msg f_NewOrderSingle_OrderCapacity -> opt msg "854" parse_QtyType (fun msg f_NewOrderSingle_QtyType -> opt msg "121" parse_ForexReq (fun msg f_NewOrderSingle_ForexReq -> opt msg "120" parse_string (fun msg f_NewOrderSingle_SettlCurrency -> opt msg "20002" parse_IncludeDealers (fun msg f_NewOrderSingle_IncludeDealers -> opt msg "5961" parse_TradingProtocol (fun msg f_NewOrderSingle_TradingProtocol -> opt msg "5626" parse_MKTXPricingProcess (fun msg f_NewOrderSingle_MKTXPricingProcess -> opt msg "5214" parse_float (fun msg f_NewOrderSingle_MKTXTargetLevel -> opt msg "29726" parse_float (fun msg f_NewOrderSingle_MKTXExternalTargetLevel -> opt msg "20016" parse_MKTXRTSPurpose (fun msg f_NewOrderSingle_MKTXRTSPurpose -> opt msg "423" parse_PriceType (fun msg f_NewOrderSingle_PriceType -> opt msg "58" parse_string (fun msg f_NewOrderSingle_Text -> opt msg "70" parse_string (fun msg f_NewOrderSingle_AllocID -> (ParseSuccess {
+        f_NewOrderSingle_DealersGrp = f_NewOrderSingle_DealersGrp;
+        f_NewOrderSingle_AllocsGrp = f_NewOrderSingle_AllocsGrp;
+        f_NewOrderSingle_Parties = f_NewOrderSingle_Parties;
+        f_NewOrderSingle_Instrument = f_NewOrderSingle_Instrument;
+        f_NewOrderSingle_SpreadorBenchmarkCurveData = f_NewOrderSingle_SpreadorBenchmarkCurveData;
+        f_NewOrderSingle_ClOrdID = f_NewOrderSingle_ClOrdID;
+        f_NewOrderSingle_Currency = f_NewOrderSingle_Currency;
+        f_NewOrderSingle_HandlInst = f_NewOrderSingle_HandlInst;
+        f_NewOrderSingle_ExecInst = f_NewOrderSingle_ExecInst;
+        f_NewOrderSingle_OrderQty = f_NewOrderSingle_OrderQty;
+        f_NewOrderSingle_OrdType = f_NewOrderSingle_OrdType;
+        f_NewOrderSingle_Price = f_NewOrderSingle_Price;
+        f_NewOrderSingle_Side = f_NewOrderSingle_Side;
+        f_NewOrderSingle_TransactTime = f_NewOrderSingle_TransactTime;
+        f_NewOrderSingle_SettlType = f_NewOrderSingle_SettlType;
+        f_NewOrderSingle_SettlDate = f_NewOrderSingle_SettlDate;
+        f_NewOrderSingle_OrderCapacity = f_NewOrderSingle_OrderCapacity;
+        f_NewOrderSingle_QtyType = f_NewOrderSingle_QtyType;
+        f_NewOrderSingle_ForexReq = f_NewOrderSingle_ForexReq;
+        f_NewOrderSingle_SettlCurrency = f_NewOrderSingle_SettlCurrency;
+        f_NewOrderSingle_IncludeDealers = f_NewOrderSingle_IncludeDealers;
+        f_NewOrderSingle_TradingProtocol = f_NewOrderSingle_TradingProtocol;
+        f_NewOrderSingle_MKTXPricingProcess = f_NewOrderSingle_MKTXPricingProcess;
+        f_NewOrderSingle_MKTXTargetLevel = f_NewOrderSingle_MKTXTargetLevel;
+        f_NewOrderSingle_MKTXExternalTargetLevel = f_NewOrderSingle_MKTXExternalTargetLevel;
+        f_NewOrderSingle_MKTXRTSPurpose = f_NewOrderSingle_MKTXRTSPurpose;
+        f_NewOrderSingle_PriceType = f_NewOrderSingle_PriceType;
+        f_NewOrderSingle_Text = f_NewOrderSingle_Text;
+        f_NewOrderSingle_AllocID = f_NewOrderSingle_AllocID
+    },msg)
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_OrderCancel (msg)  =
+    (check_duplicate_tags msg (fun () -> block msg parse_Parties (fun msg f_OrderCancel_Parties -> opt msg "41" parse_string (fun msg f_OrderCancel_OrigClOrdID -> opt msg "11112" parse_string (fun msg f_OrderCancel_ClOrdID -> opt msg "55" parse_string (fun msg f_OrderCancel_Symbol -> opt msg "54" parse_Side (fun msg f_OrderCancel_Side -> opt msg "60" parse_UTCTimestamp_milli (fun msg f_OrderCancel_TransactTime -> (ParseSuccess {
+        f_OrderCancel_Parties = f_OrderCancel_Parties;
+        f_OrderCancel_OrigClOrdID = f_OrderCancel_OrigClOrdID;
+        f_OrderCancel_ClOrdID = f_OrderCancel_ClOrdID;
+        f_OrderCancel_Symbol = f_OrderCancel_Symbol;
+        f_OrderCancel_Side = f_OrderCancel_Side;
+        f_OrderCancel_TransactTime = f_OrderCancel_TransactTime
+    },msg)
+    )
+    )
+    )
+    )
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_NewOrder_Multi_Leg (msg)  =
+    (repeating msg "555" parse_LegsGrp (fun msg f_NewOrder_Multi_Leg_LegsGrp -> repeating msg "9690" parse_DealersGrp (fun msg f_NewOrder_Multi_Leg_DealersGrp -> repeating msg "670" parse_LegAllocsGrp (fun msg f_NewOrder_Multi_Leg_LegAllocsGrp -> check_duplicate_tags msg (fun () -> block msg parse_Parties (fun msg f_NewOrder_Multi_Leg_Parties -> block msg parse_Instrument (fun msg f_NewOrder_Multi_Leg_Instrument -> opt msg "11112" parse_string (fun msg f_NewOrder_Multi_Leg_ClOrdID -> opt msg "54" parse_Side (fun msg f_NewOrder_Multi_Leg_Side -> opt msg "528" parse_OrderCapacity (fun msg f_NewOrder_Multi_Leg_OrderCapacity -> opt msg "60" parse_UTCTimestamp_milli (fun msg f_NewOrder_Multi_Leg_TransactTime -> opt msg "854" parse_QtyType (fun msg f_NewOrder_Multi_Leg_QtyType -> opt msg "38" parse_float (fun msg f_NewOrder_Multi_Leg_OrderQty -> opt msg "40" parse_char (fun msg f_NewOrder_Multi_Leg_OrdType -> opt msg "58" parse_string (fun msg f_NewOrder_Multi_Leg_Text -> opt msg "6122" parse_string (fun msg f_NewOrder_Multi_Leg_Notes -> opt msg "20002" parse_IncludeDealers (fun msg f_NewOrder_Multi_Leg_IncludeDealers -> opt msg "5961" parse_TradingProtocol (fun msg f_NewOrder_Multi_Leg_TradingProtocol -> opt msg "5626" parse_MKTXPricingProcess (fun msg f_NewOrder_Multi_Leg_MKTXPricingProcess -> opt msg "29734" parse_int (fun msg f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel -> opt msg "20016" parse_MKTXRTSPurpose (fun msg f_NewOrder_Multi_Leg_MKTXRTSPurpose -> opt msg "70" parse_string (fun msg f_NewOrder_Multi_Leg_AllocID -> (ParseSuccess {
+        f_NewOrder_Multi_Leg_LegsGrp = f_NewOrder_Multi_Leg_LegsGrp;
+        f_NewOrder_Multi_Leg_DealersGrp = f_NewOrder_Multi_Leg_DealersGrp;
+        f_NewOrder_Multi_Leg_LegAllocsGrp = f_NewOrder_Multi_Leg_LegAllocsGrp;
+        f_NewOrder_Multi_Leg_Parties = f_NewOrder_Multi_Leg_Parties;
+        f_NewOrder_Multi_Leg_Instrument = f_NewOrder_Multi_Leg_Instrument;
+        f_NewOrder_Multi_Leg_ClOrdID = f_NewOrder_Multi_Leg_ClOrdID;
+        f_NewOrder_Multi_Leg_Side = f_NewOrder_Multi_Leg_Side;
+        f_NewOrder_Multi_Leg_OrderCapacity = f_NewOrder_Multi_Leg_OrderCapacity;
+        f_NewOrder_Multi_Leg_TransactTime = f_NewOrder_Multi_Leg_TransactTime;
+        f_NewOrder_Multi_Leg_QtyType = f_NewOrder_Multi_Leg_QtyType;
+        f_NewOrder_Multi_Leg_OrderQty = f_NewOrder_Multi_Leg_OrderQty;
+        f_NewOrder_Multi_Leg_OrdType = f_NewOrder_Multi_Leg_OrdType;
+        f_NewOrder_Multi_Leg_Text = f_NewOrder_Multi_Leg_Text;
+        f_NewOrder_Multi_Leg_Notes = f_NewOrder_Multi_Leg_Notes;
+        f_NewOrder_Multi_Leg_IncludeDealers = f_NewOrder_Multi_Leg_IncludeDealers;
+        f_NewOrder_Multi_Leg_TradingProtocol = f_NewOrder_Multi_Leg_TradingProtocol;
+        f_NewOrder_Multi_Leg_MKTXPricingProcess = f_NewOrder_Multi_Leg_MKTXPricingProcess;
+        f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel = f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel;
+        f_NewOrder_Multi_Leg_MKTXRTSPurpose = f_NewOrder_Multi_Leg_MKTXRTSPurpose;
+        f_NewOrder_Multi_Leg_AllocID = f_NewOrder_Multi_Leg_AllocID
+    },msg)
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_NewOrder_List (msg)  =
+    (repeating msg "73" parse_OrdersGrp (fun msg f_NewOrder_List_OrdersGrp -> repeating msg "9690" parse_DealersGrp (fun msg f_NewOrder_List_DealersGrp -> repeating msg "78" parse_AllocsGrp (fun msg f_NewOrder_List_AllocsGrp -> check_duplicate_tags msg (fun () -> opt msg "66" parse_string (fun msg f_NewOrder_List_ListID -> opt msg "394" parse_int (fun msg f_NewOrder_List_BidType -> opt msg "68" parse_int (fun msg f_NewOrder_List_TotalNoOrders -> opt msg "20002" parse_IncludeDealers (fun msg f_NewOrder_List_IncludeDealers -> opt msg "528" parse_OrderCapacity (fun msg f_NewOrder_List_OrderCapacity -> opt msg "5626" parse_MKTXPricingProcess (fun msg f_NewOrder_List_MKTXPricingProcess -> opt msg "29726" parse_float (fun msg f_NewOrder_List_MKTXExternalTargetLevel -> opt msg "20068" parse_MKTXListType (fun msg f_NewOrder_List_MKTXListType -> opt msg "70" parse_string (fun msg f_NewOrder_List_AllocID -> (ParseSuccess {
+        f_NewOrder_List_OrdersGrp = f_NewOrder_List_OrdersGrp;
+        f_NewOrder_List_DealersGrp = f_NewOrder_List_DealersGrp;
+        f_NewOrder_List_AllocsGrp = f_NewOrder_List_AllocsGrp;
+        f_NewOrder_List_ListID = f_NewOrder_List_ListID;
+        f_NewOrder_List_BidType = f_NewOrder_List_BidType;
+        f_NewOrder_List_TotalNoOrders = f_NewOrder_List_TotalNoOrders;
+        f_NewOrder_List_IncludeDealers = f_NewOrder_List_IncludeDealers;
+        f_NewOrder_List_OrderCapacity = f_NewOrder_List_OrderCapacity;
+        f_NewOrder_List_MKTXPricingProcess = f_NewOrder_List_MKTXPricingProcess;
+        f_NewOrder_List_MKTXExternalTargetLevel = f_NewOrder_List_MKTXExternalTargetLevel;
+        f_NewOrder_List_MKTXListType = f_NewOrder_List_MKTXListType;
+        f_NewOrder_List_AllocID = f_NewOrder_List_AllocID
+    },msg)
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_ListOrderCancel (msg)  =
+    (check_duplicate_tags msg (fun () -> opt msg "66" parse_string (fun msg f_ListOrderCancel_ListID -> opt msg "60" parse_UTCTimestamp_milli (fun msg f_ListOrderCancel_TransactTime -> (ParseSuccess {
+        f_ListOrderCancel_ListID = f_ListOrderCancel_ListID;
+        f_ListOrderCancel_TransactTime = f_ListOrderCancel_TransactTime
+    },msg)
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_OrderCancelReject (msg)  =
+    (check_duplicate_tags msg (fun () -> opt msg "66" parse_string (fun msg f_OrderCancelReject_ListID -> opt msg "37" parse_string (fun msg f_OrderCancelReject_OrderID -> opt msg "11112" parse_string (fun msg f_OrderCancelReject_ClOrdID -> opt msg "39" parse_OrdStatus (fun msg f_OrderCancelReject_OrdStatus -> opt msg "41" parse_string (fun msg f_OrderCancelReject_OrigClOrdID -> opt msg "434" parse_CxlRejResponseTo (fun msg f_OrderCancelReject_CxlRejResponseTo -> opt msg "102" parse_CxlRejReason (fun msg f_OrderCancelReject_CxlRejReason -> opt msg "60" parse_UTCTimestamp_milli (fun msg f_OrderCancelReject_TransactTime -> opt msg "58" parse_string (fun msg f_OrderCancelReject_Text -> (ParseSuccess {
+        f_OrderCancelReject_ListID = f_OrderCancelReject_ListID;
+        f_OrderCancelReject_OrderID = f_OrderCancelReject_OrderID;
+        f_OrderCancelReject_ClOrdID = f_OrderCancelReject_ClOrdID;
+        f_OrderCancelReject_OrdStatus = f_OrderCancelReject_OrdStatus;
+        f_OrderCancelReject_OrigClOrdID = f_OrderCancelReject_OrigClOrdID;
+        f_OrderCancelReject_CxlRejResponseTo = f_OrderCancelReject_CxlRejResponseTo;
+        f_OrderCancelReject_CxlRejReason = f_OrderCancelReject_CxlRejReason;
+        f_OrderCancelReject_TransactTime = f_OrderCancelReject_TransactTime;
+        f_OrderCancelReject_Text = f_OrderCancelReject_Text
+    },msg)
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_BusinessMessageReject (msg)  =
+    (check_duplicate_tags msg (fun () -> opt msg "45" parse_int (fun msg f_BusinessMessageReject_RefSeqNum -> opt msg "372" parse_string (fun msg f_BusinessMessageReject_RefMsgTyp -> opt msg "379" parse_string (fun msg f_BusinessMessageReject_BusinessRejectRefID -> opt msg "380" parse_BusinessRejectReason (fun msg f_BusinessMessageReject_BusinessRejectReason -> opt msg "58" parse_string (fun msg f_BusinessMessageReject_Text -> (ParseSuccess {
+        f_BusinessMessageReject_RefSeqNum = f_BusinessMessageReject_RefSeqNum;
+        f_BusinessMessageReject_RefMsgTyp = f_BusinessMessageReject_RefMsgTyp;
+        f_BusinessMessageReject_BusinessRejectRefID = f_BusinessMessageReject_BusinessRejectRefID;
+        f_BusinessMessageReject_BusinessRejectReason = f_BusinessMessageReject_BusinessRejectReason;
+        f_BusinessMessageReject_Text = f_BusinessMessageReject_Text
+    },msg)
+    )
+    )
+    )
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_AllocationReport (msg)  =
+    (repeating msg "73" parse_OrdersGrp (fun msg f_AllocationReport_OrdersGrp -> repeating msg "124" parse_ExecsGrp (fun msg f_AllocationReport_ExecsGrp -> repeating msg "78" parse_AllocsGrp (fun msg f_AllocationReport_AllocsGrp -> check_duplicate_tags msg (fun () -> block msg parse_Instrument (fun msg f_AllocationReport_Instrument -> block msg parse_SpreadorBenchmarkCurveData (fun msg f_AllocationReport_SpreadorBenchmarkCurveData -> block msg parse_Parties (fun msg f_AllocationReport_Parties -> opt msg "755" parse_string (fun msg f_AllocationReport_AllocReportID -> opt msg "70" parse_string (fun msg f_AllocationReport_AllocID -> opt msg "71" parse_AllocTransType (fun msg f_AllocationReport_AllocTransType -> opt msg "795" parse_string (fun msg f_AllocationReport_AllocReportRefID -> opt msg "796" parse_AllocCancReplaceReason (fun msg f_AllocationReport_AllocCancReplaceReason -> opt msg "72" parse_string (fun msg f_AllocationReport_RefAllocID -> opt msg "794" parse_AllocReportType (fun msg f_AllocationReport_AllocReportType -> opt msg "87" parse_AllocStatus (fun msg f_AllocationReport_AllocStatus -> opt msg "857" parse_AllocNoOrdersType (fun msg f_AllocationReport_AllocNoOrdersType -> opt msg "54" parse_Side (fun msg f_AllocationReport_Side -> opt msg "53" parse_float (fun msg f_AllocationReport_Quantity -> opt msg "854" parse_QtyType (fun msg f_AllocationReport_QtyType -> opt msg "423" parse_PriceType (fun msg f_AllocationReport_PriceType -> opt msg "6" parse_float (fun msg f_AllocationReport_AvgPx -> opt msg "15" parse_string (fun msg f_AllocationReport_Currency -> opt msg "75" parse_LocalMktDate (fun msg f_AllocationReport_TradeDate -> opt msg "60" parse_UTCTimestamp_milli (fun msg f_AllocationReport_TransactTime -> opt msg "64" parse_LocalMktDate (fun msg f_AllocationReport_SettlDate -> opt msg "381" parse_float (fun msg f_AllocationReport_GrossTradeAmt -> opt msg "118" parse_float (fun msg f_AllocationReport_NetMoney -> opt msg "58" parse_string (fun msg f_AllocationReport_Text -> opt msg "159" parse_float (fun msg f_AllocationReport_AccruedInterestAmt -> opt msg "235" parse_YieldType (fun msg f_AllocationReport_YieldType -> opt msg "236" parse_float (fun msg f_AllocationReport_Yield -> opt msg "6122" parse_string (fun msg f_AllocationReport_Notes -> opt msg "5626" parse_MKTXPricingProcess (fun msg f_AllocationReport_MKTXPricingProcess -> (ParseSuccess {
+        f_AllocationReport_OrdersGrp = f_AllocationReport_OrdersGrp;
+        f_AllocationReport_ExecsGrp = f_AllocationReport_ExecsGrp;
+        f_AllocationReport_AllocsGrp = f_AllocationReport_AllocsGrp;
+        f_AllocationReport_Instrument = f_AllocationReport_Instrument;
+        f_AllocationReport_SpreadorBenchmarkCurveData = f_AllocationReport_SpreadorBenchmarkCurveData;
+        f_AllocationReport_Parties = f_AllocationReport_Parties;
+        f_AllocationReport_AllocReportID = f_AllocationReport_AllocReportID;
+        f_AllocationReport_AllocID = f_AllocationReport_AllocID;
+        f_AllocationReport_AllocTransType = f_AllocationReport_AllocTransType;
+        f_AllocationReport_AllocReportRefID = f_AllocationReport_AllocReportRefID;
+        f_AllocationReport_AllocCancReplaceReason = f_AllocationReport_AllocCancReplaceReason;
+        f_AllocationReport_RefAllocID = f_AllocationReport_RefAllocID;
+        f_AllocationReport_AllocReportType = f_AllocationReport_AllocReportType;
+        f_AllocationReport_AllocStatus = f_AllocationReport_AllocStatus;
+        f_AllocationReport_AllocNoOrdersType = f_AllocationReport_AllocNoOrdersType;
+        f_AllocationReport_Side = f_AllocationReport_Side;
+        f_AllocationReport_Quantity = f_AllocationReport_Quantity;
+        f_AllocationReport_QtyType = f_AllocationReport_QtyType;
+        f_AllocationReport_PriceType = f_AllocationReport_PriceType;
+        f_AllocationReport_AvgPx = f_AllocationReport_AvgPx;
+        f_AllocationReport_Currency = f_AllocationReport_Currency;
+        f_AllocationReport_TradeDate = f_AllocationReport_TradeDate;
+        f_AllocationReport_TransactTime = f_AllocationReport_TransactTime;
+        f_AllocationReport_SettlDate = f_AllocationReport_SettlDate;
+        f_AllocationReport_GrossTradeAmt = f_AllocationReport_GrossTradeAmt;
+        f_AllocationReport_NetMoney = f_AllocationReport_NetMoney;
+        f_AllocationReport_Text = f_AllocationReport_Text;
+        f_AllocationReport_AccruedInterestAmt = f_AllocationReport_AccruedInterestAmt;
+        f_AllocationReport_YieldType = f_AllocationReport_YieldType;
+        f_AllocationReport_Yield = f_AllocationReport_Yield;
+        f_AllocationReport_Notes = f_AllocationReport_Notes;
+        f_AllocationReport_MKTXPricingProcess = f_AllocationReport_MKTXPricingProcess
     },msg)
     )
     )
@@ -180,6 +282,50 @@ let parse_ExecutionReport (msg)  =
     )
     )
     )
+    )) |> check_unknown_tags
+;;
+
+let parse_AllocationReportACK (msg)  =
+    (check_duplicate_tags msg (fun () -> opt msg "755" parse_string (fun msg f_AllocationReportACK_AllocReportID -> opt msg "70" parse_string (fun msg f_AllocationReportACK_AllocID -> opt msg "75" parse_LocalMktDate (fun msg f_AllocationReportACK_TradeDate -> opt msg "60" parse_UTCTimestamp_milli (fun msg f_AllocationReportACK_TransactTime -> opt msg "87" parse_AllocStatus (fun msg f_AllocationReportACK_AllocStatus -> opt msg "88" parse_AllocRejCode (fun msg f_AllocationReportACK_AllocRejCode -> opt msg "794" parse_AllocReportType (fun msg f_AllocationReportACK_AllocReportType -> opt msg "58" parse_string (fun msg f_AllocationReportACK_Text -> (ParseSuccess {
+        f_AllocationReportACK_AllocReportID = f_AllocationReportACK_AllocReportID;
+        f_AllocationReportACK_AllocID = f_AllocationReportACK_AllocID;
+        f_AllocationReportACK_TradeDate = f_AllocationReportACK_TradeDate;
+        f_AllocationReportACK_TransactTime = f_AllocationReportACK_TransactTime;
+        f_AllocationReportACK_AllocStatus = f_AllocationReportACK_AllocStatus;
+        f_AllocationReportACK_AllocRejCode = f_AllocationReportACK_AllocRejCode;
+        f_AllocationReportACK_AllocReportType = f_AllocationReportACK_AllocReportType;
+        f_AllocationReportACK_Text = f_AllocationReportACK_Text
+    },msg)
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_AllocationInstruction (msg)  =
+    (repeating msg "73" parse_OrdersGrp (fun msg f_AllocationInstruction_OrdersGrp -> repeating msg "124" parse_ExecsGrp (fun msg f_AllocationInstruction_ExecsGrp -> repeating msg "78" parse_AllocsGrp (fun msg f_AllocationInstruction_AllocsGrp -> check_duplicate_tags msg (fun () -> block msg parse_Instrument (fun msg f_AllocationInstruction_Instrument -> opt msg "70" parse_string (fun msg f_AllocationInstruction_AllocID -> opt msg "71" parse_AllocTransType (fun msg f_AllocationInstruction_AllocTransType -> opt msg "626" parse_AllocType (fun msg f_AllocationInstruction_AllocType -> opt msg "72" parse_string (fun msg f_AllocationInstruction_RefAllocID -> opt msg "796" parse_AllocCancReplaceReason (fun msg f_AllocationInstruction_AllocCancReplaceReason -> opt msg "857" parse_AllocNoOrdersType (fun msg f_AllocationInstruction_AllocNoOrdersType -> opt msg "54" parse_Side (fun msg f_AllocationInstruction_Side -> opt msg "53" parse_float (fun msg f_AllocationInstruction_Quantity -> opt msg "6" parse_float (fun msg f_AllocationInstruction_AvgPx -> opt msg "75" parse_LocalMktDate (fun msg f_AllocationInstruction_TradeDate -> opt msg "60" parse_UTCTimestamp_milli (fun msg f_AllocationInstruction_TransactTime -> opt msg "58" parse_string (fun msg f_AllocationInstruction_Text -> (ParseSuccess {
+        f_AllocationInstruction_OrdersGrp = f_AllocationInstruction_OrdersGrp;
+        f_AllocationInstruction_ExecsGrp = f_AllocationInstruction_ExecsGrp;
+        f_AllocationInstruction_AllocsGrp = f_AllocationInstruction_AllocsGrp;
+        f_AllocationInstruction_Instrument = f_AllocationInstruction_Instrument;
+        f_AllocationInstruction_AllocID = f_AllocationInstruction_AllocID;
+        f_AllocationInstruction_AllocTransType = f_AllocationInstruction_AllocTransType;
+        f_AllocationInstruction_AllocType = f_AllocationInstruction_AllocType;
+        f_AllocationInstruction_RefAllocID = f_AllocationInstruction_RefAllocID;
+        f_AllocationInstruction_AllocCancReplaceReason = f_AllocationInstruction_AllocCancReplaceReason;
+        f_AllocationInstruction_AllocNoOrdersType = f_AllocationInstruction_AllocNoOrdersType;
+        f_AllocationInstruction_Side = f_AllocationInstruction_Side;
+        f_AllocationInstruction_Quantity = f_AllocationInstruction_Quantity;
+        f_AllocationInstruction_AvgPx = f_AllocationInstruction_AvgPx;
+        f_AllocationInstruction_TradeDate = f_AllocationInstruction_TradeDate;
+        f_AllocationInstruction_TransactTime = f_AllocationInstruction_TransactTime;
+        f_AllocationInstruction_Text = f_AllocationInstruction_Text
+    },msg)
     )
     )
     )
@@ -196,7 +342,195 @@ let parse_ExecutionReport (msg)  =
     )
     )
     )
+    )) |> check_unknown_tags
+;;
+
+let parse_AllocationInstructionACK (msg)  =
+    (check_duplicate_tags msg (fun () -> block msg parse_Parties (fun msg f_AllocationInstructionACK_Parties -> opt msg "70" parse_string (fun msg f_AllocationInstructionACK_AllocID -> opt msg "75" parse_LocalMktDate (fun msg f_AllocationInstructionACK_TradeDate -> opt msg "60" parse_UTCTimestamp_milli (fun msg f_AllocationInstructionACK_TransactTime -> opt msg "87" parse_AllocStatus (fun msg f_AllocationInstructionACK_AllocStatus -> opt msg "88" parse_AllocRejCode (fun msg f_AllocationInstructionACK_AllocRejCode -> opt msg "626" parse_AllocType (fun msg f_AllocationInstructionACK_AllocType -> opt msg "58" parse_string (fun msg f_AllocationInstructionACK_Text -> (ParseSuccess {
+        f_AllocationInstructionACK_Parties = f_AllocationInstructionACK_Parties;
+        f_AllocationInstructionACK_AllocID = f_AllocationInstructionACK_AllocID;
+        f_AllocationInstructionACK_TradeDate = f_AllocationInstructionACK_TradeDate;
+        f_AllocationInstructionACK_TransactTime = f_AllocationInstructionACK_TransactTime;
+        f_AllocationInstructionACK_AllocStatus = f_AllocationInstructionACK_AllocStatus;
+        f_AllocationInstructionACK_AllocRejCode = f_AllocationInstructionACK_AllocRejCode;
+        f_AllocationInstructionACK_AllocType = f_AllocationInstructionACK_AllocType;
+        f_AllocationInstructionACK_Text = f_AllocationInstructionACK_Text
+    },msg)
     )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_Heartbeat (msg)  =
+    (check_duplicate_tags msg (fun () -> opt msg "112" parse_string (fun msg f_Heartbeat_TestReqID -> (ParseSuccess {
+        f_Heartbeat_TestReqID = f_Heartbeat_TestReqID
+    },msg)
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_TestRequest (msg)  =
+    (check_duplicate_tags msg (fun () -> opt msg "112" parse_string (fun msg f_TestRequest_TestReqID -> (ParseSuccess {
+        f_TestRequest_TestReqID = f_TestRequest_TestReqID
+    },msg)
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_ResendRequest (msg)  =
+    (check_duplicate_tags msg (fun () -> opt msg "7" parse_int (fun msg f_ResendRequest_BeginSeqNo -> opt msg "16" parse_int (fun msg f_ResendRequest_EndSeqNo -> (ParseSuccess {
+        f_ResendRequest_BeginSeqNo = f_ResendRequest_BeginSeqNo;
+        f_ResendRequest_EndSeqNo = f_ResendRequest_EndSeqNo
+    },msg)
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_SessionLevelReject (msg)  =
+    (check_duplicate_tags msg (fun () -> opt msg "45" parse_int (fun msg f_SessionLevelReject_RefSeqNum -> opt msg "58" parse_string (fun msg f_SessionLevelReject_Text -> opt msg "371" parse_int (fun msg f_SessionLevelReject_RefTagID -> opt msg "372" parse_string (fun msg f_SessionLevelReject_RefMsgTyp -> opt msg "373" parse_SessionRejectReason (fun msg f_SessionLevelReject_SessionRejectReason -> (ParseSuccess {
+        f_SessionLevelReject_RefSeqNum = f_SessionLevelReject_RefSeqNum;
+        f_SessionLevelReject_Text = f_SessionLevelReject_Text;
+        f_SessionLevelReject_RefTagID = f_SessionLevelReject_RefTagID;
+        f_SessionLevelReject_RefMsgTyp = f_SessionLevelReject_RefMsgTyp;
+        f_SessionLevelReject_SessionRejectReason = f_SessionLevelReject_SessionRejectReason
+    },msg)
+    )
+    )
+    )
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_SequenceResetRequest (msg)  =
+    (check_duplicate_tags msg (fun () -> opt msg "123" parse_GapFillFlag (fun msg f_SequenceResetRequest_GapFillFlag -> opt msg "36" parse_int (fun msg f_SequenceResetRequest_NewSeqNo -> (ParseSuccess {
+        f_SequenceResetRequest_GapFillFlag = f_SequenceResetRequest_GapFillFlag;
+        f_SequenceResetRequest_NewSeqNo = f_SequenceResetRequest_NewSeqNo
+    },msg)
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_Logout (msg)  =
+    (check_duplicate_tags msg (fun () -> opt msg "58" parse_string (fun msg f_Logout_Text -> (ParseSuccess {
+        f_Logout_Text = f_Logout_Text
+    },msg)
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_FIXLogon (msg)  =
+    (check_duplicate_tags msg (fun () -> opt msg "98" parse_int (fun msg f_FIXLogon_EncryptMethod -> opt msg "108" parse_int (fun msg f_FIXLogon_HeartBtInt -> opt msg "141" parse_bool (fun msg f_FIXLogon_ResetSeqNumFlag -> (ParseSuccess {
+        f_FIXLogon_EncryptMethod = f_FIXLogon_EncryptMethod;
+        f_FIXLogon_HeartBtInt = f_FIXLogon_HeartBtInt;
+        f_FIXLogon_ResetSeqNumFlag = f_FIXLogon_ResetSeqNumFlag
+    },msg)
+    )
+    )
+    )
+    )) |> check_unknown_tags
+;;
+
+let parse_ExecutionReport (msg)  =
+    (repeating msg "2668" parse_TrdRegPublicationsGrp (fun msg f_ExecutionReport_TrdRegPublicationsGrp -> repeating msg "1907" parse_RegulatoryTradeIDsGrp (fun msg f_ExecutionReport_RegulatoryTradeIDsGrp -> repeating msg "555" parse_LegsGrp (fun msg f_ExecutionReport_LegsGrp -> repeating msg "9690" parse_DealersGrp (fun msg f_ExecutionReport_DealersGrp -> repeating msg "5661" parse_MKTXCostAnalysisGrp (fun msg f_ExecutionReport_MKTXCostAnalysisGrp -> check_duplicate_tags msg (fun () -> block msg parse_Parties (fun msg f_ExecutionReport_Parties -> block msg parse_Instrument (fun msg f_ExecutionReport_Instrument -> block msg parse_SpreadorBenchmarkCurveData (fun msg f_ExecutionReport_SpreadorBenchmarkCurveData -> opt msg "11112" parse_string (fun msg f_ExecutionReport_ClOrdID -> opt msg "41" parse_string (fun msg f_ExecutionReport_OrigClOrdID -> opt msg "37" parse_string (fun msg f_ExecutionReport_OrderID -> opt msg "66" parse_string (fun msg f_ExecutionReport_ListID -> opt msg "22211" parse_string (fun msg f_ExecutionReport_MKTXCPTYLEI -> opt msg "22214" parse_string (fun msg f_ExecutionReport_MKTXPartyLEI -> opt msg "528" parse_OrderCapacity (fun msg f_ExecutionReport_OrderCapacity -> opt msg "20117" parse_string (fun msg f_ExecutionReport_MKTXInquiryID -> opt msg "22202" parse_MKTXTrdRegPublicationReason (fun msg f_ExecutionReport_MKTXTrdRegPublicationReason -> opt msg "22204" parse_MKTXESCBStblty (fun msg f_ExecutionReport_MKTXESCBStblty -> opt msg "8013" parse_PreTradeWaiver (fun msg f_ExecutionReport_PreTradeWaiver -> opt msg "22209" parse_MKTXTradeReportingInd (fun msg f_ExecutionReport_MKTXTradeReportingInd -> opt msg "2524" parse_TradeReportingIndicator (fun msg f_ExecutionReport_TradeReportingIndicator -> opt msg "20016_2" parse_InternalCrossingFlag (fun msg f_ExecutionReport_InternalCrossingFlag -> opt msg "22213" parse_string (fun msg f_ExecutionReport_MKTXVenueTransactionID -> opt msg "17" parse_string (fun msg f_ExecutionReport_ExecID -> opt msg "19" parse_string (fun msg f_ExecutionReport_ExecRefID -> opt msg "21" parse_HandlInst (fun msg f_ExecutionReport_HandlInst -> opt msg "30" parse_string (fun msg f_ExecutionReport_LastMkt -> opt msg "150" parse_ExecType (fun msg f_ExecutionReport_ExecType -> opt msg "527" parse_string (fun msg f_ExecutionReport_SecondaryExecID -> opt msg "39" parse_OrdStatus (fun msg f_ExecutionReport_OrdStatus -> opt msg "103" parse_OrdRejReason (fun msg f_ExecutionReport_OrdRejReason -> opt msg "64" parse_LocalMktDate (fun msg f_ExecutionReport_SettlDate -> opt msg "225" parse_LocalMktDate (fun msg f_ExecutionReport_IssueDate -> opt msg "44" parse_float (fun msg f_ExecutionReport_Price -> opt msg "54" parse_Side (fun msg f_ExecutionReport_Side -> opt msg "38" parse_float (fun msg f_ExecutionReport_OrderQty -> opt msg "423" parse_PriceType (fun msg f_ExecutionReport_PriceType -> opt msg "15" parse_string (fun msg f_ExecutionReport_Currency -> opt msg "31" parse_float (fun msg f_ExecutionReport_LastPx -> opt msg "669" parse_float (fun msg f_ExecutionReport_LastParPx -> opt msg "151" parse_float (fun msg f_ExecutionReport_LeavesQty -> opt msg "14" parse_float (fun msg f_ExecutionReport_CumQty -> opt msg "6" parse_float (fun msg f_ExecutionReport_AvgPx -> opt msg "75" parse_LocalMktDate (fun msg f_ExecutionReport_TradeDate -> opt msg "60" parse_UTCTimestamp_milli (fun msg f_ExecutionReport_TransactTime -> opt msg "235" parse_YieldType (fun msg f_ExecutionReport_YieldType -> opt msg "236" parse_float (fun msg f_ExecutionReport_Yield -> opt msg "381" parse_float (fun msg f_ExecutionReport_GrossTradeAmt -> opt msg "159" parse_float (fun msg f_ExecutionReport_AccruedInterestAmt -> opt msg "118" parse_float (fun msg f_ExecutionReport_NetMoney -> opt msg "119" parse_float (fun msg f_ExecutionReport_SettlCurrAmt -> opt msg "120" parse_string (fun msg f_ExecutionReport_SettlCurrency -> opt msg "155" parse_float (fun msg f_ExecutionReport_SettlCurrFxRate -> opt msg "156" parse_char (fun msg f_ExecutionReport_SettlCurrFxRateCalc -> opt msg "58" parse_string (fun msg f_ExecutionReport_Text -> opt msg "20002" parse_IncludeDealers (fun msg f_ExecutionReport_IncludeDealers -> opt msg "6122" parse_string (fun msg f_ExecutionReport_Notes -> opt msg "5961" parse_TradingProtocol (fun msg f_ExecutionReport_TradingProtocol -> opt msg "9872" parse_int (fun msg f_ExecutionReport_NumberofTrades -> opt msg "9664" parse_string (fun msg f_ExecutionReport_LegTransactionSeqNumberLegID -> opt msg "6655" parse_float (fun msg f_ExecutionReport_InquiryQty -> opt msg "157" parse_int (fun msg f_ExecutionReport_NumDaysInterest -> opt msg "6659" parse_LocalMktDate (fun msg f_ExecutionReport_DatedDate_2 -> opt msg "9714" parse_UTCTimestamp_milli (fun msg f_ExecutionReport_BrokerReceiptTime -> opt msg "21004" parse_float (fun msg f_ExecutionReport_GSpread -> opt msg "9804" parse_float (fun msg f_ExecutionReport_ZSpread -> opt msg "9805" parse_float (fun msg f_ExecutionReport_ISpread -> opt msg "9806" parse_float (fun msg f_ExecutionReport_ASWSpread -> opt msg "5645" parse_float (fun msg f_ExecutionReport_OASSpread -> opt msg "5626" parse_MKTXPricingProcess (fun msg f_ExecutionReport_MKTXPricingProcess -> opt msg "5214" parse_float (fun msg f_ExecutionReport_MKTXTargetLevel -> opt msg "9597" parse_string (fun msg f_ExecutionReport_ClientBook -> opt msg "9699" parse_float (fun msg f_ExecutionReport_DirtyPrice -> opt msg "29" parse_LastCapacity (fun msg f_ExecutionReport_LastCapacity -> opt msg "29752" parse_MKTXTradeStyle (fun msg f_ExecutionReport_MKTXTradeStyle -> opt msg "29708" parse_string (fun msg f_ExecutionReport_MKTXCompositeBidSpread -> opt msg "29709" parse_float (fun msg f_ExecutionReport_MKTXCompositeOfferSpread -> opt msg "29706" parse_float (fun msg f_ExecutionReport_MKTXCompositeBidPrice -> opt msg "29707" parse_float (fun msg f_ExecutionReport_MKTXCompositeOfferPrice -> opt msg "29750" parse_float (fun msg f_ExecutionReport_MKTXCompositeBidMMEYield -> opt msg "29751" parse_float (fun msg f_ExecutionReport_MKTXCompositeOfferMMEYield -> opt msg "29749" parse_float (fun msg f_ExecutionReport_MKTXCompositeLiquidityScore -> opt msg "29744" parse_MKTXAutoExType (fun msg f_ExecutionReport_MKTXAutoExType -> opt msg "29747" parse_MKTXAutoExStatus (fun msg f_ExecutionReport_MKTXAutoExStatus -> opt msg "29748" parse_string (fun msg f_ExecutionReport_MKTXAutoExDesc -> opt msg "29745" parse_string (fun msg f_ExecutionReport_MKTXAutoExRefLevel -> opt msg "29746" parse_MKTXAutoExRefLevelType (fun msg f_ExecutionReport_MKTXAutoExRefLevelType -> opt msg "126" parse_UTCTimestamp_milli (fun msg f_ExecutionReport_ExpireTime -> opt msg "32" parse_float (fun msg f_ExecutionReport_LastQty -> (ParseSuccess {
+        f_ExecutionReport_TrdRegPublicationsGrp = f_ExecutionReport_TrdRegPublicationsGrp;
+        f_ExecutionReport_RegulatoryTradeIDsGrp = f_ExecutionReport_RegulatoryTradeIDsGrp;
+        f_ExecutionReport_LegsGrp = f_ExecutionReport_LegsGrp;
+        f_ExecutionReport_DealersGrp = f_ExecutionReport_DealersGrp;
+        f_ExecutionReport_MKTXCostAnalysisGrp = f_ExecutionReport_MKTXCostAnalysisGrp;
+        f_ExecutionReport_Parties = f_ExecutionReport_Parties;
+        f_ExecutionReport_Instrument = f_ExecutionReport_Instrument;
+        f_ExecutionReport_SpreadorBenchmarkCurveData = f_ExecutionReport_SpreadorBenchmarkCurveData;
+        f_ExecutionReport_ClOrdID = f_ExecutionReport_ClOrdID;
+        f_ExecutionReport_OrigClOrdID = f_ExecutionReport_OrigClOrdID;
+        f_ExecutionReport_OrderID = f_ExecutionReport_OrderID;
+        f_ExecutionReport_ListID = f_ExecutionReport_ListID;
+        f_ExecutionReport_MKTXCPTYLEI = f_ExecutionReport_MKTXCPTYLEI;
+        f_ExecutionReport_MKTXPartyLEI = f_ExecutionReport_MKTXPartyLEI;
+        f_ExecutionReport_OrderCapacity = f_ExecutionReport_OrderCapacity;
+        f_ExecutionReport_MKTXInquiryID = f_ExecutionReport_MKTXInquiryID;
+        f_ExecutionReport_MKTXTrdRegPublicationReason = f_ExecutionReport_MKTXTrdRegPublicationReason;
+        f_ExecutionReport_MKTXESCBStblty = f_ExecutionReport_MKTXESCBStblty;
+        f_ExecutionReport_PreTradeWaiver = f_ExecutionReport_PreTradeWaiver;
+        f_ExecutionReport_MKTXTradeReportingInd = f_ExecutionReport_MKTXTradeReportingInd;
+        f_ExecutionReport_TradeReportingIndicator = f_ExecutionReport_TradeReportingIndicator;
+        f_ExecutionReport_InternalCrossingFlag = f_ExecutionReport_InternalCrossingFlag;
+        f_ExecutionReport_MKTXVenueTransactionID = f_ExecutionReport_MKTXVenueTransactionID;
+        f_ExecutionReport_ExecID = f_ExecutionReport_ExecID;
+        f_ExecutionReport_ExecRefID = f_ExecutionReport_ExecRefID;
+        f_ExecutionReport_HandlInst = f_ExecutionReport_HandlInst;
+        f_ExecutionReport_LastMkt = f_ExecutionReport_LastMkt;
+        f_ExecutionReport_ExecType = f_ExecutionReport_ExecType;
+        f_ExecutionReport_SecondaryExecID = f_ExecutionReport_SecondaryExecID;
+        f_ExecutionReport_OrdStatus = f_ExecutionReport_OrdStatus;
+        f_ExecutionReport_OrdRejReason = f_ExecutionReport_OrdRejReason;
+        f_ExecutionReport_SettlDate = f_ExecutionReport_SettlDate;
+        f_ExecutionReport_IssueDate = f_ExecutionReport_IssueDate;
+        f_ExecutionReport_Price = f_ExecutionReport_Price;
+        f_ExecutionReport_Side = f_ExecutionReport_Side;
+        f_ExecutionReport_OrderQty = f_ExecutionReport_OrderQty;
+        f_ExecutionReport_PriceType = f_ExecutionReport_PriceType;
+        f_ExecutionReport_Currency = f_ExecutionReport_Currency;
+        f_ExecutionReport_LastPx = f_ExecutionReport_LastPx;
+        f_ExecutionReport_LastParPx = f_ExecutionReport_LastParPx;
+        f_ExecutionReport_LeavesQty = f_ExecutionReport_LeavesQty;
+        f_ExecutionReport_CumQty = f_ExecutionReport_CumQty;
+        f_ExecutionReport_AvgPx = f_ExecutionReport_AvgPx;
+        f_ExecutionReport_TradeDate = f_ExecutionReport_TradeDate;
+        f_ExecutionReport_TransactTime = f_ExecutionReport_TransactTime;
+        f_ExecutionReport_YieldType = f_ExecutionReport_YieldType;
+        f_ExecutionReport_Yield = f_ExecutionReport_Yield;
+        f_ExecutionReport_GrossTradeAmt = f_ExecutionReport_GrossTradeAmt;
+        f_ExecutionReport_AccruedInterestAmt = f_ExecutionReport_AccruedInterestAmt;
+        f_ExecutionReport_NetMoney = f_ExecutionReport_NetMoney;
+        f_ExecutionReport_SettlCurrAmt = f_ExecutionReport_SettlCurrAmt;
+        f_ExecutionReport_SettlCurrency = f_ExecutionReport_SettlCurrency;
+        f_ExecutionReport_SettlCurrFxRate = f_ExecutionReport_SettlCurrFxRate;
+        f_ExecutionReport_SettlCurrFxRateCalc = f_ExecutionReport_SettlCurrFxRateCalc;
+        f_ExecutionReport_Text = f_ExecutionReport_Text;
+        f_ExecutionReport_IncludeDealers = f_ExecutionReport_IncludeDealers;
+        f_ExecutionReport_Notes = f_ExecutionReport_Notes;
+        f_ExecutionReport_TradingProtocol = f_ExecutionReport_TradingProtocol;
+        f_ExecutionReport_NumberofTrades = f_ExecutionReport_NumberofTrades;
+        f_ExecutionReport_LegTransactionSeqNumberLegID = f_ExecutionReport_LegTransactionSeqNumberLegID;
+        f_ExecutionReport_InquiryQty = f_ExecutionReport_InquiryQty;
+        f_ExecutionReport_NumDaysInterest = f_ExecutionReport_NumDaysInterest;
+        f_ExecutionReport_DatedDate_2 = f_ExecutionReport_DatedDate_2;
+        f_ExecutionReport_BrokerReceiptTime = f_ExecutionReport_BrokerReceiptTime;
+        f_ExecutionReport_GSpread = f_ExecutionReport_GSpread;
+        f_ExecutionReport_ZSpread = f_ExecutionReport_ZSpread;
+        f_ExecutionReport_ISpread = f_ExecutionReport_ISpread;
+        f_ExecutionReport_ASWSpread = f_ExecutionReport_ASWSpread;
+        f_ExecutionReport_OASSpread = f_ExecutionReport_OASSpread;
+        f_ExecutionReport_MKTXPricingProcess = f_ExecutionReport_MKTXPricingProcess;
+        f_ExecutionReport_MKTXTargetLevel = f_ExecutionReport_MKTXTargetLevel;
+        f_ExecutionReport_ClientBook = f_ExecutionReport_ClientBook;
+        f_ExecutionReport_DirtyPrice = f_ExecutionReport_DirtyPrice;
+        f_ExecutionReport_LastCapacity = f_ExecutionReport_LastCapacity;
+        f_ExecutionReport_MKTXTradeStyle = f_ExecutionReport_MKTXTradeStyle;
+        f_ExecutionReport_MKTXCompositeBidSpread = f_ExecutionReport_MKTXCompositeBidSpread;
+        f_ExecutionReport_MKTXCompositeOfferSpread = f_ExecutionReport_MKTXCompositeOfferSpread;
+        f_ExecutionReport_MKTXCompositeBidPrice = f_ExecutionReport_MKTXCompositeBidPrice;
+        f_ExecutionReport_MKTXCompositeOfferPrice = f_ExecutionReport_MKTXCompositeOfferPrice;
+        f_ExecutionReport_MKTXCompositeBidMMEYield = f_ExecutionReport_MKTXCompositeBidMMEYield;
+        f_ExecutionReport_MKTXCompositeOfferMMEYield = f_ExecutionReport_MKTXCompositeOfferMMEYield;
+        f_ExecutionReport_MKTXCompositeLiquidityScore = f_ExecutionReport_MKTXCompositeLiquidityScore;
+        f_ExecutionReport_MKTXAutoExType = f_ExecutionReport_MKTXAutoExType;
+        f_ExecutionReport_MKTXAutoExStatus = f_ExecutionReport_MKTXAutoExStatus;
+        f_ExecutionReport_MKTXAutoExDesc = f_ExecutionReport_MKTXAutoExDesc;
+        f_ExecutionReport_MKTXAutoExRefLevel = f_ExecutionReport_MKTXAutoExRefLevel;
+        f_ExecutionReport_MKTXAutoExRefLevelType = f_ExecutionReport_MKTXAutoExRefLevelType;
+        f_ExecutionReport_ExpireTime = f_ExecutionReport_ExpireTime;
+        f_ExecutionReport_LastQty = f_ExecutionReport_LastQty
+    },msg)
     )
     )
     )
@@ -289,151 +623,19 @@ let parse_ExecutionReport (msg)  =
     )) |> check_unknown_tags
 ;;
 
-let parse_NewOrderSingle (msg)  =
-    (repeating msg "453" parse_Parties (fun msg f_NewOrderSingle_Parties -> repeating msg "78" parse_PreAllocGrp (fun msg f_NewOrderSingle_PreAllocGrp -> repeating msg "386" parse_TrdgSesGrp (fun msg f_NewOrderSingle_TrdgSesGrp -> repeating msg "711" parse_UndInstrmtGrp (fun msg f_NewOrderSingle_UndInstrmtGrp -> repeating msg "232" parse_Stipulations (fun msg f_NewOrderSingle_Stipulations -> check_duplicate_tags msg (fun () -> block msg parse_Instrument (fun msg f_NewOrderSingle_Instrument -> block msg parse_FinancingDetails (fun msg f_NewOrderSingle_FinancingDetails -> block msg parse_OrderQtyData (fun msg f_NewOrderSingle_OrderQtyData -> block msg parse_SpreadOrBenchmarkCurveData (fun msg f_NewOrderSingle_SpreadOrBenchmarkCurveData -> block msg parse_YieldData (fun msg f_NewOrderSingle_YieldData -> block msg parse_CommissionData (fun msg f_NewOrderSingle_CommissionData -> block msg parse_PegInstructions (fun msg f_NewOrderSingle_PegInstructions -> block msg parse_DiscretionInstructions (fun msg f_NewOrderSingle_DiscretionInstructions -> opt msg "11" parse_string (fun msg f_NewOrderSingle_ClOrdID -> opt msg "526" parse_string (fun msg f_NewOrderSingle_SecondaryClOrdID -> opt msg "583" parse_string (fun msg f_NewOrderSingle_ClOrdLinkID -> opt msg "229" parse_LocalMktDate (fun msg f_NewOrderSingle_TradeOriginationDate -> opt msg "75" parse_LocalMktDate (fun msg f_NewOrderSingle_TradeDate -> opt msg "1" parse_string (fun msg f_NewOrderSingle_Account -> opt msg "660" parse_AcctIDSource (fun msg f_NewOrderSingle_AcctIDSource -> opt msg "581" parse_AccountType (fun msg f_NewOrderSingle_AccountType -> opt msg "589" parse_DayBookingInst (fun msg f_NewOrderSingle_DayBookingInst -> opt msg "590" parse_BookingUnit (fun msg f_NewOrderSingle_BookingUnit -> opt msg "591" parse_PreallocMethod (fun msg f_NewOrderSingle_PreallocMethod -> opt msg "70" parse_string (fun msg f_NewOrderSingle_AllocID -> opt msg "63" parse_SettlType (fun msg f_NewOrderSingle_SettlType -> opt msg "64" parse_LocalMktDate (fun msg f_NewOrderSingle_SettlDate -> opt msg "544" parse_CashMargin (fun msg f_NewOrderSingle_CashMargin -> opt msg "635" parse_ClearingFeeIndicator (fun msg f_NewOrderSingle_ClearingFeeIndicator -> opt msg "21" parse_HandlInst (fun msg f_NewOrderSingle_HandlInst -> opt msg "18" parse_ExecInst (fun msg f_NewOrderSingle_ExecInst -> opt msg "110" parse_float (fun msg f_NewOrderSingle_MinQty -> opt msg "111" parse_float (fun msg f_NewOrderSingle_MaxFloor -> opt msg "100" parse_Exchange (fun msg f_NewOrderSingle_ExDestination -> opt msg "81" parse_ProcessCode (fun msg f_NewOrderSingle_ProcessCode -> opt msg "140" parse_float (fun msg f_NewOrderSingle_PrevClosePx -> opt msg "54" parse_Side (fun msg f_NewOrderSingle_Side -> opt msg "114" parse_LocateReqd (fun msg f_NewOrderSingle_LocateReqd -> opt msg "60" parse_UTCTimestamp_milli (fun msg f_NewOrderSingle_TransactTime -> opt msg "854" parse_QtyType (fun msg f_NewOrderSingle_QtyType -> opt msg "40" parse_OrdType (fun msg f_NewOrderSingle_OrdType -> opt msg "423" parse_PriceType (fun msg f_NewOrderSingle_PriceType -> opt msg "44" parse_float (fun msg f_NewOrderSingle_Price -> opt msg "99" parse_float (fun msg f_NewOrderSingle_StopPx -> opt msg "15" parse_Currency (fun msg f_NewOrderSingle_Currency -> opt msg "376" parse_string (fun msg f_NewOrderSingle_ComplianceID -> opt msg "377" parse_SolicitedFlag (fun msg f_NewOrderSingle_SolicitedFlag -> opt msg "23" parse_string (fun msg f_NewOrderSingle_IOIID -> opt msg "117" parse_string (fun msg f_NewOrderSingle_QuoteID -> opt msg "59" parse_TimeInForce (fun msg f_NewOrderSingle_TimeInForce -> opt msg "168" parse_UTCTimestamp_milli (fun msg f_NewOrderSingle_EffectiveTime -> opt msg "432" parse_LocalMktDate (fun msg f_NewOrderSingle_ExpireDate -> opt msg "126" parse_UTCTimestamp_milli (fun msg f_NewOrderSingle_ExpireTime -> opt msg "427" parse_GTBookingInst (fun msg f_NewOrderSingle_GTBookingInst -> opt msg "528" parse_OrderCapacity (fun msg f_NewOrderSingle_OrderCapacity -> opt msg "529" parse_OrderRestrictions (fun msg f_NewOrderSingle_OrderRestrictions -> opt msg "582" parse_CustOrderCapacity (fun msg f_NewOrderSingle_CustOrderCapacity -> opt msg "121" parse_ForexReq (fun msg f_NewOrderSingle_ForexReq -> opt msg "120" parse_Currency (fun msg f_NewOrderSingle_SettlCurrency -> opt msg "775" parse_BookingType (fun msg f_NewOrderSingle_BookingType -> opt msg "58" parse_string (fun msg f_NewOrderSingle_Text -> opt msg "354" parse_int (fun msg f_NewOrderSingle_EncodedTextLen -> opt msg "355" parse_string (fun msg f_NewOrderSingle_EncodedText -> opt msg "193" parse_LocalMktDate (fun msg f_NewOrderSingle_SettlDate2 -> opt msg "192" parse_float (fun msg f_NewOrderSingle_OrderQty2 -> opt msg "640" parse_float (fun msg f_NewOrderSingle_Price2 -> opt msg "77" parse_PositionEffect (fun msg f_NewOrderSingle_PositionEffect -> opt msg "203" parse_CoveredOrUncovered (fun msg f_NewOrderSingle_CoveredOrUncovered -> opt msg "210" parse_float (fun msg f_NewOrderSingle_MaxShow -> opt msg "847" parse_TargetStrategy (fun msg f_NewOrderSingle_TargetStrategy -> opt msg "848" parse_string (fun msg f_NewOrderSingle_TargetStrategyParameters -> opt msg "849" parse_float (fun msg f_NewOrderSingle_ParticipationRate -> opt msg "480" parse_CancellationRights (fun msg f_NewOrderSingle_CancellationRights -> opt msg "481" parse_MoneyLaunderingStatus (fun msg f_NewOrderSingle_MoneyLaunderingStatus -> opt msg "513" parse_string (fun msg f_NewOrderSingle_RegistID -> opt msg "494" parse_string (fun msg f_NewOrderSingle_Designation -> (ParseSuccess {
-        f_NewOrderSingle_Parties = f_NewOrderSingle_Parties;
-        f_NewOrderSingle_PreAllocGrp = f_NewOrderSingle_PreAllocGrp;
-        f_NewOrderSingle_TrdgSesGrp = f_NewOrderSingle_TrdgSesGrp;
-        f_NewOrderSingle_UndInstrmtGrp = f_NewOrderSingle_UndInstrmtGrp;
-        f_NewOrderSingle_Stipulations = f_NewOrderSingle_Stipulations;
-        f_NewOrderSingle_Instrument = f_NewOrderSingle_Instrument;
-        f_NewOrderSingle_FinancingDetails = f_NewOrderSingle_FinancingDetails;
-        f_NewOrderSingle_OrderQtyData = f_NewOrderSingle_OrderQtyData;
-        f_NewOrderSingle_SpreadOrBenchmarkCurveData = f_NewOrderSingle_SpreadOrBenchmarkCurveData;
-        f_NewOrderSingle_YieldData = f_NewOrderSingle_YieldData;
-        f_NewOrderSingle_CommissionData = f_NewOrderSingle_CommissionData;
-        f_NewOrderSingle_PegInstructions = f_NewOrderSingle_PegInstructions;
-        f_NewOrderSingle_DiscretionInstructions = f_NewOrderSingle_DiscretionInstructions;
-        f_NewOrderSingle_ClOrdID = f_NewOrderSingle_ClOrdID;
-        f_NewOrderSingle_SecondaryClOrdID = f_NewOrderSingle_SecondaryClOrdID;
-        f_NewOrderSingle_ClOrdLinkID = f_NewOrderSingle_ClOrdLinkID;
-        f_NewOrderSingle_TradeOriginationDate = f_NewOrderSingle_TradeOriginationDate;
-        f_NewOrderSingle_TradeDate = f_NewOrderSingle_TradeDate;
-        f_NewOrderSingle_Account = f_NewOrderSingle_Account;
-        f_NewOrderSingle_AcctIDSource = f_NewOrderSingle_AcctIDSource;
-        f_NewOrderSingle_AccountType = f_NewOrderSingle_AccountType;
-        f_NewOrderSingle_DayBookingInst = f_NewOrderSingle_DayBookingInst;
-        f_NewOrderSingle_BookingUnit = f_NewOrderSingle_BookingUnit;
-        f_NewOrderSingle_PreallocMethod = f_NewOrderSingle_PreallocMethod;
-        f_NewOrderSingle_AllocID = f_NewOrderSingle_AllocID;
-        f_NewOrderSingle_SettlType = f_NewOrderSingle_SettlType;
-        f_NewOrderSingle_SettlDate = f_NewOrderSingle_SettlDate;
-        f_NewOrderSingle_CashMargin = f_NewOrderSingle_CashMargin;
-        f_NewOrderSingle_ClearingFeeIndicator = f_NewOrderSingle_ClearingFeeIndicator;
-        f_NewOrderSingle_HandlInst = f_NewOrderSingle_HandlInst;
-        f_NewOrderSingle_ExecInst = f_NewOrderSingle_ExecInst;
-        f_NewOrderSingle_MinQty = f_NewOrderSingle_MinQty;
-        f_NewOrderSingle_MaxFloor = f_NewOrderSingle_MaxFloor;
-        f_NewOrderSingle_ExDestination = f_NewOrderSingle_ExDestination;
-        f_NewOrderSingle_ProcessCode = f_NewOrderSingle_ProcessCode;
-        f_NewOrderSingle_PrevClosePx = f_NewOrderSingle_PrevClosePx;
-        f_NewOrderSingle_Side = f_NewOrderSingle_Side;
-        f_NewOrderSingle_LocateReqd = f_NewOrderSingle_LocateReqd;
-        f_NewOrderSingle_TransactTime = f_NewOrderSingle_TransactTime;
-        f_NewOrderSingle_QtyType = f_NewOrderSingle_QtyType;
-        f_NewOrderSingle_OrdType = f_NewOrderSingle_OrdType;
-        f_NewOrderSingle_PriceType = f_NewOrderSingle_PriceType;
-        f_NewOrderSingle_Price = f_NewOrderSingle_Price;
-        f_NewOrderSingle_StopPx = f_NewOrderSingle_StopPx;
-        f_NewOrderSingle_Currency = f_NewOrderSingle_Currency;
-        f_NewOrderSingle_ComplianceID = f_NewOrderSingle_ComplianceID;
-        f_NewOrderSingle_SolicitedFlag = f_NewOrderSingle_SolicitedFlag;
-        f_NewOrderSingle_IOIID = f_NewOrderSingle_IOIID;
-        f_NewOrderSingle_QuoteID = f_NewOrderSingle_QuoteID;
-        f_NewOrderSingle_TimeInForce = f_NewOrderSingle_TimeInForce;
-        f_NewOrderSingle_EffectiveTime = f_NewOrderSingle_EffectiveTime;
-        f_NewOrderSingle_ExpireDate = f_NewOrderSingle_ExpireDate;
-        f_NewOrderSingle_ExpireTime = f_NewOrderSingle_ExpireTime;
-        f_NewOrderSingle_GTBookingInst = f_NewOrderSingle_GTBookingInst;
-        f_NewOrderSingle_OrderCapacity = f_NewOrderSingle_OrderCapacity;
-        f_NewOrderSingle_OrderRestrictions = f_NewOrderSingle_OrderRestrictions;
-        f_NewOrderSingle_CustOrderCapacity = f_NewOrderSingle_CustOrderCapacity;
-        f_NewOrderSingle_ForexReq = f_NewOrderSingle_ForexReq;
-        f_NewOrderSingle_SettlCurrency = f_NewOrderSingle_SettlCurrency;
-        f_NewOrderSingle_BookingType = f_NewOrderSingle_BookingType;
-        f_NewOrderSingle_Text = f_NewOrderSingle_Text;
-        f_NewOrderSingle_EncodedTextLen = f_NewOrderSingle_EncodedTextLen;
-        f_NewOrderSingle_EncodedText = f_NewOrderSingle_EncodedText;
-        f_NewOrderSingle_SettlDate2 = f_NewOrderSingle_SettlDate2;
-        f_NewOrderSingle_OrderQty2 = f_NewOrderSingle_OrderQty2;
-        f_NewOrderSingle_Price2 = f_NewOrderSingle_Price2;
-        f_NewOrderSingle_PositionEffect = f_NewOrderSingle_PositionEffect;
-        f_NewOrderSingle_CoveredOrUncovered = f_NewOrderSingle_CoveredOrUncovered;
-        f_NewOrderSingle_MaxShow = f_NewOrderSingle_MaxShow;
-        f_NewOrderSingle_TargetStrategy = f_NewOrderSingle_TargetStrategy;
-        f_NewOrderSingle_TargetStrategyParameters = f_NewOrderSingle_TargetStrategyParameters;
-        f_NewOrderSingle_ParticipationRate = f_NewOrderSingle_ParticipationRate;
-        f_NewOrderSingle_CancellationRights = f_NewOrderSingle_CancellationRights;
-        f_NewOrderSingle_MoneyLaunderingStatus = f_NewOrderSingle_MoneyLaunderingStatus;
-        f_NewOrderSingle_RegistID = f_NewOrderSingle_RegistID;
-        f_NewOrderSingle_Designation = f_NewOrderSingle_Designation
+let parse_DontKnowTrade (msg)  =
+    (check_duplicate_tags msg (fun () -> opt msg "37" parse_string (fun msg f_DontKnowTrade_OrderID -> opt msg "17" parse_string (fun msg f_DontKnowTrade_ExecID -> opt msg "127" parse_DKReason (fun msg f_DontKnowTrade_DKReason -> opt msg "54" parse_Side (fun msg f_DontKnowTrade_Side -> opt msg "32" parse_float (fun msg f_DontKnowTrade_LastQty -> opt msg "31" parse_float (fun msg f_DontKnowTrade_LastPx -> opt msg "58" parse_string (fun msg f_DontKnowTrade_Text -> opt msg "198" parse_string (fun msg f_DontKnowTrade_SecondaryOrderID -> opt msg "354" parse_int (fun msg f_DontKnowTrade_EncodedTextLen -> opt msg "355" parse_string (fun msg f_DontKnowTrade_EncodedText -> (ParseSuccess {
+        f_DontKnowTrade_OrderID = f_DontKnowTrade_OrderID;
+        f_DontKnowTrade_ExecID = f_DontKnowTrade_ExecID;
+        f_DontKnowTrade_DKReason = f_DontKnowTrade_DKReason;
+        f_DontKnowTrade_Side = f_DontKnowTrade_Side;
+        f_DontKnowTrade_LastQty = f_DontKnowTrade_LastQty;
+        f_DontKnowTrade_LastPx = f_DontKnowTrade_LastPx;
+        f_DontKnowTrade_Text = f_DontKnowTrade_Text;
+        f_DontKnowTrade_SecondaryOrderID = f_DontKnowTrade_SecondaryOrderID;
+        f_DontKnowTrade_EncodedTextLen = f_DontKnowTrade_EncodedTextLen;
+        f_DontKnowTrade_EncodedText = f_DontKnowTrade_EncodedText
     },msg)
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
     )
     )
     )
@@ -449,9 +651,45 @@ let parse_NewOrderSingle (msg)  =
 
 let parse_app_msg_data (msg_tag) (msg)  =
     (match msg_tag with
+        | Full_Msg_NewOrderSingle_Tag -> ((>>=) (parse_NewOrderSingle msg) (fun f -> ParseSuccess (FIX_Full_Msg_NewOrderSingle f)
+        ))
+        | Full_Msg_OrderCancel_Tag -> ((>>=) (parse_OrderCancel msg) (fun f -> ParseSuccess (FIX_Full_Msg_OrderCancel f)
+        ))
+        | Full_Msg_NewOrder_Multi_Leg_Tag -> ((>>=) (parse_NewOrder_Multi_Leg msg) (fun f -> ParseSuccess (FIX_Full_Msg_NewOrder_Multi_Leg f)
+        ))
+        | Full_Msg_NewOrder_List_Tag -> ((>>=) (parse_NewOrder_List msg) (fun f -> ParseSuccess (FIX_Full_Msg_NewOrder_List f)
+        ))
+        | Full_Msg_ListOrderCancel_Tag -> ((>>=) (parse_ListOrderCancel msg) (fun f -> ParseSuccess (FIX_Full_Msg_ListOrderCancel f)
+        ))
+        | Full_Msg_OrderCancelReject_Tag -> ((>>=) (parse_OrderCancelReject msg) (fun f -> ParseSuccess (FIX_Full_Msg_OrderCancelReject f)
+        ))
+        | Full_Msg_BusinessMessageReject_Tag -> ((>>=) (parse_BusinessMessageReject msg) (fun f -> ParseSuccess (FIX_Full_Msg_BusinessMessageReject f)
+        ))
+        | Full_Msg_AllocationReport_Tag -> ((>>=) (parse_AllocationReport msg) (fun f -> ParseSuccess (FIX_Full_Msg_AllocationReport f)
+        ))
+        | Full_Msg_AllocationReportACK_Tag -> ((>>=) (parse_AllocationReportACK msg) (fun f -> ParseSuccess (FIX_Full_Msg_AllocationReportACK f)
+        ))
+        | Full_Msg_AllocationInstruction_Tag -> ((>>=) (parse_AllocationInstruction msg) (fun f -> ParseSuccess (FIX_Full_Msg_AllocationInstruction f)
+        ))
+        | Full_Msg_AllocationInstructionACK_Tag -> ((>>=) (parse_AllocationInstructionACK msg) (fun f -> ParseSuccess (FIX_Full_Msg_AllocationInstructionACK f)
+        ))
+        | Full_Msg_Heartbeat_Tag -> ((>>=) (parse_Heartbeat msg) (fun f -> ParseSuccess (FIX_Full_Msg_Heartbeat f)
+        ))
+        | Full_Msg_TestRequest_Tag -> ((>>=) (parse_TestRequest msg) (fun f -> ParseSuccess (FIX_Full_Msg_TestRequest f)
+        ))
+        | Full_Msg_ResendRequest_Tag -> ((>>=) (parse_ResendRequest msg) (fun f -> ParseSuccess (FIX_Full_Msg_ResendRequest f)
+        ))
+        | Full_Msg_SessionLevelReject_Tag -> ((>>=) (parse_SessionLevelReject msg) (fun f -> ParseSuccess (FIX_Full_Msg_SessionLevelReject f)
+        ))
+        | Full_Msg_SequenceResetRequest_Tag -> ((>>=) (parse_SequenceResetRequest msg) (fun f -> ParseSuccess (FIX_Full_Msg_SequenceResetRequest f)
+        ))
+        | Full_Msg_Logout_Tag -> ((>>=) (parse_Logout msg) (fun f -> ParseSuccess (FIX_Full_Msg_Logout f)
+        ))
+        | Full_Msg_FIXLogon_Tag -> ((>>=) (parse_FIXLogon msg) (fun f -> ParseSuccess (FIX_Full_Msg_FIXLogon f)
+        ))
         | Full_Msg_ExecutionReport_Tag -> ((>>=) (parse_ExecutionReport msg) (fun f -> ParseSuccess (FIX_Full_Msg_ExecutionReport f)
         ))
-        | Full_Msg_NewOrderSingle_Tag -> ((>>=) (parse_NewOrderSingle msg) (fun f -> ParseSuccess (FIX_Full_Msg_NewOrderSingle f)
+        | Full_Msg_DontKnowTrade_Tag -> ((>>=) (parse_DontKnowTrade msg) (fun f -> ParseSuccess (FIX_Full_Msg_DontKnowTrade f)
         ))
     )
 ;;

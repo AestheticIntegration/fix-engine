@@ -1,0 +1,32 @@
+(* Aesthetic Integration copyright 2018 *)
+open Actions;;
+open Model_messages;;
+open State;;
+open Template;;
+
+type event =
+    | Action of fix_action
+    | Message of model_msg
+;;
+
+type template = {
+    name : string;
+    template : Template.t list
+}
+;;
+
+let templates = {
+    name = "OrderCancelReject";
+    template = Template_OrderCancel :: (Template_OrderCancelReject :: [])
+} :: [];;
+
+let mod_state_with_event (e) (s)  =
+    (match e with
+        | Action a -> { s with
+            incoming_action = Some a
+        }
+        | Message m -> { s with
+            incoming_msg = FIX_TL_Normal m
+        }
+    )
+;;

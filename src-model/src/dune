@@ -1,30 +1,9 @@
 (rule
-  (targets act_checks.ml)
-  (deps act_checks.iml)
+  (targets msg_check_validate.ml)
+  (deps msg_check_validate.iml)
    (action
-    (with-stdout-to act_checks.ml
-       (run imandra-extract  act_checks.iml))))
-       
-(rule
-  (targets msg_check_types.ml)
-  (deps msg_check_types.iml)
-   (action
-    (with-stdout-to msg_check_types.ml
-       (run imandra-extract  msg_check_types.iml))))
-       
-(rule
-  (targets venue.ml)
-  (deps venue.iml)
-   (action
-    (with-stdout-to venue.ml
-       (run imandra-extract  venue.iml))))
-       
-(rule
-  (targets msg_reject.ml)
-  (deps msg_reject.iml)
-   (action
-    (with-stdout-to msg_reject.ml
-       (run imandra-extract  msg_reject.iml))))
+    (with-stdout-to msg_check_validate.ml
+       (run imandra-extract  msg_check_validate.iml))))
        
 (rule
   (targets msg_process.ml)
@@ -34,6 +13,13 @@
        (run imandra-extract  msg_process.iml))))
        
 (rule
+  (targets repeatingGroupConsistencyChecks.ml)
+  (deps repeatingGroupConsistencyChecks.iml)
+   (action
+    (with-stdout-to repeatingGroupConsistencyChecks.ml
+       (run imandra-extract  repeatingGroupConsistencyChecks.iml))))
+       
+(rule
   (targets msg_check_fields.ml)
   (deps msg_check_fields.iml)
    (action
@@ -41,25 +27,11 @@
        (run imandra-extract  msg_check_fields.iml))))
        
 (rule
-  (targets msg_defaults.ml)
-  (deps msg_defaults.iml)
+  (targets act_checks.ml)
+  (deps act_checks.iml)
    (action
-    (with-stdout-to msg_defaults.ml
-       (run imandra-extract  msg_defaults.iml))))
-       
-(rule
-  (targets msg_receive.ml)
-  (deps msg_receive.iml)
-   (action
-    (with-stdout-to msg_receive.ml
-       (run imandra-extract  msg_receive.iml))))
-       
-(rule
-  (targets repeatingGroupConsistencyChecks.ml)
-  (deps repeatingGroupConsistencyChecks.iml)
-   (action
-    (with-stdout-to repeatingGroupConsistencyChecks.ml
-       (run imandra-extract  repeatingGroupConsistencyChecks.iml))))
+    (with-stdout-to act_checks.ml
+       (run imandra-extract  act_checks.iml))))
        
 (rule
   (targets act_process.ml)
@@ -69,16 +41,51 @@
        (run imandra-extract  act_process.iml))))
        
 (rule
-  (targets msg_check_validate.ml)
-  (deps msg_check_validate.iml)
+  (targets msg_reject.ml)
+  (deps msg_reject.iml)
    (action
-    (with-stdout-to msg_check_validate.ml
-       (run imandra-extract  msg_check_validate.iml))))
+    (with-stdout-to msg_reject.ml
+       (run imandra-extract  msg_reject.iml))))
+       
+(rule
+  (targets msg_receive.ml)
+  (deps msg_receive.iml)
+   (action
+    (with-stdout-to msg_receive.ml
+       (run imandra-extract  msg_receive.iml))))
+       
+(rule
+  (targets msg_check_types.ml)
+  (deps msg_check_types.iml)
+   (action
+    (with-stdout-to msg_check_types.ml
+       (run imandra-extract  msg_check_types.iml))))
+       
+(rule
+  (targets ipl_functions.ml)
+  (deps ipl_functions.iml)
+   (action
+    (with-stdout-to ipl_functions.ml
+       (run imandra-extract  ipl_functions.iml))))
+       
+(rule
+  (targets msg_defaults.ml)
+  (deps msg_defaults.iml)
+   (action
+    (with-stdout-to msg_defaults.ml
+       (run imandra-extract  msg_defaults.iml))))
+       
+(rule
+  (targets venue.ml)
+  (deps venue.iml)
+   (action
+    (with-stdout-to venue.ml
+       (run imandra-extract  venue.iml))))
        
 (library
   (name venue)
   (public_name fix-engine.venue)
   (wrapped false)
   (flags (:standard -open Imandra_prelude -warn-error -a))
-  (libraries imandra-prelude core venue_types)
+  (libraries imandra-prelude venue_types)
 )

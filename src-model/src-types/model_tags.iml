@@ -1,13 +1,66 @@
 (* Aesthetic Integration copyright 2018 *)
 
 type m_field_tag =
-    | M_Field_OrdType_Tag 
     | M_Field_Symbol_Tag 
-    | M_Field_ClOrdID_Tag 
-    | M_Field_TransactTime_Tag 
+    | M_Field_ListID_Tag 
+    | M_Field_TestReqID_Tag 
+    | M_Field_EncryptMethod_Tag 
+    | M_Field_AllocReportID_Tag 
     | M_Field_Side_Tag 
+    | M_Field_Instrument_Tag 
+    | M_Field_RefSeqNum_Tag 
+    | M_Field_TradeDate_Tag 
+    | M_Field_ExecID_Tag 
+    | M_Field_Parties_Tag 
+    | M_Field_AllocNoOrdersType_Tag 
+    | M_Field_Text_Tag 
+    | M_Field_ClOrdID_Tag 
+    | M_Field_RefTagID_Tag 
+    | M_Field_AllocType_Tag 
+    | M_Field_TransactTime_Tag 
+    | M_Field_SessionRejectReason_Tag 
+    | M_Field_NewSeqNo_Tag 
+    | M_Field_RefMsgTyp_Tag 
+    | M_Field_OrigClOrdID_Tag 
+    | M_Field_BusinessRejectReason_Tag 
+    | M_Field_AllocReportType_Tag 
+    | M_Field_OrderID_Tag 
+    | M_Field_AllocStatus_Tag 
+    | M_Field_Quantity_Tag 
+    | M_Field_CFICode_Tag 
+    | M_Field_AvgPx_Tag 
+    | M_Field_DKReason_Tag 
+    | M_Field_TotalNoOrders_Tag 
+    | M_Field_BidType_Tag 
+    | M_Field_BeginSeqNo_Tag 
+    | M_Field_OrdType_Tag 
+    | M_Field_AllocID_Tag 
+    | M_Field_HeartBtInt_Tag 
+    | M_Field_InstrumentLeg_Tag 
+    | M_Field_EndSeqNo_Tag 
+    | M_Field_AllocTransType_Tag 
+    | M_Field_OrderQty_Tag 
+    | M_Field_LegSecurityIDSource_Tag
+    | M_Field_LegSecurityID_Tag
+    | M_Field_LegSymbol_Tag
 ;;
 
 type m_msg_tag =
     | M_Msg_NewOrderSingle_Tag 
+    | M_Msg_OrderCancel_Tag 
+    | M_Msg_NewOrder_Multi_Leg_Tag 
+    | M_Msg_NewOrder_List_Tag 
+    | M_Msg_ListOrderCancel_Tag 
+    | M_Msg_BusinessMessageReject_Tag 
+    | M_Msg_AllocationReport_Tag 
+    | M_Msg_AllocationReportACK_Tag 
+    | M_Msg_AllocationInstruction_Tag 
+    | M_Msg_Heartbeat_Tag 
+    | M_Msg_TestRequest_Tag 
+    | M_Msg_ResendRequest_Tag 
+    | M_Msg_SessionLevelReject_Tag 
+    | M_Msg_SequenceResetRequest_Tag 
+    | M_Msg_Logout_Tag 
+    | M_Msg_FIXLogon_Tag 
+    | M_Msg_DontKnowTrade_Tag 
 ;;

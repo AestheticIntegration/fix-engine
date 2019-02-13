@@ -4,53 +4,661 @@ open Full_app_messages;;
 open Full_app_records;;
 open Model_messages;;
 open Model_tags;;
+open Repeating_groups_converter;;
 
-let convert__full_to_model_ExecutionReport (msg : full_fix_executionreport_data)  =
-    let c_mod_f_ExecutionReport_Text = msg.f_ExecutionReport_Text in
-    (match msg.f_ExecutionReport_Instrument.f_Instrument_Symbol with
+let convert__full_to_model_NewOrderSingle (msg : full_fix_newordersingle_data)  =
+    (match check_convert_full_to_model__AllocsGrp msg.f_NewOrderSingle_AllocsGrp with
+        | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
+            field_missing_data_field = x
+        })
+        | RG_Success -> let c_mod_f_NewOrderSingle_AllocsGrp = convert__full_to_model_AllocsGrp msg.f_NewOrderSingle_AllocsGrp in
+        let c_mod_f_NewOrderSingle_AllocID = msg.f_NewOrderSingle_AllocID in
+        let c_mod_f_NewOrderSingle_Text = msg.f_NewOrderSingle_Text in
+        let c_mod_f_NewOrderSingle_PriceType = msg.f_NewOrderSingle_PriceType in
+        let c_mod_f_NewOrderSingle_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency = msg.f_NewOrderSingle_SpreadorBenchmarkCurveData.f_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency in
+        let c_mod_f_NewOrderSingle_MKTXRTSPurpose = msg.f_NewOrderSingle_MKTXRTSPurpose in
+        let c_mod_f_NewOrderSingle_MKTXExternalTargetLevel = msg.f_NewOrderSingle_MKTXExternalTargetLevel in
+        let c_mod_f_NewOrderSingle_MKTXTargetLevel = msg.f_NewOrderSingle_MKTXTargetLevel in
+        let c_mod_f_NewOrderSingle_MKTXPricingProcess = msg.f_NewOrderSingle_MKTXPricingProcess in
+        let c_mod_f_NewOrderSingle_TradingProtocol = msg.f_NewOrderSingle_TradingProtocol in
+        (match check_convert_full_to_model__DealersGrp msg.f_NewOrderSingle_DealersGrp with
+            | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
+                field_missing_data_field = x
+            })
+            | RG_Success -> let c_mod_f_NewOrderSingle_DealersGrp = convert__full_to_model_DealersGrp msg.f_NewOrderSingle_DealersGrp in
+            let c_mod_f_NewOrderSingle_IncludeDealers = msg.f_NewOrderSingle_IncludeDealers in
+            let c_mod_f_NewOrderSingle_SettlCurrency = msg.f_NewOrderSingle_SettlCurrency in
+            let c_mod_f_NewOrderSingle_ForexReq = msg.f_NewOrderSingle_ForexReq in
+            (match msg.f_NewOrderSingle_Instrument.f_Instrument_CFICode with
+                | None -> (FIX_TL_Req_Field_Missing {
+                    field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
+                    field_missing_data_field = M_Field_CFICode_Tag
+                })
+                | Some m_f_Instrument_CFICode -> let c_mod_f_NewOrderSingle_Instrument_CFICode = m_f_Instrument_CFICode in
+                let c_mod_f_NewOrderSingle_QtyType = msg.f_NewOrderSingle_QtyType in
+                let c_mod_f_NewOrderSingle_OrderCapacity = msg.f_NewOrderSingle_OrderCapacity in
+                let c_mod_f_NewOrderSingle_SettlDate = msg.f_NewOrderSingle_SettlDate in
+                let c_mod_f_NewOrderSingle_SettlType = msg.f_NewOrderSingle_SettlType in
+                (match msg.f_NewOrderSingle_TransactTime with
+                    | None -> (FIX_TL_Req_Field_Missing {
+                        field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
+                        field_missing_data_field = M_Field_TransactTime_Tag
+                    })
+                    | Some m_f_NewOrderSingle_TransactTime -> let c_mod_f_NewOrderSingle_TransactTime = m_f_NewOrderSingle_TransactTime in
+                    (match msg.f_NewOrderSingle_Side with
+                        | None -> (FIX_TL_Req_Field_Missing {
+                            field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
+                            field_missing_data_field = M_Field_Side_Tag
+                        })
+                        | Some m_f_NewOrderSingle_Side -> let c_mod_f_NewOrderSingle_Side = m_f_NewOrderSingle_Side in
+                        let c_mod_f_NewOrderSingle_Price = msg.f_NewOrderSingle_Price in
+                        (match msg.f_NewOrderSingle_OrdType with
+                            | None -> (FIX_TL_Req_Field_Missing {
+                                field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
+                                field_missing_data_field = M_Field_OrdType_Tag
+                            })
+                            | Some m_f_NewOrderSingle_OrdType -> let c_mod_f_NewOrderSingle_OrdType = m_f_NewOrderSingle_OrdType in
+                            (match msg.f_NewOrderSingle_OrderQty with
+                                | None -> (FIX_TL_Req_Field_Missing {
+                                    field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
+                                    field_missing_data_field = M_Field_OrderQty_Tag
+                                })
+                                | Some m_f_NewOrderSingle_OrderQty -> let c_mod_f_NewOrderSingle_OrderQty = m_f_NewOrderSingle_OrderQty in
+                                let c_mod_f_NewOrderSingle_ExecInst = msg.f_NewOrderSingle_ExecInst in
+                                (match check_convert_full_to_model__PartyIDsGrp msg.f_NewOrderSingle_Parties.f_Parties_PartyIDsGrp with
+                                    | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                                        field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
+                                        field_missing_data_field = x
+                                    })
+                                    | RG_Success -> let c_mod_f_NewOrderSingle_Parties_PartyIDsGrp = convert__full_to_model_PartyIDsGrp msg.f_NewOrderSingle_Parties.f_Parties_PartyIDsGrp in
+                                    let c_mod_f_NewOrderSingle_HandlInst = msg.f_NewOrderSingle_HandlInst in
+                                    let c_mod_f_NewOrderSingle_Currency = msg.f_NewOrderSingle_Currency in
+                                    (match msg.f_NewOrderSingle_ClOrdID with
+                                        | None -> (FIX_TL_Req_Field_Missing {
+                                            field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
+                                            field_missing_data_field = M_Field_ClOrdID_Tag
+                                        })
+                                        | Some m_f_NewOrderSingle_ClOrdID -> let c_mod_f_NewOrderSingle_ClOrdID = m_f_NewOrderSingle_ClOrdID in
+                                        let fix_msg_data = {
+                                            mod_f_NewOrderSingle_ClOrdID = c_mod_f_NewOrderSingle_ClOrdID;
+                                            mod_f_NewOrderSingle_Currency = c_mod_f_NewOrderSingle_Currency;
+                                            mod_f_NewOrderSingle_HandlInst = (match c_mod_f_NewOrderSingle_HandlInst with
+                                                | None -> None
+                                                | Some d -> (Some (convert__full_to_model_HandlInst d))
+                                            );
+                                            mod_f_NewOrderSingle_Parties_PartyIDsGrp = c_mod_f_NewOrderSingle_Parties_PartyIDsGrp;
+                                            mod_f_NewOrderSingle_ExecInst = (match c_mod_f_NewOrderSingle_ExecInst with
+                                                | None -> None
+                                                | Some d -> (Some (convert__full_to_model_ExecInst d))
+                                            );
+                                            mod_f_NewOrderSingle_OrderQty = c_mod_f_NewOrderSingle_OrderQty;
+                                            mod_f_NewOrderSingle_OrdType = c_mod_f_NewOrderSingle_OrdType;
+                                            mod_f_NewOrderSingle_Price = c_mod_f_NewOrderSingle_Price;
+                                            mod_f_NewOrderSingle_Side = convert__full_to_model_Side c_mod_f_NewOrderSingle_Side;
+                                            mod_f_NewOrderSingle_TransactTime = c_mod_f_NewOrderSingle_TransactTime;
+                                            mod_f_NewOrderSingle_SettlType = (match c_mod_f_NewOrderSingle_SettlType with
+                                                | None -> None
+                                                | Some d -> (Some (convert__full_to_model_SettlType d))
+                                            );
+                                            mod_f_NewOrderSingle_SettlDate = c_mod_f_NewOrderSingle_SettlDate;
+                                            mod_f_NewOrderSingle_OrderCapacity = (match c_mod_f_NewOrderSingle_OrderCapacity with
+                                                | None -> None
+                                                | Some d -> (Some (convert__full_to_model_OrderCapacity d))
+                                            );
+                                            mod_f_NewOrderSingle_QtyType = (match c_mod_f_NewOrderSingle_QtyType with
+                                                | None -> None
+                                                | Some d -> (Some (convert__full_to_model_QtyType d))
+                                            );
+                                            mod_f_NewOrderSingle_Instrument_CFICode = c_mod_f_NewOrderSingle_Instrument_CFICode;
+                                            mod_f_NewOrderSingle_ForexReq = (match c_mod_f_NewOrderSingle_ForexReq with
+                                                | None -> None
+                                                | Some d -> (Some (convert__full_to_model_ForexReq d))
+                                            );
+                                            mod_f_NewOrderSingle_SettlCurrency = c_mod_f_NewOrderSingle_SettlCurrency;
+                                            mod_f_NewOrderSingle_IncludeDealers = (match c_mod_f_NewOrderSingle_IncludeDealers with
+                                                | None -> None
+                                                | Some d -> (Some (convert__full_to_model_IncludeDealers d))
+                                            );
+                                            mod_f_NewOrderSingle_DealersGrp = c_mod_f_NewOrderSingle_DealersGrp;
+                                            mod_f_NewOrderSingle_TradingProtocol = (match c_mod_f_NewOrderSingle_TradingProtocol with
+                                                | None -> None
+                                                | Some d -> (Some (convert__full_to_model_TradingProtocol d))
+                                            );
+                                            mod_f_NewOrderSingle_MKTXPricingProcess = (match c_mod_f_NewOrderSingle_MKTXPricingProcess with
+                                                | None -> None
+                                                | Some d -> (Some (convert__full_to_model_MKTXPricingProcess d))
+                                            );
+                                            mod_f_NewOrderSingle_MKTXTargetLevel = c_mod_f_NewOrderSingle_MKTXTargetLevel;
+                                            mod_f_NewOrderSingle_MKTXExternalTargetLevel = c_mod_f_NewOrderSingle_MKTXExternalTargetLevel;
+                                            mod_f_NewOrderSingle_MKTXRTSPurpose = (match c_mod_f_NewOrderSingle_MKTXRTSPurpose with
+                                                | None -> None
+                                                | Some d -> (Some (convert__full_to_model_MKTXRTSPurpose d))
+                                            );
+                                            mod_f_NewOrderSingle_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency = c_mod_f_NewOrderSingle_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency;
+                                            mod_f_NewOrderSingle_PriceType = (match c_mod_f_NewOrderSingle_PriceType with
+                                                | None -> None
+                                                | Some d -> (Some (convert__full_to_model_PriceType d))
+                                            );
+                                            mod_f_NewOrderSingle_Text = c_mod_f_NewOrderSingle_Text;
+                                            mod_f_NewOrderSingle_AllocID = c_mod_f_NewOrderSingle_AllocID;
+                                            mod_f_NewOrderSingle_AllocsGrp = c_mod_f_NewOrderSingle_AllocsGrp
+                                        } in
+                                        FIX_TL_Normal (FIX_Msg_NewOrderSingle fix_msg_data)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+;;
+
+let convert__full_to_model_OrderCancel (msg : full_fix_ordercancel_data)  =
+    (match msg.f_OrderCancel_TransactTime with
+        | None -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_OrderCancel_Tag;
+            field_missing_data_field = M_Field_TransactTime_Tag
+        })
+        | Some m_f_OrderCancel_TransactTime -> let c_mod_f_OrderCancel_TransactTime = m_f_OrderCancel_TransactTime in
+        (match msg.f_OrderCancel_Side with
+            | None -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_OrderCancel_Tag;
+                field_missing_data_field = M_Field_Side_Tag
+            })
+            | Some m_f_OrderCancel_Side -> let c_mod_f_OrderCancel_Side = m_f_OrderCancel_Side in
+            (match msg.f_OrderCancel_Symbol with
+                | None -> (FIX_TL_Req_Field_Missing {
+                    field_missing_data_msg = M_Msg_OrderCancel_Tag;
+                    field_missing_data_field = M_Field_Symbol_Tag
+                })
+                | Some m_f_OrderCancel_Symbol -> let c_mod_f_OrderCancel_Symbol = m_f_OrderCancel_Symbol in
+                (match check_convert_full_to_model__PartyIDsGrp msg.f_OrderCancel_Parties.f_Parties_PartyIDsGrp with
+                    | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                        field_missing_data_msg = M_Msg_OrderCancel_Tag;
+                        field_missing_data_field = x
+                    })
+                    | RG_Success -> let c_mod_f_OrderCancel_Parties_PartyIDsGrp = convert__full_to_model_PartyIDsGrp msg.f_OrderCancel_Parties.f_Parties_PartyIDsGrp in
+                    (match msg.f_OrderCancel_ClOrdID with
+                        | None -> (FIX_TL_Req_Field_Missing {
+                            field_missing_data_msg = M_Msg_OrderCancel_Tag;
+                            field_missing_data_field = M_Field_ClOrdID_Tag
+                        })
+                        | Some m_f_OrderCancel_ClOrdID -> let c_mod_f_OrderCancel_ClOrdID = m_f_OrderCancel_ClOrdID in
+                        (match msg.f_OrderCancel_OrigClOrdID with
+                            | None -> (FIX_TL_Req_Field_Missing {
+                                field_missing_data_msg = M_Msg_OrderCancel_Tag;
+                                field_missing_data_field = M_Field_OrigClOrdID_Tag
+                            })
+                            | Some m_f_OrderCancel_OrigClOrdID -> let c_mod_f_OrderCancel_OrigClOrdID = m_f_OrderCancel_OrigClOrdID in
+                            let fix_msg_data = {
+                                mod_f_OrderCancel_OrigClOrdID = c_mod_f_OrderCancel_OrigClOrdID;
+                                mod_f_OrderCancel_ClOrdID = c_mod_f_OrderCancel_ClOrdID;
+                                mod_f_OrderCancel_Parties_PartyIDsGrp = c_mod_f_OrderCancel_Parties_PartyIDsGrp;
+                                mod_f_OrderCancel_Symbol = c_mod_f_OrderCancel_Symbol;
+                                mod_f_OrderCancel_Side = convert__full_to_model_Side c_mod_f_OrderCancel_Side;
+                                mod_f_OrderCancel_TransactTime = c_mod_f_OrderCancel_TransactTime
+                            } in
+                            FIX_TL_Normal (FIX_Msg_OrderCancel fix_msg_data)
+                        )
+                    )
+                )
+            )
+        )
+    )
+;;
+
+let convert__full_to_model_NewOrder_Multi_Leg (msg : full_fix_neworder_multi_leg_data)  =
+    (match check_convert_full_to_model__LegAllocsGrp msg.f_NewOrder_Multi_Leg_LegAllocsGrp with
+        | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_NewOrder_Multi_Leg_Tag;
+            field_missing_data_field = x
+        })
+        | RG_Success -> let c_mod_f_NewOrder_Multi_Leg_LegAllocsGrp = convert__full_to_model_LegAllocsGrp msg.f_NewOrder_Multi_Leg_LegAllocsGrp in
+        let c_mod_f_NewOrder_Multi_Leg_AllocID = msg.f_NewOrder_Multi_Leg_AllocID in
+        let c_mod_f_NewOrder_Multi_Leg_MKTXRTSPurpose = msg.f_NewOrder_Multi_Leg_MKTXRTSPurpose in
+        let c_mod_f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel = msg.f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel in
+        let c_mod_f_NewOrder_Multi_Leg_MKTXPricingProcess = msg.f_NewOrder_Multi_Leg_MKTXPricingProcess in
+        let c_mod_f_NewOrder_Multi_Leg_TradingProtocol = msg.f_NewOrder_Multi_Leg_TradingProtocol in
+        (match check_convert_full_to_model__DealersGrp msg.f_NewOrder_Multi_Leg_DealersGrp with
+            | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_NewOrder_Multi_Leg_Tag;
+                field_missing_data_field = x
+            })
+            | RG_Success -> let c_mod_f_NewOrder_Multi_Leg_DealersGrp = convert__full_to_model_DealersGrp msg.f_NewOrder_Multi_Leg_DealersGrp in
+            let c_mod_f_NewOrder_Multi_Leg_IncludeDealers = msg.f_NewOrder_Multi_Leg_IncludeDealers in
+            let c_mod_f_NewOrder_Multi_Leg_Notes = msg.f_NewOrder_Multi_Leg_Notes in
+            let c_mod_f_NewOrder_Multi_Leg_Text = msg.f_NewOrder_Multi_Leg_Text in
+            (match msg.f_NewOrder_Multi_Leg_OrdType with
+                | None -> (FIX_TL_Req_Field_Missing {
+                    field_missing_data_msg = M_Msg_NewOrder_Multi_Leg_Tag;
+                    field_missing_data_field = M_Field_OrdType_Tag
+                })
+                | Some m_f_NewOrder_Multi_Leg_OrdType -> let c_mod_f_NewOrder_Multi_Leg_OrdType = m_f_NewOrder_Multi_Leg_OrdType in
+                let c_mod_f_NewOrder_Multi_Leg_OrderQty = msg.f_NewOrder_Multi_Leg_OrderQty in
+                let c_mod_f_NewOrder_Multi_Leg_QtyType = msg.f_NewOrder_Multi_Leg_QtyType in
+                (match msg.f_NewOrder_Multi_Leg_TransactTime with
+                    | None -> (FIX_TL_Req_Field_Missing {
+                        field_missing_data_msg = M_Msg_NewOrder_Multi_Leg_Tag;
+                        field_missing_data_field = M_Field_TransactTime_Tag
+                    })
+                    | Some m_f_NewOrder_Multi_Leg_TransactTime -> let c_mod_f_NewOrder_Multi_Leg_TransactTime = m_f_NewOrder_Multi_Leg_TransactTime in
+                    (match check_convert_full_to_model__LegsGrp msg.f_NewOrder_Multi_Leg_LegsGrp with
+                        | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                            field_missing_data_msg = M_Msg_NewOrder_Multi_Leg_Tag;
+                            field_missing_data_field = x
+                        })
+                        | RG_Success -> let c_mod_f_NewOrder_Multi_Leg_LegsGrp = convert__full_to_model_LegsGrp msg.f_NewOrder_Multi_Leg_LegsGrp in
+                        let c_mod_f_NewOrder_Multi_Leg_OrderCapacity = msg.f_NewOrder_Multi_Leg_OrderCapacity in
+                        (match msg.f_NewOrder_Multi_Leg_Instrument.f_Instrument_CFICode with
+                            | None -> (FIX_TL_Req_Field_Missing {
+                                field_missing_data_msg = M_Msg_NewOrder_Multi_Leg_Tag;
+                                field_missing_data_field = M_Field_CFICode_Tag
+                            })
+                            | Some m_f_Instrument_CFICode -> let c_mod_f_NewOrder_Multi_Leg_Instrument_CFICode = m_f_Instrument_CFICode in
+                            let c_mod_f_NewOrder_Multi_Leg_Side = msg.f_NewOrder_Multi_Leg_Side in
+                            (match check_convert_full_to_model__PartyIDsGrp msg.f_NewOrder_Multi_Leg_Parties.f_Parties_PartyIDsGrp with
+                                | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                                    field_missing_data_msg = M_Msg_NewOrder_Multi_Leg_Tag;
+                                    field_missing_data_field = x
+                                })
+                                | RG_Success -> let c_mod_f_NewOrder_Multi_Leg_Parties_PartyIDsGrp = convert__full_to_model_PartyIDsGrp msg.f_NewOrder_Multi_Leg_Parties.f_Parties_PartyIDsGrp in
+                                (match msg.f_NewOrder_Multi_Leg_ClOrdID with
+                                    | None -> (FIX_TL_Req_Field_Missing {
+                                        field_missing_data_msg = M_Msg_NewOrder_Multi_Leg_Tag;
+                                        field_missing_data_field = M_Field_ClOrdID_Tag
+                                    })
+                                    | Some m_f_NewOrder_Multi_Leg_ClOrdID -> let c_mod_f_NewOrder_Multi_Leg_ClOrdID = m_f_NewOrder_Multi_Leg_ClOrdID in
+                                    let fix_msg_data = {
+                                        mod_f_NewOrder_Multi_Leg_ClOrdID = c_mod_f_NewOrder_Multi_Leg_ClOrdID;
+                                        mod_f_NewOrder_Multi_Leg_Parties_PartyIDsGrp = c_mod_f_NewOrder_Multi_Leg_Parties_PartyIDsGrp;
+                                        mod_f_NewOrder_Multi_Leg_Side = (match c_mod_f_NewOrder_Multi_Leg_Side with
+                                            | None -> None
+                                            | Some d -> (Some (convert__full_to_model_Side d))
+                                        );
+                                        mod_f_NewOrder_Multi_Leg_Instrument_CFICode = c_mod_f_NewOrder_Multi_Leg_Instrument_CFICode;
+                                        mod_f_NewOrder_Multi_Leg_OrderCapacity = (match c_mod_f_NewOrder_Multi_Leg_OrderCapacity with
+                                            | None -> None
+                                            | Some d -> (Some (convert__full_to_model_OrderCapacity d))
+                                        );
+                                        mod_f_NewOrder_Multi_Leg_LegsGrp = c_mod_f_NewOrder_Multi_Leg_LegsGrp;
+                                        mod_f_NewOrder_Multi_Leg_TransactTime = c_mod_f_NewOrder_Multi_Leg_TransactTime;
+                                        mod_f_NewOrder_Multi_Leg_QtyType = (match c_mod_f_NewOrder_Multi_Leg_QtyType with
+                                            | None -> None
+                                            | Some d -> (Some (convert__full_to_model_QtyType d))
+                                        );
+                                        mod_f_NewOrder_Multi_Leg_OrderQty = c_mod_f_NewOrder_Multi_Leg_OrderQty;
+                                        mod_f_NewOrder_Multi_Leg_OrdType = c_mod_f_NewOrder_Multi_Leg_OrdType;
+                                        mod_f_NewOrder_Multi_Leg_Text = c_mod_f_NewOrder_Multi_Leg_Text;
+                                        mod_f_NewOrder_Multi_Leg_Notes = c_mod_f_NewOrder_Multi_Leg_Notes;
+                                        mod_f_NewOrder_Multi_Leg_IncludeDealers = (match c_mod_f_NewOrder_Multi_Leg_IncludeDealers with
+                                            | None -> None
+                                            | Some d -> (Some (convert__full_to_model_IncludeDealers d))
+                                        );
+                                        mod_f_NewOrder_Multi_Leg_DealersGrp = c_mod_f_NewOrder_Multi_Leg_DealersGrp;
+                                        mod_f_NewOrder_Multi_Leg_TradingProtocol = (match c_mod_f_NewOrder_Multi_Leg_TradingProtocol with
+                                            | None -> None
+                                            | Some d -> (Some (convert__full_to_model_TradingProtocol d))
+                                        );
+                                        mod_f_NewOrder_Multi_Leg_MKTXPricingProcess = (match c_mod_f_NewOrder_Multi_Leg_MKTXPricingProcess with
+                                            | None -> None
+                                            | Some d -> (Some (convert__full_to_model_MKTXPricingProcess d))
+                                        );
+                                        mod_f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel = c_mod_f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel;
+                                        mod_f_NewOrder_Multi_Leg_MKTXRTSPurpose = (match c_mod_f_NewOrder_Multi_Leg_MKTXRTSPurpose with
+                                            | None -> None
+                                            | Some d -> (Some (convert__full_to_model_MKTXRTSPurpose d))
+                                        );
+                                        mod_f_NewOrder_Multi_Leg_AllocID = c_mod_f_NewOrder_Multi_Leg_AllocID;
+                                        mod_f_NewOrder_Multi_Leg_LegAllocsGrp = c_mod_f_NewOrder_Multi_Leg_LegAllocsGrp
+                                    } in
+                                    FIX_TL_Normal (FIX_Msg_NewOrder_Multi_Leg fix_msg_data)
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+;;
+
+let convert__full_to_model_NewOrder_List (msg : full_fix_neworder_list_data)  =
+    (match check_convert_full_to_model__AllocsGrp msg.f_NewOrder_List_AllocsGrp with
+        | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_NewOrder_List_Tag;
+            field_missing_data_field = x
+        })
+        | RG_Success -> let c_mod_f_NewOrder_List_AllocsGrp = convert__full_to_model_AllocsGrp msg.f_NewOrder_List_AllocsGrp in
+        let c_mod_f_NewOrder_List_AllocID = msg.f_NewOrder_List_AllocID in
+        let c_mod_f_NewOrder_List_MKTXListType = msg.f_NewOrder_List_MKTXListType in
+        let c_mod_f_NewOrder_List_MKTXExternalTargetLevel = msg.f_NewOrder_List_MKTXExternalTargetLevel in
+        let c_mod_f_NewOrder_List_MKTXPricingProcess = msg.f_NewOrder_List_MKTXPricingProcess in
+        let c_mod_f_NewOrder_List_OrderCapacity = msg.f_NewOrder_List_OrderCapacity in
+        (match check_convert_full_to_model__DealersGrp msg.f_NewOrder_List_DealersGrp with
+            | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_NewOrder_List_Tag;
+                field_missing_data_field = x
+            })
+            | RG_Success -> let c_mod_f_NewOrder_List_DealersGrp = convert__full_to_model_DealersGrp msg.f_NewOrder_List_DealersGrp in
+            let c_mod_f_NewOrder_List_IncludeDealers = msg.f_NewOrder_List_IncludeDealers in
+            (match check_convert_full_to_model__OrdersGrp msg.f_NewOrder_List_OrdersGrp with
+                | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                    field_missing_data_msg = M_Msg_NewOrder_List_Tag;
+                    field_missing_data_field = x
+                })
+                | RG_Success -> let c_mod_f_NewOrder_List_OrdersGrp = convert__full_to_model_OrdersGrp msg.f_NewOrder_List_OrdersGrp in
+                (match msg.f_NewOrder_List_TotalNoOrders with
+                    | None -> (FIX_TL_Req_Field_Missing {
+                        field_missing_data_msg = M_Msg_NewOrder_List_Tag;
+                        field_missing_data_field = M_Field_TotalNoOrders_Tag
+                    })
+                    | Some m_f_NewOrder_List_TotalNoOrders -> let c_mod_f_NewOrder_List_TotalNoOrders = m_f_NewOrder_List_TotalNoOrders in
+                    (match msg.f_NewOrder_List_BidType with
+                        | None -> (FIX_TL_Req_Field_Missing {
+                            field_missing_data_msg = M_Msg_NewOrder_List_Tag;
+                            field_missing_data_field = M_Field_BidType_Tag
+                        })
+                        | Some m_f_NewOrder_List_BidType -> let c_mod_f_NewOrder_List_BidType = m_f_NewOrder_List_BidType in
+                        (match msg.f_NewOrder_List_ListID with
+                            | None -> (FIX_TL_Req_Field_Missing {
+                                field_missing_data_msg = M_Msg_NewOrder_List_Tag;
+                                field_missing_data_field = M_Field_ListID_Tag
+                            })
+                            | Some m_f_NewOrder_List_ListID -> let c_mod_f_NewOrder_List_ListID = m_f_NewOrder_List_ListID in
+                            let fix_msg_data = {
+                                mod_f_NewOrder_List_ListID = c_mod_f_NewOrder_List_ListID;
+                                mod_f_NewOrder_List_BidType = c_mod_f_NewOrder_List_BidType;
+                                mod_f_NewOrder_List_TotalNoOrders = c_mod_f_NewOrder_List_TotalNoOrders;
+                                mod_f_NewOrder_List_OrdersGrp = c_mod_f_NewOrder_List_OrdersGrp;
+                                mod_f_NewOrder_List_IncludeDealers = (match c_mod_f_NewOrder_List_IncludeDealers with
+                                    | None -> None
+                                    | Some d -> (Some (convert__full_to_model_IncludeDealers d))
+                                );
+                                mod_f_NewOrder_List_DealersGrp = c_mod_f_NewOrder_List_DealersGrp;
+                                mod_f_NewOrder_List_OrderCapacity = (match c_mod_f_NewOrder_List_OrderCapacity with
+                                    | None -> None
+                                    | Some d -> (Some (convert__full_to_model_OrderCapacity d))
+                                );
+                                mod_f_NewOrder_List_MKTXPricingProcess = (match c_mod_f_NewOrder_List_MKTXPricingProcess with
+                                    | None -> None
+                                    | Some d -> (Some (convert__full_to_model_MKTXPricingProcess d))
+                                );
+                                mod_f_NewOrder_List_MKTXExternalTargetLevel = c_mod_f_NewOrder_List_MKTXExternalTargetLevel;
+                                mod_f_NewOrder_List_MKTXListType = (match c_mod_f_NewOrder_List_MKTXListType with
+                                    | None -> None
+                                    | Some d -> (Some (convert__full_to_model_MKTXListType d))
+                                );
+                                mod_f_NewOrder_List_AllocID = c_mod_f_NewOrder_List_AllocID;
+                                mod_f_NewOrder_List_AllocsGrp = c_mod_f_NewOrder_List_AllocsGrp
+                            } in
+                            FIX_TL_Normal (FIX_Msg_NewOrder_List fix_msg_data)
+                        )
+                    )
+                )
+            )
+        )
+    )
+;;
+
+let convert__full_to_model_ListOrderCancel (msg : full_fix_listordercancel_data)  =
+    (match msg.f_ListOrderCancel_TransactTime with
+        | None -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_ListOrderCancel_Tag;
+            field_missing_data_field = M_Field_TransactTime_Tag
+        })
+        | Some m_f_ListOrderCancel_TransactTime -> let c_mod_f_ListOrderCancel_TransactTime = m_f_ListOrderCancel_TransactTime in
+        (match msg.f_ListOrderCancel_ListID with
+            | None -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_ListOrderCancel_Tag;
+                field_missing_data_field = M_Field_ListID_Tag
+            })
+            | Some m_f_ListOrderCancel_ListID -> let c_mod_f_ListOrderCancel_ListID = m_f_ListOrderCancel_ListID in
+            let fix_msg_data = {
+                mod_f_ListOrderCancel_ListID = c_mod_f_ListOrderCancel_ListID;
+                mod_f_ListOrderCancel_TransactTime = c_mod_f_ListOrderCancel_TransactTime
+            } in
+            FIX_TL_Normal (FIX_Msg_ListOrderCancel fix_msg_data)
+        )
+    )
+;;
+
+let convert__full_to_model_OrderCancelReject (msg : full_fix_ordercancelreject_data)  =
+    (match msg.f_OrderCancelReject_Text with
         | None -> (FIX_TL_None)
-        | Some m_f_Instrument_Symbol -> let c_mod_f_ExecutionReport_Instrument_Symbol = m_f_Instrument_Symbol in
-        (match msg.f_ExecutionReport_OrdStatus with
+        | Some m_f_OrderCancelReject_Text -> let c_mod_f_OrderCancelReject_Text = m_f_OrderCancelReject_Text in
+        (match msg.f_OrderCancelReject_TransactTime with
             | None -> (FIX_TL_None)
-            | Some m_f_ExecutionReport_OrdStatus -> let c_mod_f_ExecutionReport_OrdStatus = m_f_ExecutionReport_OrdStatus in
-            (match msg.f_ExecutionReport_CumQty with
+            | Some m_f_OrderCancelReject_TransactTime -> let c_mod_f_OrderCancelReject_TransactTime = m_f_OrderCancelReject_TransactTime in
+            let c_mod_f_OrderCancelReject_CxlRejReason = msg.f_OrderCancelReject_CxlRejReason in
+            (match msg.f_OrderCancelReject_CxlRejResponseTo with
                 | None -> (FIX_TL_None)
-                | Some m_f_ExecutionReport_CumQty -> let c_mod_f_ExecutionReport_CumQty = m_f_ExecutionReport_CumQty in
-                (match msg.f_ExecutionReport_LeavesQty with
+                | Some m_f_OrderCancelReject_CxlRejResponseTo -> let c_mod_f_OrderCancelReject_CxlRejResponseTo = m_f_OrderCancelReject_CxlRejResponseTo in
+                (match msg.f_OrderCancelReject_OrigClOrdID with
                     | None -> (FIX_TL_None)
-                    | Some m_f_ExecutionReport_LeavesQty -> let c_mod_f_ExecutionReport_LeavesQty = m_f_ExecutionReport_LeavesQty in
-                    (match msg.f_ExecutionReport_Side with
+                    | Some m_f_OrderCancelReject_OrigClOrdID -> let c_mod_f_OrderCancelReject_OrigClOrdID = m_f_OrderCancelReject_OrigClOrdID in
+                    (match msg.f_OrderCancelReject_OrdStatus with
                         | None -> (FIX_TL_None)
-                        | Some m_f_ExecutionReport_Side -> let c_mod_f_ExecutionReport_Side = m_f_ExecutionReport_Side in
-                        (match msg.f_ExecutionReport_AvgPx with
+                        | Some m_f_OrderCancelReject_OrdStatus -> let c_mod_f_OrderCancelReject_OrdStatus = m_f_OrderCancelReject_OrdStatus in
+                        (match msg.f_OrderCancelReject_ClOrdID with
                             | None -> (FIX_TL_None)
-                            | Some m_f_ExecutionReport_AvgPx -> let c_mod_f_ExecutionReport_AvgPx = m_f_ExecutionReport_AvgPx in
-                            (match msg.f_ExecutionReport_ExecType with
+                            | Some m_f_OrderCancelReject_ClOrdID -> let c_mod_f_OrderCancelReject_ClOrdID = m_f_OrderCancelReject_ClOrdID in
+                            (match msg.f_OrderCancelReject_OrderID with
                                 | None -> (FIX_TL_None)
-                                | Some m_f_ExecutionReport_ExecType -> let c_mod_f_ExecutionReport_ExecType = m_f_ExecutionReport_ExecType in
-                                (match msg.f_ExecutionReport_ExecID with
-                                    | None -> (FIX_TL_None)
-                                    | Some m_f_ExecutionReport_ExecID -> let c_mod_f_ExecutionReport_ExecID = m_f_ExecutionReport_ExecID in
-                                    (match msg.f_ExecutionReport_OrderID with
-                                        | None -> (FIX_TL_None)
-                                        | Some m_f_ExecutionReport_OrderID -> let c_mod_f_ExecutionReport_OrderID = m_f_ExecutionReport_OrderID in
-                                        (match msg.f_ExecutionReport_ClOrdID with
-                                            | None -> (FIX_TL_None)
-                                            | Some m_f_ExecutionReport_ClOrdID -> let c_mod_f_ExecutionReport_ClOrdID = m_f_ExecutionReport_ClOrdID in
-                                            let fix_msg_data = {
-                                                mod_f_ExecutionReport_ClOrdID = c_mod_f_ExecutionReport_ClOrdID;
-                                                mod_f_ExecutionReport_OrderID = c_mod_f_ExecutionReport_OrderID;
-                                                mod_f_ExecutionReport_ExecID = c_mod_f_ExecutionReport_ExecID;
-                                                mod_f_ExecutionReport_ExecType = convert__full_to_model_ExecType c_mod_f_ExecutionReport_ExecType;
-                                                mod_f_ExecutionReport_AvgPx = c_mod_f_ExecutionReport_AvgPx;
-                                                mod_f_ExecutionReport_Side = convert__full_to_model_Side c_mod_f_ExecutionReport_Side;
-                                                mod_f_ExecutionReport_LeavesQty = c_mod_f_ExecutionReport_LeavesQty;
-                                                mod_f_ExecutionReport_CumQty = c_mod_f_ExecutionReport_CumQty;
-                                                mod_f_ExecutionReport_OrdStatus = convert__full_to_model_OrdStatus c_mod_f_ExecutionReport_OrdStatus;
-                                                mod_f_ExecutionReport_Instrument_Symbol = c_mod_f_ExecutionReport_Instrument_Symbol;
-                                                mod_f_ExecutionReport_Text = c_mod_f_ExecutionReport_Text
-                                            } in
-                                            FIX_TL_Normal (FIX_Msg_ExecutionReport fix_msg_data)
+                                | Some m_f_OrderCancelReject_OrderID -> let c_mod_f_OrderCancelReject_OrderID = m_f_OrderCancelReject_OrderID in
+                                let c_mod_f_OrderCancelReject_ListID = msg.f_OrderCancelReject_ListID in
+                                let fix_msg_data = {
+                                    mod_f_OrderCancelReject_ListID = c_mod_f_OrderCancelReject_ListID;
+                                    mod_f_OrderCancelReject_OrderID = c_mod_f_OrderCancelReject_OrderID;
+                                    mod_f_OrderCancelReject_ClOrdID = c_mod_f_OrderCancelReject_ClOrdID;
+                                    mod_f_OrderCancelReject_OrdStatus = convert__full_to_model_OrdStatus c_mod_f_OrderCancelReject_OrdStatus;
+                                    mod_f_OrderCancelReject_OrigClOrdID = c_mod_f_OrderCancelReject_OrigClOrdID;
+                                    mod_f_OrderCancelReject_CxlRejResponseTo = convert__full_to_model_CxlRejResponseTo c_mod_f_OrderCancelReject_CxlRejResponseTo;
+                                    mod_f_OrderCancelReject_CxlRejReason = (match c_mod_f_OrderCancelReject_CxlRejReason with
+                                        | None -> None
+                                        | Some d -> (Some (convert__full_to_model_CxlRejReason d))
+                                    );
+                                    mod_f_OrderCancelReject_TransactTime = c_mod_f_OrderCancelReject_TransactTime;
+                                    mod_f_OrderCancelReject_Text = c_mod_f_OrderCancelReject_Text
+                                } in
+                                FIX_TL_Normal (FIX_Msg_OrderCancelReject fix_msg_data)
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+;;
+
+let convert__full_to_model_BusinessMessageReject (msg : full_fix_businessmessagereject_data)  =
+    let c_mod_f_BusinessMessageReject_Text = msg.f_BusinessMessageReject_Text in
+    (match msg.f_BusinessMessageReject_BusinessRejectReason with
+        | None -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_BusinessMessageReject_Tag;
+            field_missing_data_field = M_Field_BusinessRejectReason_Tag
+        })
+        | Some m_f_BusinessMessageReject_BusinessRejectReason -> let c_mod_f_BusinessMessageReject_BusinessRejectReason = m_f_BusinessMessageReject_BusinessRejectReason in
+        let c_mod_f_BusinessMessageReject_BusinessRejectRefID = msg.f_BusinessMessageReject_BusinessRejectRefID in
+        (match msg.f_BusinessMessageReject_RefMsgTyp with
+            | None -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_BusinessMessageReject_Tag;
+                field_missing_data_field = M_Field_RefMsgTyp_Tag
+            })
+            | Some m_f_BusinessMessageReject_RefMsgTyp -> let c_mod_f_BusinessMessageReject_RefMsgTyp = m_f_BusinessMessageReject_RefMsgTyp in
+            let c_mod_f_BusinessMessageReject_RefSeqNum = msg.f_BusinessMessageReject_RefSeqNum in
+            let fix_msg_data = {
+                mod_f_BusinessMessageReject_RefSeqNum = c_mod_f_BusinessMessageReject_RefSeqNum;
+                mod_f_BusinessMessageReject_RefMsgTyp = c_mod_f_BusinessMessageReject_RefMsgTyp;
+                mod_f_BusinessMessageReject_BusinessRejectRefID = c_mod_f_BusinessMessageReject_BusinessRejectRefID;
+                mod_f_BusinessMessageReject_BusinessRejectReason = convert__full_to_model_BusinessRejectReason c_mod_f_BusinessMessageReject_BusinessRejectReason;
+                mod_f_BusinessMessageReject_Text = c_mod_f_BusinessMessageReject_Text
+            } in
+            FIX_TL_Normal (FIX_Msg_BusinessMessageReject fix_msg_data)
+        )
+    )
+;;
+
+let convert__full_to_model_AllocationReport (msg : full_fix_allocationreport_data)  =
+    let c_mod_f_AllocationReport_MKTXPricingProcess = msg.f_AllocationReport_MKTXPricingProcess in
+    let c_mod_f_AllocationReport_Notes = msg.f_AllocationReport_Notes in
+    (match check_convert_full_to_model__AllocsGrp msg.f_AllocationReport_AllocsGrp with
+        | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_AllocationReport_Tag;
+            field_missing_data_field = x
+        })
+        | RG_Success -> let c_mod_f_AllocationReport_AllocsGrp = convert__full_to_model_AllocsGrp msg.f_AllocationReport_AllocsGrp in
+        let c_mod_f_AllocationReport_Yield = msg.f_AllocationReport_Yield in
+        let c_mod_f_AllocationReport_YieldType = msg.f_AllocationReport_YieldType in
+        let c_mod_f_AllocationReport_AccruedInterestAmt = msg.f_AllocationReport_AccruedInterestAmt in
+        let c_mod_f_AllocationReport_Text = msg.f_AllocationReport_Text in
+        let c_mod_f_AllocationReport_NetMoney = msg.f_AllocationReport_NetMoney in
+        let c_mod_f_AllocationReport_GrossTradeAmt = msg.f_AllocationReport_GrossTradeAmt in
+        let c_mod_f_AllocationReport_SettlDate = msg.f_AllocationReport_SettlDate in
+        let c_mod_f_AllocationReport_TransactTime = msg.f_AllocationReport_TransactTime in
+        (match msg.f_AllocationReport_TradeDate with
+            | None -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                field_missing_data_field = M_Field_TradeDate_Tag
+            })
+            | Some m_f_AllocationReport_TradeDate -> let c_mod_f_AllocationReport_TradeDate = m_f_AllocationReport_TradeDate in
+            (match check_convert_full_to_model__PartyIDsGrp msg.f_AllocationReport_Parties.f_Parties_PartyIDsGrp with
+                | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                    field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                    field_missing_data_field = x
+                })
+                | RG_Success -> let c_mod_f_AllocationReport_Parties_PartyIDsGrp = convert__full_to_model_PartyIDsGrp msg.f_AllocationReport_Parties.f_Parties_PartyIDsGrp in
+                let c_mod_f_AllocationReport_Currency = msg.f_AllocationReport_Currency in
+                let c_mod_f_AllocationReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency = msg.f_AllocationReport_SpreadorBenchmarkCurveData.f_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency in
+                (match msg.f_AllocationReport_AvgPx with
+                    | None -> (FIX_TL_Req_Field_Missing {
+                        field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                        field_missing_data_field = M_Field_AvgPx_Tag
+                    })
+                    | Some m_f_AllocationReport_AvgPx -> let c_mod_f_AllocationReport_AvgPx = m_f_AllocationReport_AvgPx in
+                    let c_mod_f_AllocationReport_PriceType = msg.f_AllocationReport_PriceType in
+                    let c_mod_f_AllocationReport_QtyType = msg.f_AllocationReport_QtyType in
+                    (match msg.f_AllocationReport_Quantity with
+                        | None -> (FIX_TL_Req_Field_Missing {
+                            field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                            field_missing_data_field = M_Field_Quantity_Tag
+                        })
+                        | Some m_f_AllocationReport_Quantity -> let c_mod_f_AllocationReport_Quantity = m_f_AllocationReport_Quantity in
+                        (match msg.f_AllocationReport_Instrument.f_Instrument_CFICode with
+                            | None -> (FIX_TL_Req_Field_Missing {
+                                field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                                field_missing_data_field = M_Field_CFICode_Tag
+                            })
+                            | Some m_f_Instrument_CFICode -> let c_mod_f_AllocationReport_Instrument_CFICode = m_f_Instrument_CFICode in
+                            (match msg.f_AllocationReport_Side with
+                                | None -> (FIX_TL_Req_Field_Missing {
+                                    field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                                    field_missing_data_field = M_Field_Side_Tag
+                                })
+                                | Some m_f_AllocationReport_Side -> let c_mod_f_AllocationReport_Side = m_f_AllocationReport_Side in
+                                (match check_convert_full_to_model__ExecsGrp msg.f_AllocationReport_ExecsGrp with
+                                    | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                                        field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                                        field_missing_data_field = x
+                                    })
+                                    | RG_Success -> let c_mod_f_AllocationReport_ExecsGrp = convert__full_to_model_ExecsGrp msg.f_AllocationReport_ExecsGrp in
+                                    (match check_convert_full_to_model__OrdersGrp msg.f_AllocationReport_OrdersGrp with
+                                        | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                                            field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                                            field_missing_data_field = x
+                                        })
+                                        | RG_Success -> let c_mod_f_AllocationReport_OrdersGrp = convert__full_to_model_OrdersGrp msg.f_AllocationReport_OrdersGrp in
+                                        (match msg.f_AllocationReport_AllocNoOrdersType with
+                                            | None -> (FIX_TL_Req_Field_Missing {
+                                                field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                                                field_missing_data_field = M_Field_AllocNoOrdersType_Tag
+                                            })
+                                            | Some m_f_AllocationReport_AllocNoOrdersType -> let c_mod_f_AllocationReport_AllocNoOrdersType = m_f_AllocationReport_AllocNoOrdersType in
+                                            (match msg.f_AllocationReport_AllocStatus with
+                                                | None -> (FIX_TL_Req_Field_Missing {
+                                                    field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                                                    field_missing_data_field = M_Field_AllocStatus_Tag
+                                                })
+                                                | Some m_f_AllocationReport_AllocStatus -> let c_mod_f_AllocationReport_AllocStatus = m_f_AllocationReport_AllocStatus in
+                                                (match msg.f_AllocationReport_AllocReportType with
+                                                    | None -> (FIX_TL_Req_Field_Missing {
+                                                        field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                                                        field_missing_data_field = M_Field_AllocReportType_Tag
+                                                    })
+                                                    | Some m_f_AllocationReport_AllocReportType -> let c_mod_f_AllocationReport_AllocReportType = m_f_AllocationReport_AllocReportType in
+                                                    let c_mod_f_AllocationReport_RefAllocID = msg.f_AllocationReport_RefAllocID in
+                                                    let c_mod_f_AllocationReport_AllocCancReplaceReason = msg.f_AllocationReport_AllocCancReplaceReason in
+                                                    let c_mod_f_AllocationReport_AllocReportRefID = msg.f_AllocationReport_AllocReportRefID in
+                                                    (match msg.f_AllocationReport_AllocTransType with
+                                                        | None -> (FIX_TL_Req_Field_Missing {
+                                                            field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                                                            field_missing_data_field = M_Field_AllocTransType_Tag
+                                                        })
+                                                        | Some m_f_AllocationReport_AllocTransType -> let c_mod_f_AllocationReport_AllocTransType = m_f_AllocationReport_AllocTransType in
+                                                        let c_mod_f_AllocationReport_AllocID = msg.f_AllocationReport_AllocID in
+                                                        (match msg.f_AllocationReport_AllocReportID with
+                                                            | None -> (FIX_TL_Req_Field_Missing {
+                                                                field_missing_data_msg = M_Msg_AllocationReport_Tag;
+                                                                field_missing_data_field = M_Field_AllocReportID_Tag
+                                                            })
+                                                            | Some m_f_AllocationReport_AllocReportID -> let c_mod_f_AllocationReport_AllocReportID = m_f_AllocationReport_AllocReportID in
+                                                            let fix_msg_data = {
+                                                                mod_f_AllocationReport_AllocReportID = c_mod_f_AllocationReport_AllocReportID;
+                                                                mod_f_AllocationReport_AllocID = c_mod_f_AllocationReport_AllocID;
+                                                                mod_f_AllocationReport_AllocTransType = convert__full_to_model_AllocTransType c_mod_f_AllocationReport_AllocTransType;
+                                                                mod_f_AllocationReport_AllocReportRefID = c_mod_f_AllocationReport_AllocReportRefID;
+                                                                mod_f_AllocationReport_AllocCancReplaceReason = (match c_mod_f_AllocationReport_AllocCancReplaceReason with
+                                                                    | None -> None
+                                                                    | Some d -> (Some (convert__full_to_model_AllocCancReplaceReason d))
+                                                                );
+                                                                mod_f_AllocationReport_RefAllocID = c_mod_f_AllocationReport_RefAllocID;
+                                                                mod_f_AllocationReport_AllocReportType = convert__full_to_model_AllocReportType c_mod_f_AllocationReport_AllocReportType;
+                                                                mod_f_AllocationReport_AllocStatus = convert__full_to_model_AllocStatus c_mod_f_AllocationReport_AllocStatus;
+                                                                mod_f_AllocationReport_AllocNoOrdersType = convert__full_to_model_AllocNoOrdersType c_mod_f_AllocationReport_AllocNoOrdersType;
+                                                                mod_f_AllocationReport_OrdersGrp = c_mod_f_AllocationReport_OrdersGrp;
+                                                                mod_f_AllocationReport_ExecsGrp = c_mod_f_AllocationReport_ExecsGrp;
+                                                                mod_f_AllocationReport_Side = convert__full_to_model_Side c_mod_f_AllocationReport_Side;
+                                                                mod_f_AllocationReport_Instrument_CFICode = c_mod_f_AllocationReport_Instrument_CFICode;
+                                                                mod_f_AllocationReport_Quantity = c_mod_f_AllocationReport_Quantity;
+                                                                mod_f_AllocationReport_QtyType = (match c_mod_f_AllocationReport_QtyType with
+                                                                    | None -> None
+                                                                    | Some d -> (Some (convert__full_to_model_QtyType d))
+                                                                );
+                                                                mod_f_AllocationReport_PriceType = (match c_mod_f_AllocationReport_PriceType with
+                                                                    | None -> None
+                                                                    | Some d -> (Some (convert__full_to_model_PriceType d))
+                                                                );
+                                                                mod_f_AllocationReport_AvgPx = c_mod_f_AllocationReport_AvgPx;
+                                                                mod_f_AllocationReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency = c_mod_f_AllocationReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency;
+                                                                mod_f_AllocationReport_Currency = c_mod_f_AllocationReport_Currency;
+                                                                mod_f_AllocationReport_Parties_PartyIDsGrp = c_mod_f_AllocationReport_Parties_PartyIDsGrp;
+                                                                mod_f_AllocationReport_TradeDate = c_mod_f_AllocationReport_TradeDate;
+                                                                mod_f_AllocationReport_TransactTime = c_mod_f_AllocationReport_TransactTime;
+                                                                mod_f_AllocationReport_SettlDate = c_mod_f_AllocationReport_SettlDate;
+                                                                mod_f_AllocationReport_GrossTradeAmt = c_mod_f_AllocationReport_GrossTradeAmt;
+                                                                mod_f_AllocationReport_NetMoney = c_mod_f_AllocationReport_NetMoney;
+                                                                mod_f_AllocationReport_Text = c_mod_f_AllocationReport_Text;
+                                                                mod_f_AllocationReport_AccruedInterestAmt = c_mod_f_AllocationReport_AccruedInterestAmt;
+                                                                mod_f_AllocationReport_YieldType = (match c_mod_f_AllocationReport_YieldType with
+                                                                    | None -> None
+                                                                    | Some d -> (Some (convert__full_to_model_YieldType d))
+                                                                );
+                                                                mod_f_AllocationReport_Yield = c_mod_f_AllocationReport_Yield;
+                                                                mod_f_AllocationReport_AllocsGrp = c_mod_f_AllocationReport_AllocsGrp;
+                                                                mod_f_AllocationReport_Notes = c_mod_f_AllocationReport_Notes;
+                                                                mod_f_AllocationReport_MKTXPricingProcess = (match c_mod_f_AllocationReport_MKTXPricingProcess with
+                                                                    | None -> None
+                                                                    | Some d -> (Some (convert__full_to_model_MKTXPricingProcess d))
+                                                                )
+                                                            } in
+                                                            FIX_TL_Normal (FIX_Msg_AllocationReport fix_msg_data)
+                                                        )
+                                                    )
+                                                )
+                                            )
                                         )
                                     )
                                 )
@@ -63,46 +671,688 @@ let convert__full_to_model_ExecutionReport (msg : full_fix_executionreport_data)
     )
 ;;
 
-let convert__full_to_model_NewOrderSingle (msg : full_fix_newordersingle_data)  =
-    (match msg.f_NewOrderSingle_Instrument.f_Instrument_Symbol with
+let convert__full_to_model_AllocationReportACK (msg : full_fix_allocationreportack_data)  =
+    let c_mod_f_AllocationReportACK_Text = msg.f_AllocationReportACK_Text in
+    let c_mod_f_AllocationReportACK_AllocReportType = msg.f_AllocationReportACK_AllocReportType in
+    let c_mod_f_AllocationReportACK_AllocRejCode = msg.f_AllocationReportACK_AllocRejCode in
+    (match msg.f_AllocationReportACK_AllocStatus with
         | None -> (FIX_TL_Req_Field_Missing {
-            field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
-            field_missing_data_field = M_Field_Symbol_Tag
+            field_missing_data_msg = M_Msg_AllocationReportACK_Tag;
+            field_missing_data_field = M_Field_AllocStatus_Tag
         })
-        | Some m_f_Instrument_Symbol -> let c_mod_f_NewOrderSingle_Instrument_Symbol = m_f_Instrument_Symbol in
-        (match msg.f_NewOrderSingle_OrdType with
+        | Some m_f_AllocationReportACK_AllocStatus -> let c_mod_f_AllocationReportACK_AllocStatus = m_f_AllocationReportACK_AllocStatus in
+        (match msg.f_AllocationReportACK_TransactTime with
             | None -> (FIX_TL_Req_Field_Missing {
-                field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
-                field_missing_data_field = M_Field_OrdType_Tag
+                field_missing_data_msg = M_Msg_AllocationReportACK_Tag;
+                field_missing_data_field = M_Field_TransactTime_Tag
             })
-            | Some m_f_NewOrderSingle_OrdType -> let c_mod_f_NewOrderSingle_OrdType = m_f_NewOrderSingle_OrdType in
-            (match msg.f_NewOrderSingle_TransactTime with
+            | Some m_f_AllocationReportACK_TransactTime -> let c_mod_f_AllocationReportACK_TransactTime = m_f_AllocationReportACK_TransactTime in
+            let c_mod_f_AllocationReportACK_TradeDate = msg.f_AllocationReportACK_TradeDate in
+            (match msg.f_AllocationReportACK_AllocID with
                 | None -> (FIX_TL_Req_Field_Missing {
-                    field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
-                    field_missing_data_field = M_Field_TransactTime_Tag
+                    field_missing_data_msg = M_Msg_AllocationReportACK_Tag;
+                    field_missing_data_field = M_Field_AllocID_Tag
                 })
-                | Some m_f_NewOrderSingle_TransactTime -> let c_mod_f_NewOrderSingle_TransactTime = m_f_NewOrderSingle_TransactTime in
-                (match msg.f_NewOrderSingle_Side with
+                | Some m_f_AllocationReportACK_AllocID -> let c_mod_f_AllocationReportACK_AllocID = m_f_AllocationReportACK_AllocID in
+                (match msg.f_AllocationReportACK_AllocReportID with
                     | None -> (FIX_TL_Req_Field_Missing {
-                        field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
-                        field_missing_data_field = M_Field_Side_Tag
+                        field_missing_data_msg = M_Msg_AllocationReportACK_Tag;
+                        field_missing_data_field = M_Field_AllocReportID_Tag
                     })
-                    | Some m_f_NewOrderSingle_Side -> let c_mod_f_NewOrderSingle_Side = m_f_NewOrderSingle_Side in
-                    (match msg.f_NewOrderSingle_ClOrdID with
+                    | Some m_f_AllocationReportACK_AllocReportID -> let c_mod_f_AllocationReportACK_AllocReportID = m_f_AllocationReportACK_AllocReportID in
+                    let fix_msg_data = {
+                        mod_f_AllocationReportACK_AllocReportID = c_mod_f_AllocationReportACK_AllocReportID;
+                        mod_f_AllocationReportACK_AllocID = c_mod_f_AllocationReportACK_AllocID;
+                        mod_f_AllocationReportACK_TradeDate = c_mod_f_AllocationReportACK_TradeDate;
+                        mod_f_AllocationReportACK_TransactTime = c_mod_f_AllocationReportACK_TransactTime;
+                        mod_f_AllocationReportACK_AllocStatus = convert__full_to_model_AllocStatus c_mod_f_AllocationReportACK_AllocStatus;
+                        mod_f_AllocationReportACK_AllocRejCode = (match c_mod_f_AllocationReportACK_AllocRejCode with
+                            | None -> None
+                            | Some d -> (Some (convert__full_to_model_AllocRejCode d))
+                        );
+                        mod_f_AllocationReportACK_AllocReportType = (match c_mod_f_AllocationReportACK_AllocReportType with
+                            | None -> None
+                            | Some d -> (Some (convert__full_to_model_AllocReportType d))
+                        );
+                        mod_f_AllocationReportACK_Text = c_mod_f_AllocationReportACK_Text
+                    } in
+                    FIX_TL_Normal (FIX_Msg_AllocationReportACK fix_msg_data)
+                )
+            )
+        )
+    )
+;;
+
+let convert__full_to_model_AllocationInstruction (msg : full_fix_allocationinstruction_data)  =
+    (match check_convert_full_to_model__AllocsGrp msg.f_AllocationInstruction_AllocsGrp with
+        | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_AllocationInstruction_Tag;
+            field_missing_data_field = x
+        })
+        | RG_Success -> let c_mod_f_AllocationInstruction_AllocsGrp = convert__full_to_model_AllocsGrp msg.f_AllocationInstruction_AllocsGrp in
+        let c_mod_f_AllocationInstruction_Text = msg.f_AllocationInstruction_Text in
+        let c_mod_f_AllocationInstruction_TransactTime = msg.f_AllocationInstruction_TransactTime in
+        (match msg.f_AllocationInstruction_TradeDate with
+            | None -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_AllocationInstruction_Tag;
+                field_missing_data_field = M_Field_TradeDate_Tag
+            })
+            | Some m_f_AllocationInstruction_TradeDate -> let c_mod_f_AllocationInstruction_TradeDate = m_f_AllocationInstruction_TradeDate in
+            (match msg.f_AllocationInstruction_AvgPx with
+                | None -> (FIX_TL_Req_Field_Missing {
+                    field_missing_data_msg = M_Msg_AllocationInstruction_Tag;
+                    field_missing_data_field = M_Field_AvgPx_Tag
+                })
+                | Some m_f_AllocationInstruction_AvgPx -> let c_mod_f_AllocationInstruction_AvgPx = m_f_AllocationInstruction_AvgPx in
+                (match msg.f_AllocationInstruction_Quantity with
+                    | None -> (FIX_TL_Req_Field_Missing {
+                        field_missing_data_msg = M_Msg_AllocationInstruction_Tag;
+                        field_missing_data_field = M_Field_Quantity_Tag
+                    })
+                    | Some m_f_AllocationInstruction_Quantity -> let c_mod_f_AllocationInstruction_Quantity = m_f_AllocationInstruction_Quantity in
+                    (match msg.f_AllocationInstruction_Instrument.f_Instrument_CFICode with
                         | None -> (FIX_TL_Req_Field_Missing {
-                            field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
-                            field_missing_data_field = M_Field_ClOrdID_Tag
+                            field_missing_data_msg = M_Msg_AllocationInstruction_Tag;
+                            field_missing_data_field = M_Field_CFICode_Tag
                         })
-                        | Some m_f_NewOrderSingle_ClOrdID -> let c_mod_f_NewOrderSingle_ClOrdID = m_f_NewOrderSingle_ClOrdID in
-                        let fix_msg_data = {
-                            mod_f_NewOrderSingle_ClOrdID = c_mod_f_NewOrderSingle_ClOrdID;
-                            mod_f_NewOrderSingle_Side = convert__full_to_model_Side c_mod_f_NewOrderSingle_Side;
-                            mod_f_NewOrderSingle_TransactTime = c_mod_f_NewOrderSingle_TransactTime;
-                            mod_f_NewOrderSingle_OrdType = convert__full_to_model_OrdType c_mod_f_NewOrderSingle_OrdType;
-                            mod_f_NewOrderSingle_Instrument_Symbol = c_mod_f_NewOrderSingle_Instrument_Symbol
-                        } in
-                        FIX_TL_Normal (FIX_Msg_NewOrderSingle fix_msg_data)
+                        | Some m_f_Instrument_CFICode -> let c_mod_f_AllocationInstruction_Instrument_CFICode = m_f_Instrument_CFICode in
+                        (match msg.f_AllocationInstruction_Side with
+                            | None -> (FIX_TL_Req_Field_Missing {
+                                field_missing_data_msg = M_Msg_AllocationInstruction_Tag;
+                                field_missing_data_field = M_Field_Side_Tag
+                            })
+                            | Some m_f_AllocationInstruction_Side -> let c_mod_f_AllocationInstruction_Side = m_f_AllocationInstruction_Side in
+                            (match check_convert_full_to_model__ExecsGrp msg.f_AllocationInstruction_ExecsGrp with
+                                | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                                    field_missing_data_msg = M_Msg_AllocationInstruction_Tag;
+                                    field_missing_data_field = x
+                                })
+                                | RG_Success -> let c_mod_f_AllocationInstruction_ExecsGrp = convert__full_to_model_ExecsGrp msg.f_AllocationInstruction_ExecsGrp in
+                                (match check_convert_full_to_model__OrdersGrp msg.f_AllocationInstruction_OrdersGrp with
+                                    | RG_Failure x -> (FIX_TL_Req_Field_Missing {
+                                        field_missing_data_msg = M_Msg_AllocationInstruction_Tag;
+                                        field_missing_data_field = x
+                                    })
+                                    | RG_Success -> let c_mod_f_AllocationInstruction_OrdersGrp = convert__full_to_model_OrdersGrp msg.f_AllocationInstruction_OrdersGrp in
+                                    (match msg.f_AllocationInstruction_AllocNoOrdersType with
+                                        | None -> (FIX_TL_Req_Field_Missing {
+                                            field_missing_data_msg = M_Msg_AllocationInstruction_Tag;
+                                            field_missing_data_field = M_Field_AllocNoOrdersType_Tag
+                                        })
+                                        | Some m_f_AllocationInstruction_AllocNoOrdersType -> let c_mod_f_AllocationInstruction_AllocNoOrdersType = m_f_AllocationInstruction_AllocNoOrdersType in
+                                        let c_mod_f_AllocationInstruction_AllocCancReplaceReason = msg.f_AllocationInstruction_AllocCancReplaceReason in
+                                        let c_mod_f_AllocationInstruction_RefAllocID = msg.f_AllocationInstruction_RefAllocID in
+                                        (match msg.f_AllocationInstruction_AllocType with
+                                            | None -> (FIX_TL_Req_Field_Missing {
+                                                field_missing_data_msg = M_Msg_AllocationInstruction_Tag;
+                                                field_missing_data_field = M_Field_AllocType_Tag
+                                            })
+                                            | Some m_f_AllocationInstruction_AllocType -> let c_mod_f_AllocationInstruction_AllocType = m_f_AllocationInstruction_AllocType in
+                                            (match msg.f_AllocationInstruction_AllocTransType with
+                                                | None -> (FIX_TL_Req_Field_Missing {
+                                                    field_missing_data_msg = M_Msg_AllocationInstruction_Tag;
+                                                    field_missing_data_field = M_Field_AllocTransType_Tag
+                                                })
+                                                | Some m_f_AllocationInstruction_AllocTransType -> let c_mod_f_AllocationInstruction_AllocTransType = m_f_AllocationInstruction_AllocTransType in
+                                                (match msg.f_AllocationInstruction_AllocID with
+                                                    | None -> (FIX_TL_Req_Field_Missing {
+                                                        field_missing_data_msg = M_Msg_AllocationInstruction_Tag;
+                                                        field_missing_data_field = M_Field_AllocID_Tag
+                                                    })
+                                                    | Some m_f_AllocationInstruction_AllocID -> let c_mod_f_AllocationInstruction_AllocID = m_f_AllocationInstruction_AllocID in
+                                                    let fix_msg_data = {
+                                                        mod_f_AllocationInstruction_AllocID = c_mod_f_AllocationInstruction_AllocID;
+                                                        mod_f_AllocationInstruction_AllocTransType = convert__full_to_model_AllocTransType c_mod_f_AllocationInstruction_AllocTransType;
+                                                        mod_f_AllocationInstruction_AllocType = convert__full_to_model_AllocType c_mod_f_AllocationInstruction_AllocType;
+                                                        mod_f_AllocationInstruction_RefAllocID = c_mod_f_AllocationInstruction_RefAllocID;
+                                                        mod_f_AllocationInstruction_AllocCancReplaceReason = (match c_mod_f_AllocationInstruction_AllocCancReplaceReason with
+                                                            | None -> None
+                                                            | Some d -> (Some (convert__full_to_model_AllocCancReplaceReason d))
+                                                        );
+                                                        mod_f_AllocationInstruction_AllocNoOrdersType = convert__full_to_model_AllocNoOrdersType c_mod_f_AllocationInstruction_AllocNoOrdersType;
+                                                        mod_f_AllocationInstruction_OrdersGrp = c_mod_f_AllocationInstruction_OrdersGrp;
+                                                        mod_f_AllocationInstruction_ExecsGrp = c_mod_f_AllocationInstruction_ExecsGrp;
+                                                        mod_f_AllocationInstruction_Side = convert__full_to_model_Side c_mod_f_AllocationInstruction_Side;
+                                                        mod_f_AllocationInstruction_Instrument_CFICode = c_mod_f_AllocationInstruction_Instrument_CFICode;
+                                                        mod_f_AllocationInstruction_Quantity = c_mod_f_AllocationInstruction_Quantity;
+                                                        mod_f_AllocationInstruction_AvgPx = c_mod_f_AllocationInstruction_AvgPx;
+                                                        mod_f_AllocationInstruction_TradeDate = c_mod_f_AllocationInstruction_TradeDate;
+                                                        mod_f_AllocationInstruction_TransactTime = c_mod_f_AllocationInstruction_TransactTime;
+                                                        mod_f_AllocationInstruction_Text = c_mod_f_AllocationInstruction_Text;
+                                                        mod_f_AllocationInstruction_AllocsGrp = c_mod_f_AllocationInstruction_AllocsGrp
+                                                    } in
+                                                    FIX_TL_Normal (FIX_Msg_AllocationInstruction fix_msg_data)
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
                     )
+                )
+            )
+        )
+    )
+;;
+
+let convert__full_to_model_AllocationInstructionACK (msg : full_fix_allocationinstructionack_data)  =
+    let c_mod_f_AllocationInstructionACK_Text = msg.f_AllocationInstructionACK_Text in
+    let c_mod_f_AllocationInstructionACK_AllocType = msg.f_AllocationInstructionACK_AllocType in
+    let c_mod_f_AllocationInstructionACK_AllocRejCode = msg.f_AllocationInstructionACK_AllocRejCode in
+    (match msg.f_AllocationInstructionACK_AllocStatus with
+        | None -> (FIX_TL_None)
+        | Some m_f_AllocationInstructionACK_AllocStatus -> let c_mod_f_AllocationInstructionACK_AllocStatus = m_f_AllocationInstructionACK_AllocStatus in
+        (match msg.f_AllocationInstructionACK_TransactTime with
+            | None -> (FIX_TL_None)
+            | Some m_f_AllocationInstructionACK_TransactTime -> let c_mod_f_AllocationInstructionACK_TransactTime = m_f_AllocationInstructionACK_TransactTime in
+            let c_mod_f_AllocationInstructionACK_TradeDate = msg.f_AllocationInstructionACK_TradeDate in
+            (match check_convert_full_to_model__PartyIDsGrp msg.f_AllocationInstructionACK_Parties.f_Parties_PartyIDsGrp with
+                | RG_Failure x -> (FIX_TL_None)
+                | RG_Success -> let c_mod_f_AllocationInstructionACK_Parties_PartyIDsGrp = convert__full_to_model_PartyIDsGrp msg.f_AllocationInstructionACK_Parties.f_Parties_PartyIDsGrp in
+                (match msg.f_AllocationInstructionACK_AllocID with
+                    | None -> (FIX_TL_None)
+                    | Some m_f_AllocationInstructionACK_AllocID -> let c_mod_f_AllocationInstructionACK_AllocID = m_f_AllocationInstructionACK_AllocID in
+                    let fix_msg_data = {
+                        mod_f_AllocationInstructionACK_AllocID = c_mod_f_AllocationInstructionACK_AllocID;
+                        mod_f_AllocationInstructionACK_Parties_PartyIDsGrp = c_mod_f_AllocationInstructionACK_Parties_PartyIDsGrp;
+                        mod_f_AllocationInstructionACK_TradeDate = c_mod_f_AllocationInstructionACK_TradeDate;
+                        mod_f_AllocationInstructionACK_TransactTime = c_mod_f_AllocationInstructionACK_TransactTime;
+                        mod_f_AllocationInstructionACK_AllocStatus = convert__full_to_model_AllocStatus c_mod_f_AllocationInstructionACK_AllocStatus;
+                        mod_f_AllocationInstructionACK_AllocRejCode = (match c_mod_f_AllocationInstructionACK_AllocRejCode with
+                            | None -> None
+                            | Some d -> (Some (convert__full_to_model_AllocRejCode d))
+                        );
+                        mod_f_AllocationInstructionACK_AllocType = (match c_mod_f_AllocationInstructionACK_AllocType with
+                            | None -> None
+                            | Some d -> (Some (convert__full_to_model_AllocType d))
+                        );
+                        mod_f_AllocationInstructionACK_Text = c_mod_f_AllocationInstructionACK_Text
+                    } in
+                    FIX_TL_Normal (FIX_Msg_AllocationInstructionACK fix_msg_data)
+                )
+            )
+        )
+    )
+;;
+
+let convert__full_to_model_Heartbeat (msg : full_fix_heartbeat_data)  =
+    let c_mod_f_Heartbeat_TestReqID = msg.f_Heartbeat_TestReqID in
+    let fix_msg_data = {
+        mod_f_Heartbeat_TestReqID = c_mod_f_Heartbeat_TestReqID
+    } in
+    FIX_TL_Normal (FIX_Msg_Heartbeat fix_msg_data)
+;;
+
+let convert__full_to_model_TestRequest (msg : full_fix_testrequest_data)  =
+    (match msg.f_TestRequest_TestReqID with
+        | None -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_TestRequest_Tag;
+            field_missing_data_field = M_Field_TestReqID_Tag
+        })
+        | Some m_f_TestRequest_TestReqID -> let c_mod_f_TestRequest_TestReqID = m_f_TestRequest_TestReqID in
+        let fix_msg_data = {
+            mod_f_TestRequest_TestReqID = c_mod_f_TestRequest_TestReqID
+        } in
+        FIX_TL_Normal (FIX_Msg_TestRequest fix_msg_data)
+    )
+;;
+
+let convert__full_to_model_ResendRequest (msg : full_fix_resendrequest_data)  =
+    (match msg.f_ResendRequest_EndSeqNo with
+        | None -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_ResendRequest_Tag;
+            field_missing_data_field = M_Field_EndSeqNo_Tag
+        })
+        | Some m_f_ResendRequest_EndSeqNo -> let c_mod_f_ResendRequest_EndSeqNo = m_f_ResendRequest_EndSeqNo in
+        (match msg.f_ResendRequest_BeginSeqNo with
+            | None -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_ResendRequest_Tag;
+                field_missing_data_field = M_Field_BeginSeqNo_Tag
+            })
+            | Some m_f_ResendRequest_BeginSeqNo -> let c_mod_f_ResendRequest_BeginSeqNo = m_f_ResendRequest_BeginSeqNo in
+            let fix_msg_data = {
+                mod_f_ResendRequest_BeginSeqNo = c_mod_f_ResendRequest_BeginSeqNo;
+                mod_f_ResendRequest_EndSeqNo = c_mod_f_ResendRequest_EndSeqNo
+            } in
+            FIX_TL_Normal (FIX_Msg_ResendRequest fix_msg_data)
+        )
+    )
+;;
+
+let convert__full_to_model_SessionLevelReject (msg : full_fix_sessionlevelreject_data)  =
+    (match msg.f_SessionLevelReject_SessionRejectReason with
+        | None -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_SessionLevelReject_Tag;
+            field_missing_data_field = M_Field_SessionRejectReason_Tag
+        })
+        | Some m_f_SessionLevelReject_SessionRejectReason -> let c_mod_f_SessionLevelReject_SessionRejectReason = m_f_SessionLevelReject_SessionRejectReason in
+        (match msg.f_SessionLevelReject_RefMsgTyp with
+            | None -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_SessionLevelReject_Tag;
+                field_missing_data_field = M_Field_RefMsgTyp_Tag
+            })
+            | Some m_f_SessionLevelReject_RefMsgTyp -> let c_mod_f_SessionLevelReject_RefMsgTyp = m_f_SessionLevelReject_RefMsgTyp in
+            (match msg.f_SessionLevelReject_RefTagID with
+                | None -> (FIX_TL_Req_Field_Missing {
+                    field_missing_data_msg = M_Msg_SessionLevelReject_Tag;
+                    field_missing_data_field = M_Field_RefTagID_Tag
+                })
+                | Some m_f_SessionLevelReject_RefTagID -> let c_mod_f_SessionLevelReject_RefTagID = m_f_SessionLevelReject_RefTagID in
+                (match msg.f_SessionLevelReject_Text with
+                    | None -> (FIX_TL_Req_Field_Missing {
+                        field_missing_data_msg = M_Msg_SessionLevelReject_Tag;
+                        field_missing_data_field = M_Field_Text_Tag
+                    })
+                    | Some m_f_SessionLevelReject_Text -> let c_mod_f_SessionLevelReject_Text = m_f_SessionLevelReject_Text in
+                    (match msg.f_SessionLevelReject_RefSeqNum with
+                        | None -> (FIX_TL_Req_Field_Missing {
+                            field_missing_data_msg = M_Msg_SessionLevelReject_Tag;
+                            field_missing_data_field = M_Field_RefSeqNum_Tag
+                        })
+                        | Some m_f_SessionLevelReject_RefSeqNum -> let c_mod_f_SessionLevelReject_RefSeqNum = m_f_SessionLevelReject_RefSeqNum in
+                        let fix_msg_data = {
+                            mod_f_SessionLevelReject_RefSeqNum = c_mod_f_SessionLevelReject_RefSeqNum;
+                            mod_f_SessionLevelReject_Text = c_mod_f_SessionLevelReject_Text;
+                            mod_f_SessionLevelReject_RefTagID = c_mod_f_SessionLevelReject_RefTagID;
+                            mod_f_SessionLevelReject_RefMsgTyp = c_mod_f_SessionLevelReject_RefMsgTyp;
+                            mod_f_SessionLevelReject_SessionRejectReason = convert__full_to_model_SessionRejectReason c_mod_f_SessionLevelReject_SessionRejectReason
+                        } in
+                        FIX_TL_Normal (FIX_Msg_SessionLevelReject fix_msg_data)
+                    )
+                )
+            )
+        )
+    )
+;;
+
+let convert__full_to_model_SequenceResetRequest (msg : full_fix_sequenceresetrequest_data)  =
+    (match msg.f_SequenceResetRequest_NewSeqNo with
+        | None -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_SequenceResetRequest_Tag;
+            field_missing_data_field = M_Field_NewSeqNo_Tag
+        })
+        | Some m_f_SequenceResetRequest_NewSeqNo -> let c_mod_f_SequenceResetRequest_NewSeqNo = m_f_SequenceResetRequest_NewSeqNo in
+        let c_mod_f_SequenceResetRequest_GapFillFlag = msg.f_SequenceResetRequest_GapFillFlag in
+        let fix_msg_data = {
+            mod_f_SequenceResetRequest_GapFillFlag = (match c_mod_f_SequenceResetRequest_GapFillFlag with
+                | None -> None
+                | Some d -> (Some (convert__full_to_model_GapFillFlag d))
+            );
+            mod_f_SequenceResetRequest_NewSeqNo = c_mod_f_SequenceResetRequest_NewSeqNo
+        } in
+        FIX_TL_Normal (FIX_Msg_SequenceResetRequest fix_msg_data)
+    )
+;;
+
+let convert__full_to_model_Logout (msg : full_fix_logout_data)  =
+    let c_mod_f_Logout_Text = msg.f_Logout_Text in
+    let fix_msg_data = {
+        mod_f_Logout_Text = c_mod_f_Logout_Text
+    } in
+    FIX_TL_Normal (FIX_Msg_Logout fix_msg_data)
+;;
+
+let convert__full_to_model_FIXLogon (msg : full_fix_fixlogon_data)  =
+    let c_mod_f_FIXLogon_ResetSeqNumFlag = msg.f_FIXLogon_ResetSeqNumFlag in
+    (match msg.f_FIXLogon_HeartBtInt with
+        | None -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_FIXLogon_Tag;
+            field_missing_data_field = M_Field_HeartBtInt_Tag
+        })
+        | Some m_f_FIXLogon_HeartBtInt -> let c_mod_f_FIXLogon_HeartBtInt = m_f_FIXLogon_HeartBtInt in
+        (match msg.f_FIXLogon_EncryptMethod with
+            | None -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_FIXLogon_Tag;
+                field_missing_data_field = M_Field_EncryptMethod_Tag
+            })
+            | Some m_f_FIXLogon_EncryptMethod -> let c_mod_f_FIXLogon_EncryptMethod = m_f_FIXLogon_EncryptMethod in
+            let fix_msg_data = {
+                mod_f_FIXLogon_EncryptMethod = c_mod_f_FIXLogon_EncryptMethod;
+                mod_f_FIXLogon_HeartBtInt = c_mod_f_FIXLogon_HeartBtInt;
+                mod_f_FIXLogon_ResetSeqNumFlag = c_mod_f_FIXLogon_ResetSeqNumFlag
+            } in
+            FIX_TL_Normal (FIX_Msg_FIXLogon fix_msg_data)
+        )
+    )
+;;
+
+let convert__full_to_model_ExecutionReport (msg : full_fix_executionreport_data)  =
+    let c_mod_f_ExecutionReport_LastQty = msg.f_ExecutionReport_LastQty in
+    let c_mod_f_ExecutionReport_ExpireTime = msg.f_ExecutionReport_ExpireTime in
+    let c_mod_f_ExecutionReport_MKTXAutoExRefLevelType = msg.f_ExecutionReport_MKTXAutoExRefLevelType in
+    let c_mod_f_ExecutionReport_MKTXAutoExRefLevel = msg.f_ExecutionReport_MKTXAutoExRefLevel in
+    let c_mod_f_ExecutionReport_MKTXAutoExDesc = msg.f_ExecutionReport_MKTXAutoExDesc in
+    let c_mod_f_ExecutionReport_MKTXAutoExStatus = msg.f_ExecutionReport_MKTXAutoExStatus in
+    let c_mod_f_ExecutionReport_MKTXAutoExType = msg.f_ExecutionReport_MKTXAutoExType in
+    let c_mod_f_ExecutionReport_MKTXCompositeLiquidityScore = msg.f_ExecutionReport_MKTXCompositeLiquidityScore in
+    let c_mod_f_ExecutionReport_MKTXCompositeOfferMMEYield = msg.f_ExecutionReport_MKTXCompositeOfferMMEYield in
+    let c_mod_f_ExecutionReport_MKTXCompositeBidMMEYield = msg.f_ExecutionReport_MKTXCompositeBidMMEYield in
+    let c_mod_f_ExecutionReport_MKTXCompositeOfferPrice = msg.f_ExecutionReport_MKTXCompositeOfferPrice in
+    let c_mod_f_ExecutionReport_MKTXCompositeBidPrice = msg.f_ExecutionReport_MKTXCompositeBidPrice in
+    let c_mod_f_ExecutionReport_MKTXCompositeOfferSpread = msg.f_ExecutionReport_MKTXCompositeOfferSpread in
+    let c_mod_f_ExecutionReport_MKTXCompositeBidSpread = msg.f_ExecutionReport_MKTXCompositeBidSpread in
+    let c_mod_f_ExecutionReport_MKTXTradeStyle = msg.f_ExecutionReport_MKTXTradeStyle in
+    let c_mod_f_ExecutionReport_LastCapacity = msg.f_ExecutionReport_LastCapacity in
+    let c_mod_f_ExecutionReport_DirtyPrice = msg.f_ExecutionReport_DirtyPrice in
+    let c_mod_f_ExecutionReport_ClientBook = msg.f_ExecutionReport_ClientBook in
+    let c_mod_f_ExecutionReport_MKTXTargetLevel = msg.f_ExecutionReport_MKTXTargetLevel in
+    let c_mod_f_ExecutionReport_MKTXPricingProcess = msg.f_ExecutionReport_MKTXPricingProcess in
+    (match check_convert_full_to_model__MKTXCostAnalysisGrp msg.f_ExecutionReport_MKTXCostAnalysisGrp with
+        | RG_Failure x -> (FIX_TL_None)
+        | RG_Success -> let c_mod_f_ExecutionReport_MKTXCostAnalysisGrp = convert__full_to_model_MKTXCostAnalysisGrp msg.f_ExecutionReport_MKTXCostAnalysisGrp in
+        let c_mod_f_ExecutionReport_OASSpread = msg.f_ExecutionReport_OASSpread in
+        let c_mod_f_ExecutionReport_ASWSpread = msg.f_ExecutionReport_ASWSpread in
+        let c_mod_f_ExecutionReport_ISpread = msg.f_ExecutionReport_ISpread in
+        let c_mod_f_ExecutionReport_ZSpread = msg.f_ExecutionReport_ZSpread in
+        let c_mod_f_ExecutionReport_GSpread = msg.f_ExecutionReport_GSpread in
+        let c_mod_f_ExecutionReport_BrokerReceiptTime = msg.f_ExecutionReport_BrokerReceiptTime in
+        let c_mod_f_ExecutionReport_DatedDate_2 = msg.f_ExecutionReport_DatedDate_2 in
+        let c_mod_f_ExecutionReport_NumDaysInterest = msg.f_ExecutionReport_NumDaysInterest in
+        (match msg.f_ExecutionReport_InquiryQty with
+            | None -> (FIX_TL_None)
+            | Some m_f_ExecutionReport_InquiryQty -> let c_mod_f_ExecutionReport_InquiryQty = m_f_ExecutionReport_InquiryQty in
+            let c_mod_f_ExecutionReport_LegTransactionSeqNumberLegID = msg.f_ExecutionReport_LegTransactionSeqNumberLegID in
+            let c_mod_f_ExecutionReport_NumberofTrades = msg.f_ExecutionReport_NumberofTrades in
+            let c_mod_f_ExecutionReport_TradingProtocol = msg.f_ExecutionReport_TradingProtocol in
+            let c_mod_f_ExecutionReport_Notes = msg.f_ExecutionReport_Notes in
+            (match check_convert_full_to_model__DealersGrp msg.f_ExecutionReport_DealersGrp with
+                | RG_Failure x -> (FIX_TL_None)
+                | RG_Success -> let c_mod_f_ExecutionReport_DealersGrp = convert__full_to_model_DealersGrp msg.f_ExecutionReport_DealersGrp in
+                let c_mod_f_ExecutionReport_IncludeDealers = msg.f_ExecutionReport_IncludeDealers in
+                (match check_convert_full_to_model__LegsGrp msg.f_ExecutionReport_LegsGrp with
+                    | RG_Failure x -> (FIX_TL_None)
+                    | RG_Success -> let c_mod_f_ExecutionReport_LegsGrp = convert__full_to_model_LegsGrp msg.f_ExecutionReport_LegsGrp in
+                    let c_mod_f_ExecutionReport_Text = msg.f_ExecutionReport_Text in
+                    let c_mod_f_ExecutionReport_SettlCurrFxRateCalc = msg.f_ExecutionReport_SettlCurrFxRateCalc in
+                    let c_mod_f_ExecutionReport_SettlCurrFxRate = msg.f_ExecutionReport_SettlCurrFxRate in
+                    let c_mod_f_ExecutionReport_SettlCurrency = msg.f_ExecutionReport_SettlCurrency in
+                    let c_mod_f_ExecutionReport_SettlCurrAmt = msg.f_ExecutionReport_SettlCurrAmt in
+                    let c_mod_f_ExecutionReport_NetMoney = msg.f_ExecutionReport_NetMoney in
+                    let c_mod_f_ExecutionReport_AccruedInterestAmt = msg.f_ExecutionReport_AccruedInterestAmt in
+                    let c_mod_f_ExecutionReport_GrossTradeAmt = msg.f_ExecutionReport_GrossTradeAmt in
+                    let c_mod_f_ExecutionReport_Yield = msg.f_ExecutionReport_Yield in
+                    let c_mod_f_ExecutionReport_YieldType = msg.f_ExecutionReport_YieldType in
+                    (match msg.f_ExecutionReport_SpreadorBenchmarkCurveData.f_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency with
+                        | None -> (FIX_TL_None)
+                        | Some m_f_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency -> let c_mod_f_ExecutionReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency = m_f_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency in
+                        let c_mod_f_ExecutionReport_TransactTime = msg.f_ExecutionReport_TransactTime in
+                        let c_mod_f_ExecutionReport_TradeDate = msg.f_ExecutionReport_TradeDate in
+                        (match msg.f_ExecutionReport_AvgPx with
+                            | None -> (FIX_TL_None)
+                            | Some m_f_ExecutionReport_AvgPx -> let c_mod_f_ExecutionReport_AvgPx = m_f_ExecutionReport_AvgPx in
+                            (match msg.f_ExecutionReport_CumQty with
+                                | None -> (FIX_TL_None)
+                                | Some m_f_ExecutionReport_CumQty -> let c_mod_f_ExecutionReport_CumQty = m_f_ExecutionReport_CumQty in
+                                (match msg.f_ExecutionReport_LeavesQty with
+                                    | None -> (FIX_TL_None)
+                                    | Some m_f_ExecutionReport_LeavesQty -> let c_mod_f_ExecutionReport_LeavesQty = m_f_ExecutionReport_LeavesQty in
+                                    let c_mod_f_ExecutionReport_LastParPx = msg.f_ExecutionReport_LastParPx in
+                                    let c_mod_f_ExecutionReport_LastPx = msg.f_ExecutionReport_LastPx in
+                                    let c_mod_f_ExecutionReport_Currency = msg.f_ExecutionReport_Currency in
+                                    let c_mod_f_ExecutionReport_PriceType = msg.f_ExecutionReport_PriceType in
+                                    let c_mod_f_ExecutionReport_OrderQty = msg.f_ExecutionReport_OrderQty in
+                                    (match msg.f_ExecutionReport_Side with
+                                        | None -> (FIX_TL_None)
+                                        | Some m_f_ExecutionReport_Side -> let c_mod_f_ExecutionReport_Side = m_f_ExecutionReport_Side in
+                                        let c_mod_f_ExecutionReport_Price = msg.f_ExecutionReport_Price in
+                                        (match msg.f_ExecutionReport_Instrument.f_Instrument_CFICode with
+                                            | None -> (FIX_TL_None)
+                                            | Some m_f_Instrument_CFICode -> let c_mod_f_ExecutionReport_Instrument_CFICode = m_f_Instrument_CFICode in
+                                            let c_mod_f_ExecutionReport_IssueDate = msg.f_ExecutionReport_IssueDate in
+                                            let c_mod_f_ExecutionReport_SettlDate = msg.f_ExecutionReport_SettlDate in
+                                            let c_mod_f_ExecutionReport_OrdRejReason = msg.f_ExecutionReport_OrdRejReason in
+                                            (match msg.f_ExecutionReport_OrdStatus with
+                                                | None -> (FIX_TL_None)
+                                                | Some m_f_ExecutionReport_OrdStatus -> let c_mod_f_ExecutionReport_OrdStatus = m_f_ExecutionReport_OrdStatus in
+                                                let c_mod_f_ExecutionReport_SecondaryExecID = msg.f_ExecutionReport_SecondaryExecID in
+                                                let c_mod_f_ExecutionReport_ExecType = msg.f_ExecutionReport_ExecType in
+                                                let c_mod_f_ExecutionReport_LastMkt = msg.f_ExecutionReport_LastMkt in
+                                                let c_mod_f_ExecutionReport_HandlInst = msg.f_ExecutionReport_HandlInst in
+                                                let c_mod_f_ExecutionReport_ExecRefID = msg.f_ExecutionReport_ExecRefID in
+                                                (match msg.f_ExecutionReport_ExecID with
+                                                    | None -> (FIX_TL_None)
+                                                    | Some m_f_ExecutionReport_ExecID -> let c_mod_f_ExecutionReport_ExecID = m_f_ExecutionReport_ExecID in
+                                                    let c_mod_f_ExecutionReport_MKTXVenueTransactionID = msg.f_ExecutionReport_MKTXVenueTransactionID in
+                                                    (match check_convert_full_to_model__RegulatoryTradeIDsGrp msg.f_ExecutionReport_RegulatoryTradeIDsGrp with
+                                                        | RG_Failure x -> (FIX_TL_None)
+                                                        | RG_Success -> let c_mod_f_ExecutionReport_RegulatoryTradeIDsGrp = convert__full_to_model_RegulatoryTradeIDsGrp msg.f_ExecutionReport_RegulatoryTradeIDsGrp in
+                                                        let c_mod_f_ExecutionReport_InternalCrossingFlag = msg.f_ExecutionReport_InternalCrossingFlag in
+                                                        let c_mod_f_ExecutionReport_TradeReportingIndicator = msg.f_ExecutionReport_TradeReportingIndicator in
+                                                        let c_mod_f_ExecutionReport_MKTXTradeReportingInd = msg.f_ExecutionReport_MKTXTradeReportingInd in
+                                                        let c_mod_f_ExecutionReport_PreTradeWaiver = msg.f_ExecutionReport_PreTradeWaiver in
+                                                        let c_mod_f_ExecutionReport_MKTXESCBStblty = msg.f_ExecutionReport_MKTXESCBStblty in
+                                                        (match check_convert_full_to_model__TrdRegPublicationsGrp msg.f_ExecutionReport_TrdRegPublicationsGrp with
+                                                            | RG_Failure x -> (FIX_TL_None)
+                                                            | RG_Success -> let c_mod_f_ExecutionReport_TrdRegPublicationsGrp = convert__full_to_model_TrdRegPublicationsGrp msg.f_ExecutionReport_TrdRegPublicationsGrp in
+                                                            let c_mod_f_ExecutionReport_MKTXTrdRegPublicationReason = msg.f_ExecutionReport_MKTXTrdRegPublicationReason in
+                                                            let c_mod_f_ExecutionReport_MKTXInquiryID = msg.f_ExecutionReport_MKTXInquiryID in
+                                                            let c_mod_f_ExecutionReport_OrderCapacity = msg.f_ExecutionReport_OrderCapacity in
+                                                            let c_mod_f_ExecutionReport_MKTXPartyLEI = msg.f_ExecutionReport_MKTXPartyLEI in
+                                                            let c_mod_f_ExecutionReport_MKTXCPTYLEI = msg.f_ExecutionReport_MKTXCPTYLEI in
+                                                            let c_mod_f_ExecutionReport_ListID = msg.f_ExecutionReport_ListID in
+                                                            (match check_convert_full_to_model__PartyIDsGrp msg.f_ExecutionReport_Parties.f_Parties_PartyIDsGrp with
+                                                                | RG_Failure x -> (FIX_TL_None)
+                                                                | RG_Success -> let c_mod_f_ExecutionReport_Parties_PartyIDsGrp = convert__full_to_model_PartyIDsGrp msg.f_ExecutionReport_Parties.f_Parties_PartyIDsGrp in
+                                                                (match msg.f_ExecutionReport_OrderID with
+                                                                    | None -> (FIX_TL_None)
+                                                                    | Some m_f_ExecutionReport_OrderID -> let c_mod_f_ExecutionReport_OrderID = m_f_ExecutionReport_OrderID in
+                                                                    let c_mod_f_ExecutionReport_OrigClOrdID = msg.f_ExecutionReport_OrigClOrdID in
+                                                                    let c_mod_f_ExecutionReport_ClOrdID = msg.f_ExecutionReport_ClOrdID in
+                                                                    let fix_msg_data = {
+                                                                        mod_f_ExecutionReport_ClOrdID = c_mod_f_ExecutionReport_ClOrdID;
+                                                                        mod_f_ExecutionReport_OrigClOrdID = c_mod_f_ExecutionReport_OrigClOrdID;
+                                                                        mod_f_ExecutionReport_OrderID = c_mod_f_ExecutionReport_OrderID;
+                                                                        mod_f_ExecutionReport_Parties_PartyIDsGrp = c_mod_f_ExecutionReport_Parties_PartyIDsGrp;
+                                                                        mod_f_ExecutionReport_ListID = c_mod_f_ExecutionReport_ListID;
+                                                                        mod_f_ExecutionReport_MKTXCPTYLEI = c_mod_f_ExecutionReport_MKTXCPTYLEI;
+                                                                        mod_f_ExecutionReport_MKTXPartyLEI = c_mod_f_ExecutionReport_MKTXPartyLEI;
+                                                                        mod_f_ExecutionReport_OrderCapacity = (match c_mod_f_ExecutionReport_OrderCapacity with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_OrderCapacity d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_MKTXInquiryID = c_mod_f_ExecutionReport_MKTXInquiryID;
+                                                                        mod_f_ExecutionReport_MKTXTrdRegPublicationReason = (match c_mod_f_ExecutionReport_MKTXTrdRegPublicationReason with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_MKTXTrdRegPublicationReason d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_TrdRegPublicationsGrp = c_mod_f_ExecutionReport_TrdRegPublicationsGrp;
+                                                                        mod_f_ExecutionReport_MKTXESCBStblty = (match c_mod_f_ExecutionReport_MKTXESCBStblty with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_MKTXESCBStblty d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_PreTradeWaiver = (match c_mod_f_ExecutionReport_PreTradeWaiver with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_PreTradeWaiver d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_MKTXTradeReportingInd = (match c_mod_f_ExecutionReport_MKTXTradeReportingInd with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_MKTXTradeReportingInd d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_TradeReportingIndicator = (match c_mod_f_ExecutionReport_TradeReportingIndicator with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_TradeReportingIndicator d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_InternalCrossingFlag = (match c_mod_f_ExecutionReport_InternalCrossingFlag with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_InternalCrossingFlag d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_RegulatoryTradeIDsGrp = c_mod_f_ExecutionReport_RegulatoryTradeIDsGrp;
+                                                                        mod_f_ExecutionReport_MKTXVenueTransactionID = c_mod_f_ExecutionReport_MKTXVenueTransactionID;
+                                                                        mod_f_ExecutionReport_ExecID = c_mod_f_ExecutionReport_ExecID;
+                                                                        mod_f_ExecutionReport_ExecRefID = c_mod_f_ExecutionReport_ExecRefID;
+                                                                        mod_f_ExecutionReport_HandlInst = (match c_mod_f_ExecutionReport_HandlInst with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_HandlInst d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_LastMkt = c_mod_f_ExecutionReport_LastMkt;
+                                                                        mod_f_ExecutionReport_ExecType = (match c_mod_f_ExecutionReport_ExecType with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_ExecType d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_SecondaryExecID = c_mod_f_ExecutionReport_SecondaryExecID;
+                                                                        mod_f_ExecutionReport_OrdStatus = convert__full_to_model_OrdStatus c_mod_f_ExecutionReport_OrdStatus;
+                                                                        mod_f_ExecutionReport_OrdRejReason = (match c_mod_f_ExecutionReport_OrdRejReason with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_OrdRejReason d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_SettlDate = c_mod_f_ExecutionReport_SettlDate;
+                                                                        mod_f_ExecutionReport_IssueDate = c_mod_f_ExecutionReport_IssueDate;
+                                                                        mod_f_ExecutionReport_Instrument_CFICode = c_mod_f_ExecutionReport_Instrument_CFICode;
+                                                                        mod_f_ExecutionReport_Price = c_mod_f_ExecutionReport_Price;
+                                                                        mod_f_ExecutionReport_Side = convert__full_to_model_Side c_mod_f_ExecutionReport_Side;
+                                                                        mod_f_ExecutionReport_OrderQty = c_mod_f_ExecutionReport_OrderQty;
+                                                                        mod_f_ExecutionReport_PriceType = (match c_mod_f_ExecutionReport_PriceType with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_PriceType d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_Currency = c_mod_f_ExecutionReport_Currency;
+                                                                        mod_f_ExecutionReport_LastPx = c_mod_f_ExecutionReport_LastPx;
+                                                                        mod_f_ExecutionReport_LastParPx = c_mod_f_ExecutionReport_LastParPx;
+                                                                        mod_f_ExecutionReport_LeavesQty = c_mod_f_ExecutionReport_LeavesQty;
+                                                                        mod_f_ExecutionReport_CumQty = c_mod_f_ExecutionReport_CumQty;
+                                                                        mod_f_ExecutionReport_AvgPx = c_mod_f_ExecutionReport_AvgPx;
+                                                                        mod_f_ExecutionReport_TradeDate = c_mod_f_ExecutionReport_TradeDate;
+                                                                        mod_f_ExecutionReport_TransactTime = c_mod_f_ExecutionReport_TransactTime;
+                                                                        mod_f_ExecutionReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency = c_mod_f_ExecutionReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency;
+                                                                        mod_f_ExecutionReport_YieldType = (match c_mod_f_ExecutionReport_YieldType with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_YieldType d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_Yield = c_mod_f_ExecutionReport_Yield;
+                                                                        mod_f_ExecutionReport_GrossTradeAmt = c_mod_f_ExecutionReport_GrossTradeAmt;
+                                                                        mod_f_ExecutionReport_AccruedInterestAmt = c_mod_f_ExecutionReport_AccruedInterestAmt;
+                                                                        mod_f_ExecutionReport_NetMoney = c_mod_f_ExecutionReport_NetMoney;
+                                                                        mod_f_ExecutionReport_SettlCurrAmt = c_mod_f_ExecutionReport_SettlCurrAmt;
+                                                                        mod_f_ExecutionReport_SettlCurrency = c_mod_f_ExecutionReport_SettlCurrency;
+                                                                        mod_f_ExecutionReport_SettlCurrFxRate = c_mod_f_ExecutionReport_SettlCurrFxRate;
+                                                                        mod_f_ExecutionReport_SettlCurrFxRateCalc = c_mod_f_ExecutionReport_SettlCurrFxRateCalc;
+                                                                        mod_f_ExecutionReport_Text = c_mod_f_ExecutionReport_Text;
+                                                                        mod_f_ExecutionReport_LegsGrp = c_mod_f_ExecutionReport_LegsGrp;
+                                                                        mod_f_ExecutionReport_IncludeDealers = (match c_mod_f_ExecutionReport_IncludeDealers with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_IncludeDealers d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_DealersGrp = c_mod_f_ExecutionReport_DealersGrp;
+                                                                        mod_f_ExecutionReport_Notes = c_mod_f_ExecutionReport_Notes;
+                                                                        mod_f_ExecutionReport_TradingProtocol = (match c_mod_f_ExecutionReport_TradingProtocol with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_TradingProtocol d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_NumberofTrades = c_mod_f_ExecutionReport_NumberofTrades;
+                                                                        mod_f_ExecutionReport_LegTransactionSeqNumberLegID = c_mod_f_ExecutionReport_LegTransactionSeqNumberLegID;
+                                                                        mod_f_ExecutionReport_InquiryQty = c_mod_f_ExecutionReport_InquiryQty;
+                                                                        mod_f_ExecutionReport_NumDaysInterest = c_mod_f_ExecutionReport_NumDaysInterest;
+                                                                        mod_f_ExecutionReport_DatedDate_2 = c_mod_f_ExecutionReport_DatedDate_2;
+                                                                        mod_f_ExecutionReport_BrokerReceiptTime = c_mod_f_ExecutionReport_BrokerReceiptTime;
+                                                                        mod_f_ExecutionReport_GSpread = c_mod_f_ExecutionReport_GSpread;
+                                                                        mod_f_ExecutionReport_ZSpread = c_mod_f_ExecutionReport_ZSpread;
+                                                                        mod_f_ExecutionReport_ISpread = c_mod_f_ExecutionReport_ISpread;
+                                                                        mod_f_ExecutionReport_ASWSpread = c_mod_f_ExecutionReport_ASWSpread;
+                                                                        mod_f_ExecutionReport_OASSpread = c_mod_f_ExecutionReport_OASSpread;
+                                                                        mod_f_ExecutionReport_MKTXCostAnalysisGrp = c_mod_f_ExecutionReport_MKTXCostAnalysisGrp;
+                                                                        mod_f_ExecutionReport_MKTXPricingProcess = (match c_mod_f_ExecutionReport_MKTXPricingProcess with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_MKTXPricingProcess d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_MKTXTargetLevel = c_mod_f_ExecutionReport_MKTXTargetLevel;
+                                                                        mod_f_ExecutionReport_ClientBook = c_mod_f_ExecutionReport_ClientBook;
+                                                                        mod_f_ExecutionReport_DirtyPrice = c_mod_f_ExecutionReport_DirtyPrice;
+                                                                        mod_f_ExecutionReport_LastCapacity = (match c_mod_f_ExecutionReport_LastCapacity with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_LastCapacity d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_MKTXTradeStyle = (match c_mod_f_ExecutionReport_MKTXTradeStyle with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_MKTXTradeStyle d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_MKTXCompositeBidSpread = c_mod_f_ExecutionReport_MKTXCompositeBidSpread;
+                                                                        mod_f_ExecutionReport_MKTXCompositeOfferSpread = c_mod_f_ExecutionReport_MKTXCompositeOfferSpread;
+                                                                        mod_f_ExecutionReport_MKTXCompositeBidPrice = c_mod_f_ExecutionReport_MKTXCompositeBidPrice;
+                                                                        mod_f_ExecutionReport_MKTXCompositeOfferPrice = c_mod_f_ExecutionReport_MKTXCompositeOfferPrice;
+                                                                        mod_f_ExecutionReport_MKTXCompositeBidMMEYield = c_mod_f_ExecutionReport_MKTXCompositeBidMMEYield;
+                                                                        mod_f_ExecutionReport_MKTXCompositeOfferMMEYield = c_mod_f_ExecutionReport_MKTXCompositeOfferMMEYield;
+                                                                        mod_f_ExecutionReport_MKTXCompositeLiquidityScore = c_mod_f_ExecutionReport_MKTXCompositeLiquidityScore;
+                                                                        mod_f_ExecutionReport_MKTXAutoExType = (match c_mod_f_ExecutionReport_MKTXAutoExType with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_MKTXAutoExType d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_MKTXAutoExStatus = (match c_mod_f_ExecutionReport_MKTXAutoExStatus with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_MKTXAutoExStatus d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_MKTXAutoExDesc = c_mod_f_ExecutionReport_MKTXAutoExDesc;
+                                                                        mod_f_ExecutionReport_MKTXAutoExRefLevel = c_mod_f_ExecutionReport_MKTXAutoExRefLevel;
+                                                                        mod_f_ExecutionReport_MKTXAutoExRefLevelType = (match c_mod_f_ExecutionReport_MKTXAutoExRefLevelType with
+                                                                            | None -> None
+                                                                            | Some d -> (Some (convert__full_to_model_MKTXAutoExRefLevelType d))
+                                                                        );
+                                                                        mod_f_ExecutionReport_ExpireTime = c_mod_f_ExecutionReport_ExpireTime;
+                                                                        mod_f_ExecutionReport_LastQty = c_mod_f_ExecutionReport_LastQty
+                                                                    } in
+                                                                    FIX_TL_Normal (FIX_Msg_ExecutionReport fix_msg_data)
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+;;
+
+let convert__full_to_model_DontKnowTrade (msg : full_fix_dontknowtrade_data)  =
+    let c_mod_f_DontKnowTrade_EncodedText = msg.f_DontKnowTrade_EncodedText in
+    let c_mod_f_DontKnowTrade_EncodedTextLen = msg.f_DontKnowTrade_EncodedTextLen in
+    let c_mod_f_DontKnowTrade_SecondaryOrderID = msg.f_DontKnowTrade_SecondaryOrderID in
+    let c_mod_f_DontKnowTrade_Text = msg.f_DontKnowTrade_Text in
+    let c_mod_f_DontKnowTrade_LastPx = msg.f_DontKnowTrade_LastPx in
+    let c_mod_f_DontKnowTrade_LastQty = msg.f_DontKnowTrade_LastQty in
+    (match msg.f_DontKnowTrade_Side with
+        | None -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_DontKnowTrade_Tag;
+            field_missing_data_field = M_Field_Side_Tag
+        })
+        | Some m_f_DontKnowTrade_Side -> let c_mod_f_DontKnowTrade_Side = m_f_DontKnowTrade_Side in
+        (match msg.f_DontKnowTrade_DKReason with
+            | None -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_DontKnowTrade_Tag;
+                field_missing_data_field = M_Field_DKReason_Tag
+            })
+            | Some m_f_DontKnowTrade_DKReason -> let c_mod_f_DontKnowTrade_DKReason = m_f_DontKnowTrade_DKReason in
+            (match msg.f_DontKnowTrade_ExecID with
+                | None -> (FIX_TL_Req_Field_Missing {
+                    field_missing_data_msg = M_Msg_DontKnowTrade_Tag;
+                    field_missing_data_field = M_Field_ExecID_Tag
+                })
+                | Some m_f_DontKnowTrade_ExecID -> let c_mod_f_DontKnowTrade_ExecID = m_f_DontKnowTrade_ExecID in
+                (match msg.f_DontKnowTrade_OrderID with
+                    | None -> (FIX_TL_Req_Field_Missing {
+                        field_missing_data_msg = M_Msg_DontKnowTrade_Tag;
+                        field_missing_data_field = M_Field_OrderID_Tag
+                    })
+                    | Some m_f_DontKnowTrade_OrderID -> let c_mod_f_DontKnowTrade_OrderID = m_f_DontKnowTrade_OrderID in
+                    let fix_msg_data = {
+                        mod_f_DontKnowTrade_OrderID = c_mod_f_DontKnowTrade_OrderID;
+                        mod_f_DontKnowTrade_ExecID = c_mod_f_DontKnowTrade_ExecID;
+                        mod_f_DontKnowTrade_DKReason = convert__full_to_model_DKReason c_mod_f_DontKnowTrade_DKReason;
+                        mod_f_DontKnowTrade_Side = convert__full_to_model_Side c_mod_f_DontKnowTrade_Side;
+                        mod_f_DontKnowTrade_LastQty = c_mod_f_DontKnowTrade_LastQty;
+                        mod_f_DontKnowTrade_LastPx = c_mod_f_DontKnowTrade_LastPx;
+                        mod_f_DontKnowTrade_Text = c_mod_f_DontKnowTrade_Text;
+                        mod_f_DontKnowTrade_SecondaryOrderID = c_mod_f_DontKnowTrade_SecondaryOrderID;
+                        mod_f_DontKnowTrade_EncodedTextLen = c_mod_f_DontKnowTrade_EncodedTextLen;
+                        mod_f_DontKnowTrade_EncodedText = c_mod_f_DontKnowTrade_EncodedText
+                    } in
+                    FIX_TL_Normal (FIX_Msg_DontKnowTrade fix_msg_data)
                 )
             )
         )
@@ -111,428 +1361,705 @@ let convert__full_to_model_NewOrderSingle (msg : full_fix_newordersingle_data)  
 
 let convert_full_to_model_fix (msg : full_app_msg_data)  =
     (match msg with
-        | FIX_Full_Msg_ExecutionReport msg_data -> (convert__full_to_model_ExecutionReport msg_data)
         | FIX_Full_Msg_NewOrderSingle msg_data -> (convert__full_to_model_NewOrderSingle msg_data)
+        | FIX_Full_Msg_OrderCancel msg_data -> (convert__full_to_model_OrderCancel msg_data)
+        | FIX_Full_Msg_NewOrder_Multi_Leg msg_data -> (convert__full_to_model_NewOrder_Multi_Leg msg_data)
+        | FIX_Full_Msg_NewOrder_List msg_data -> (convert__full_to_model_NewOrder_List msg_data)
+        | FIX_Full_Msg_ListOrderCancel msg_data -> (convert__full_to_model_ListOrderCancel msg_data)
+        | FIX_Full_Msg_OrderCancelReject msg_data -> (convert__full_to_model_OrderCancelReject msg_data)
+        | FIX_Full_Msg_BusinessMessageReject msg_data -> (convert__full_to_model_BusinessMessageReject msg_data)
+        | FIX_Full_Msg_AllocationReport msg_data -> (convert__full_to_model_AllocationReport msg_data)
+        | FIX_Full_Msg_AllocationReportACK msg_data -> (convert__full_to_model_AllocationReportACK msg_data)
+        | FIX_Full_Msg_AllocationInstruction msg_data -> (convert__full_to_model_AllocationInstruction msg_data)
+        | FIX_Full_Msg_AllocationInstructionACK msg_data -> (convert__full_to_model_AllocationInstructionACK msg_data)
+        | FIX_Full_Msg_Heartbeat msg_data -> (convert__full_to_model_Heartbeat msg_data)
+        | FIX_Full_Msg_TestRequest msg_data -> (convert__full_to_model_TestRequest msg_data)
+        | FIX_Full_Msg_ResendRequest msg_data -> (convert__full_to_model_ResendRequest msg_data)
+        | FIX_Full_Msg_SessionLevelReject msg_data -> (convert__full_to_model_SessionLevelReject msg_data)
+        | FIX_Full_Msg_SequenceResetRequest msg_data -> (convert__full_to_model_SequenceResetRequest msg_data)
+        | FIX_Full_Msg_Logout msg_data -> (convert__full_to_model_Logout msg_data)
+        | FIX_Full_Msg_FIXLogon msg_data -> (convert__full_to_model_FIXLogon msg_data)
+        | FIX_Full_Msg_ExecutionReport msg_data -> (convert__full_to_model_ExecutionReport msg_data)
+        | FIX_Full_Msg_DontKnowTrade msg_data -> (convert__full_to_model_DontKnowTrade msg_data)
     )
-;;
-
-let convert__model_to_full_ExecutionReport (msg : mod_executionreport_data)  =
-    FIX_Full_Msg_ExecutionReport {
-        f_ExecutionReport_OrderID = Some msg.mod_f_ExecutionReport_OrderID;
-        f_ExecutionReport_SecondaryOrderID = None;
-        f_ExecutionReport_SecondaryClOrdID = None;
-        f_ExecutionReport_SecondaryExecID = None;
-        f_ExecutionReport_ClOrdID = Some msg.mod_f_ExecutionReport_ClOrdID;
-        f_ExecutionReport_OrigClOrdID = None;
-        f_ExecutionReport_ClOrdLinkID = None;
-        f_ExecutionReport_QuoteRespID = None;
-        f_ExecutionReport_OrdStatusReqID = None;
-        f_ExecutionReport_MassStatusReqID = None;
-        f_ExecutionReport_TotNumReports = None;
-        f_ExecutionReport_LastRptRequested = None;
-        f_ExecutionReport_Parties = [];
-        f_ExecutionReport_TradeOriginationDate = None;
-        f_ExecutionReport_ContraGrp = [];
-        f_ExecutionReport_ListID = None;
-        f_ExecutionReport_CrossID = None;
-        f_ExecutionReport_OrigCrossID = None;
-        f_ExecutionReport_CrossType = None;
-        f_ExecutionReport_ExecID = Some msg.mod_f_ExecutionReport_ExecID;
-        f_ExecutionReport_ExecRefID = None;
-        f_ExecutionReport_ExecType = Some (convert__model_to_full_ExecType msg.mod_f_ExecutionReport_ExecType);
-        f_ExecutionReport_OrdStatus = Some (convert__model_to_full_OrdStatus msg.mod_f_ExecutionReport_OrdStatus);
-        f_ExecutionReport_WorkingIndicator = None;
-        f_ExecutionReport_OrdRejReason = None;
-        f_ExecutionReport_ExecRestatementReason = None;
-        f_ExecutionReport_Account = None;
-        f_ExecutionReport_AcctIDSource = None;
-        f_ExecutionReport_AccountType = None;
-        f_ExecutionReport_DayBookingInst = None;
-        f_ExecutionReport_BookingUnit = None;
-        f_ExecutionReport_PreallocMethod = None;
-        f_ExecutionReport_SettlType = None;
-        f_ExecutionReport_SettlDate = None;
-        f_ExecutionReport_CashMargin = None;
-        f_ExecutionReport_ClearingFeeIndicator = None;
-        f_ExecutionReport_Instrument = {
-            f_Instrument_Symbol = Some msg.mod_f_ExecutionReport_Instrument_Symbol;
-            f_Instrument_SymbolSfx = None;
-            f_Instrument_SecurityID = None;
-            f_Instrument_SecurityIDSource = None;
-            f_Instrument_SecAltIDGrp = [];
-            f_Instrument_Product = None;
-            f_Instrument_CFICode = None;
-            f_Instrument_SecurityType = None;
-            f_Instrument_SecuritySubType = None;
-            f_Instrument_MaturityMonthYear = None;
-            f_Instrument_MaturityDate = None;
-            f_Instrument_CouponPaymentDate = None;
-            f_Instrument_IssueDate = None;
-            f_Instrument_RepoCollateralSecurityType = None;
-            f_Instrument_RepurchaseTerm = None;
-            f_Instrument_RepurchaseRate = None;
-            f_Instrument_Factor = None;
-            f_Instrument_CreditRating = None;
-            f_Instrument_InstrRegistry = None;
-            f_Instrument_CountryOfIssue = None;
-            f_Instrument_StateOrProvinceOfIssue = None;
-            f_Instrument_LocaleOfIssue = None;
-            f_Instrument_RedemptionDate = None;
-            f_Instrument_StrikePrice = None;
-            f_Instrument_StrikeCurrency = None;
-            f_Instrument_OptAttribute = None;
-            f_Instrument_ContractMultiplier = None;
-            f_Instrument_CouponRate = None;
-            f_Instrument_SecurityExchange = None;
-            f_Instrument_Issuer = None;
-            f_Instrument_EncodedIssuerLen = None;
-            f_Instrument_EncodedIssuer = None;
-            f_Instrument_SecurityDesc = None;
-            f_Instrument_EncodedSecurityDescLen = None;
-            f_Instrument_EncodedSecurityDesc = None;
-            f_Instrument_Pool = None;
-            f_Instrument_ContractSettlMonth = None;
-            f_Instrument_CPProgram = None;
-            f_Instrument_CPRegType = None;
-            f_Instrument_EvntGrp = [];
-            f_Instrument_DatedDate = None;
-            f_Instrument_InterestAccrualDate = None
-        };
-        f_ExecutionReport_FinancingDetails = {
-            f_FinancingDetails_AgreementDesc = None;
-            f_FinancingDetails_AgreementID = None;
-            f_FinancingDetails_AgreementDate = None;
-            f_FinancingDetails_AgreementCurrency = None;
-            f_FinancingDetails_TerminationType = None;
-            f_FinancingDetails_StartDate = None;
-            f_FinancingDetails_EndDate = None;
-            f_FinancingDetails_DeliveryType = None;
-            f_FinancingDetails_MarginRatio = None
-        };
-        f_ExecutionReport_UndInstrmtGrp = [];
-        f_ExecutionReport_Side = Some (convert__model_to_full_Side msg.mod_f_ExecutionReport_Side);
-        f_ExecutionReport_Stipulations = [];
-        f_ExecutionReport_QtyType = None;
-        f_ExecutionReport_OrderQtyData = {
-            f_OrderQtyData_OrderQty = None;
-            f_OrderQtyData_CashOrderQty = None;
-            f_OrderQtyData_OrderPercent = None;
-            f_OrderQtyData_RoundingDirection = None;
-            f_OrderQtyData_RoundingModulus = None
-        };
-        f_ExecutionReport_OrdType = None;
-        f_ExecutionReport_PriceType = None;
-        f_ExecutionReport_Price = None;
-        f_ExecutionReport_StopPx = None;
-        f_ExecutionReport_PegInstructions = {
-            f_PegInstructions_PegOffsetValue = None;
-            f_PegInstructions_PegMoveType = None;
-            f_PegInstructions_PegOffsetType = None;
-            f_PegInstructions_PegLimitType = None;
-            f_PegInstructions_PegRoundDirection = None;
-            f_PegInstructions_PegScope = None
-        };
-        f_ExecutionReport_DiscretionInstructions = {
-            f_DiscretionInstructions_DiscretionInst = None;
-            f_DiscretionInstructions_DiscretionOffsetValue = None;
-            f_DiscretionInstructions_DiscretionMoveType = None;
-            f_DiscretionInstructions_DiscretionOffsetType = None;
-            f_DiscretionInstructions_DiscretionLimitType = None;
-            f_DiscretionInstructions_DiscretionRoundDirection = None;
-            f_DiscretionInstructions_DiscretionScope = None
-        };
-        f_ExecutionReport_PeggedPrice = None;
-        f_ExecutionReport_DiscretionPrice = None;
-        f_ExecutionReport_TargetStrategy = None;
-        f_ExecutionReport_TargetStrategyParameters = None;
-        f_ExecutionReport_ParticipationRate = None;
-        f_ExecutionReport_TargetStrategyPerformance = None;
-        f_ExecutionReport_Currency = None;
-        f_ExecutionReport_ComplianceID = None;
-        f_ExecutionReport_SolicitedFlag = None;
-        f_ExecutionReport_TimeInForce = None;
-        f_ExecutionReport_EffectiveTime = None;
-        f_ExecutionReport_ExpireDate = None;
-        f_ExecutionReport_ExpireTime = None;
-        f_ExecutionReport_ExecInst = None;
-        f_ExecutionReport_OrderCapacity = None;
-        f_ExecutionReport_OrderRestrictions = None;
-        f_ExecutionReport_CustOrderCapacity = None;
-        f_ExecutionReport_LastQty = None;
-        f_ExecutionReport_UnderlyingLastQty = None;
-        f_ExecutionReport_LastPx = None;
-        f_ExecutionReport_UnderlyingLastPx = None;
-        f_ExecutionReport_LastParPx = None;
-        f_ExecutionReport_LastSpotRate = None;
-        f_ExecutionReport_LastForwardPoints = None;
-        f_ExecutionReport_LastMkt = None;
-        f_ExecutionReport_TradingSessionID = None;
-        f_ExecutionReport_TradingSessionSubID = None;
-        f_ExecutionReport_TimeBracket = None;
-        f_ExecutionReport_LastCapacity = None;
-        f_ExecutionReport_LeavesQty = Some msg.mod_f_ExecutionReport_LeavesQty;
-        f_ExecutionReport_CumQty = Some msg.mod_f_ExecutionReport_CumQty;
-        f_ExecutionReport_AvgPx = Some msg.mod_f_ExecutionReport_AvgPx;
-        f_ExecutionReport_DayOrderQty = None;
-        f_ExecutionReport_DayCumQty = None;
-        f_ExecutionReport_DayAvgPx = None;
-        f_ExecutionReport_GTBookingInst = None;
-        f_ExecutionReport_TradeDate = None;
-        f_ExecutionReport_TransactTime = None;
-        f_ExecutionReport_ReportToExch = None;
-        f_ExecutionReport_CommissionData = {
-            f_CommissionData_Commission = None;
-            f_CommissionData_CommType = None;
-            f_CommissionData_CommCurrency = None;
-            f_CommissionData_FundRenewWaiv = None
-        };
-        f_ExecutionReport_SpreadOrBenchmarkCurveData = {
-            f_SpreadOrBenchmarkCurveData_Spread = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkCurveCurrency = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkCurveName = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkCurvePoint = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkPrice = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkPriceType = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkSecurityID = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkSecurityIDSource = None
-        };
-        f_ExecutionReport_YieldData = {
-            f_YieldData_YieldType = None;
-            f_YieldData_Yield = None;
-            f_YieldData_YieldCalcDate = None;
-            f_YieldData_YieldRedemptionDate = None;
-            f_YieldData_YieldRedemptionPrice = None;
-            f_YieldData_YieldRedemptionPriceType = None
-        };
-        f_ExecutionReport_GrossTradeAmt = None;
-        f_ExecutionReport_NumDaysInterest = None;
-        f_ExecutionReport_ExDate = None;
-        f_ExecutionReport_AccruedInterestRate = None;
-        f_ExecutionReport_AccruedInterestAmt = None;
-        f_ExecutionReport_InterestAtMaturity = None;
-        f_ExecutionReport_EndAccruedInterestAmt = None;
-        f_ExecutionReport_StartCash = None;
-        f_ExecutionReport_EndCash = None;
-        f_ExecutionReport_TradedFlatSwitch = None;
-        f_ExecutionReport_BasisFeatureDate = None;
-        f_ExecutionReport_BasisFeaturePrice = None;
-        f_ExecutionReport_Concession = None;
-        f_ExecutionReport_TotalTakedown = None;
-        f_ExecutionReport_NetMoney = None;
-        f_ExecutionReport_SettlCurrAmt = None;
-        f_ExecutionReport_SettlCurrency = None;
-        f_ExecutionReport_SettlCurrFxRate = None;
-        f_ExecutionReport_SettlCurrFxRateCalc = None;
-        f_ExecutionReport_HandlInst = None;
-        f_ExecutionReport_MinQty = None;
-        f_ExecutionReport_MaxFloor = None;
-        f_ExecutionReport_PositionEffect = None;
-        f_ExecutionReport_MaxShow = None;
-        f_ExecutionReport_BookingType = None;
-        f_ExecutionReport_Text = msg.mod_f_ExecutionReport_Text;
-        f_ExecutionReport_EncodedTextLen = None;
-        f_ExecutionReport_EncodedText = None;
-        f_ExecutionReport_SettlDate2 = None;
-        f_ExecutionReport_OrderQty2 = None;
-        f_ExecutionReport_LastForwardPoints2 = None;
-        f_ExecutionReport_MultiLegReportingType = None;
-        f_ExecutionReport_CancellationRights = None;
-        f_ExecutionReport_MoneyLaunderingStatus = None;
-        f_ExecutionReport_RegistID = None;
-        f_ExecutionReport_Designation = None;
-        f_ExecutionReport_TransBkdTime = None;
-        f_ExecutionReport_ExecValuationPoint = None;
-        f_ExecutionReport_ExecPriceType = None;
-        f_ExecutionReport_ExecPriceAdjustment = None;
-        f_ExecutionReport_PriorityIndicator = None;
-        f_ExecutionReport_PriceImprovement = None;
-        f_ExecutionReport_LastLiquidityInd = None;
-        f_ExecutionReport_ContAmtGrp = [];
-        f_ExecutionReport_InstrmtLegExecGrp = [];
-        f_ExecutionReport_CopyMsgIndicator = None;
-        f_ExecutionReport_MiscFeesGrp = []
-    }
 ;;
 
 let convert__model_to_full_NewOrderSingle (msg : mod_newordersingle_data)  =
     FIX_Full_Msg_NewOrderSingle {
         f_NewOrderSingle_ClOrdID = Some msg.mod_f_NewOrderSingle_ClOrdID;
-        f_NewOrderSingle_SecondaryClOrdID = None;
-        f_NewOrderSingle_ClOrdLinkID = None;
-        f_NewOrderSingle_Parties = [];
-        f_NewOrderSingle_TradeOriginationDate = None;
-        f_NewOrderSingle_TradeDate = None;
-        f_NewOrderSingle_Account = None;
-        f_NewOrderSingle_AcctIDSource = None;
-        f_NewOrderSingle_AccountType = None;
-        f_NewOrderSingle_DayBookingInst = None;
-        f_NewOrderSingle_BookingUnit = None;
-        f_NewOrderSingle_PreallocMethod = None;
-        f_NewOrderSingle_AllocID = None;
-        f_NewOrderSingle_PreAllocGrp = [];
-        f_NewOrderSingle_SettlType = None;
-        f_NewOrderSingle_SettlDate = None;
-        f_NewOrderSingle_CashMargin = None;
-        f_NewOrderSingle_ClearingFeeIndicator = None;
-        f_NewOrderSingle_HandlInst = None;
-        f_NewOrderSingle_ExecInst = None;
-        f_NewOrderSingle_MinQty = None;
-        f_NewOrderSingle_MaxFloor = None;
-        f_NewOrderSingle_ExDestination = None;
-        f_NewOrderSingle_TrdgSesGrp = [];
-        f_NewOrderSingle_ProcessCode = None;
+        f_NewOrderSingle_Currency = msg.mod_f_NewOrderSingle_Currency;
+        f_NewOrderSingle_HandlInst = (match msg.mod_f_NewOrderSingle_HandlInst with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_HandlInst d))
+        );
+        f_NewOrderSingle_Parties = {
+            f_Parties_PartyIDsGrp = convert__model_to_full_PartyIDsGrp msg.mod_f_NewOrderSingle_Parties_PartyIDsGrp
+        };
+        f_NewOrderSingle_ExecInst = (match msg.mod_f_NewOrderSingle_ExecInst with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_ExecInst d))
+        );
+        f_NewOrderSingle_OrderQty = Some msg.mod_f_NewOrderSingle_OrderQty;
+        f_NewOrderSingle_OrdType = Some msg.mod_f_NewOrderSingle_OrdType;
+        f_NewOrderSingle_Price = msg.mod_f_NewOrderSingle_Price;
+        f_NewOrderSingle_Side = Some (convert__model_to_full_Side msg.mod_f_NewOrderSingle_Side);
+        f_NewOrderSingle_TransactTime = Some msg.mod_f_NewOrderSingle_TransactTime;
+        f_NewOrderSingle_SettlType = (match msg.mod_f_NewOrderSingle_SettlType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_SettlType d))
+        );
+        f_NewOrderSingle_SettlDate = msg.mod_f_NewOrderSingle_SettlDate;
+        f_NewOrderSingle_OrderCapacity = (match msg.mod_f_NewOrderSingle_OrderCapacity with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_OrderCapacity d))
+        );
+        f_NewOrderSingle_QtyType = (match msg.mod_f_NewOrderSingle_QtyType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_QtyType d))
+        );
         f_NewOrderSingle_Instrument = {
-            f_Instrument_Symbol = Some msg.mod_f_NewOrderSingle_Instrument_Symbol;
-            f_Instrument_SymbolSfx = None;
+            f_Instrument_CFICode = Some msg.mod_f_NewOrderSingle_Instrument_CFICode;
+            f_Instrument_Symbol = None;
             f_Instrument_SecurityID = None;
             f_Instrument_SecurityIDSource = None;
-            f_Instrument_SecAltIDGrp = [];
             f_Instrument_Product = None;
-            f_Instrument_CFICode = None;
-            f_Instrument_SecurityType = None;
-            f_Instrument_SecuritySubType = None;
-            f_Instrument_MaturityMonthYear = None;
-            f_Instrument_MaturityDate = None;
-            f_Instrument_CouponPaymentDate = None;
-            f_Instrument_IssueDate = None;
-            f_Instrument_RepoCollateralSecurityType = None;
-            f_Instrument_RepurchaseTerm = None;
-            f_Instrument_RepurchaseRate = None;
-            f_Instrument_Factor = None;
-            f_Instrument_CreditRating = None;
-            f_Instrument_InstrRegistry = None;
             f_Instrument_CountryOfIssue = None;
-            f_Instrument_StateOrProvinceOfIssue = None;
-            f_Instrument_LocaleOfIssue = None;
-            f_Instrument_RedemptionDate = None;
-            f_Instrument_StrikePrice = None;
-            f_Instrument_StrikeCurrency = None;
-            f_Instrument_OptAttribute = None;
-            f_Instrument_ContractMultiplier = None;
-            f_Instrument_CouponRate = None;
-            f_Instrument_SecurityExchange = None;
-            f_Instrument_Issuer = None;
-            f_Instrument_EncodedIssuerLen = None;
-            f_Instrument_EncodedIssuer = None;
+            f_Instrument_SecurityType = None;
+            f_Instrument_MaturityDate = None;
             f_Instrument_SecurityDesc = None;
-            f_Instrument_EncodedSecurityDescLen = None;
-            f_Instrument_EncodedSecurityDesc = None;
-            f_Instrument_Pool = None;
-            f_Instrument_ContractSettlMonth = None;
-            f_Instrument_CPProgram = None;
-            f_Instrument_CPRegType = None;
-            f_Instrument_EvntGrp = [];
+            f_Instrument_PrevClosePx = None;
+            f_Instrument_CouponRate = None;
+            f_Instrument_Issuer = None;
+            f_Instrument_SecurityAltIDGrp = [];
+            f_Instrument_IssueDate = None;
+            f_Instrument_Factor = None;
             f_Instrument_DatedDate = None;
-            f_Instrument_InterestAccrualDate = None
+            f_Instrument_SecuritySubType = None
         };
-        f_NewOrderSingle_FinancingDetails = {
-            f_FinancingDetails_AgreementDesc = None;
-            f_FinancingDetails_AgreementID = None;
-            f_FinancingDetails_AgreementDate = None;
-            f_FinancingDetails_AgreementCurrency = None;
-            f_FinancingDetails_TerminationType = None;
-            f_FinancingDetails_StartDate = None;
-            f_FinancingDetails_EndDate = None;
-            f_FinancingDetails_DeliveryType = None;
-            f_FinancingDetails_MarginRatio = None
+        f_NewOrderSingle_ForexReq = (match msg.mod_f_NewOrderSingle_ForexReq with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_ForexReq d))
+        );
+        f_NewOrderSingle_SettlCurrency = msg.mod_f_NewOrderSingle_SettlCurrency;
+        f_NewOrderSingle_IncludeDealers = (match msg.mod_f_NewOrderSingle_IncludeDealers with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_IncludeDealers d))
+        );
+        f_NewOrderSingle_DealersGrp = convert__model_to_full_DealersGrp msg.mod_f_NewOrderSingle_DealersGrp;
+        f_NewOrderSingle_TradingProtocol = (match msg.mod_f_NewOrderSingle_TradingProtocol with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_TradingProtocol d))
+        );
+        f_NewOrderSingle_MKTXPricingProcess = (match msg.mod_f_NewOrderSingle_MKTXPricingProcess with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXPricingProcess d))
+        );
+        f_NewOrderSingle_MKTXTargetLevel = msg.mod_f_NewOrderSingle_MKTXTargetLevel;
+        f_NewOrderSingle_MKTXExternalTargetLevel = msg.mod_f_NewOrderSingle_MKTXExternalTargetLevel;
+        f_NewOrderSingle_MKTXRTSPurpose = (match msg.mod_f_NewOrderSingle_MKTXRTSPurpose with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXRTSPurpose d))
+        );
+        f_NewOrderSingle_SpreadorBenchmarkCurveData = {
+            f_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency = msg.mod_f_NewOrderSingle_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency;
+            f_SpreadorBenchmarkCurveData_Spread = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkCurveName = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkCurvePoint = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkPrice = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkPriceType = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkSecurityID = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkSecurityIDSource = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkYield = None
         };
-        f_NewOrderSingle_UndInstrmtGrp = [];
-        f_NewOrderSingle_PrevClosePx = None;
-        f_NewOrderSingle_Side = Some (convert__model_to_full_Side msg.mod_f_NewOrderSingle_Side);
-        f_NewOrderSingle_LocateReqd = None;
-        f_NewOrderSingle_TransactTime = Some msg.mod_f_NewOrderSingle_TransactTime;
-        f_NewOrderSingle_Stipulations = [];
-        f_NewOrderSingle_QtyType = None;
-        f_NewOrderSingle_OrderQtyData = {
-            f_OrderQtyData_OrderQty = None;
-            f_OrderQtyData_CashOrderQty = None;
-            f_OrderQtyData_OrderPercent = None;
-            f_OrderQtyData_RoundingDirection = None;
-            f_OrderQtyData_RoundingModulus = None
+        f_NewOrderSingle_PriceType = (match msg.mod_f_NewOrderSingle_PriceType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_PriceType d))
+        );
+        f_NewOrderSingle_Text = msg.mod_f_NewOrderSingle_Text;
+        f_NewOrderSingle_AllocID = msg.mod_f_NewOrderSingle_AllocID;
+        f_NewOrderSingle_AllocsGrp = convert__model_to_full_AllocsGrp msg.mod_f_NewOrderSingle_AllocsGrp
+    }
+;;
+
+let convert__model_to_full_OrderCancel (msg : mod_ordercancel_data)  =
+    FIX_Full_Msg_OrderCancel {
+        f_OrderCancel_OrigClOrdID = Some msg.mod_f_OrderCancel_OrigClOrdID;
+        f_OrderCancel_ClOrdID = Some msg.mod_f_OrderCancel_ClOrdID;
+        f_OrderCancel_Parties = {
+            f_Parties_PartyIDsGrp = convert__model_to_full_PartyIDsGrp msg.mod_f_OrderCancel_Parties_PartyIDsGrp
         };
-        f_NewOrderSingle_OrdType = Some (convert__model_to_full_OrdType msg.mod_f_NewOrderSingle_OrdType);
-        f_NewOrderSingle_PriceType = None;
-        f_NewOrderSingle_Price = None;
-        f_NewOrderSingle_StopPx = None;
-        f_NewOrderSingle_SpreadOrBenchmarkCurveData = {
-            f_SpreadOrBenchmarkCurveData_Spread = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkCurveCurrency = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkCurveName = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkCurvePoint = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkPrice = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkPriceType = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkSecurityID = None;
-            f_SpreadOrBenchmarkCurveData_BenchmarkSecurityIDSource = None
+        f_OrderCancel_Symbol = Some msg.mod_f_OrderCancel_Symbol;
+        f_OrderCancel_Side = Some (convert__model_to_full_Side msg.mod_f_OrderCancel_Side);
+        f_OrderCancel_TransactTime = Some msg.mod_f_OrderCancel_TransactTime
+    }
+;;
+
+let convert__model_to_full_NewOrder_Multi_Leg (msg : mod_neworder_multi_leg_data)  =
+    FIX_Full_Msg_NewOrder_Multi_Leg {
+        f_NewOrder_Multi_Leg_ClOrdID = Some msg.mod_f_NewOrder_Multi_Leg_ClOrdID;
+        f_NewOrder_Multi_Leg_Parties = {
+            f_Parties_PartyIDsGrp = convert__model_to_full_PartyIDsGrp msg.mod_f_NewOrder_Multi_Leg_Parties_PartyIDsGrp
         };
-        f_NewOrderSingle_YieldData = {
-            f_YieldData_YieldType = None;
-            f_YieldData_Yield = None;
-            f_YieldData_YieldCalcDate = None;
-            f_YieldData_YieldRedemptionDate = None;
-            f_YieldData_YieldRedemptionPrice = None;
-            f_YieldData_YieldRedemptionPriceType = None
+        f_NewOrder_Multi_Leg_Side = (match msg.mod_f_NewOrder_Multi_Leg_Side with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_Side d))
+        );
+        f_NewOrder_Multi_Leg_Instrument = {
+            f_Instrument_CFICode = Some msg.mod_f_NewOrder_Multi_Leg_Instrument_CFICode;
+            f_Instrument_Symbol = None;
+            f_Instrument_SecurityID = None;
+            f_Instrument_SecurityIDSource = None;
+            f_Instrument_Product = None;
+            f_Instrument_CountryOfIssue = None;
+            f_Instrument_SecurityType = None;
+            f_Instrument_MaturityDate = None;
+            f_Instrument_SecurityDesc = None;
+            f_Instrument_PrevClosePx = None;
+            f_Instrument_CouponRate = None;
+            f_Instrument_Issuer = None;
+            f_Instrument_SecurityAltIDGrp = [];
+            f_Instrument_IssueDate = None;
+            f_Instrument_Factor = None;
+            f_Instrument_DatedDate = None;
+            f_Instrument_SecuritySubType = None
         };
-        f_NewOrderSingle_Currency = None;
-        f_NewOrderSingle_ComplianceID = None;
-        f_NewOrderSingle_SolicitedFlag = None;
-        f_NewOrderSingle_IOIID = None;
-        f_NewOrderSingle_QuoteID = None;
-        f_NewOrderSingle_TimeInForce = None;
-        f_NewOrderSingle_EffectiveTime = None;
-        f_NewOrderSingle_ExpireDate = None;
-        f_NewOrderSingle_ExpireTime = None;
-        f_NewOrderSingle_GTBookingInst = None;
-        f_NewOrderSingle_CommissionData = {
-            f_CommissionData_Commission = None;
-            f_CommissionData_CommType = None;
-            f_CommissionData_CommCurrency = None;
-            f_CommissionData_FundRenewWaiv = None
+        f_NewOrder_Multi_Leg_OrderCapacity = (match msg.mod_f_NewOrder_Multi_Leg_OrderCapacity with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_OrderCapacity d))
+        );
+        f_NewOrder_Multi_Leg_LegsGrp = convert__model_to_full_LegsGrp msg.mod_f_NewOrder_Multi_Leg_LegsGrp;
+        f_NewOrder_Multi_Leg_TransactTime = Some msg.mod_f_NewOrder_Multi_Leg_TransactTime;
+        f_NewOrder_Multi_Leg_QtyType = (match msg.mod_f_NewOrder_Multi_Leg_QtyType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_QtyType d))
+        );
+        f_NewOrder_Multi_Leg_OrderQty = msg.mod_f_NewOrder_Multi_Leg_OrderQty;
+        f_NewOrder_Multi_Leg_OrdType = Some msg.mod_f_NewOrder_Multi_Leg_OrdType;
+        f_NewOrder_Multi_Leg_Text = msg.mod_f_NewOrder_Multi_Leg_Text;
+        f_NewOrder_Multi_Leg_Notes = msg.mod_f_NewOrder_Multi_Leg_Notes;
+        f_NewOrder_Multi_Leg_IncludeDealers = (match msg.mod_f_NewOrder_Multi_Leg_IncludeDealers with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_IncludeDealers d))
+        );
+        f_NewOrder_Multi_Leg_DealersGrp = convert__model_to_full_DealersGrp msg.mod_f_NewOrder_Multi_Leg_DealersGrp;
+        f_NewOrder_Multi_Leg_TradingProtocol = (match msg.mod_f_NewOrder_Multi_Leg_TradingProtocol with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_TradingProtocol d))
+        );
+        f_NewOrder_Multi_Leg_MKTXPricingProcess = (match msg.mod_f_NewOrder_Multi_Leg_MKTXPricingProcess with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXPricingProcess d))
+        );
+        f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel = msg.mod_f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel;
+        f_NewOrder_Multi_Leg_MKTXRTSPurpose = (match msg.mod_f_NewOrder_Multi_Leg_MKTXRTSPurpose with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXRTSPurpose d))
+        );
+        f_NewOrder_Multi_Leg_AllocID = msg.mod_f_NewOrder_Multi_Leg_AllocID;
+        f_NewOrder_Multi_Leg_LegAllocsGrp = convert__model_to_full_LegAllocsGrp msg.mod_f_NewOrder_Multi_Leg_LegAllocsGrp
+    }
+;;
+
+let convert__model_to_full_NewOrder_List (msg : mod_neworder_list_data)  =
+    FIX_Full_Msg_NewOrder_List {
+        f_NewOrder_List_ListID = Some msg.mod_f_NewOrder_List_ListID;
+        f_NewOrder_List_BidType = Some msg.mod_f_NewOrder_List_BidType;
+        f_NewOrder_List_TotalNoOrders = Some msg.mod_f_NewOrder_List_TotalNoOrders;
+        f_NewOrder_List_OrdersGrp = convert__model_to_full_OrdersGrp msg.mod_f_NewOrder_List_OrdersGrp;
+        f_NewOrder_List_IncludeDealers = (match msg.mod_f_NewOrder_List_IncludeDealers with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_IncludeDealers d))
+        );
+        f_NewOrder_List_DealersGrp = convert__model_to_full_DealersGrp msg.mod_f_NewOrder_List_DealersGrp;
+        f_NewOrder_List_OrderCapacity = (match msg.mod_f_NewOrder_List_OrderCapacity with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_OrderCapacity d))
+        );
+        f_NewOrder_List_MKTXPricingProcess = (match msg.mod_f_NewOrder_List_MKTXPricingProcess with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXPricingProcess d))
+        );
+        f_NewOrder_List_MKTXExternalTargetLevel = msg.mod_f_NewOrder_List_MKTXExternalTargetLevel;
+        f_NewOrder_List_MKTXListType = (match msg.mod_f_NewOrder_List_MKTXListType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXListType d))
+        );
+        f_NewOrder_List_AllocID = msg.mod_f_NewOrder_List_AllocID;
+        f_NewOrder_List_AllocsGrp = convert__model_to_full_AllocsGrp msg.mod_f_NewOrder_List_AllocsGrp
+    }
+;;
+
+let convert__model_to_full_ListOrderCancel (msg : mod_listordercancel_data)  =
+    FIX_Full_Msg_ListOrderCancel {
+        f_ListOrderCancel_ListID = Some msg.mod_f_ListOrderCancel_ListID;
+        f_ListOrderCancel_TransactTime = Some msg.mod_f_ListOrderCancel_TransactTime
+    }
+;;
+
+let convert__model_to_full_OrderCancelReject (msg : mod_ordercancelreject_data)  =
+    FIX_Full_Msg_OrderCancelReject {
+        f_OrderCancelReject_ListID = msg.mod_f_OrderCancelReject_ListID;
+        f_OrderCancelReject_OrderID = Some msg.mod_f_OrderCancelReject_OrderID;
+        f_OrderCancelReject_ClOrdID = Some msg.mod_f_OrderCancelReject_ClOrdID;
+        f_OrderCancelReject_OrdStatus = Some (convert__model_to_full_OrdStatus msg.mod_f_OrderCancelReject_OrdStatus);
+        f_OrderCancelReject_OrigClOrdID = Some msg.mod_f_OrderCancelReject_OrigClOrdID;
+        f_OrderCancelReject_CxlRejResponseTo = Some (convert__model_to_full_CxlRejResponseTo msg.mod_f_OrderCancelReject_CxlRejResponseTo);
+        f_OrderCancelReject_CxlRejReason = (match msg.mod_f_OrderCancelReject_CxlRejReason with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_CxlRejReason d))
+        );
+        f_OrderCancelReject_TransactTime = Some msg.mod_f_OrderCancelReject_TransactTime;
+        f_OrderCancelReject_Text = Some msg.mod_f_OrderCancelReject_Text
+    }
+;;
+
+let convert__model_to_full_BusinessMessageReject (msg : mod_businessmessagereject_data)  =
+    FIX_Full_Msg_BusinessMessageReject {
+        f_BusinessMessageReject_RefSeqNum = msg.mod_f_BusinessMessageReject_RefSeqNum;
+        f_BusinessMessageReject_RefMsgTyp = Some msg.mod_f_BusinessMessageReject_RefMsgTyp;
+        f_BusinessMessageReject_BusinessRejectRefID = msg.mod_f_BusinessMessageReject_BusinessRejectRefID;
+        f_BusinessMessageReject_BusinessRejectReason = Some (convert__model_to_full_BusinessRejectReason msg.mod_f_BusinessMessageReject_BusinessRejectReason);
+        f_BusinessMessageReject_Text = msg.mod_f_BusinessMessageReject_Text
+    }
+;;
+
+let convert__model_to_full_AllocationReport (msg : mod_allocationreport_data)  =
+    FIX_Full_Msg_AllocationReport {
+        f_AllocationReport_AllocReportID = Some msg.mod_f_AllocationReport_AllocReportID;
+        f_AllocationReport_AllocID = msg.mod_f_AllocationReport_AllocID;
+        f_AllocationReport_AllocTransType = Some (convert__model_to_full_AllocTransType msg.mod_f_AllocationReport_AllocTransType);
+        f_AllocationReport_AllocReportRefID = msg.mod_f_AllocationReport_AllocReportRefID;
+        f_AllocationReport_AllocCancReplaceReason = (match msg.mod_f_AllocationReport_AllocCancReplaceReason with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_AllocCancReplaceReason d))
+        );
+        f_AllocationReport_RefAllocID = msg.mod_f_AllocationReport_RefAllocID;
+        f_AllocationReport_AllocReportType = Some (convert__model_to_full_AllocReportType msg.mod_f_AllocationReport_AllocReportType);
+        f_AllocationReport_AllocStatus = Some (convert__model_to_full_AllocStatus msg.mod_f_AllocationReport_AllocStatus);
+        f_AllocationReport_AllocNoOrdersType = Some (convert__model_to_full_AllocNoOrdersType msg.mod_f_AllocationReport_AllocNoOrdersType);
+        f_AllocationReport_OrdersGrp = convert__model_to_full_OrdersGrp msg.mod_f_AllocationReport_OrdersGrp;
+        f_AllocationReport_ExecsGrp = convert__model_to_full_ExecsGrp msg.mod_f_AllocationReport_ExecsGrp;
+        f_AllocationReport_Side = Some (convert__model_to_full_Side msg.mod_f_AllocationReport_Side);
+        f_AllocationReport_Instrument = {
+            f_Instrument_CFICode = Some msg.mod_f_AllocationReport_Instrument_CFICode;
+            f_Instrument_Symbol = None;
+            f_Instrument_SecurityID = None;
+            f_Instrument_SecurityIDSource = None;
+            f_Instrument_Product = None;
+            f_Instrument_CountryOfIssue = None;
+            f_Instrument_SecurityType = None;
+            f_Instrument_MaturityDate = None;
+            f_Instrument_SecurityDesc = None;
+            f_Instrument_PrevClosePx = None;
+            f_Instrument_CouponRate = None;
+            f_Instrument_Issuer = None;
+            f_Instrument_SecurityAltIDGrp = [];
+            f_Instrument_IssueDate = None;
+            f_Instrument_Factor = None;
+            f_Instrument_DatedDate = None;
+            f_Instrument_SecuritySubType = None
         };
-        f_NewOrderSingle_OrderCapacity = None;
-        f_NewOrderSingle_OrderRestrictions = None;
-        f_NewOrderSingle_CustOrderCapacity = None;
-        f_NewOrderSingle_ForexReq = None;
-        f_NewOrderSingle_SettlCurrency = None;
-        f_NewOrderSingle_BookingType = None;
-        f_NewOrderSingle_Text = None;
-        f_NewOrderSingle_EncodedTextLen = None;
-        f_NewOrderSingle_EncodedText = None;
-        f_NewOrderSingle_SettlDate2 = None;
-        f_NewOrderSingle_OrderQty2 = None;
-        f_NewOrderSingle_Price2 = None;
-        f_NewOrderSingle_PositionEffect = None;
-        f_NewOrderSingle_CoveredOrUncovered = None;
-        f_NewOrderSingle_MaxShow = None;
-        f_NewOrderSingle_PegInstructions = {
-            f_PegInstructions_PegOffsetValue = None;
-            f_PegInstructions_PegMoveType = None;
-            f_PegInstructions_PegOffsetType = None;
-            f_PegInstructions_PegLimitType = None;
-            f_PegInstructions_PegRoundDirection = None;
-            f_PegInstructions_PegScope = None
+        f_AllocationReport_Quantity = Some msg.mod_f_AllocationReport_Quantity;
+        f_AllocationReport_QtyType = (match msg.mod_f_AllocationReport_QtyType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_QtyType d))
+        );
+        f_AllocationReport_PriceType = (match msg.mod_f_AllocationReport_PriceType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_PriceType d))
+        );
+        f_AllocationReport_AvgPx = Some msg.mod_f_AllocationReport_AvgPx;
+        f_AllocationReport_SpreadorBenchmarkCurveData = {
+            f_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency = msg.mod_f_AllocationReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency;
+            f_SpreadorBenchmarkCurveData_Spread = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkCurveName = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkCurvePoint = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkPrice = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkPriceType = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkSecurityID = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkSecurityIDSource = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkYield = None
         };
-        f_NewOrderSingle_DiscretionInstructions = {
-            f_DiscretionInstructions_DiscretionInst = None;
-            f_DiscretionInstructions_DiscretionOffsetValue = None;
-            f_DiscretionInstructions_DiscretionMoveType = None;
-            f_DiscretionInstructions_DiscretionOffsetType = None;
-            f_DiscretionInstructions_DiscretionLimitType = None;
-            f_DiscretionInstructions_DiscretionRoundDirection = None;
-            f_DiscretionInstructions_DiscretionScope = None
+        f_AllocationReport_Currency = msg.mod_f_AllocationReport_Currency;
+        f_AllocationReport_Parties = {
+            f_Parties_PartyIDsGrp = convert__model_to_full_PartyIDsGrp msg.mod_f_AllocationReport_Parties_PartyIDsGrp
         };
-        f_NewOrderSingle_TargetStrategy = None;
-        f_NewOrderSingle_TargetStrategyParameters = None;
-        f_NewOrderSingle_ParticipationRate = None;
-        f_NewOrderSingle_CancellationRights = None;
-        f_NewOrderSingle_MoneyLaunderingStatus = None;
-        f_NewOrderSingle_RegistID = None;
-        f_NewOrderSingle_Designation = None
+        f_AllocationReport_TradeDate = Some msg.mod_f_AllocationReport_TradeDate;
+        f_AllocationReport_TransactTime = msg.mod_f_AllocationReport_TransactTime;
+        f_AllocationReport_SettlDate = msg.mod_f_AllocationReport_SettlDate;
+        f_AllocationReport_GrossTradeAmt = msg.mod_f_AllocationReport_GrossTradeAmt;
+        f_AllocationReport_NetMoney = msg.mod_f_AllocationReport_NetMoney;
+        f_AllocationReport_Text = msg.mod_f_AllocationReport_Text;
+        f_AllocationReport_AccruedInterestAmt = msg.mod_f_AllocationReport_AccruedInterestAmt;
+        f_AllocationReport_YieldType = (match msg.mod_f_AllocationReport_YieldType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_YieldType d))
+        );
+        f_AllocationReport_Yield = msg.mod_f_AllocationReport_Yield;
+        f_AllocationReport_AllocsGrp = convert__model_to_full_AllocsGrp msg.mod_f_AllocationReport_AllocsGrp;
+        f_AllocationReport_Notes = msg.mod_f_AllocationReport_Notes;
+        f_AllocationReport_MKTXPricingProcess = (match msg.mod_f_AllocationReport_MKTXPricingProcess with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXPricingProcess d))
+        )
+    }
+;;
+
+let convert__model_to_full_AllocationReportACK (msg : mod_allocationreportack_data)  =
+    FIX_Full_Msg_AllocationReportACK {
+        f_AllocationReportACK_AllocReportID = Some msg.mod_f_AllocationReportACK_AllocReportID;
+        f_AllocationReportACK_AllocID = Some msg.mod_f_AllocationReportACK_AllocID;
+        f_AllocationReportACK_TradeDate = msg.mod_f_AllocationReportACK_TradeDate;
+        f_AllocationReportACK_TransactTime = Some msg.mod_f_AllocationReportACK_TransactTime;
+        f_AllocationReportACK_AllocStatus = Some (convert__model_to_full_AllocStatus msg.mod_f_AllocationReportACK_AllocStatus);
+        f_AllocationReportACK_AllocRejCode = (match msg.mod_f_AllocationReportACK_AllocRejCode with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_AllocRejCode d))
+        );
+        f_AllocationReportACK_AllocReportType = (match msg.mod_f_AllocationReportACK_AllocReportType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_AllocReportType d))
+        );
+        f_AllocationReportACK_Text = msg.mod_f_AllocationReportACK_Text
+    }
+;;
+
+let convert__model_to_full_AllocationInstruction (msg : mod_allocationinstruction_data)  =
+    FIX_Full_Msg_AllocationInstruction {
+        f_AllocationInstruction_AllocID = Some msg.mod_f_AllocationInstruction_AllocID;
+        f_AllocationInstruction_AllocTransType = Some (convert__model_to_full_AllocTransType msg.mod_f_AllocationInstruction_AllocTransType);
+        f_AllocationInstruction_AllocType = Some (convert__model_to_full_AllocType msg.mod_f_AllocationInstruction_AllocType);
+        f_AllocationInstruction_RefAllocID = msg.mod_f_AllocationInstruction_RefAllocID;
+        f_AllocationInstruction_AllocCancReplaceReason = (match msg.mod_f_AllocationInstruction_AllocCancReplaceReason with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_AllocCancReplaceReason d))
+        );
+        f_AllocationInstruction_AllocNoOrdersType = Some (convert__model_to_full_AllocNoOrdersType msg.mod_f_AllocationInstruction_AllocNoOrdersType);
+        f_AllocationInstruction_OrdersGrp = convert__model_to_full_OrdersGrp msg.mod_f_AllocationInstruction_OrdersGrp;
+        f_AllocationInstruction_ExecsGrp = convert__model_to_full_ExecsGrp msg.mod_f_AllocationInstruction_ExecsGrp;
+        f_AllocationInstruction_Side = Some (convert__model_to_full_Side msg.mod_f_AllocationInstruction_Side);
+        f_AllocationInstruction_Instrument = {
+            f_Instrument_CFICode = Some msg.mod_f_AllocationInstruction_Instrument_CFICode;
+            f_Instrument_Symbol = None;
+            f_Instrument_SecurityID = None;
+            f_Instrument_SecurityIDSource = None;
+            f_Instrument_Product = None;
+            f_Instrument_CountryOfIssue = None;
+            f_Instrument_SecurityType = None;
+            f_Instrument_MaturityDate = None;
+            f_Instrument_SecurityDesc = None;
+            f_Instrument_PrevClosePx = None;
+            f_Instrument_CouponRate = None;
+            f_Instrument_Issuer = None;
+            f_Instrument_SecurityAltIDGrp = [];
+            f_Instrument_IssueDate = None;
+            f_Instrument_Factor = None;
+            f_Instrument_DatedDate = None;
+            f_Instrument_SecuritySubType = None
+        };
+        f_AllocationInstruction_Quantity = Some msg.mod_f_AllocationInstruction_Quantity;
+        f_AllocationInstruction_AvgPx = Some msg.mod_f_AllocationInstruction_AvgPx;
+        f_AllocationInstruction_TradeDate = Some msg.mod_f_AllocationInstruction_TradeDate;
+        f_AllocationInstruction_TransactTime = msg.mod_f_AllocationInstruction_TransactTime;
+        f_AllocationInstruction_Text = msg.mod_f_AllocationInstruction_Text;
+        f_AllocationInstruction_AllocsGrp = convert__model_to_full_AllocsGrp msg.mod_f_AllocationInstruction_AllocsGrp
+    }
+;;
+
+let convert__model_to_full_AllocationInstructionACK (msg : mod_allocationinstructionack_data)  =
+    FIX_Full_Msg_AllocationInstructionACK {
+        f_AllocationInstructionACK_AllocID = Some msg.mod_f_AllocationInstructionACK_AllocID;
+        f_AllocationInstructionACK_Parties = {
+            f_Parties_PartyIDsGrp = convert__model_to_full_PartyIDsGrp msg.mod_f_AllocationInstructionACK_Parties_PartyIDsGrp
+        };
+        f_AllocationInstructionACK_TradeDate = msg.mod_f_AllocationInstructionACK_TradeDate;
+        f_AllocationInstructionACK_TransactTime = Some msg.mod_f_AllocationInstructionACK_TransactTime;
+        f_AllocationInstructionACK_AllocStatus = Some (convert__model_to_full_AllocStatus msg.mod_f_AllocationInstructionACK_AllocStatus);
+        f_AllocationInstructionACK_AllocRejCode = (match msg.mod_f_AllocationInstructionACK_AllocRejCode with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_AllocRejCode d))
+        );
+        f_AllocationInstructionACK_AllocType = (match msg.mod_f_AllocationInstructionACK_AllocType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_AllocType d))
+        );
+        f_AllocationInstructionACK_Text = msg.mod_f_AllocationInstructionACK_Text
+    }
+;;
+
+let convert__model_to_full_Heartbeat (msg : mod_heartbeat_data)  =
+    FIX_Full_Msg_Heartbeat {
+        f_Heartbeat_TestReqID = msg.mod_f_Heartbeat_TestReqID
+    }
+;;
+
+let convert__model_to_full_TestRequest (msg : mod_testrequest_data)  =
+    FIX_Full_Msg_TestRequest {
+        f_TestRequest_TestReqID = Some msg.mod_f_TestRequest_TestReqID
+    }
+;;
+
+let convert__model_to_full_ResendRequest (msg : mod_resendrequest_data)  =
+    FIX_Full_Msg_ResendRequest {
+        f_ResendRequest_BeginSeqNo = Some msg.mod_f_ResendRequest_BeginSeqNo;
+        f_ResendRequest_EndSeqNo = Some msg.mod_f_ResendRequest_EndSeqNo
+    }
+;;
+
+let convert__model_to_full_SessionLevelReject (msg : mod_sessionlevelreject_data)  =
+    FIX_Full_Msg_SessionLevelReject {
+        f_SessionLevelReject_RefSeqNum = Some msg.mod_f_SessionLevelReject_RefSeqNum;
+        f_SessionLevelReject_Text = Some msg.mod_f_SessionLevelReject_Text;
+        f_SessionLevelReject_RefTagID = Some msg.mod_f_SessionLevelReject_RefTagID;
+        f_SessionLevelReject_RefMsgTyp = Some msg.mod_f_SessionLevelReject_RefMsgTyp;
+        f_SessionLevelReject_SessionRejectReason = Some (convert__model_to_full_SessionRejectReason msg.mod_f_SessionLevelReject_SessionRejectReason)
+    }
+;;
+
+let convert__model_to_full_SequenceResetRequest (msg : mod_sequenceresetrequest_data)  =
+    FIX_Full_Msg_SequenceResetRequest {
+        f_SequenceResetRequest_GapFillFlag = (match msg.mod_f_SequenceResetRequest_GapFillFlag with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_GapFillFlag d))
+        );
+        f_SequenceResetRequest_NewSeqNo = Some msg.mod_f_SequenceResetRequest_NewSeqNo
+    }
+;;
+
+let convert__model_to_full_Logout (msg : mod_logout_data)  =
+    FIX_Full_Msg_Logout {
+        f_Logout_Text = msg.mod_f_Logout_Text
+    }
+;;
+
+let convert__model_to_full_FIXLogon (msg : mod_fixlogon_data)  =
+    FIX_Full_Msg_FIXLogon {
+        f_FIXLogon_EncryptMethod = Some msg.mod_f_FIXLogon_EncryptMethod;
+        f_FIXLogon_HeartBtInt = Some msg.mod_f_FIXLogon_HeartBtInt;
+        f_FIXLogon_ResetSeqNumFlag = msg.mod_f_FIXLogon_ResetSeqNumFlag
+    }
+;;
+
+let convert__model_to_full_ExecutionReport (msg : mod_executionreport_data)  =
+    FIX_Full_Msg_ExecutionReport {
+        f_ExecutionReport_ClOrdID = msg.mod_f_ExecutionReport_ClOrdID;
+        f_ExecutionReport_OrigClOrdID = msg.mod_f_ExecutionReport_OrigClOrdID;
+        f_ExecutionReport_OrderID = Some msg.mod_f_ExecutionReport_OrderID;
+        f_ExecutionReport_Parties = {
+            f_Parties_PartyIDsGrp = convert__model_to_full_PartyIDsGrp msg.mod_f_ExecutionReport_Parties_PartyIDsGrp
+        };
+        f_ExecutionReport_ListID = msg.mod_f_ExecutionReport_ListID;
+        f_ExecutionReport_MKTXCPTYLEI = msg.mod_f_ExecutionReport_MKTXCPTYLEI;
+        f_ExecutionReport_MKTXPartyLEI = msg.mod_f_ExecutionReport_MKTXPartyLEI;
+        f_ExecutionReport_OrderCapacity = (match msg.mod_f_ExecutionReport_OrderCapacity with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_OrderCapacity d))
+        );
+        f_ExecutionReport_MKTXInquiryID = msg.mod_f_ExecutionReport_MKTXInquiryID;
+        f_ExecutionReport_MKTXTrdRegPublicationReason = (match msg.mod_f_ExecutionReport_MKTXTrdRegPublicationReason with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXTrdRegPublicationReason d))
+        );
+        f_ExecutionReport_TrdRegPublicationsGrp = convert__model_to_full_TrdRegPublicationsGrp msg.mod_f_ExecutionReport_TrdRegPublicationsGrp;
+        f_ExecutionReport_MKTXESCBStblty = (match msg.mod_f_ExecutionReport_MKTXESCBStblty with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXESCBStblty d))
+        );
+        f_ExecutionReport_PreTradeWaiver = (match msg.mod_f_ExecutionReport_PreTradeWaiver with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_PreTradeWaiver d))
+        );
+        f_ExecutionReport_MKTXTradeReportingInd = (match msg.mod_f_ExecutionReport_MKTXTradeReportingInd with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXTradeReportingInd d))
+        );
+        f_ExecutionReport_TradeReportingIndicator = (match msg.mod_f_ExecutionReport_TradeReportingIndicator with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_TradeReportingIndicator d))
+        );
+        f_ExecutionReport_InternalCrossingFlag = (match msg.mod_f_ExecutionReport_InternalCrossingFlag with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_InternalCrossingFlag d))
+        );
+        f_ExecutionReport_RegulatoryTradeIDsGrp = convert__model_to_full_RegulatoryTradeIDsGrp msg.mod_f_ExecutionReport_RegulatoryTradeIDsGrp;
+        f_ExecutionReport_MKTXVenueTransactionID = msg.mod_f_ExecutionReport_MKTXVenueTransactionID;
+        f_ExecutionReport_ExecID = Some msg.mod_f_ExecutionReport_ExecID;
+        f_ExecutionReport_ExecRefID = msg.mod_f_ExecutionReport_ExecRefID;
+        f_ExecutionReport_HandlInst = (match msg.mod_f_ExecutionReport_HandlInst with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_HandlInst d))
+        );
+        f_ExecutionReport_LastMkt = msg.mod_f_ExecutionReport_LastMkt;
+        f_ExecutionReport_ExecType = (match msg.mod_f_ExecutionReport_ExecType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_ExecType d))
+        );
+        f_ExecutionReport_SecondaryExecID = msg.mod_f_ExecutionReport_SecondaryExecID;
+        f_ExecutionReport_OrdStatus = Some (convert__model_to_full_OrdStatus msg.mod_f_ExecutionReport_OrdStatus);
+        f_ExecutionReport_OrdRejReason = (match msg.mod_f_ExecutionReport_OrdRejReason with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_OrdRejReason d))
+        );
+        f_ExecutionReport_SettlDate = msg.mod_f_ExecutionReport_SettlDate;
+        f_ExecutionReport_IssueDate = msg.mod_f_ExecutionReport_IssueDate;
+        f_ExecutionReport_Instrument = {
+            f_Instrument_CFICode = Some msg.mod_f_ExecutionReport_Instrument_CFICode;
+            f_Instrument_Symbol = None;
+            f_Instrument_SecurityID = None;
+            f_Instrument_SecurityIDSource = None;
+            f_Instrument_Product = None;
+            f_Instrument_CountryOfIssue = None;
+            f_Instrument_SecurityType = None;
+            f_Instrument_MaturityDate = None;
+            f_Instrument_SecurityDesc = None;
+            f_Instrument_PrevClosePx = None;
+            f_Instrument_CouponRate = None;
+            f_Instrument_Issuer = None;
+            f_Instrument_SecurityAltIDGrp = [];
+            f_Instrument_IssueDate = None;
+            f_Instrument_Factor = None;
+            f_Instrument_DatedDate = None;
+            f_Instrument_SecuritySubType = None
+        };
+        f_ExecutionReport_Price = msg.mod_f_ExecutionReport_Price;
+        f_ExecutionReport_Side = Some (convert__model_to_full_Side msg.mod_f_ExecutionReport_Side);
+        f_ExecutionReport_OrderQty = msg.mod_f_ExecutionReport_OrderQty;
+        f_ExecutionReport_PriceType = (match msg.mod_f_ExecutionReport_PriceType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_PriceType d))
+        );
+        f_ExecutionReport_Currency = msg.mod_f_ExecutionReport_Currency;
+        f_ExecutionReport_LastPx = msg.mod_f_ExecutionReport_LastPx;
+        f_ExecutionReport_LastParPx = msg.mod_f_ExecutionReport_LastParPx;
+        f_ExecutionReport_LeavesQty = Some msg.mod_f_ExecutionReport_LeavesQty;
+        f_ExecutionReport_CumQty = Some msg.mod_f_ExecutionReport_CumQty;
+        f_ExecutionReport_AvgPx = Some msg.mod_f_ExecutionReport_AvgPx;
+        f_ExecutionReport_TradeDate = msg.mod_f_ExecutionReport_TradeDate;
+        f_ExecutionReport_TransactTime = msg.mod_f_ExecutionReport_TransactTime;
+        f_ExecutionReport_SpreadorBenchmarkCurveData = {
+            f_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency = Some msg.mod_f_ExecutionReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency;
+            f_SpreadorBenchmarkCurveData_Spread = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkCurveName = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkCurvePoint = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkPrice = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkPriceType = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkSecurityID = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkSecurityIDSource = None;
+            f_SpreadorBenchmarkCurveData_BenchmarkYield = None
+        };
+        f_ExecutionReport_YieldType = (match msg.mod_f_ExecutionReport_YieldType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_YieldType d))
+        );
+        f_ExecutionReport_Yield = msg.mod_f_ExecutionReport_Yield;
+        f_ExecutionReport_GrossTradeAmt = msg.mod_f_ExecutionReport_GrossTradeAmt;
+        f_ExecutionReport_AccruedInterestAmt = msg.mod_f_ExecutionReport_AccruedInterestAmt;
+        f_ExecutionReport_NetMoney = msg.mod_f_ExecutionReport_NetMoney;
+        f_ExecutionReport_SettlCurrAmt = msg.mod_f_ExecutionReport_SettlCurrAmt;
+        f_ExecutionReport_SettlCurrency = msg.mod_f_ExecutionReport_SettlCurrency;
+        f_ExecutionReport_SettlCurrFxRate = msg.mod_f_ExecutionReport_SettlCurrFxRate;
+        f_ExecutionReport_SettlCurrFxRateCalc = msg.mod_f_ExecutionReport_SettlCurrFxRateCalc;
+        f_ExecutionReport_Text = msg.mod_f_ExecutionReport_Text;
+        f_ExecutionReport_LegsGrp = convert__model_to_full_LegsGrp msg.mod_f_ExecutionReport_LegsGrp;
+        f_ExecutionReport_IncludeDealers = (match msg.mod_f_ExecutionReport_IncludeDealers with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_IncludeDealers d))
+        );
+        f_ExecutionReport_DealersGrp = convert__model_to_full_DealersGrp msg.mod_f_ExecutionReport_DealersGrp;
+        f_ExecutionReport_Notes = msg.mod_f_ExecutionReport_Notes;
+        f_ExecutionReport_TradingProtocol = (match msg.mod_f_ExecutionReport_TradingProtocol with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_TradingProtocol d))
+        );
+        f_ExecutionReport_NumberofTrades = msg.mod_f_ExecutionReport_NumberofTrades;
+        f_ExecutionReport_LegTransactionSeqNumberLegID = msg.mod_f_ExecutionReport_LegTransactionSeqNumberLegID;
+        f_ExecutionReport_InquiryQty = Some msg.mod_f_ExecutionReport_InquiryQty;
+        f_ExecutionReport_NumDaysInterest = msg.mod_f_ExecutionReport_NumDaysInterest;
+        f_ExecutionReport_DatedDate_2 = msg.mod_f_ExecutionReport_DatedDate_2;
+        f_ExecutionReport_BrokerReceiptTime = msg.mod_f_ExecutionReport_BrokerReceiptTime;
+        f_ExecutionReport_GSpread = msg.mod_f_ExecutionReport_GSpread;
+        f_ExecutionReport_ZSpread = msg.mod_f_ExecutionReport_ZSpread;
+        f_ExecutionReport_ISpread = msg.mod_f_ExecutionReport_ISpread;
+        f_ExecutionReport_ASWSpread = msg.mod_f_ExecutionReport_ASWSpread;
+        f_ExecutionReport_OASSpread = msg.mod_f_ExecutionReport_OASSpread;
+        f_ExecutionReport_MKTXCostAnalysisGrp = convert__model_to_full_MKTXCostAnalysisGrp msg.mod_f_ExecutionReport_MKTXCostAnalysisGrp;
+        f_ExecutionReport_MKTXPricingProcess = (match msg.mod_f_ExecutionReport_MKTXPricingProcess with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXPricingProcess d))
+        );
+        f_ExecutionReport_MKTXTargetLevel = msg.mod_f_ExecutionReport_MKTXTargetLevel;
+        f_ExecutionReport_ClientBook = msg.mod_f_ExecutionReport_ClientBook;
+        f_ExecutionReport_DirtyPrice = msg.mod_f_ExecutionReport_DirtyPrice;
+        f_ExecutionReport_LastCapacity = (match msg.mod_f_ExecutionReport_LastCapacity with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_LastCapacity d))
+        );
+        f_ExecutionReport_MKTXTradeStyle = (match msg.mod_f_ExecutionReport_MKTXTradeStyle with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXTradeStyle d))
+        );
+        f_ExecutionReport_MKTXCompositeBidSpread = msg.mod_f_ExecutionReport_MKTXCompositeBidSpread;
+        f_ExecutionReport_MKTXCompositeOfferSpread = msg.mod_f_ExecutionReport_MKTXCompositeOfferSpread;
+        f_ExecutionReport_MKTXCompositeBidPrice = msg.mod_f_ExecutionReport_MKTXCompositeBidPrice;
+        f_ExecutionReport_MKTXCompositeOfferPrice = msg.mod_f_ExecutionReport_MKTXCompositeOfferPrice;
+        f_ExecutionReport_MKTXCompositeBidMMEYield = msg.mod_f_ExecutionReport_MKTXCompositeBidMMEYield;
+        f_ExecutionReport_MKTXCompositeOfferMMEYield = msg.mod_f_ExecutionReport_MKTXCompositeOfferMMEYield;
+        f_ExecutionReport_MKTXCompositeLiquidityScore = msg.mod_f_ExecutionReport_MKTXCompositeLiquidityScore;
+        f_ExecutionReport_MKTXAutoExType = (match msg.mod_f_ExecutionReport_MKTXAutoExType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXAutoExType d))
+        );
+        f_ExecutionReport_MKTXAutoExStatus = (match msg.mod_f_ExecutionReport_MKTXAutoExStatus with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXAutoExStatus d))
+        );
+        f_ExecutionReport_MKTXAutoExDesc = msg.mod_f_ExecutionReport_MKTXAutoExDesc;
+        f_ExecutionReport_MKTXAutoExRefLevel = msg.mod_f_ExecutionReport_MKTXAutoExRefLevel;
+        f_ExecutionReport_MKTXAutoExRefLevelType = (match msg.mod_f_ExecutionReport_MKTXAutoExRefLevelType with
+            | None -> None
+            | Some d -> (Some (convert__model_to_full_MKTXAutoExRefLevelType d))
+        );
+        f_ExecutionReport_ExpireTime = msg.mod_f_ExecutionReport_ExpireTime;
+        f_ExecutionReport_LastQty = msg.mod_f_ExecutionReport_LastQty
+    }
+;;
+
+let convert__model_to_full_DontKnowTrade (msg : mod_dontknowtrade_data)  =
+    FIX_Full_Msg_DontKnowTrade {
+        f_DontKnowTrade_OrderID = Some msg.mod_f_DontKnowTrade_OrderID;
+        f_DontKnowTrade_ExecID = Some msg.mod_f_DontKnowTrade_ExecID;
+        f_DontKnowTrade_DKReason = Some (convert__model_to_full_DKReason msg.mod_f_DontKnowTrade_DKReason);
+        f_DontKnowTrade_Side = Some (convert__model_to_full_Side msg.mod_f_DontKnowTrade_Side);
+        f_DontKnowTrade_LastQty = msg.mod_f_DontKnowTrade_LastQty;
+        f_DontKnowTrade_LastPx = msg.mod_f_DontKnowTrade_LastPx;
+        f_DontKnowTrade_Text = msg.mod_f_DontKnowTrade_Text;
+        f_DontKnowTrade_SecondaryOrderID = msg.mod_f_DontKnowTrade_SecondaryOrderID;
+        f_DontKnowTrade_EncodedTextLen = msg.mod_f_DontKnowTrade_EncodedTextLen;
+        f_DontKnowTrade_EncodedText = msg.mod_f_DontKnowTrade_EncodedText
     }
 ;;
 
 let convert_model_to_full_fix (msg : model_msg)  =
     (match msg with
-        | FIX_Msg_ExecutionReport msg_data -> (convert__model_to_full_ExecutionReport msg_data)
         | FIX_Msg_NewOrderSingle msg_data -> (convert__model_to_full_NewOrderSingle msg_data)
+        | FIX_Msg_OrderCancel msg_data -> (convert__model_to_full_OrderCancel msg_data)
+        | FIX_Msg_NewOrder_Multi_Leg msg_data -> (convert__model_to_full_NewOrder_Multi_Leg msg_data)
+        | FIX_Msg_NewOrder_List msg_data -> (convert__model_to_full_NewOrder_List msg_data)
+        | FIX_Msg_ListOrderCancel msg_data -> (convert__model_to_full_ListOrderCancel msg_data)
+        | FIX_Msg_OrderCancelReject msg_data -> (convert__model_to_full_OrderCancelReject msg_data)
+        | FIX_Msg_BusinessMessageReject msg_data -> (convert__model_to_full_BusinessMessageReject msg_data)
+        | FIX_Msg_AllocationReport msg_data -> (convert__model_to_full_AllocationReport msg_data)
+        | FIX_Msg_AllocationReportACK msg_data -> (convert__model_to_full_AllocationReportACK msg_data)
+        | FIX_Msg_AllocationInstruction msg_data -> (convert__model_to_full_AllocationInstruction msg_data)
+        | FIX_Msg_AllocationInstructionACK msg_data -> (convert__model_to_full_AllocationInstructionACK msg_data)
+        | FIX_Msg_Heartbeat msg_data -> (convert__model_to_full_Heartbeat msg_data)
+        | FIX_Msg_TestRequest msg_data -> (convert__model_to_full_TestRequest msg_data)
+        | FIX_Msg_ResendRequest msg_data -> (convert__model_to_full_ResendRequest msg_data)
+        | FIX_Msg_SessionLevelReject msg_data -> (convert__model_to_full_SessionLevelReject msg_data)
+        | FIX_Msg_SequenceResetRequest msg_data -> (convert__model_to_full_SequenceResetRequest msg_data)
+        | FIX_Msg_Logout msg_data -> (convert__model_to_full_Logout msg_data)
+        | FIX_Msg_FIXLogon msg_data -> (convert__model_to_full_FIXLogon msg_data)
+        | FIX_Msg_ExecutionReport msg_data -> (convert__model_to_full_ExecutionReport msg_data)
+        | FIX_Msg_DontKnowTrade msg_data -> (convert__model_to_full_DontKnowTrade msg_data)
     )
 ;;

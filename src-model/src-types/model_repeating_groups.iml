@@ -1,2 +1,267 @@
 (* Aesthetic Integration copyright 2018 *)
+open Datetime;;
+open Model_app_enums;;
+open Numeric;;
 
+type model_fix_inner_securityaltidgrp = {
+    mod_f_SecurityAltIDGrp_SecurityAltID : string option;
+    mod_f_SecurityAltIDGrp_SecurityAltIDSource : model_fix_securityaltidsource option
+}
+;;
+
+type model_fix_rec_securityaltidgrp = {
+    mod_f_SecurityAltIDGrp_NoSecurityAltID : int option;
+    rg_SecurityAltIDGrp_element_0 : model_fix_inner_securityaltidgrp option;
+    rg_SecurityAltIDGrp_element_1 : model_fix_inner_securityaltidgrp option;
+    rg_SecurityAltIDGrp_element_2 : model_fix_inner_securityaltidgrp option;
+    rg_SecurityAltIDGrp_element_3 : model_fix_inner_securityaltidgrp option;
+    rg_SecurityAltIDGrp_element_4 : model_fix_inner_securityaltidgrp option
+}
+;;
+
+type model_fix_inner_execsgrp = {
+    mod_f_ExecsGrp_LastQty : fix_float_6 option;
+    mod_f_ExecsGrp_ExecID : string option;
+    mod_f_ExecsGrp_SecondaryExecID : string option;
+    mod_f_ExecsGrp_LastPx : fix_float_6 option;
+    mod_f_ExecsGrp_LastParPx : fix_float_6 option
+}
+;;
+
+type model_fix_rec_execsgrp = {
+    mod_f_ExecsGrp_NoExecs : int option;
+    rg_ExecsGrp_element_0 : model_fix_inner_execsgrp option;
+    rg_ExecsGrp_element_1 : model_fix_inner_execsgrp option;
+    rg_ExecsGrp_element_2 : model_fix_inner_execsgrp option;
+    rg_ExecsGrp_element_3 : model_fix_inner_execsgrp option;
+    rg_ExecsGrp_element_4 : model_fix_inner_execsgrp option
+}
+;;
+
+type model_fix_inner_mktxcostanalysisgrp = {
+    mod_f_MKTXCostAnalysisGrp_MKTXAnalysisTo : model_fix_mktxanalysisto option;
+    mod_f_MKTXCostAnalysisGrp_MKTXBenefit : fix_float_6 option;
+    mod_f_MKTXCostAnalysisGrp_MKTXComparisonPrice : fix_float_6 option;
+    mod_f_MKTXCostAnalysisGrp_MKTXPriceDiff : fix_float_6 option
+}
+;;
+
+type model_fix_rec_mktxcostanalysisgrp = {
+    mod_f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis : int option;
+    rg_MKTXCostAnalysisGrp_element_0 : model_fix_inner_mktxcostanalysisgrp option;
+    rg_MKTXCostAnalysisGrp_element_1 : model_fix_inner_mktxcostanalysisgrp option;
+    rg_MKTXCostAnalysisGrp_element_2 : model_fix_inner_mktxcostanalysisgrp option;
+    rg_MKTXCostAnalysisGrp_element_3 : model_fix_inner_mktxcostanalysisgrp option;
+    rg_MKTXCostAnalysisGrp_element_4 : model_fix_inner_mktxcostanalysisgrp option
+}
+;;
+
+type model_fix_inner_regulatorytradeidsgrp = {
+    mod_f_RegulatoryTradeIDsGrp_RegulatoryTradeID : string option;
+    mod_f_RegulatoryTradeIDsGrp_RegulatoryTradeIDType : model_fix_regulatorytradeidtype option
+}
+;;
+
+type model_fix_rec_regulatorytradeidsgrp = {
+    mod_f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs : int option;
+    rg_RegulatoryTradeIDsGrp_element_0 : model_fix_inner_regulatorytradeidsgrp option;
+    rg_RegulatoryTradeIDsGrp_element_1 : model_fix_inner_regulatorytradeidsgrp option;
+    rg_RegulatoryTradeIDsGrp_element_2 : model_fix_inner_regulatorytradeidsgrp option;
+    rg_RegulatoryTradeIDsGrp_element_3 : model_fix_inner_regulatorytradeidsgrp option;
+    rg_RegulatoryTradeIDsGrp_element_4 : model_fix_inner_regulatorytradeidsgrp option
+}
+;;
+
+type model_fix_inner_legsgrp = {
+    mod_f_LegsGrp_InstrumentLeg_LegSymbol : string;
+    mod_f_LegsGrp_InstrumentLeg_LegSecurityID : string;
+    mod_f_LegsGrp_InstrumentLeg_LegSecurityIDSource : model_fix_legsecurityidsource;
+    mod_f_LegsGrp_InstrumentLeg_LegProduct : model_fix_legproduct option;
+    mod_f_LegsGrp_InstrumentLeg_LegIssueDate : fix_localmktdate option;
+    mod_f_LegsGrp_InstrumentLeg_LegDatedDate : fix_localmktdate option;
+    mod_f_LegsGrp_InstrumentLeg_LegSecurityType : string option;
+    mod_f_LegsGrp_InstrumentLeg_LegMaturityDate : fix_localmktdate option;
+    mod_f_LegsGrp_InstrumentLeg_LegCouponRate : fix_float_6 option;
+    mod_f_LegsGrp_InstrumentLeg_LegIssuer : string option;
+    mod_f_LegsGrp_InstrumentLeg_LegSecurityDesc : string option;
+    mod_f_LegsGrp_InstrumentLeg_LegSide : model_fix_legside option;
+    mod_f_LegsGrp_InstrumentLeg_LegCurrency : string option;
+    mod_f_LegsGrp_LegQty : fix_float_6 option;
+    mod_f_LegsGrp_LegSwapType : model_fix_legswaptype option;
+    mod_f_LegsGrp_LegRefID : string option;
+    mod_f_LegsGrp_LegPrice : fix_float_6 option;
+    mod_f_LegsGrp_LegSettlDate : fix_localmktdate option;
+    mod_f_LegsGrp_PortfolioName : string option
+}
+;;
+
+type model_fix_rec_legsgrp = {
+    mod_f_LegsGrp_NoLegs : int option;
+    rg_LegsGrp_element_0 : model_fix_inner_legsgrp option;
+    rg_LegsGrp_element_1 : model_fix_inner_legsgrp option;
+    rg_LegsGrp_element_2 : model_fix_inner_legsgrp option;
+    rg_LegsGrp_element_3 : model_fix_inner_legsgrp option;
+    rg_LegsGrp_element_4 : model_fix_inner_legsgrp option
+}
+;;
+
+type model_fix_inner_dealersgrp = {
+    mod_f_DealersGrp_DealerID : string option;
+    mod_f_DealersGrp_DealerIDSource : model_fix_dealeridsource option;
+    mod_f_DealersGrp_Exclude : model_fix_exclude option;
+    mod_f_DealersGrp_DealerQuotePriceType : int option;
+    mod_f_DealersGrp_ReferencePrice : fix_float_6 option;
+    mod_f_DealersGrp_DealerQuotePrice : fix_float_6 option;
+    mod_f_DealersGrp_DealerQuoteOrdQty : fix_float_6 option;
+    mod_f_DealersGrp_DealerQuoteText : string option;
+    mod_f_DealersGrp_CompetitiveStatus : model_fix_competitivestatus option;
+    mod_f_DealersGrp_TraderID : string option;
+    mod_f_DealersGrp_QuoteRank : string option;
+    mod_f_DealersGrp_DealerFXRate : string option
+}
+;;
+
+type model_fix_rec_dealersgrp = {
+    mod_f_DealersGrp_NoDealers : int option;
+    rg_DealersGrp_element_0 : model_fix_inner_dealersgrp option;
+    rg_DealersGrp_element_1 : model_fix_inner_dealersgrp option;
+    rg_DealersGrp_element_2 : model_fix_inner_dealersgrp option;
+    rg_DealersGrp_element_3 : model_fix_inner_dealersgrp option;
+    rg_DealersGrp_element_4 : model_fix_inner_dealersgrp option
+}
+;;
+
+type model_fix_inner_trdregpublicationsgrp = {
+    mod_f_TrdRegPublicationsGrp_TrdRegPublicationType : model_fix_trdregpublicationtype option;
+    mod_f_TrdRegPublicationsGrp_TrdRegPublicationReason : model_fix_trdregpublicationreason option
+}
+;;
+
+type model_fix_rec_trdregpublicationsgrp = {
+    mod_f_TrdRegPublicationsGrp_NoTrdRegPublications : int option;
+    rg_TrdRegPublicationsGrp_element_0 : model_fix_inner_trdregpublicationsgrp option;
+    rg_TrdRegPublicationsGrp_element_1 : model_fix_inner_trdregpublicationsgrp option;
+    rg_TrdRegPublicationsGrp_element_2 : model_fix_inner_trdregpublicationsgrp option;
+    rg_TrdRegPublicationsGrp_element_3 : model_fix_inner_trdregpublicationsgrp option;
+    rg_TrdRegPublicationsGrp_element_4 : model_fix_inner_trdregpublicationsgrp option
+}
+;;
+
+type model_fix_inner_partysubidsgrp = {
+    mod_f_PartySubIDsGrp_PartySubID : string option;
+    mod_f_PartySubIDsGrp_PartySubIDType : model_fix_partysubidtype option
+}
+;;
+
+type model_fix_rec_partysubidsgrp = {
+    mod_f_PartySubIDsGrp_NoPartySubIDs : int option;
+    rg_PartySubIDsGrp_element_0 : model_fix_inner_partysubidsgrp option;
+    rg_PartySubIDsGrp_element_1 : model_fix_inner_partysubidsgrp option;
+    rg_PartySubIDsGrp_element_2 : model_fix_inner_partysubidsgrp option;
+    rg_PartySubIDsGrp_element_3 : model_fix_inner_partysubidsgrp option;
+    rg_PartySubIDsGrp_element_4 : model_fix_inner_partysubidsgrp option
+}
+;;
+
+type model_fix_inner_legallocsgrp = {
+    mod_f_LegAllocsGrp_LegAllocAccount : string option;
+    mod_f_LegAllocsGrp_LegAllocQty : fix_float_6 option
+}
+;;
+
+type model_fix_rec_legallocsgrp = {
+    mod_f_LegAllocsGrp_NoLegAllocs : int option;
+    rg_LegAllocsGrp_element_0 : model_fix_inner_legallocsgrp option;
+    rg_LegAllocsGrp_element_1 : model_fix_inner_legallocsgrp option;
+    rg_LegAllocsGrp_element_2 : model_fix_inner_legallocsgrp option;
+    rg_LegAllocsGrp_element_3 : model_fix_inner_legallocsgrp option;
+    rg_LegAllocsGrp_element_4 : model_fix_inner_legallocsgrp option
+}
+;;
+
+type model_fix_inner_allocsgrp = {
+    mod_f_AllocsGrp_AllocAccount : string option;
+    mod_f_AllocsGrp_AllocQty : fix_float_6 option;
+    mod_f_AllocsGrp_IndividualAllocID : string option;
+    mod_f_AllocsGrp_AllocNetMoney : fix_float_6 option;
+    mod_f_AllocsGrp_AllocSettlCurrAmt : fix_float_6 option;
+    mod_f_AllocsGrp_AllocSettlCurrency : string option;
+    mod_f_AllocsGrp_SettlCurrFxRate : fix_float option;
+    mod_f_AllocsGrp_SettlCurrFxRateCalc : string option;
+    mod_f_AllocsGrp_AllocAccruedInterestAmt : fix_float_6 option
+}
+;;
+
+type model_fix_rec_allocsgrp = {
+    mod_f_AllocsGrp_NoAllocs : int option;
+    rg_AllocsGrp_element_0 : model_fix_inner_allocsgrp option;
+    rg_AllocsGrp_element_1 : model_fix_inner_allocsgrp option;
+    rg_AllocsGrp_element_2 : model_fix_inner_allocsgrp option;
+    rg_AllocsGrp_element_3 : model_fix_inner_allocsgrp option;
+    rg_AllocsGrp_element_4 : model_fix_inner_allocsgrp option
+}
+;;
+
+type model_fix_inner_partyidsgrp = {
+    mod_f_PartyIDsGrp_PartyID : string option;
+    mod_f_PartyIDsGrp_PartyIDSource : model_fix_partyidsource option;
+    mod_f_PartyIDsGrp_PartyRole : model_fix_partyrole option;
+    mod_f_PartyIDsGrp_Algorithm : model_fix_algorithm option;
+    mod_f_PartyIDsGrp_PartySubIDsGrp : model_fix_rec_partysubidsgrp
+}
+;;
+
+type model_fix_rec_partyidsgrp = {
+    mod_f_PartyIDsGrp_NoPartyIDs : int option;
+    rg_PartyIDsGrp_element_0 : model_fix_inner_partyidsgrp option;
+    rg_PartyIDsGrp_element_1 : model_fix_inner_partyidsgrp option;
+    rg_PartyIDsGrp_element_2 : model_fix_inner_partyidsgrp option;
+    rg_PartyIDsGrp_element_3 : model_fix_inner_partyidsgrp option;
+    rg_PartyIDsGrp_element_4 : model_fix_inner_partyidsgrp option
+}
+;;
+
+type model_fix_inner_ordersgrp = {
+    mod_f_OrdersGrp_ClOrdID : string option;
+    mod_f_OrdersGrp_ListSeqNo : int option;
+    mod_f_OrdersGrp_PortfolioName : string option;
+    mod_f_OrdersGrp_Notes : string option;
+    mod_f_OrdersGrp_Parties_PartyIDsGrp : model_fix_rec_partyidsgrp;
+    mod_f_OrdersGrp_SettlDate : fix_localmktdate option;
+    mod_f_OrdersGrp_Instrument_Symbol : string;
+    mod_f_OrdersGrp_Instrument_SecurityID : string option;
+    mod_f_OrdersGrp_Instrument_SecurityIDSource : model_fix_securityidsource option;
+    mod_f_OrdersGrp_Instrument_Product : model_fix_product option;
+    mod_f_OrdersGrp_Instrument_CFICode : string option;
+    mod_f_OrdersGrp_Instrument_CountryOfIssue : string option;
+    mod_f_OrdersGrp_Instrument_SecurityType : string option;
+    mod_f_OrdersGrp_Instrument_MaturityDate : fix_localmktdate option;
+    mod_f_OrdersGrp_Instrument_SecurityDesc : string option;
+    mod_f_OrdersGrp_Instrument_PrevClosePx : fix_float_6 option;
+    mod_f_OrdersGrp_Instrument_CouponRate : fix_float option;
+    mod_f_OrdersGrp_Instrument_Issuer : string option;
+    mod_f_OrdersGrp_Instrument_SecurityAltIDGrp : model_fix_rec_securityaltidgrp;
+    mod_f_OrdersGrp_Instrument_IssueDate : fix_localmktdate option;
+    mod_f_OrdersGrp_Instrument_Factor : fix_float option;
+    mod_f_OrdersGrp_Instrument_DatedDate : fix_localmktdate option;
+    mod_f_OrdersGrp_Instrument_SecuritySubType : string option;
+    mod_f_OrdersGrp_Side : model_fix_side option;
+    mod_f_OrdersGrp_Price : fix_float_6 option;
+    mod_f_OrdersGrp_TransactTime : fix_utctimestamp_milli option;
+    mod_f_OrdersGrp_OrderQty : fix_float_6 option;
+    mod_f_OrdersGrp_TradingProtocol : model_fix_tradingprotocol option;
+    mod_f_OrdersGrp_OrderID : string option;
+    mod_f_OrdersGrp_ListID : string option;
+    mod_f_OrdersGrp_OrderAvgPx : fix_float_6 option
+}
+;;
+
+type model_fix_rec_ordersgrp = {
+    mod_f_OrdersGrp_NoOrders : int option;
+    rg_OrdersGrp_element_0 : model_fix_inner_ordersgrp option;
+    rg_OrdersGrp_element_1 : model_fix_inner_ordersgrp option;
+    rg_OrdersGrp_element_2 : model_fix_inner_ordersgrp option;
+    rg_OrdersGrp_element_3 : model_fix_inner_ordersgrp option;
+    rg_OrdersGrp_element_4 : model_fix_inner_ordersgrp option
+}
+;;

@@ -1,5 +1,2 @@
 (* Aesthetic Integration copyright 2018 *)
 
-type fix_action =
-    | EmptyAction 
-;;

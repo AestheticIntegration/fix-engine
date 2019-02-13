@@ -1,5 +1,8 @@
 (* Aesthetic Integration copyright 2018 *)
+open Enum_converter;;
+open Full_app_records;;
 open Imandra_utils;;
+open Model_repeating_groups;;
 open Model_tags;;
 
 exception Ipl_rg_exception 
@@ -12,5 +15,1900 @@ let rec cap_length (d) (x) (h)  =
     (match d with
         | [] -> (min x h)
         | _ :: t -> (cap_length t ((+) x 1) h)
+    )
+;;
+
+let rec map_convert__model_to_full_RG_SecurityAltIDGrp (d) (x)  =
+    (match d with
+        | [] -> []
+        | h :: t -> ((convert__model_to_full_RG_SecurityAltIDGrp h x) :: (map_convert__model_to_full_RG_SecurityAltIDGrp t x))
+    ) and 
+convert__model_to_full_RG_SecurityAltIDGrp (rec_in : model_fix_inner_securityaltidgrp) (len : int)  =
+    {
+        f_SecurityAltIDGrp_SecurityAltID = rec_in.mod_f_SecurityAltIDGrp_SecurityAltID;
+        f_SecurityAltIDGrp_SecurityAltIDSource = (match rec_in.mod_f_SecurityAltIDGrp_SecurityAltIDSource with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_SecurityAltIDSource x))
+        );
+        f_SecurityAltIDGrp_NoSecurityAltID = Some len
+    } and 
+convert__model_to_full_SecurityAltIDGrp (rec_in : model_fix_rec_securityaltidgrp)  =
+    let d = [] in
+    let d = (match rec_in.rg_SecurityAltIDGrp_element_0 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_SecurityAltIDGrp_element_1 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_SecurityAltIDGrp_element_2 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_SecurityAltIDGrp_element_3 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_SecurityAltIDGrp_element_4 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    map_convert__model_to_full_RG_SecurityAltIDGrp d (cap_length d 0 5)
+;;
+
+let rec convert__full_to_model_SecurityAltIDGrp (rec_in : fix_rg_securityaltidgrp)  =
+    let block4 = None in
+    let block3 = None in
+    let block2 = None in
+    let block1 = None in
+    let block0 = None in
+    let t = rec_in in
+    (match t with
+        | [] -> {
+            mod_f_SecurityAltIDGrp_NoSecurityAltID = Some (cap_length rec_in 0 5);
+            rg_SecurityAltIDGrp_element_4 = block4;
+            rg_SecurityAltIDGrp_element_3 = block3;
+            rg_SecurityAltIDGrp_element_2 = block2;
+            rg_SecurityAltIDGrp_element_1 = block1;
+            rg_SecurityAltIDGrp_element_0 = block0
+        }
+        | h :: t -> let block0 = Some (convert__full_to_model_RG_SecurityAltIDGrp h) in
+        (match t with
+            | [] -> {
+                mod_f_SecurityAltIDGrp_NoSecurityAltID = Some (cap_length rec_in 0 5);
+                rg_SecurityAltIDGrp_element_4 = block4;
+                rg_SecurityAltIDGrp_element_3 = block3;
+                rg_SecurityAltIDGrp_element_2 = block2;
+                rg_SecurityAltIDGrp_element_1 = block1;
+                rg_SecurityAltIDGrp_element_0 = block0
+            }
+            | h :: t -> let block1 = Some (convert__full_to_model_RG_SecurityAltIDGrp h) in
+            (match t with
+                | [] -> {
+                    mod_f_SecurityAltIDGrp_NoSecurityAltID = Some (cap_length rec_in 0 5);
+                    rg_SecurityAltIDGrp_element_4 = block4;
+                    rg_SecurityAltIDGrp_element_3 = block3;
+                    rg_SecurityAltIDGrp_element_2 = block2;
+                    rg_SecurityAltIDGrp_element_1 = block1;
+                    rg_SecurityAltIDGrp_element_0 = block0
+                }
+                | h :: t -> let block2 = Some (convert__full_to_model_RG_SecurityAltIDGrp h) in
+                (match t with
+                    | [] -> {
+                        mod_f_SecurityAltIDGrp_NoSecurityAltID = Some (cap_length rec_in 0 5);
+                        rg_SecurityAltIDGrp_element_4 = block4;
+                        rg_SecurityAltIDGrp_element_3 = block3;
+                        rg_SecurityAltIDGrp_element_2 = block2;
+                        rg_SecurityAltIDGrp_element_1 = block1;
+                        rg_SecurityAltIDGrp_element_0 = block0
+                    }
+                    | h :: t -> let block3 = Some (convert__full_to_model_RG_SecurityAltIDGrp h) in
+                    (match t with
+                        | [] -> {
+                            mod_f_SecurityAltIDGrp_NoSecurityAltID = Some (cap_length rec_in 0 5);
+                            rg_SecurityAltIDGrp_element_4 = block4;
+                            rg_SecurityAltIDGrp_element_3 = block3;
+                            rg_SecurityAltIDGrp_element_2 = block2;
+                            rg_SecurityAltIDGrp_element_1 = block1;
+                            rg_SecurityAltIDGrp_element_0 = block0
+                        }
+                        | h :: t -> let block4 = Some (convert__full_to_model_RG_SecurityAltIDGrp h) in
+                        {
+                            mod_f_SecurityAltIDGrp_NoSecurityAltID = Some (cap_length rec_in 0 5);
+                            rg_SecurityAltIDGrp_element_4 = block4;
+                            rg_SecurityAltIDGrp_element_3 = block3;
+                            rg_SecurityAltIDGrp_element_2 = block2;
+                            rg_SecurityAltIDGrp_element_1 = block1;
+                            rg_SecurityAltIDGrp_element_0 = block0
+                        }
+                    )
+                )
+            )
+        )
+    ) and 
+convert__full_to_model_RG_SecurityAltIDGrp (rec_in : fix_rg_inner_securityaltidgrp)  =
+    {
+        mod_f_SecurityAltIDGrp_SecurityAltID = rec_in.f_SecurityAltIDGrp_SecurityAltID;
+        mod_f_SecurityAltIDGrp_SecurityAltIDSource = (match rec_in.f_SecurityAltIDGrp_SecurityAltIDSource with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_SecurityAltIDSource x))
+        )
+    }
+;;
+
+let check_convert_full_to_model_RG_SecurityAltIDGrp (rec_in : fix_rg_inner_securityaltidgrp)  =
+    RG_Success
+;;
+
+let rec check_convert_full_to_model__SecurityAltIDGrp (rec_in : fix_rg_securityaltidgrp)  =
+    (match rec_in with
+        | [] -> RG_Success
+        | x :: y -> ((match check_convert_full_to_model_RG_SecurityAltIDGrp x with
+            | RG_Success -> (check_convert_full_to_model__SecurityAltIDGrp y)
+            | f -> f
+        )
+        )
+    )
+;;
+
+let rec map_convert__model_to_full_RG_ExecsGrp (d) (x)  =
+    (match d with
+        | [] -> []
+        | h :: t -> ((convert__model_to_full_RG_ExecsGrp h x) :: (map_convert__model_to_full_RG_ExecsGrp t x))
+    ) and 
+convert__model_to_full_RG_ExecsGrp (rec_in : model_fix_inner_execsgrp) (len : int)  =
+    {
+        f_ExecsGrp_LastQty = rec_in.mod_f_ExecsGrp_LastQty;
+        f_ExecsGrp_ExecID = rec_in.mod_f_ExecsGrp_ExecID;
+        f_ExecsGrp_SecondaryExecID = rec_in.mod_f_ExecsGrp_SecondaryExecID;
+        f_ExecsGrp_LastPx = rec_in.mod_f_ExecsGrp_LastPx;
+        f_ExecsGrp_LastParPx = rec_in.mod_f_ExecsGrp_LastParPx;
+        f_ExecsGrp_NoExecs = Some len
+    } and 
+convert__model_to_full_ExecsGrp (rec_in : model_fix_rec_execsgrp)  =
+    let d = [] in
+    let d = (match rec_in.rg_ExecsGrp_element_0 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_ExecsGrp_element_1 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_ExecsGrp_element_2 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_ExecsGrp_element_3 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_ExecsGrp_element_4 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    map_convert__model_to_full_RG_ExecsGrp d (cap_length d 0 5)
+;;
+
+let rec convert__full_to_model_ExecsGrp (rec_in : fix_rg_execsgrp)  =
+    let block4 = None in
+    let block3 = None in
+    let block2 = None in
+    let block1 = None in
+    let block0 = None in
+    let t = rec_in in
+    (match t with
+        | [] -> {
+            mod_f_ExecsGrp_NoExecs = Some (cap_length rec_in 0 5);
+            rg_ExecsGrp_element_4 = block4;
+            rg_ExecsGrp_element_3 = block3;
+            rg_ExecsGrp_element_2 = block2;
+            rg_ExecsGrp_element_1 = block1;
+            rg_ExecsGrp_element_0 = block0
+        }
+        | h :: t -> let block0 = Some (convert__full_to_model_RG_ExecsGrp h) in
+        (match t with
+            | [] -> {
+                mod_f_ExecsGrp_NoExecs = Some (cap_length rec_in 0 5);
+                rg_ExecsGrp_element_4 = block4;
+                rg_ExecsGrp_element_3 = block3;
+                rg_ExecsGrp_element_2 = block2;
+                rg_ExecsGrp_element_1 = block1;
+                rg_ExecsGrp_element_0 = block0
+            }
+            | h :: t -> let block1 = Some (convert__full_to_model_RG_ExecsGrp h) in
+            (match t with
+                | [] -> {
+                    mod_f_ExecsGrp_NoExecs = Some (cap_length rec_in 0 5);
+                    rg_ExecsGrp_element_4 = block4;
+                    rg_ExecsGrp_element_3 = block3;
+                    rg_ExecsGrp_element_2 = block2;
+                    rg_ExecsGrp_element_1 = block1;
+                    rg_ExecsGrp_element_0 = block0
+                }
+                | h :: t -> let block2 = Some (convert__full_to_model_RG_ExecsGrp h) in
+                (match t with
+                    | [] -> {
+                        mod_f_ExecsGrp_NoExecs = Some (cap_length rec_in 0 5);
+                        rg_ExecsGrp_element_4 = block4;
+                        rg_ExecsGrp_element_3 = block3;
+                        rg_ExecsGrp_element_2 = block2;
+                        rg_ExecsGrp_element_1 = block1;
+                        rg_ExecsGrp_element_0 = block0
+                    }
+                    | h :: t -> let block3 = Some (convert__full_to_model_RG_ExecsGrp h) in
+                    (match t with
+                        | [] -> {
+                            mod_f_ExecsGrp_NoExecs = Some (cap_length rec_in 0 5);
+                            rg_ExecsGrp_element_4 = block4;
+                            rg_ExecsGrp_element_3 = block3;
+                            rg_ExecsGrp_element_2 = block2;
+                            rg_ExecsGrp_element_1 = block1;
+                            rg_ExecsGrp_element_0 = block0
+                        }
+                        | h :: t -> let block4 = Some (convert__full_to_model_RG_ExecsGrp h) in
+                        {
+                            mod_f_ExecsGrp_NoExecs = Some (cap_length rec_in 0 5);
+                            rg_ExecsGrp_element_4 = block4;
+                            rg_ExecsGrp_element_3 = block3;
+                            rg_ExecsGrp_element_2 = block2;
+                            rg_ExecsGrp_element_1 = block1;
+                            rg_ExecsGrp_element_0 = block0
+                        }
+                    )
+                )
+            )
+        )
+    ) and 
+convert__full_to_model_RG_ExecsGrp (rec_in : fix_rg_inner_execsgrp)  =
+    {
+        mod_f_ExecsGrp_LastQty = rec_in.f_ExecsGrp_LastQty;
+        mod_f_ExecsGrp_ExecID = rec_in.f_ExecsGrp_ExecID;
+        mod_f_ExecsGrp_SecondaryExecID = rec_in.f_ExecsGrp_SecondaryExecID;
+        mod_f_ExecsGrp_LastPx = rec_in.f_ExecsGrp_LastPx;
+        mod_f_ExecsGrp_LastParPx = rec_in.f_ExecsGrp_LastParPx
+    }
+;;
+
+let check_convert_full_to_model_RG_ExecsGrp (rec_in : fix_rg_inner_execsgrp)  =
+    RG_Success
+;;
+
+let rec check_convert_full_to_model__ExecsGrp (rec_in : fix_rg_execsgrp)  =
+    (match rec_in with
+        | [] -> RG_Success
+        | x :: y -> ((match check_convert_full_to_model_RG_ExecsGrp x with
+            | RG_Success -> (check_convert_full_to_model__ExecsGrp y)
+            | f -> f
+        )
+        )
+    )
+;;
+
+let rec map_convert__model_to_full_RG_MKTXCostAnalysisGrp (d) (x)  =
+    (match d with
+        | [] -> []
+        | h :: t -> ((convert__model_to_full_RG_MKTXCostAnalysisGrp h x) :: (map_convert__model_to_full_RG_MKTXCostAnalysisGrp t x))
+    ) and 
+convert__model_to_full_RG_MKTXCostAnalysisGrp (rec_in : model_fix_inner_mktxcostanalysisgrp) (len : int)  =
+    {
+        f_MKTXCostAnalysisGrp_MKTXAnalysisTo = (match rec_in.mod_f_MKTXCostAnalysisGrp_MKTXAnalysisTo with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_MKTXAnalysisTo x))
+        );
+        f_MKTXCostAnalysisGrp_MKTXBenefit = rec_in.mod_f_MKTXCostAnalysisGrp_MKTXBenefit;
+        f_MKTXCostAnalysisGrp_MKTXComparisonPrice = rec_in.mod_f_MKTXCostAnalysisGrp_MKTXComparisonPrice;
+        f_MKTXCostAnalysisGrp_MKTXPriceDiff = rec_in.mod_f_MKTXCostAnalysisGrp_MKTXPriceDiff;
+        f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis = Some len
+    } and 
+convert__model_to_full_MKTXCostAnalysisGrp (rec_in : model_fix_rec_mktxcostanalysisgrp)  =
+    let d = [] in
+    let d = (match rec_in.rg_MKTXCostAnalysisGrp_element_0 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_MKTXCostAnalysisGrp_element_1 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_MKTXCostAnalysisGrp_element_2 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_MKTXCostAnalysisGrp_element_3 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_MKTXCostAnalysisGrp_element_4 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    map_convert__model_to_full_RG_MKTXCostAnalysisGrp d (cap_length d 0 5)
+;;
+
+let rec convert__full_to_model_MKTXCostAnalysisGrp (rec_in : fix_rg_mktxcostanalysisgrp)  =
+    let block4 = None in
+    let block3 = None in
+    let block2 = None in
+    let block1 = None in
+    let block0 = None in
+    let t = rec_in in
+    (match t with
+        | [] -> {
+            mod_f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis = Some (cap_length rec_in 0 5);
+            rg_MKTXCostAnalysisGrp_element_4 = block4;
+            rg_MKTXCostAnalysisGrp_element_3 = block3;
+            rg_MKTXCostAnalysisGrp_element_2 = block2;
+            rg_MKTXCostAnalysisGrp_element_1 = block1;
+            rg_MKTXCostAnalysisGrp_element_0 = block0
+        }
+        | h :: t -> let block0 = Some (convert__full_to_model_RG_MKTXCostAnalysisGrp h) in
+        (match t with
+            | [] -> {
+                mod_f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis = Some (cap_length rec_in 0 5);
+                rg_MKTXCostAnalysisGrp_element_4 = block4;
+                rg_MKTXCostAnalysisGrp_element_3 = block3;
+                rg_MKTXCostAnalysisGrp_element_2 = block2;
+                rg_MKTXCostAnalysisGrp_element_1 = block1;
+                rg_MKTXCostAnalysisGrp_element_0 = block0
+            }
+            | h :: t -> let block1 = Some (convert__full_to_model_RG_MKTXCostAnalysisGrp h) in
+            (match t with
+                | [] -> {
+                    mod_f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis = Some (cap_length rec_in 0 5);
+                    rg_MKTXCostAnalysisGrp_element_4 = block4;
+                    rg_MKTXCostAnalysisGrp_element_3 = block3;
+                    rg_MKTXCostAnalysisGrp_element_2 = block2;
+                    rg_MKTXCostAnalysisGrp_element_1 = block1;
+                    rg_MKTXCostAnalysisGrp_element_0 = block0
+                }
+                | h :: t -> let block2 = Some (convert__full_to_model_RG_MKTXCostAnalysisGrp h) in
+                (match t with
+                    | [] -> {
+                        mod_f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis = Some (cap_length rec_in 0 5);
+                        rg_MKTXCostAnalysisGrp_element_4 = block4;
+                        rg_MKTXCostAnalysisGrp_element_3 = block3;
+                        rg_MKTXCostAnalysisGrp_element_2 = block2;
+                        rg_MKTXCostAnalysisGrp_element_1 = block1;
+                        rg_MKTXCostAnalysisGrp_element_0 = block0
+                    }
+                    | h :: t -> let block3 = Some (convert__full_to_model_RG_MKTXCostAnalysisGrp h) in
+                    (match t with
+                        | [] -> {
+                            mod_f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis = Some (cap_length rec_in 0 5);
+                            rg_MKTXCostAnalysisGrp_element_4 = block4;
+                            rg_MKTXCostAnalysisGrp_element_3 = block3;
+                            rg_MKTXCostAnalysisGrp_element_2 = block2;
+                            rg_MKTXCostAnalysisGrp_element_1 = block1;
+                            rg_MKTXCostAnalysisGrp_element_0 = block0
+                        }
+                        | h :: t -> let block4 = Some (convert__full_to_model_RG_MKTXCostAnalysisGrp h) in
+                        {
+                            mod_f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis = Some (cap_length rec_in 0 5);
+                            rg_MKTXCostAnalysisGrp_element_4 = block4;
+                            rg_MKTXCostAnalysisGrp_element_3 = block3;
+                            rg_MKTXCostAnalysisGrp_element_2 = block2;
+                            rg_MKTXCostAnalysisGrp_element_1 = block1;
+                            rg_MKTXCostAnalysisGrp_element_0 = block0
+                        }
+                    )
+                )
+            )
+        )
+    ) and 
+convert__full_to_model_RG_MKTXCostAnalysisGrp (rec_in : fix_rg_inner_mktxcostanalysisgrp)  =
+    {
+        mod_f_MKTXCostAnalysisGrp_MKTXAnalysisTo = (match rec_in.f_MKTXCostAnalysisGrp_MKTXAnalysisTo with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_MKTXAnalysisTo x))
+        );
+        mod_f_MKTXCostAnalysisGrp_MKTXBenefit = rec_in.f_MKTXCostAnalysisGrp_MKTXBenefit;
+        mod_f_MKTXCostAnalysisGrp_MKTXComparisonPrice = rec_in.f_MKTXCostAnalysisGrp_MKTXComparisonPrice;
+        mod_f_MKTXCostAnalysisGrp_MKTXPriceDiff = rec_in.f_MKTXCostAnalysisGrp_MKTXPriceDiff
+    }
+;;
+
+let check_convert_full_to_model_RG_MKTXCostAnalysisGrp (rec_in : fix_rg_inner_mktxcostanalysisgrp)  =
+    RG_Success
+;;
+
+let rec check_convert_full_to_model__MKTXCostAnalysisGrp (rec_in : fix_rg_mktxcostanalysisgrp)  =
+    (match rec_in with
+        | [] -> RG_Success
+        | x :: y -> ((match check_convert_full_to_model_RG_MKTXCostAnalysisGrp x with
+            | RG_Success -> (check_convert_full_to_model__MKTXCostAnalysisGrp y)
+            | f -> f
+        )
+        )
+    )
+;;
+
+let rec map_convert__model_to_full_RG_RegulatoryTradeIDsGrp (d) (x)  =
+    (match d with
+        | [] -> []
+        | h :: t -> ((convert__model_to_full_RG_RegulatoryTradeIDsGrp h x) :: (map_convert__model_to_full_RG_RegulatoryTradeIDsGrp t x))
+    ) and 
+convert__model_to_full_RG_RegulatoryTradeIDsGrp (rec_in : model_fix_inner_regulatorytradeidsgrp) (len : int)  =
+    {
+        f_RegulatoryTradeIDsGrp_RegulatoryTradeID = rec_in.mod_f_RegulatoryTradeIDsGrp_RegulatoryTradeID;
+        f_RegulatoryTradeIDsGrp_RegulatoryTradeIDType = (match rec_in.mod_f_RegulatoryTradeIDsGrp_RegulatoryTradeIDType with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_RegulatoryTradeIDType x))
+        );
+        f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs = Some len
+    } and 
+convert__model_to_full_RegulatoryTradeIDsGrp (rec_in : model_fix_rec_regulatorytradeidsgrp)  =
+    let d = [] in
+    let d = (match rec_in.rg_RegulatoryTradeIDsGrp_element_0 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_RegulatoryTradeIDsGrp_element_1 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_RegulatoryTradeIDsGrp_element_2 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_RegulatoryTradeIDsGrp_element_3 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_RegulatoryTradeIDsGrp_element_4 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    map_convert__model_to_full_RG_RegulatoryTradeIDsGrp d (cap_length d 0 5)
+;;
+
+let rec convert__full_to_model_RegulatoryTradeIDsGrp (rec_in : fix_rg_regulatorytradeidsgrp)  =
+    let block4 = None in
+    let block3 = None in
+    let block2 = None in
+    let block1 = None in
+    let block0 = None in
+    let t = rec_in in
+    (match t with
+        | [] -> {
+            mod_f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs = Some (cap_length rec_in 0 5);
+            rg_RegulatoryTradeIDsGrp_element_4 = block4;
+            rg_RegulatoryTradeIDsGrp_element_3 = block3;
+            rg_RegulatoryTradeIDsGrp_element_2 = block2;
+            rg_RegulatoryTradeIDsGrp_element_1 = block1;
+            rg_RegulatoryTradeIDsGrp_element_0 = block0
+        }
+        | h :: t -> let block0 = Some (convert__full_to_model_RG_RegulatoryTradeIDsGrp h) in
+        (match t with
+            | [] -> {
+                mod_f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs = Some (cap_length rec_in 0 5);
+                rg_RegulatoryTradeIDsGrp_element_4 = block4;
+                rg_RegulatoryTradeIDsGrp_element_3 = block3;
+                rg_RegulatoryTradeIDsGrp_element_2 = block2;
+                rg_RegulatoryTradeIDsGrp_element_1 = block1;
+                rg_RegulatoryTradeIDsGrp_element_0 = block0
+            }
+            | h :: t -> let block1 = Some (convert__full_to_model_RG_RegulatoryTradeIDsGrp h) in
+            (match t with
+                | [] -> {
+                    mod_f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs = Some (cap_length rec_in 0 5);
+                    rg_RegulatoryTradeIDsGrp_element_4 = block4;
+                    rg_RegulatoryTradeIDsGrp_element_3 = block3;
+                    rg_RegulatoryTradeIDsGrp_element_2 = block2;
+                    rg_RegulatoryTradeIDsGrp_element_1 = block1;
+                    rg_RegulatoryTradeIDsGrp_element_0 = block0
+                }
+                | h :: t -> let block2 = Some (convert__full_to_model_RG_RegulatoryTradeIDsGrp h) in
+                (match t with
+                    | [] -> {
+                        mod_f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs = Some (cap_length rec_in 0 5);
+                        rg_RegulatoryTradeIDsGrp_element_4 = block4;
+                        rg_RegulatoryTradeIDsGrp_element_3 = block3;
+                        rg_RegulatoryTradeIDsGrp_element_2 = block2;
+                        rg_RegulatoryTradeIDsGrp_element_1 = block1;
+                        rg_RegulatoryTradeIDsGrp_element_0 = block0
+                    }
+                    | h :: t -> let block3 = Some (convert__full_to_model_RG_RegulatoryTradeIDsGrp h) in
+                    (match t with
+                        | [] -> {
+                            mod_f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs = Some (cap_length rec_in 0 5);
+                            rg_RegulatoryTradeIDsGrp_element_4 = block4;
+                            rg_RegulatoryTradeIDsGrp_element_3 = block3;
+                            rg_RegulatoryTradeIDsGrp_element_2 = block2;
+                            rg_RegulatoryTradeIDsGrp_element_1 = block1;
+                            rg_RegulatoryTradeIDsGrp_element_0 = block0
+                        }
+                        | h :: t -> let block4 = Some (convert__full_to_model_RG_RegulatoryTradeIDsGrp h) in
+                        {
+                            mod_f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs = Some (cap_length rec_in 0 5);
+                            rg_RegulatoryTradeIDsGrp_element_4 = block4;
+                            rg_RegulatoryTradeIDsGrp_element_3 = block3;
+                            rg_RegulatoryTradeIDsGrp_element_2 = block2;
+                            rg_RegulatoryTradeIDsGrp_element_1 = block1;
+                            rg_RegulatoryTradeIDsGrp_element_0 = block0
+                        }
+                    )
+                )
+            )
+        )
+    ) and 
+convert__full_to_model_RG_RegulatoryTradeIDsGrp (rec_in : fix_rg_inner_regulatorytradeidsgrp)  =
+    {
+        mod_f_RegulatoryTradeIDsGrp_RegulatoryTradeID = rec_in.f_RegulatoryTradeIDsGrp_RegulatoryTradeID;
+        mod_f_RegulatoryTradeIDsGrp_RegulatoryTradeIDType = (match rec_in.f_RegulatoryTradeIDsGrp_RegulatoryTradeIDType with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_RegulatoryTradeIDType x))
+        )
+    }
+;;
+
+let check_convert_full_to_model_RG_RegulatoryTradeIDsGrp (rec_in : fix_rg_inner_regulatorytradeidsgrp)  =
+    RG_Success
+;;
+
+let rec check_convert_full_to_model__RegulatoryTradeIDsGrp (rec_in : fix_rg_regulatorytradeidsgrp)  =
+    (match rec_in with
+        | [] -> RG_Success
+        | x :: y -> ((match check_convert_full_to_model_RG_RegulatoryTradeIDsGrp x with
+            | RG_Success -> (check_convert_full_to_model__RegulatoryTradeIDsGrp y)
+            | f -> f
+        )
+        )
+    )
+;;
+
+let rec map_convert__model_to_full_RG_LegsGrp (d) (x)  =
+    (match d with
+        | [] -> []
+        | h :: t -> ((convert__model_to_full_RG_LegsGrp h x) :: (map_convert__model_to_full_RG_LegsGrp t x))
+    ) and 
+convert__model_to_full_RG_LegsGrp (rec_in : model_fix_inner_legsgrp) (len : int)  =
+    {
+        f_LegsGrp_LegQty = rec_in.mod_f_LegsGrp_LegQty;
+        f_LegsGrp_LegSwapType = (match rec_in.mod_f_LegsGrp_LegSwapType with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_LegSwapType x))
+        );
+        f_LegsGrp_LegRefID = rec_in.mod_f_LegsGrp_LegRefID;
+        f_LegsGrp_LegPrice = rec_in.mod_f_LegsGrp_LegPrice;
+        f_LegsGrp_LegSettlDate = rec_in.mod_f_LegsGrp_LegSettlDate;
+        f_LegsGrp_PortfolioName = rec_in.mod_f_LegsGrp_PortfolioName;
+        f_LegsGrp_NoLegs = Some len;
+        f_LegsGrp_InstrumentLeg = {
+            f_InstrumentLeg_LegSymbol = Some rec_in.mod_f_LegsGrp_InstrumentLeg_LegSymbol;
+            f_InstrumentLeg_LegSecurityID = Some rec_in.mod_f_LegsGrp_InstrumentLeg_LegSecurityID;
+            f_InstrumentLeg_LegSecurityIDSource = Some (convert__model_to_full_LegSecurityIDSource rec_in.mod_f_LegsGrp_InstrumentLeg_LegSecurityIDSource);
+            f_InstrumentLeg_LegProduct = (match rec_in.mod_f_LegsGrp_InstrumentLeg_LegProduct with
+                | None -> None
+                | Some x -> (Some (convert__model_to_full_LegProduct x))
+            );
+            f_InstrumentLeg_LegIssueDate = rec_in.mod_f_LegsGrp_InstrumentLeg_LegIssueDate;
+            f_InstrumentLeg_LegDatedDate = rec_in.mod_f_LegsGrp_InstrumentLeg_LegDatedDate;
+            f_InstrumentLeg_LegSecurityType = rec_in.mod_f_LegsGrp_InstrumentLeg_LegSecurityType;
+            f_InstrumentLeg_LegMaturityDate = rec_in.mod_f_LegsGrp_InstrumentLeg_LegMaturityDate;
+            f_InstrumentLeg_LegCouponRate = rec_in.mod_f_LegsGrp_InstrumentLeg_LegCouponRate;
+            f_InstrumentLeg_LegIssuer = rec_in.mod_f_LegsGrp_InstrumentLeg_LegIssuer;
+            f_InstrumentLeg_LegSecurityDesc = rec_in.mod_f_LegsGrp_InstrumentLeg_LegSecurityDesc;
+            f_InstrumentLeg_LegSide = (match rec_in.mod_f_LegsGrp_InstrumentLeg_LegSide with
+                | None -> None
+                | Some x -> (Some (convert__model_to_full_LegSide x))
+            );
+            f_InstrumentLeg_LegCurrency = rec_in.mod_f_LegsGrp_InstrumentLeg_LegCurrency
+        }
+    } and 
+convert__model_to_full_LegsGrp (rec_in : model_fix_rec_legsgrp)  =
+    let d = [] in
+    let d = (match rec_in.rg_LegsGrp_element_0 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_LegsGrp_element_1 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_LegsGrp_element_2 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_LegsGrp_element_3 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_LegsGrp_element_4 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    map_convert__model_to_full_RG_LegsGrp d (cap_length d 0 5)
+;;
+
+let rec convert__full_to_model_LegsGrp (rec_in : fix_rg_legsgrp)  =
+    let block4 = None in
+    let block3 = None in
+    let block2 = None in
+    let block1 = None in
+    let block0 = None in
+    let t = rec_in in
+    (match t with
+        | [] -> {
+            mod_f_LegsGrp_NoLegs = Some (cap_length rec_in 0 5);
+            rg_LegsGrp_element_4 = block4;
+            rg_LegsGrp_element_3 = block3;
+            rg_LegsGrp_element_2 = block2;
+            rg_LegsGrp_element_1 = block1;
+            rg_LegsGrp_element_0 = block0
+        }
+        | h :: t -> let block0 = Some (convert__full_to_model_RG_LegsGrp h) in
+        (match t with
+            | [] -> {
+                mod_f_LegsGrp_NoLegs = Some (cap_length rec_in 0 5);
+                rg_LegsGrp_element_4 = block4;
+                rg_LegsGrp_element_3 = block3;
+                rg_LegsGrp_element_2 = block2;
+                rg_LegsGrp_element_1 = block1;
+                rg_LegsGrp_element_0 = block0
+            }
+            | h :: t -> let block1 = Some (convert__full_to_model_RG_LegsGrp h) in
+            (match t with
+                | [] -> {
+                    mod_f_LegsGrp_NoLegs = Some (cap_length rec_in 0 5);
+                    rg_LegsGrp_element_4 = block4;
+                    rg_LegsGrp_element_3 = block3;
+                    rg_LegsGrp_element_2 = block2;
+                    rg_LegsGrp_element_1 = block1;
+                    rg_LegsGrp_element_0 = block0
+                }
+                | h :: t -> let block2 = Some (convert__full_to_model_RG_LegsGrp h) in
+                (match t with
+                    | [] -> {
+                        mod_f_LegsGrp_NoLegs = Some (cap_length rec_in 0 5);
+                        rg_LegsGrp_element_4 = block4;
+                        rg_LegsGrp_element_3 = block3;
+                        rg_LegsGrp_element_2 = block2;
+                        rg_LegsGrp_element_1 = block1;
+                        rg_LegsGrp_element_0 = block0
+                    }
+                    | h :: t -> let block3 = Some (convert__full_to_model_RG_LegsGrp h) in
+                    (match t with
+                        | [] -> {
+                            mod_f_LegsGrp_NoLegs = Some (cap_length rec_in 0 5);
+                            rg_LegsGrp_element_4 = block4;
+                            rg_LegsGrp_element_3 = block3;
+                            rg_LegsGrp_element_2 = block2;
+                            rg_LegsGrp_element_1 = block1;
+                            rg_LegsGrp_element_0 = block0
+                        }
+                        | h :: t -> let block4 = Some (convert__full_to_model_RG_LegsGrp h) in
+                        {
+                            mod_f_LegsGrp_NoLegs = Some (cap_length rec_in 0 5);
+                            rg_LegsGrp_element_4 = block4;
+                            rg_LegsGrp_element_3 = block3;
+                            rg_LegsGrp_element_2 = block2;
+                            rg_LegsGrp_element_1 = block1;
+                            rg_LegsGrp_element_0 = block0
+                        }
+                    )
+                )
+            )
+        )
+    ) and 
+convert__full_to_model_RG_LegsGrp (rec_in : fix_rg_inner_legsgrp)  =
+    {
+        mod_f_LegsGrp_InstrumentLeg_LegSymbol = (match rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegSymbol with
+            | Some x -> x
+            | None -> raise Ipl_rg_exception 
+        );
+        mod_f_LegsGrp_InstrumentLeg_LegSecurityID = (match rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegSecurityID with
+            | Some x -> x
+            | None -> raise Ipl_rg_exception 
+        );
+        mod_f_LegsGrp_InstrumentLeg_LegSecurityIDSource = (match rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegSecurityIDSource with
+            | Some x -> (convert__full_to_model_LegSecurityIDSource x)
+            | None -> raise Ipl_rg_exception 
+        );
+        mod_f_LegsGrp_InstrumentLeg_LegProduct = (match rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegProduct with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_LegProduct x))
+        );
+        mod_f_LegsGrp_InstrumentLeg_LegIssueDate = rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegIssueDate;
+        mod_f_LegsGrp_InstrumentLeg_LegDatedDate = rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegDatedDate;
+        mod_f_LegsGrp_InstrumentLeg_LegSecurityType = rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegSecurityType;
+        mod_f_LegsGrp_InstrumentLeg_LegMaturityDate = rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegMaturityDate;
+        mod_f_LegsGrp_InstrumentLeg_LegCouponRate = rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegCouponRate;
+        mod_f_LegsGrp_InstrumentLeg_LegIssuer = rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegIssuer;
+        mod_f_LegsGrp_InstrumentLeg_LegSecurityDesc = rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegSecurityDesc;
+        mod_f_LegsGrp_InstrumentLeg_LegSide = (match rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegSide with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_LegSide x))
+        );
+        mod_f_LegsGrp_InstrumentLeg_LegCurrency = rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegCurrency;
+        mod_f_LegsGrp_LegQty = rec_in.f_LegsGrp_LegQty;
+        mod_f_LegsGrp_LegSwapType = (match rec_in.f_LegsGrp_LegSwapType with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_LegSwapType x))
+        );
+        mod_f_LegsGrp_LegRefID = rec_in.f_LegsGrp_LegRefID;
+        mod_f_LegsGrp_LegPrice = rec_in.f_LegsGrp_LegPrice;
+        mod_f_LegsGrp_LegSettlDate = rec_in.f_LegsGrp_LegSettlDate;
+        mod_f_LegsGrp_PortfolioName = rec_in.f_LegsGrp_PortfolioName
+    }
+;;
+
+let check_convert_full_to_model_RG_LegsGrp (rec_in : fix_rg_inner_legsgrp)  =
+    (match rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegSecurityIDSource with
+        | None -> (RG_Failure M_Field_LegSecurityIDSource_Tag)
+        | Some _ -> ((match rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegSecurityID with
+            | None -> (RG_Failure M_Field_LegSecurityID_Tag)
+            | Some _ -> ((match rec_in.f_LegsGrp_InstrumentLeg.f_InstrumentLeg_LegSymbol with
+                | None -> (RG_Failure M_Field_LegSymbol_Tag)
+                | Some _ -> RG_Success
+            )
+            )
+        )
+        )
+    )
+;;
+
+let rec check_convert_full_to_model__LegsGrp (rec_in : fix_rg_legsgrp)  =
+    (match rec_in with
+        | [] -> RG_Success
+        | x :: y -> ((match check_convert_full_to_model_RG_LegsGrp x with
+            | RG_Success -> (check_convert_full_to_model__LegsGrp y)
+            | f -> f
+        )
+        )
+    )
+;;
+
+let rec map_convert__model_to_full_RG_DealersGrp (d) (x)  =
+    (match d with
+        | [] -> []
+        | h :: t -> ((convert__model_to_full_RG_DealersGrp h x) :: (map_convert__model_to_full_RG_DealersGrp t x))
+    ) and 
+convert__model_to_full_RG_DealersGrp (rec_in : model_fix_inner_dealersgrp) (len : int)  =
+    {
+        f_DealersGrp_DealerID = rec_in.mod_f_DealersGrp_DealerID;
+        f_DealersGrp_DealerIDSource = (match rec_in.mod_f_DealersGrp_DealerIDSource with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_DealerIDSource x))
+        );
+        f_DealersGrp_Exclude = (match rec_in.mod_f_DealersGrp_Exclude with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_Exclude x))
+        );
+        f_DealersGrp_DealerQuotePriceType = rec_in.mod_f_DealersGrp_DealerQuotePriceType;
+        f_DealersGrp_ReferencePrice = rec_in.mod_f_DealersGrp_ReferencePrice;
+        f_DealersGrp_DealerQuotePrice = rec_in.mod_f_DealersGrp_DealerQuotePrice;
+        f_DealersGrp_DealerQuoteOrdQty = rec_in.mod_f_DealersGrp_DealerQuoteOrdQty;
+        f_DealersGrp_DealerQuoteText = rec_in.mod_f_DealersGrp_DealerQuoteText;
+        f_DealersGrp_CompetitiveStatus = (match rec_in.mod_f_DealersGrp_CompetitiveStatus with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_CompetitiveStatus x))
+        );
+        f_DealersGrp_TraderID = rec_in.mod_f_DealersGrp_TraderID;
+        f_DealersGrp_QuoteRank = rec_in.mod_f_DealersGrp_QuoteRank;
+        f_DealersGrp_DealerFXRate = rec_in.mod_f_DealersGrp_DealerFXRate;
+        f_DealersGrp_NoDealers = Some len
+    } and 
+convert__model_to_full_DealersGrp (rec_in : model_fix_rec_dealersgrp)  =
+    let d = [] in
+    let d = (match rec_in.rg_DealersGrp_element_0 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_DealersGrp_element_1 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_DealersGrp_element_2 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_DealersGrp_element_3 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_DealersGrp_element_4 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    map_convert__model_to_full_RG_DealersGrp d (cap_length d 0 5)
+;;
+
+let rec convert__full_to_model_DealersGrp (rec_in : fix_rg_dealersgrp)  =
+    let block4 = None in
+    let block3 = None in
+    let block2 = None in
+    let block1 = None in
+    let block0 = None in
+    let t = rec_in in
+    (match t with
+        | [] -> {
+            mod_f_DealersGrp_NoDealers = Some (cap_length rec_in 0 5);
+            rg_DealersGrp_element_4 = block4;
+            rg_DealersGrp_element_3 = block3;
+            rg_DealersGrp_element_2 = block2;
+            rg_DealersGrp_element_1 = block1;
+            rg_DealersGrp_element_0 = block0
+        }
+        | h :: t -> let block0 = Some (convert__full_to_model_RG_DealersGrp h) in
+        (match t with
+            | [] -> {
+                mod_f_DealersGrp_NoDealers = Some (cap_length rec_in 0 5);
+                rg_DealersGrp_element_4 = block4;
+                rg_DealersGrp_element_3 = block3;
+                rg_DealersGrp_element_2 = block2;
+                rg_DealersGrp_element_1 = block1;
+                rg_DealersGrp_element_0 = block0
+            }
+            | h :: t -> let block1 = Some (convert__full_to_model_RG_DealersGrp h) in
+            (match t with
+                | [] -> {
+                    mod_f_DealersGrp_NoDealers = Some (cap_length rec_in 0 5);
+                    rg_DealersGrp_element_4 = block4;
+                    rg_DealersGrp_element_3 = block3;
+                    rg_DealersGrp_element_2 = block2;
+                    rg_DealersGrp_element_1 = block1;
+                    rg_DealersGrp_element_0 = block0
+                }
+                | h :: t -> let block2 = Some (convert__full_to_model_RG_DealersGrp h) in
+                (match t with
+                    | [] -> {
+                        mod_f_DealersGrp_NoDealers = Some (cap_length rec_in 0 5);
+                        rg_DealersGrp_element_4 = block4;
+                        rg_DealersGrp_element_3 = block3;
+                        rg_DealersGrp_element_2 = block2;
+                        rg_DealersGrp_element_1 = block1;
+                        rg_DealersGrp_element_0 = block0
+                    }
+                    | h :: t -> let block3 = Some (convert__full_to_model_RG_DealersGrp h) in
+                    (match t with
+                        | [] -> {
+                            mod_f_DealersGrp_NoDealers = Some (cap_length rec_in 0 5);
+                            rg_DealersGrp_element_4 = block4;
+                            rg_DealersGrp_element_3 = block3;
+                            rg_DealersGrp_element_2 = block2;
+                            rg_DealersGrp_element_1 = block1;
+                            rg_DealersGrp_element_0 = block0
+                        }
+                        | h :: t -> let block4 = Some (convert__full_to_model_RG_DealersGrp h) in
+                        {
+                            mod_f_DealersGrp_NoDealers = Some (cap_length rec_in 0 5);
+                            rg_DealersGrp_element_4 = block4;
+                            rg_DealersGrp_element_3 = block3;
+                            rg_DealersGrp_element_2 = block2;
+                            rg_DealersGrp_element_1 = block1;
+                            rg_DealersGrp_element_0 = block0
+                        }
+                    )
+                )
+            )
+        )
+    ) and 
+convert__full_to_model_RG_DealersGrp (rec_in : fix_rg_inner_dealersgrp)  =
+    {
+        mod_f_DealersGrp_DealerID = rec_in.f_DealersGrp_DealerID;
+        mod_f_DealersGrp_DealerIDSource = (match rec_in.f_DealersGrp_DealerIDSource with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_DealerIDSource x))
+        );
+        mod_f_DealersGrp_Exclude = (match rec_in.f_DealersGrp_Exclude with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_Exclude x))
+        );
+        mod_f_DealersGrp_DealerQuotePriceType = rec_in.f_DealersGrp_DealerQuotePriceType;
+        mod_f_DealersGrp_ReferencePrice = rec_in.f_DealersGrp_ReferencePrice;
+        mod_f_DealersGrp_DealerQuotePrice = rec_in.f_DealersGrp_DealerQuotePrice;
+        mod_f_DealersGrp_DealerQuoteOrdQty = rec_in.f_DealersGrp_DealerQuoteOrdQty;
+        mod_f_DealersGrp_DealerQuoteText = rec_in.f_DealersGrp_DealerQuoteText;
+        mod_f_DealersGrp_CompetitiveStatus = (match rec_in.f_DealersGrp_CompetitiveStatus with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_CompetitiveStatus x))
+        );
+        mod_f_DealersGrp_TraderID = rec_in.f_DealersGrp_TraderID;
+        mod_f_DealersGrp_QuoteRank = rec_in.f_DealersGrp_QuoteRank;
+        mod_f_DealersGrp_DealerFXRate = rec_in.f_DealersGrp_DealerFXRate
+    }
+;;
+
+let check_convert_full_to_model_RG_DealersGrp (rec_in : fix_rg_inner_dealersgrp)  =
+    RG_Success
+;;
+
+let rec check_convert_full_to_model__DealersGrp (rec_in : fix_rg_dealersgrp)  =
+    (match rec_in with
+        | [] -> RG_Success
+        | x :: y -> ((match check_convert_full_to_model_RG_DealersGrp x with
+            | RG_Success -> (check_convert_full_to_model__DealersGrp y)
+            | f -> f
+        )
+        )
+    )
+;;
+
+let rec map_convert__model_to_full_RG_TrdRegPublicationsGrp (d) (x)  =
+    (match d with
+        | [] -> []
+        | h :: t -> ((convert__model_to_full_RG_TrdRegPublicationsGrp h x) :: (map_convert__model_to_full_RG_TrdRegPublicationsGrp t x))
+    ) and 
+convert__model_to_full_RG_TrdRegPublicationsGrp (rec_in : model_fix_inner_trdregpublicationsgrp) (len : int)  =
+    {
+        f_TrdRegPublicationsGrp_TrdRegPublicationType = (match rec_in.mod_f_TrdRegPublicationsGrp_TrdRegPublicationType with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_TrdRegPublicationType x))
+        );
+        f_TrdRegPublicationsGrp_TrdRegPublicationReason = (match rec_in.mod_f_TrdRegPublicationsGrp_TrdRegPublicationReason with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_TrdRegPublicationReason x))
+        );
+        f_TrdRegPublicationsGrp_NoTrdRegPublications = Some len
+    } and 
+convert__model_to_full_TrdRegPublicationsGrp (rec_in : model_fix_rec_trdregpublicationsgrp)  =
+    let d = [] in
+    let d = (match rec_in.rg_TrdRegPublicationsGrp_element_0 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_TrdRegPublicationsGrp_element_1 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_TrdRegPublicationsGrp_element_2 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_TrdRegPublicationsGrp_element_3 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_TrdRegPublicationsGrp_element_4 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    map_convert__model_to_full_RG_TrdRegPublicationsGrp d (cap_length d 0 5)
+;;
+
+let rec convert__full_to_model_TrdRegPublicationsGrp (rec_in : fix_rg_trdregpublicationsgrp)  =
+    let block4 = None in
+    let block3 = None in
+    let block2 = None in
+    let block1 = None in
+    let block0 = None in
+    let t = rec_in in
+    (match t with
+        | [] -> {
+            mod_f_TrdRegPublicationsGrp_NoTrdRegPublications = Some (cap_length rec_in 0 5);
+            rg_TrdRegPublicationsGrp_element_4 = block4;
+            rg_TrdRegPublicationsGrp_element_3 = block3;
+            rg_TrdRegPublicationsGrp_element_2 = block2;
+            rg_TrdRegPublicationsGrp_element_1 = block1;
+            rg_TrdRegPublicationsGrp_element_0 = block0
+        }
+        | h :: t -> let block0 = Some (convert__full_to_model_RG_TrdRegPublicationsGrp h) in
+        (match t with
+            | [] -> {
+                mod_f_TrdRegPublicationsGrp_NoTrdRegPublications = Some (cap_length rec_in 0 5);
+                rg_TrdRegPublicationsGrp_element_4 = block4;
+                rg_TrdRegPublicationsGrp_element_3 = block3;
+                rg_TrdRegPublicationsGrp_element_2 = block2;
+                rg_TrdRegPublicationsGrp_element_1 = block1;
+                rg_TrdRegPublicationsGrp_element_0 = block0
+            }
+            | h :: t -> let block1 = Some (convert__full_to_model_RG_TrdRegPublicationsGrp h) in
+            (match t with
+                | [] -> {
+                    mod_f_TrdRegPublicationsGrp_NoTrdRegPublications = Some (cap_length rec_in 0 5);
+                    rg_TrdRegPublicationsGrp_element_4 = block4;
+                    rg_TrdRegPublicationsGrp_element_3 = block3;
+                    rg_TrdRegPublicationsGrp_element_2 = block2;
+                    rg_TrdRegPublicationsGrp_element_1 = block1;
+                    rg_TrdRegPublicationsGrp_element_0 = block0
+                }
+                | h :: t -> let block2 = Some (convert__full_to_model_RG_TrdRegPublicationsGrp h) in
+                (match t with
+                    | [] -> {
+                        mod_f_TrdRegPublicationsGrp_NoTrdRegPublications = Some (cap_length rec_in 0 5);
+                        rg_TrdRegPublicationsGrp_element_4 = block4;
+                        rg_TrdRegPublicationsGrp_element_3 = block3;
+                        rg_TrdRegPublicationsGrp_element_2 = block2;
+                        rg_TrdRegPublicationsGrp_element_1 = block1;
+                        rg_TrdRegPublicationsGrp_element_0 = block0
+                    }
+                    | h :: t -> let block3 = Some (convert__full_to_model_RG_TrdRegPublicationsGrp h) in
+                    (match t with
+                        | [] -> {
+                            mod_f_TrdRegPublicationsGrp_NoTrdRegPublications = Some (cap_length rec_in 0 5);
+                            rg_TrdRegPublicationsGrp_element_4 = block4;
+                            rg_TrdRegPublicationsGrp_element_3 = block3;
+                            rg_TrdRegPublicationsGrp_element_2 = block2;
+                            rg_TrdRegPublicationsGrp_element_1 = block1;
+                            rg_TrdRegPublicationsGrp_element_0 = block0
+                        }
+                        | h :: t -> let block4 = Some (convert__full_to_model_RG_TrdRegPublicationsGrp h) in
+                        {
+                            mod_f_TrdRegPublicationsGrp_NoTrdRegPublications = Some (cap_length rec_in 0 5);
+                            rg_TrdRegPublicationsGrp_element_4 = block4;
+                            rg_TrdRegPublicationsGrp_element_3 = block3;
+                            rg_TrdRegPublicationsGrp_element_2 = block2;
+                            rg_TrdRegPublicationsGrp_element_1 = block1;
+                            rg_TrdRegPublicationsGrp_element_0 = block0
+                        }
+                    )
+                )
+            )
+        )
+    ) and 
+convert__full_to_model_RG_TrdRegPublicationsGrp (rec_in : fix_rg_inner_trdregpublicationsgrp)  =
+    {
+        mod_f_TrdRegPublicationsGrp_TrdRegPublicationType = (match rec_in.f_TrdRegPublicationsGrp_TrdRegPublicationType with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_TrdRegPublicationType x))
+        );
+        mod_f_TrdRegPublicationsGrp_TrdRegPublicationReason = (match rec_in.f_TrdRegPublicationsGrp_TrdRegPublicationReason with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_TrdRegPublicationReason x))
+        )
+    }
+;;
+
+let check_convert_full_to_model_RG_TrdRegPublicationsGrp (rec_in : fix_rg_inner_trdregpublicationsgrp)  =
+    RG_Success
+;;
+
+let rec check_convert_full_to_model__TrdRegPublicationsGrp (rec_in : fix_rg_trdregpublicationsgrp)  =
+    (match rec_in with
+        | [] -> RG_Success
+        | x :: y -> ((match check_convert_full_to_model_RG_TrdRegPublicationsGrp x with
+            | RG_Success -> (check_convert_full_to_model__TrdRegPublicationsGrp y)
+            | f -> f
+        )
+        )
+    )
+;;
+
+let rec map_convert__model_to_full_RG_PartySubIDsGrp (d) (x)  =
+    (match d with
+        | [] -> []
+        | h :: t -> ((convert__model_to_full_RG_PartySubIDsGrp h x) :: (map_convert__model_to_full_RG_PartySubIDsGrp t x))
+    ) and 
+convert__model_to_full_RG_PartySubIDsGrp (rec_in : model_fix_inner_partysubidsgrp) (len : int)  =
+    {
+        f_PartySubIDsGrp_PartySubID = rec_in.mod_f_PartySubIDsGrp_PartySubID;
+        f_PartySubIDsGrp_PartySubIDType = (match rec_in.mod_f_PartySubIDsGrp_PartySubIDType with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_PartySubIDType x))
+        );
+        f_PartySubIDsGrp_NoPartySubIDs = Some len
+    } and 
+convert__model_to_full_PartySubIDsGrp (rec_in : model_fix_rec_partysubidsgrp)  =
+    let d = [] in
+    let d = (match rec_in.rg_PartySubIDsGrp_element_0 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_PartySubIDsGrp_element_1 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_PartySubIDsGrp_element_2 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_PartySubIDsGrp_element_3 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_PartySubIDsGrp_element_4 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    map_convert__model_to_full_RG_PartySubIDsGrp d (cap_length d 0 5)
+;;
+
+let rec convert__full_to_model_PartySubIDsGrp (rec_in : fix_rg_partysubidsgrp)  =
+    let block4 = None in
+    let block3 = None in
+    let block2 = None in
+    let block1 = None in
+    let block0 = None in
+    let t = rec_in in
+    (match t with
+        | [] -> {
+            mod_f_PartySubIDsGrp_NoPartySubIDs = Some (cap_length rec_in 0 5);
+            rg_PartySubIDsGrp_element_4 = block4;
+            rg_PartySubIDsGrp_element_3 = block3;
+            rg_PartySubIDsGrp_element_2 = block2;
+            rg_PartySubIDsGrp_element_1 = block1;
+            rg_PartySubIDsGrp_element_0 = block0
+        }
+        | h :: t -> let block0 = Some (convert__full_to_model_RG_PartySubIDsGrp h) in
+        (match t with
+            | [] -> {
+                mod_f_PartySubIDsGrp_NoPartySubIDs = Some (cap_length rec_in 0 5);
+                rg_PartySubIDsGrp_element_4 = block4;
+                rg_PartySubIDsGrp_element_3 = block3;
+                rg_PartySubIDsGrp_element_2 = block2;
+                rg_PartySubIDsGrp_element_1 = block1;
+                rg_PartySubIDsGrp_element_0 = block0
+            }
+            | h :: t -> let block1 = Some (convert__full_to_model_RG_PartySubIDsGrp h) in
+            (match t with
+                | [] -> {
+                    mod_f_PartySubIDsGrp_NoPartySubIDs = Some (cap_length rec_in 0 5);
+                    rg_PartySubIDsGrp_element_4 = block4;
+                    rg_PartySubIDsGrp_element_3 = block3;
+                    rg_PartySubIDsGrp_element_2 = block2;
+                    rg_PartySubIDsGrp_element_1 = block1;
+                    rg_PartySubIDsGrp_element_0 = block0
+                }
+                | h :: t -> let block2 = Some (convert__full_to_model_RG_PartySubIDsGrp h) in
+                (match t with
+                    | [] -> {
+                        mod_f_PartySubIDsGrp_NoPartySubIDs = Some (cap_length rec_in 0 5);
+                        rg_PartySubIDsGrp_element_4 = block4;
+                        rg_PartySubIDsGrp_element_3 = block3;
+                        rg_PartySubIDsGrp_element_2 = block2;
+                        rg_PartySubIDsGrp_element_1 = block1;
+                        rg_PartySubIDsGrp_element_0 = block0
+                    }
+                    | h :: t -> let block3 = Some (convert__full_to_model_RG_PartySubIDsGrp h) in
+                    (match t with
+                        | [] -> {
+                            mod_f_PartySubIDsGrp_NoPartySubIDs = Some (cap_length rec_in 0 5);
+                            rg_PartySubIDsGrp_element_4 = block4;
+                            rg_PartySubIDsGrp_element_3 = block3;
+                            rg_PartySubIDsGrp_element_2 = block2;
+                            rg_PartySubIDsGrp_element_1 = block1;
+                            rg_PartySubIDsGrp_element_0 = block0
+                        }
+                        | h :: t -> let block4 = Some (convert__full_to_model_RG_PartySubIDsGrp h) in
+                        {
+                            mod_f_PartySubIDsGrp_NoPartySubIDs = Some (cap_length rec_in 0 5);
+                            rg_PartySubIDsGrp_element_4 = block4;
+                            rg_PartySubIDsGrp_element_3 = block3;
+                            rg_PartySubIDsGrp_element_2 = block2;
+                            rg_PartySubIDsGrp_element_1 = block1;
+                            rg_PartySubIDsGrp_element_0 = block0
+                        }
+                    )
+                )
+            )
+        )
+    ) and 
+convert__full_to_model_RG_PartySubIDsGrp (rec_in : fix_rg_inner_partysubidsgrp)  =
+    {
+        mod_f_PartySubIDsGrp_PartySubID = rec_in.f_PartySubIDsGrp_PartySubID;
+        mod_f_PartySubIDsGrp_PartySubIDType = (match rec_in.f_PartySubIDsGrp_PartySubIDType with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_PartySubIDType x))
+        )
+    }
+;;
+
+let check_convert_full_to_model_RG_PartySubIDsGrp (rec_in : fix_rg_inner_partysubidsgrp)  =
+    RG_Success
+;;
+
+let rec check_convert_full_to_model__PartySubIDsGrp (rec_in : fix_rg_partysubidsgrp)  =
+    (match rec_in with
+        | [] -> RG_Success
+        | x :: y -> ((match check_convert_full_to_model_RG_PartySubIDsGrp x with
+            | RG_Success -> (check_convert_full_to_model__PartySubIDsGrp y)
+            | f -> f
+        )
+        )
+    )
+;;
+
+let rec map_convert__model_to_full_RG_LegAllocsGrp (d) (x)  =
+    (match d with
+        | [] -> []
+        | h :: t -> ((convert__model_to_full_RG_LegAllocsGrp h x) :: (map_convert__model_to_full_RG_LegAllocsGrp t x))
+    ) and 
+convert__model_to_full_RG_LegAllocsGrp (rec_in : model_fix_inner_legallocsgrp) (len : int)  =
+    {
+        f_LegAllocsGrp_LegAllocAccount = rec_in.mod_f_LegAllocsGrp_LegAllocAccount;
+        f_LegAllocsGrp_LegAllocQty = rec_in.mod_f_LegAllocsGrp_LegAllocQty;
+        f_LegAllocsGrp_NoLegAllocs = Some len
+    } and 
+convert__model_to_full_LegAllocsGrp (rec_in : model_fix_rec_legallocsgrp)  =
+    let d = [] in
+    let d = (match rec_in.rg_LegAllocsGrp_element_0 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_LegAllocsGrp_element_1 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_LegAllocsGrp_element_2 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_LegAllocsGrp_element_3 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_LegAllocsGrp_element_4 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    map_convert__model_to_full_RG_LegAllocsGrp d (cap_length d 0 5)
+;;
+
+let rec convert__full_to_model_LegAllocsGrp (rec_in : fix_rg_legallocsgrp)  =
+    let block4 = None in
+    let block3 = None in
+    let block2 = None in
+    let block1 = None in
+    let block0 = None in
+    let t = rec_in in
+    (match t with
+        | [] -> {
+            mod_f_LegAllocsGrp_NoLegAllocs = Some (cap_length rec_in 0 5);
+            rg_LegAllocsGrp_element_4 = block4;
+            rg_LegAllocsGrp_element_3 = block3;
+            rg_LegAllocsGrp_element_2 = block2;
+            rg_LegAllocsGrp_element_1 = block1;
+            rg_LegAllocsGrp_element_0 = block0
+        }
+        | h :: t -> let block0 = Some (convert__full_to_model_RG_LegAllocsGrp h) in
+        (match t with
+            | [] -> {
+                mod_f_LegAllocsGrp_NoLegAllocs = Some (cap_length rec_in 0 5);
+                rg_LegAllocsGrp_element_4 = block4;
+                rg_LegAllocsGrp_element_3 = block3;
+                rg_LegAllocsGrp_element_2 = block2;
+                rg_LegAllocsGrp_element_1 = block1;
+                rg_LegAllocsGrp_element_0 = block0
+            }
+            | h :: t -> let block1 = Some (convert__full_to_model_RG_LegAllocsGrp h) in
+            (match t with
+                | [] -> {
+                    mod_f_LegAllocsGrp_NoLegAllocs = Some (cap_length rec_in 0 5);
+                    rg_LegAllocsGrp_element_4 = block4;
+                    rg_LegAllocsGrp_element_3 = block3;
+                    rg_LegAllocsGrp_element_2 = block2;
+                    rg_LegAllocsGrp_element_1 = block1;
+                    rg_LegAllocsGrp_element_0 = block0
+                }
+                | h :: t -> let block2 = Some (convert__full_to_model_RG_LegAllocsGrp h) in
+                (match t with
+                    | [] -> {
+                        mod_f_LegAllocsGrp_NoLegAllocs = Some (cap_length rec_in 0 5);
+                        rg_LegAllocsGrp_element_4 = block4;
+                        rg_LegAllocsGrp_element_3 = block3;
+                        rg_LegAllocsGrp_element_2 = block2;
+                        rg_LegAllocsGrp_element_1 = block1;
+                        rg_LegAllocsGrp_element_0 = block0
+                    }
+                    | h :: t -> let block3 = Some (convert__full_to_model_RG_LegAllocsGrp h) in
+                    (match t with
+                        | [] -> {
+                            mod_f_LegAllocsGrp_NoLegAllocs = Some (cap_length rec_in 0 5);
+                            rg_LegAllocsGrp_element_4 = block4;
+                            rg_LegAllocsGrp_element_3 = block3;
+                            rg_LegAllocsGrp_element_2 = block2;
+                            rg_LegAllocsGrp_element_1 = block1;
+                            rg_LegAllocsGrp_element_0 = block0
+                        }
+                        | h :: t -> let block4 = Some (convert__full_to_model_RG_LegAllocsGrp h) in
+                        {
+                            mod_f_LegAllocsGrp_NoLegAllocs = Some (cap_length rec_in 0 5);
+                            rg_LegAllocsGrp_element_4 = block4;
+                            rg_LegAllocsGrp_element_3 = block3;
+                            rg_LegAllocsGrp_element_2 = block2;
+                            rg_LegAllocsGrp_element_1 = block1;
+                            rg_LegAllocsGrp_element_0 = block0
+                        }
+                    )
+                )
+            )
+        )
+    ) and 
+convert__full_to_model_RG_LegAllocsGrp (rec_in : fix_rg_inner_legallocsgrp)  =
+    {
+        mod_f_LegAllocsGrp_LegAllocAccount = rec_in.f_LegAllocsGrp_LegAllocAccount;
+        mod_f_LegAllocsGrp_LegAllocQty = rec_in.f_LegAllocsGrp_LegAllocQty
+    }
+;;
+
+let check_convert_full_to_model_RG_LegAllocsGrp (rec_in : fix_rg_inner_legallocsgrp)  =
+    RG_Success
+;;
+
+let rec check_convert_full_to_model__LegAllocsGrp (rec_in : fix_rg_legallocsgrp)  =
+    (match rec_in with
+        | [] -> RG_Success
+        | x :: y -> ((match check_convert_full_to_model_RG_LegAllocsGrp x with
+            | RG_Success -> (check_convert_full_to_model__LegAllocsGrp y)
+            | f -> f
+        )
+        )
+    )
+;;
+
+let rec map_convert__model_to_full_RG_AllocsGrp (d) (x)  =
+    (match d with
+        | [] -> []
+        | h :: t -> ((convert__model_to_full_RG_AllocsGrp h x) :: (map_convert__model_to_full_RG_AllocsGrp t x))
+    ) and 
+convert__model_to_full_RG_AllocsGrp (rec_in : model_fix_inner_allocsgrp) (len : int)  =
+    {
+        f_AllocsGrp_AllocAccount = rec_in.mod_f_AllocsGrp_AllocAccount;
+        f_AllocsGrp_AllocQty = rec_in.mod_f_AllocsGrp_AllocQty;
+        f_AllocsGrp_IndividualAllocID = rec_in.mod_f_AllocsGrp_IndividualAllocID;
+        f_AllocsGrp_AllocNetMoney = rec_in.mod_f_AllocsGrp_AllocNetMoney;
+        f_AllocsGrp_AllocSettlCurrAmt = rec_in.mod_f_AllocsGrp_AllocSettlCurrAmt;
+        f_AllocsGrp_AllocSettlCurrency = rec_in.mod_f_AllocsGrp_AllocSettlCurrency;
+        f_AllocsGrp_SettlCurrFxRate = rec_in.mod_f_AllocsGrp_SettlCurrFxRate;
+        f_AllocsGrp_SettlCurrFxRateCalc = rec_in.mod_f_AllocsGrp_SettlCurrFxRateCalc;
+        f_AllocsGrp_AllocAccruedInterestAmt = rec_in.mod_f_AllocsGrp_AllocAccruedInterestAmt;
+        f_AllocsGrp_NoAllocs = Some len
+    } and 
+convert__model_to_full_AllocsGrp (rec_in : model_fix_rec_allocsgrp)  =
+    let d = [] in
+    let d = (match rec_in.rg_AllocsGrp_element_0 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_AllocsGrp_element_1 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_AllocsGrp_element_2 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_AllocsGrp_element_3 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_AllocsGrp_element_4 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    map_convert__model_to_full_RG_AllocsGrp d (cap_length d 0 5)
+;;
+
+let rec convert__full_to_model_AllocsGrp (rec_in : fix_rg_allocsgrp)  =
+    let block4 = None in
+    let block3 = None in
+    let block2 = None in
+    let block1 = None in
+    let block0 = None in
+    let t = rec_in in
+    (match t with
+        | [] -> {
+            mod_f_AllocsGrp_NoAllocs = Some (cap_length rec_in 0 5);
+            rg_AllocsGrp_element_4 = block4;
+            rg_AllocsGrp_element_3 = block3;
+            rg_AllocsGrp_element_2 = block2;
+            rg_AllocsGrp_element_1 = block1;
+            rg_AllocsGrp_element_0 = block0
+        }
+        | h :: t -> let block0 = Some (convert__full_to_model_RG_AllocsGrp h) in
+        (match t with
+            | [] -> {
+                mod_f_AllocsGrp_NoAllocs = Some (cap_length rec_in 0 5);
+                rg_AllocsGrp_element_4 = block4;
+                rg_AllocsGrp_element_3 = block3;
+                rg_AllocsGrp_element_2 = block2;
+                rg_AllocsGrp_element_1 = block1;
+                rg_AllocsGrp_element_0 = block0
+            }
+            | h :: t -> let block1 = Some (convert__full_to_model_RG_AllocsGrp h) in
+            (match t with
+                | [] -> {
+                    mod_f_AllocsGrp_NoAllocs = Some (cap_length rec_in 0 5);
+                    rg_AllocsGrp_element_4 = block4;
+                    rg_AllocsGrp_element_3 = block3;
+                    rg_AllocsGrp_element_2 = block2;
+                    rg_AllocsGrp_element_1 = block1;
+                    rg_AllocsGrp_element_0 = block0
+                }
+                | h :: t -> let block2 = Some (convert__full_to_model_RG_AllocsGrp h) in
+                (match t with
+                    | [] -> {
+                        mod_f_AllocsGrp_NoAllocs = Some (cap_length rec_in 0 5);
+                        rg_AllocsGrp_element_4 = block4;
+                        rg_AllocsGrp_element_3 = block3;
+                        rg_AllocsGrp_element_2 = block2;
+                        rg_AllocsGrp_element_1 = block1;
+                        rg_AllocsGrp_element_0 = block0
+                    }
+                    | h :: t -> let block3 = Some (convert__full_to_model_RG_AllocsGrp h) in
+                    (match t with
+                        | [] -> {
+                            mod_f_AllocsGrp_NoAllocs = Some (cap_length rec_in 0 5);
+                            rg_AllocsGrp_element_4 = block4;
+                            rg_AllocsGrp_element_3 = block3;
+                            rg_AllocsGrp_element_2 = block2;
+                            rg_AllocsGrp_element_1 = block1;
+                            rg_AllocsGrp_element_0 = block0
+                        }
+                        | h :: t -> let block4 = Some (convert__full_to_model_RG_AllocsGrp h) in
+                        {
+                            mod_f_AllocsGrp_NoAllocs = Some (cap_length rec_in 0 5);
+                            rg_AllocsGrp_element_4 = block4;
+                            rg_AllocsGrp_element_3 = block3;
+                            rg_AllocsGrp_element_2 = block2;
+                            rg_AllocsGrp_element_1 = block1;
+                            rg_AllocsGrp_element_0 = block0
+                        }
+                    )
+                )
+            )
+        )
+    ) and 
+convert__full_to_model_RG_AllocsGrp (rec_in : fix_rg_inner_allocsgrp)  =
+    {
+        mod_f_AllocsGrp_AllocAccount = rec_in.f_AllocsGrp_AllocAccount;
+        mod_f_AllocsGrp_AllocQty = rec_in.f_AllocsGrp_AllocQty;
+        mod_f_AllocsGrp_IndividualAllocID = rec_in.f_AllocsGrp_IndividualAllocID;
+        mod_f_AllocsGrp_AllocNetMoney = rec_in.f_AllocsGrp_AllocNetMoney;
+        mod_f_AllocsGrp_AllocSettlCurrAmt = rec_in.f_AllocsGrp_AllocSettlCurrAmt;
+        mod_f_AllocsGrp_AllocSettlCurrency = rec_in.f_AllocsGrp_AllocSettlCurrency;
+        mod_f_AllocsGrp_SettlCurrFxRate = rec_in.f_AllocsGrp_SettlCurrFxRate;
+        mod_f_AllocsGrp_SettlCurrFxRateCalc = rec_in.f_AllocsGrp_SettlCurrFxRateCalc;
+        mod_f_AllocsGrp_AllocAccruedInterestAmt = rec_in.f_AllocsGrp_AllocAccruedInterestAmt
+    }
+;;
+
+let check_convert_full_to_model_RG_AllocsGrp (rec_in : fix_rg_inner_allocsgrp)  =
+    RG_Success
+;;
+
+let rec check_convert_full_to_model__AllocsGrp (rec_in : fix_rg_allocsgrp)  =
+    (match rec_in with
+        | [] -> RG_Success
+        | x :: y -> ((match check_convert_full_to_model_RG_AllocsGrp x with
+            | RG_Success -> (check_convert_full_to_model__AllocsGrp y)
+            | f -> f
+        )
+        )
+    )
+;;
+
+let rec map_convert__model_to_full_RG_PartyIDsGrp (d) (x)  =
+    (match d with
+        | [] -> []
+        | h :: t -> ((convert__model_to_full_RG_PartyIDsGrp h x) :: (map_convert__model_to_full_RG_PartyIDsGrp t x))
+    ) and 
+convert__model_to_full_RG_PartyIDsGrp (rec_in : model_fix_inner_partyidsgrp) (len : int)  =
+    {
+        f_PartyIDsGrp_PartyID = rec_in.mod_f_PartyIDsGrp_PartyID;
+        f_PartyIDsGrp_PartyIDSource = (match rec_in.mod_f_PartyIDsGrp_PartyIDSource with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_PartyIDSource x))
+        );
+        f_PartyIDsGrp_PartyRole = (match rec_in.mod_f_PartyIDsGrp_PartyRole with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_PartyRole x))
+        );
+        f_PartyIDsGrp_Algorithm = (match rec_in.mod_f_PartyIDsGrp_Algorithm with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_Algorithm x))
+        );
+        f_PartyIDsGrp_PartySubIDsGrp = convert__model_to_full_PartySubIDsGrp rec_in.mod_f_PartyIDsGrp_PartySubIDsGrp;
+        f_PartyIDsGrp_NoPartyIDs = Some len
+    } and 
+convert__model_to_full_PartyIDsGrp (rec_in : model_fix_rec_partyidsgrp)  =
+    let d = [] in
+    let d = (match rec_in.rg_PartyIDsGrp_element_0 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_PartyIDsGrp_element_1 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_PartyIDsGrp_element_2 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_PartyIDsGrp_element_3 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_PartyIDsGrp_element_4 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    map_convert__model_to_full_RG_PartyIDsGrp d (cap_length d 0 5)
+;;
+
+let rec convert__full_to_model_PartyIDsGrp (rec_in : fix_rg_partyidsgrp)  =
+    let block4 = None in
+    let block3 = None in
+    let block2 = None in
+    let block1 = None in
+    let block0 = None in
+    let t = rec_in in
+    (match t with
+        | [] -> {
+            mod_f_PartyIDsGrp_NoPartyIDs = Some (cap_length rec_in 0 5);
+            rg_PartyIDsGrp_element_4 = block4;
+            rg_PartyIDsGrp_element_3 = block3;
+            rg_PartyIDsGrp_element_2 = block2;
+            rg_PartyIDsGrp_element_1 = block1;
+            rg_PartyIDsGrp_element_0 = block0
+        }
+        | h :: t -> let block0 = Some (convert__full_to_model_RG_PartyIDsGrp h) in
+        (match t with
+            | [] -> {
+                mod_f_PartyIDsGrp_NoPartyIDs = Some (cap_length rec_in 0 5);
+                rg_PartyIDsGrp_element_4 = block4;
+                rg_PartyIDsGrp_element_3 = block3;
+                rg_PartyIDsGrp_element_2 = block2;
+                rg_PartyIDsGrp_element_1 = block1;
+                rg_PartyIDsGrp_element_0 = block0
+            }
+            | h :: t -> let block1 = Some (convert__full_to_model_RG_PartyIDsGrp h) in
+            (match t with
+                | [] -> {
+                    mod_f_PartyIDsGrp_NoPartyIDs = Some (cap_length rec_in 0 5);
+                    rg_PartyIDsGrp_element_4 = block4;
+                    rg_PartyIDsGrp_element_3 = block3;
+                    rg_PartyIDsGrp_element_2 = block2;
+                    rg_PartyIDsGrp_element_1 = block1;
+                    rg_PartyIDsGrp_element_0 = block0
+                }
+                | h :: t -> let block2 = Some (convert__full_to_model_RG_PartyIDsGrp h) in
+                (match t with
+                    | [] -> {
+                        mod_f_PartyIDsGrp_NoPartyIDs = Some (cap_length rec_in 0 5);
+                        rg_PartyIDsGrp_element_4 = block4;
+                        rg_PartyIDsGrp_element_3 = block3;
+                        rg_PartyIDsGrp_element_2 = block2;
+                        rg_PartyIDsGrp_element_1 = block1;
+                        rg_PartyIDsGrp_element_0 = block0
+                    }
+                    | h :: t -> let block3 = Some (convert__full_to_model_RG_PartyIDsGrp h) in
+                    (match t with
+                        | [] -> {
+                            mod_f_PartyIDsGrp_NoPartyIDs = Some (cap_length rec_in 0 5);
+                            rg_PartyIDsGrp_element_4 = block4;
+                            rg_PartyIDsGrp_element_3 = block3;
+                            rg_PartyIDsGrp_element_2 = block2;
+                            rg_PartyIDsGrp_element_1 = block1;
+                            rg_PartyIDsGrp_element_0 = block0
+                        }
+                        | h :: t -> let block4 = Some (convert__full_to_model_RG_PartyIDsGrp h) in
+                        {
+                            mod_f_PartyIDsGrp_NoPartyIDs = Some (cap_length rec_in 0 5);
+                            rg_PartyIDsGrp_element_4 = block4;
+                            rg_PartyIDsGrp_element_3 = block3;
+                            rg_PartyIDsGrp_element_2 = block2;
+                            rg_PartyIDsGrp_element_1 = block1;
+                            rg_PartyIDsGrp_element_0 = block0
+                        }
+                    )
+                )
+            )
+        )
+    ) and 
+convert__full_to_model_RG_PartyIDsGrp (rec_in : fix_rg_inner_partyidsgrp)  =
+    {
+        mod_f_PartyIDsGrp_PartyID = rec_in.f_PartyIDsGrp_PartyID;
+        mod_f_PartyIDsGrp_PartyIDSource = (match rec_in.f_PartyIDsGrp_PartyIDSource with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_PartyIDSource x))
+        );
+        mod_f_PartyIDsGrp_PartyRole = (match rec_in.f_PartyIDsGrp_PartyRole with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_PartyRole x))
+        );
+        mod_f_PartyIDsGrp_Algorithm = (match rec_in.f_PartyIDsGrp_Algorithm with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_Algorithm x))
+        );
+        mod_f_PartyIDsGrp_PartySubIDsGrp = convert__full_to_model_PartySubIDsGrp rec_in.f_PartyIDsGrp_PartySubIDsGrp
+    }
+;;
+
+let check_convert_full_to_model_RG_PartyIDsGrp (rec_in : fix_rg_inner_partyidsgrp)  =
+    (match check_convert_full_to_model__PartySubIDsGrp rec_in.f_PartyIDsGrp_PartySubIDsGrp with
+        | RG_Success -> RG_Success
+        | f -> f
+    )
+;;
+
+let rec check_convert_full_to_model__PartyIDsGrp (rec_in : fix_rg_partyidsgrp)  =
+    (match rec_in with
+        | [] -> RG_Success
+        | x :: y -> ((match check_convert_full_to_model_RG_PartyIDsGrp x with
+            | RG_Success -> (check_convert_full_to_model__PartyIDsGrp y)
+            | f -> f
+        )
+        )
+    )
+;;
+
+let rec map_convert__model_to_full_RG_OrdersGrp (d) (x)  =
+    (match d with
+        | [] -> []
+        | h :: t -> ((convert__model_to_full_RG_OrdersGrp h x) :: (map_convert__model_to_full_RG_OrdersGrp t x))
+    ) and 
+convert__model_to_full_RG_OrdersGrp (rec_in : model_fix_inner_ordersgrp) (len : int)  =
+    {
+        f_OrdersGrp_ClOrdID = rec_in.mod_f_OrdersGrp_ClOrdID;
+        f_OrdersGrp_ListSeqNo = rec_in.mod_f_OrdersGrp_ListSeqNo;
+        f_OrdersGrp_PortfolioName = rec_in.mod_f_OrdersGrp_PortfolioName;
+        f_OrdersGrp_Notes = rec_in.mod_f_OrdersGrp_Notes;
+        f_OrdersGrp_SettlDate = rec_in.mod_f_OrdersGrp_SettlDate;
+        f_OrdersGrp_Side = (match rec_in.mod_f_OrdersGrp_Side with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_Side x))
+        );
+        f_OrdersGrp_Price = rec_in.mod_f_OrdersGrp_Price;
+        f_OrdersGrp_TransactTime = rec_in.mod_f_OrdersGrp_TransactTime;
+        f_OrdersGrp_OrderQty = rec_in.mod_f_OrdersGrp_OrderQty;
+        f_OrdersGrp_TradingProtocol = (match rec_in.mod_f_OrdersGrp_TradingProtocol with
+            | None -> None
+            | Some x -> (Some (convert__model_to_full_TradingProtocol x))
+        );
+        f_OrdersGrp_OrderID = rec_in.mod_f_OrdersGrp_OrderID;
+        f_OrdersGrp_ListID = rec_in.mod_f_OrdersGrp_ListID;
+        f_OrdersGrp_OrderAvgPx = rec_in.mod_f_OrdersGrp_OrderAvgPx;
+        f_OrdersGrp_NoOrders = Some len;
+        f_OrdersGrp_Parties = {
+            f_Parties_PartyIDsGrp = convert__model_to_full_PartyIDsGrp rec_in.mod_f_OrdersGrp_Parties_PartyIDsGrp
+        };
+        f_OrdersGrp_Instrument = {
+            f_Instrument_Symbol = Some rec_in.mod_f_OrdersGrp_Instrument_Symbol;
+            f_Instrument_SecurityID = rec_in.mod_f_OrdersGrp_Instrument_SecurityID;
+            f_Instrument_SecurityIDSource = (match rec_in.mod_f_OrdersGrp_Instrument_SecurityIDSource with
+                | None -> None
+                | Some x -> (Some (convert__model_to_full_SecurityIDSource x))
+            );
+            f_Instrument_Product = (match rec_in.mod_f_OrdersGrp_Instrument_Product with
+                | None -> None
+                | Some x -> (Some (convert__model_to_full_Product x))
+            );
+            f_Instrument_CFICode = rec_in.mod_f_OrdersGrp_Instrument_CFICode;
+            f_Instrument_CountryOfIssue = rec_in.mod_f_OrdersGrp_Instrument_CountryOfIssue;
+            f_Instrument_SecurityType = rec_in.mod_f_OrdersGrp_Instrument_SecurityType;
+            f_Instrument_MaturityDate = rec_in.mod_f_OrdersGrp_Instrument_MaturityDate;
+            f_Instrument_SecurityDesc = rec_in.mod_f_OrdersGrp_Instrument_SecurityDesc;
+            f_Instrument_PrevClosePx = rec_in.mod_f_OrdersGrp_Instrument_PrevClosePx;
+            f_Instrument_CouponRate = rec_in.mod_f_OrdersGrp_Instrument_CouponRate;
+            f_Instrument_Issuer = rec_in.mod_f_OrdersGrp_Instrument_Issuer;
+            f_Instrument_SecurityAltIDGrp = convert__model_to_full_SecurityAltIDGrp rec_in.mod_f_OrdersGrp_Instrument_SecurityAltIDGrp;
+            f_Instrument_IssueDate = rec_in.mod_f_OrdersGrp_Instrument_IssueDate;
+            f_Instrument_Factor = rec_in.mod_f_OrdersGrp_Instrument_Factor;
+            f_Instrument_DatedDate = rec_in.mod_f_OrdersGrp_Instrument_DatedDate;
+            f_Instrument_SecuritySubType = rec_in.mod_f_OrdersGrp_Instrument_SecuritySubType
+        }
+    } and 
+convert__model_to_full_OrdersGrp (rec_in : model_fix_rec_ordersgrp)  =
+    let d = [] in
+    let d = (match rec_in.rg_OrdersGrp_element_0 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_OrdersGrp_element_1 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_OrdersGrp_element_2 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_OrdersGrp_element_3 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    let d = (match rec_in.rg_OrdersGrp_element_4 with
+        | None -> d
+        | Some x -> (x :: d)
+    )
+     in
+    map_convert__model_to_full_RG_OrdersGrp d (cap_length d 0 5)
+;;
+
+let rec convert__full_to_model_OrdersGrp (rec_in : fix_rg_ordersgrp)  =
+    let block4 = None in
+    let block3 = None in
+    let block2 = None in
+    let block1 = None in
+    let block0 = None in
+    let t = rec_in in
+    (match t with
+        | [] -> {
+            mod_f_OrdersGrp_NoOrders = Some (cap_length rec_in 0 5);
+            rg_OrdersGrp_element_4 = block4;
+            rg_OrdersGrp_element_3 = block3;
+            rg_OrdersGrp_element_2 = block2;
+            rg_OrdersGrp_element_1 = block1;
+            rg_OrdersGrp_element_0 = block0
+        }
+        | h :: t -> let block0 = Some (convert__full_to_model_RG_OrdersGrp h) in
+        (match t with
+            | [] -> {
+                mod_f_OrdersGrp_NoOrders = Some (cap_length rec_in 0 5);
+                rg_OrdersGrp_element_4 = block4;
+                rg_OrdersGrp_element_3 = block3;
+                rg_OrdersGrp_element_2 = block2;
+                rg_OrdersGrp_element_1 = block1;
+                rg_OrdersGrp_element_0 = block0
+            }
+            | h :: t -> let block1 = Some (convert__full_to_model_RG_OrdersGrp h) in
+            (match t with
+                | [] -> {
+                    mod_f_OrdersGrp_NoOrders = Some (cap_length rec_in 0 5);
+                    rg_OrdersGrp_element_4 = block4;
+                    rg_OrdersGrp_element_3 = block3;
+                    rg_OrdersGrp_element_2 = block2;
+                    rg_OrdersGrp_element_1 = block1;
+                    rg_OrdersGrp_element_0 = block0
+                }
+                | h :: t -> let block2 = Some (convert__full_to_model_RG_OrdersGrp h) in
+                (match t with
+                    | [] -> {
+                        mod_f_OrdersGrp_NoOrders = Some (cap_length rec_in 0 5);
+                        rg_OrdersGrp_element_4 = block4;
+                        rg_OrdersGrp_element_3 = block3;
+                        rg_OrdersGrp_element_2 = block2;
+                        rg_OrdersGrp_element_1 = block1;
+                        rg_OrdersGrp_element_0 = block0
+                    }
+                    | h :: t -> let block3 = Some (convert__full_to_model_RG_OrdersGrp h) in
+                    (match t with
+                        | [] -> {
+                            mod_f_OrdersGrp_NoOrders = Some (cap_length rec_in 0 5);
+                            rg_OrdersGrp_element_4 = block4;
+                            rg_OrdersGrp_element_3 = block3;
+                            rg_OrdersGrp_element_2 = block2;
+                            rg_OrdersGrp_element_1 = block1;
+                            rg_OrdersGrp_element_0 = block0
+                        }
+                        | h :: t -> let block4 = Some (convert__full_to_model_RG_OrdersGrp h) in
+                        {
+                            mod_f_OrdersGrp_NoOrders = Some (cap_length rec_in 0 5);
+                            rg_OrdersGrp_element_4 = block4;
+                            rg_OrdersGrp_element_3 = block3;
+                            rg_OrdersGrp_element_2 = block2;
+                            rg_OrdersGrp_element_1 = block1;
+                            rg_OrdersGrp_element_0 = block0
+                        }
+                    )
+                )
+            )
+        )
+    ) and 
+convert__full_to_model_RG_OrdersGrp (rec_in : fix_rg_inner_ordersgrp)  =
+    {
+        mod_f_OrdersGrp_ClOrdID = rec_in.f_OrdersGrp_ClOrdID;
+        mod_f_OrdersGrp_ListSeqNo = rec_in.f_OrdersGrp_ListSeqNo;
+        mod_f_OrdersGrp_PortfolioName = rec_in.f_OrdersGrp_PortfolioName;
+        mod_f_OrdersGrp_Notes = rec_in.f_OrdersGrp_Notes;
+        mod_f_OrdersGrp_Parties_PartyIDsGrp = convert__full_to_model_PartyIDsGrp rec_in.f_OrdersGrp_Parties.f_Parties_PartyIDsGrp;
+        mod_f_OrdersGrp_SettlDate = rec_in.f_OrdersGrp_SettlDate;
+        mod_f_OrdersGrp_Instrument_Symbol = (match rec_in.f_OrdersGrp_Instrument.f_Instrument_Symbol with
+            | Some x -> x
+            | None -> raise Ipl_rg_exception 
+        );
+        mod_f_OrdersGrp_Instrument_SecurityID = rec_in.f_OrdersGrp_Instrument.f_Instrument_SecurityID;
+        mod_f_OrdersGrp_Instrument_SecurityIDSource = (match rec_in.f_OrdersGrp_Instrument.f_Instrument_SecurityIDSource with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_SecurityIDSource x))
+        );
+        mod_f_OrdersGrp_Instrument_Product = (match rec_in.f_OrdersGrp_Instrument.f_Instrument_Product with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_Product x))
+        );
+        mod_f_OrdersGrp_Instrument_CFICode = rec_in.f_OrdersGrp_Instrument.f_Instrument_CFICode;
+        mod_f_OrdersGrp_Instrument_CountryOfIssue = rec_in.f_OrdersGrp_Instrument.f_Instrument_CountryOfIssue;
+        mod_f_OrdersGrp_Instrument_SecurityType = rec_in.f_OrdersGrp_Instrument.f_Instrument_SecurityType;
+        mod_f_OrdersGrp_Instrument_MaturityDate = rec_in.f_OrdersGrp_Instrument.f_Instrument_MaturityDate;
+        mod_f_OrdersGrp_Instrument_SecurityDesc = rec_in.f_OrdersGrp_Instrument.f_Instrument_SecurityDesc;
+        mod_f_OrdersGrp_Instrument_PrevClosePx = rec_in.f_OrdersGrp_Instrument.f_Instrument_PrevClosePx;
+        mod_f_OrdersGrp_Instrument_CouponRate = rec_in.f_OrdersGrp_Instrument.f_Instrument_CouponRate;
+        mod_f_OrdersGrp_Instrument_Issuer = rec_in.f_OrdersGrp_Instrument.f_Instrument_Issuer;
+        mod_f_OrdersGrp_Instrument_SecurityAltIDGrp = convert__full_to_model_SecurityAltIDGrp rec_in.f_OrdersGrp_Instrument.f_Instrument_SecurityAltIDGrp;
+        mod_f_OrdersGrp_Instrument_IssueDate = rec_in.f_OrdersGrp_Instrument.f_Instrument_IssueDate;
+        mod_f_OrdersGrp_Instrument_Factor = rec_in.f_OrdersGrp_Instrument.f_Instrument_Factor;
+        mod_f_OrdersGrp_Instrument_DatedDate = rec_in.f_OrdersGrp_Instrument.f_Instrument_DatedDate;
+        mod_f_OrdersGrp_Instrument_SecuritySubType = rec_in.f_OrdersGrp_Instrument.f_Instrument_SecuritySubType;
+        mod_f_OrdersGrp_Side = (match rec_in.f_OrdersGrp_Side with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_Side x))
+        );
+        mod_f_OrdersGrp_Price = rec_in.f_OrdersGrp_Price;
+        mod_f_OrdersGrp_TransactTime = rec_in.f_OrdersGrp_TransactTime;
+        mod_f_OrdersGrp_OrderQty = rec_in.f_OrdersGrp_OrderQty;
+        mod_f_OrdersGrp_TradingProtocol = (match rec_in.f_OrdersGrp_TradingProtocol with
+            | None -> None
+            | Some x -> (Some (convert__full_to_model_TradingProtocol x))
+        );
+        mod_f_OrdersGrp_OrderID = rec_in.f_OrdersGrp_OrderID;
+        mod_f_OrdersGrp_ListID = rec_in.f_OrdersGrp_ListID;
+        mod_f_OrdersGrp_OrderAvgPx = rec_in.f_OrdersGrp_OrderAvgPx
+    }
+;;
+
+let check_convert_full_to_model_RG_OrdersGrp (rec_in : fix_rg_inner_ordersgrp)  =
+    (match check_convert_full_to_model__SecurityAltIDGrp rec_in.f_OrdersGrp_Instrument.f_Instrument_SecurityAltIDGrp with
+        | RG_Success -> ((match check_convert_full_to_model__PartyIDsGrp rec_in.f_OrdersGrp_Parties.f_Parties_PartyIDsGrp with
+            | RG_Success -> ((match rec_in.f_OrdersGrp_Instrument.f_Instrument_Symbol with
+                | None -> (RG_Failure M_Field_Symbol_Tag)
+                | Some _ -> RG_Success
+            )
+            )
+            | f -> f
+        )
+        )
+        | f -> f
+    )
+;;
+
+let rec check_convert_full_to_model__OrdersGrp (rec_in : fix_rg_ordersgrp)  =
+    (match rec_in with
+        | [] -> RG_Success
+        | x :: y -> ((match check_convert_full_to_model_RG_OrdersGrp x with
+            | RG_Success -> (check_convert_full_to_model__OrdersGrp y)
+            | f -> f
+        )
+        )
     )
 ;;
