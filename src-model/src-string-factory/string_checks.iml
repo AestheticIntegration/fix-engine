@@ -1,24 +1,20 @@
-(* Aesthetic Integration copyright 2018 *)
-open Actions;;
+(* Aesthetic Integration copyright 2019 *)
 open Model_messages;;
 
 let isAction (str : string)  =
     (match str with
-        | "Actions.FIX_Action_x" -> true
         | _ -> false
     )
 ;;
 
 let isActionData (str : string)  =
     (match str with
-        | "Actions.m_action_fix_x" -> true
         | _ -> false
     )
 ;;
 
 let isActionField (str : string)  =
     (match str with
-        | "Actions.mod_f_x_x" -> true
         | _ -> false
     )
 ;;
@@ -26,64 +22,487 @@ let isActionField (str : string)  =
 let isModelFieldTag (str : string)  =
     (match str with
         | "Model_tags.M_Field_ClOrdID_Tag" -> true
-        | "Model_tags.M_Field_OrderID_Tag" -> true
-        | "Model_tags.M_Field_ExecID_Tag" -> true
-        | "Model_tags.M_Field_ExecType_Tag" -> true
-        | "Model_tags.M_Field_AvgPx_Tag" -> true
+        | "Model_tags.M_Field_Currency_Tag" -> true
+        | "Model_tags.M_Field_HandlInst_Tag" -> true
+        | "Model_tags.M_Field_PartyIDsGrp_Tag" -> true
+        | "Model_tags.M_Field_ExecInst_Tag" -> true
+        | "Model_tags.M_Field_OrderQty_Tag" -> true
+        | "Model_tags.M_Field_OrdType_Tag" -> true
+        | "Model_tags.M_Field_Price_Tag" -> true
         | "Model_tags.M_Field_Side_Tag" -> true
+        | "Model_tags.M_Field_TransactTime_Tag" -> true
+        | "Model_tags.M_Field_SettlType_Tag" -> true
+        | "Model_tags.M_Field_SettlDate_Tag" -> true
+        | "Model_tags.M_Field_OrderCapacity_Tag" -> true
+        | "Model_tags.M_Field_QtyType_Tag" -> true
+        | "Model_tags.M_Field_CFICode_Tag" -> true
+        | "Model_tags.M_Field_ForexReq_Tag" -> true
+        | "Model_tags.M_Field_SettlCurrency_Tag" -> true
+        | "Model_tags.M_Field_IncludeDealers_Tag" -> true
+        | "Model_tags.M_Field_DealersGrp_Tag" -> true
+        | "Model_tags.M_Field_TradingProtocol_Tag" -> true
+        | "Model_tags.M_Field_MKTXPricingProcess_Tag" -> true
+        | "Model_tags.M_Field_MKTXTargetLevel_Tag" -> true
+        | "Model_tags.M_Field_MKTXExternalTargetLevel_Tag" -> true
+        | "Model_tags.M_Field_MKTXRTSPurpose_Tag" -> true
+        | "Model_tags.M_Field_BenchmarkCurveCurrency_Tag" -> true
+        | "Model_tags.M_Field_PriceType_Tag" -> true
+        | "Model_tags.M_Field_Text_Tag" -> true
+        | "Model_tags.M_Field_AllocID_Tag" -> true
+        | "Model_tags.M_Field_AllocsGrp_Tag" -> true
+        | "Model_tags.M_Field_OrigClOrdID_Tag" -> true
+        | "Model_tags.M_Field_Symbol_Tag" -> true
+        | "Model_tags.M_Field_LegsGrp_Tag" -> true
+        | "Model_tags.M_Field_Notes_Tag" -> true
+        | "Model_tags.M_Field_MKTXLegExternalTargetLevel_Tag" -> true
+        | "Model_tags.M_Field_LegAllocsGrp_Tag" -> true
+        | "Model_tags.M_Field_ListID_Tag" -> true
+        | "Model_tags.M_Field_BidType_Tag" -> true
+        | "Model_tags.M_Field_TotalNoOrders_Tag" -> true
+        | "Model_tags.M_Field_OrdersGrp_Tag" -> true
+        | "Model_tags.M_Field_MKTXListType_Tag" -> true
+        | "Model_tags.M_Field_OrderID_Tag" -> true
+        | "Model_tags.M_Field_OrdStatus_Tag" -> true
+        | "Model_tags.M_Field_CxlRejResponseTo_Tag" -> true
+        | "Model_tags.M_Field_CxlRejReason_Tag" -> true
+        | "Model_tags.M_Field_RefSeqNum_Tag" -> true
+        | "Model_tags.M_Field_RefMsgTyp_Tag" -> true
+        | "Model_tags.M_Field_BusinessRejectRefID_Tag" -> true
+        | "Model_tags.M_Field_BusinessRejectReason_Tag" -> true
+        | "Model_tags.M_Field_AllocReportID_Tag" -> true
+        | "Model_tags.M_Field_AllocTransType_Tag" -> true
+        | "Model_tags.M_Field_AllocReportRefID_Tag" -> true
+        | "Model_tags.M_Field_AllocCancReplaceReason_Tag" -> true
+        | "Model_tags.M_Field_RefAllocID_Tag" -> true
+        | "Model_tags.M_Field_AllocReportType_Tag" -> true
+        | "Model_tags.M_Field_AllocStatus_Tag" -> true
+        | "Model_tags.M_Field_AllocNoOrdersType_Tag" -> true
+        | "Model_tags.M_Field_ExecsGrp_Tag" -> true
+        | "Model_tags.M_Field_Quantity_Tag" -> true
+        | "Model_tags.M_Field_AvgPx_Tag" -> true
+        | "Model_tags.M_Field_TradeDate_Tag" -> true
+        | "Model_tags.M_Field_GrossTradeAmt_Tag" -> true
+        | "Model_tags.M_Field_NetMoney_Tag" -> true
+        | "Model_tags.M_Field_AccruedInterestAmt_Tag" -> true
+        | "Model_tags.M_Field_YieldType_Tag" -> true
+        | "Model_tags.M_Field_Yield_Tag" -> true
+        | "Model_tags.M_Field_AllocRejCode_Tag" -> true
+        | "Model_tags.M_Field_AllocType_Tag" -> true
+        | "Model_tags.M_Field_TestReqID_Tag" -> true
+        | "Model_tags.M_Field_BeginSeqNo_Tag" -> true
+        | "Model_tags.M_Field_EndSeqNo_Tag" -> true
+        | "Model_tags.M_Field_RefTagID_Tag" -> true
+        | "Model_tags.M_Field_SessionRejectReason_Tag" -> true
+        | "Model_tags.M_Field_GapFillFlag_Tag" -> true
+        | "Model_tags.M_Field_NewSeqNo_Tag" -> true
+        | "Model_tags.M_Field_EncryptMethod_Tag" -> true
+        | "Model_tags.M_Field_HeartBtInt_Tag" -> true
+        | "Model_tags.M_Field_ResetSeqNumFlag_Tag" -> true
+        | "Model_tags.M_Field_MKTXCPTYLEI_Tag" -> true
+        | "Model_tags.M_Field_MKTXPartyLEI_Tag" -> true
+        | "Model_tags.M_Field_MKTXInquiryID_Tag" -> true
+        | "Model_tags.M_Field_MKTXTrdRegPublicationReason_Tag" -> true
+        | "Model_tags.M_Field_TrdRegPublicationsGrp_Tag" -> true
+        | "Model_tags.M_Field_MKTXESCBStblty_Tag" -> true
+        | "Model_tags.M_Field_PreTradeWaiver_Tag" -> true
+        | "Model_tags.M_Field_MKTXTradeReportingInd_Tag" -> true
+        | "Model_tags.M_Field_TradeReportingIndicator_Tag" -> true
+        | "Model_tags.M_Field_InternalCrossingFlag_Tag" -> true
+        | "Model_tags.M_Field_RegulatoryTradeIDsGrp_Tag" -> true
+        | "Model_tags.M_Field_MKTXVenueTransactionID_Tag" -> true
+        | "Model_tags.M_Field_ExecID_Tag" -> true
+        | "Model_tags.M_Field_ExecRefID_Tag" -> true
+        | "Model_tags.M_Field_LastMkt_Tag" -> true
+        | "Model_tags.M_Field_ExecType_Tag" -> true
+        | "Model_tags.M_Field_SecondaryExecID_Tag" -> true
+        | "Model_tags.M_Field_OrdRejReason_Tag" -> true
+        | "Model_tags.M_Field_IssueDate_Tag" -> true
+        | "Model_tags.M_Field_LastPx_Tag" -> true
+        | "Model_tags.M_Field_LastParPx_Tag" -> true
         | "Model_tags.M_Field_LeavesQty_Tag" -> true
         | "Model_tags.M_Field_CumQty_Tag" -> true
-        | "Model_tags.M_Field_OrdStatus_Tag" -> true
-        | "Model_tags.M_Field_Symbol_Tag" -> true
-        | "Model_tags.M_Field_Text_Tag" -> true
-        | "Model_tags.M_Field_TransactTime_Tag" -> true
-        | "Model_tags.M_Field_OrdType_Tag" -> true
+        | "Model_tags.M_Field_SettlCurrAmt_Tag" -> true
+        | "Model_tags.M_Field_SettlCurrFxRate_Tag" -> true
+        | "Model_tags.M_Field_SettlCurrFxRateCalc_Tag" -> true
+        | "Model_tags.M_Field_NumberofTrades_Tag" -> true
+        | "Model_tags.M_Field_LegTransactionSeqNumberLegID_Tag" -> true
+        | "Model_tags.M_Field_InquiryQty_Tag" -> true
+        | "Model_tags.M_Field_NumDaysInterest_Tag" -> true
+        | "Model_tags.M_Field_DatedDate_2_Tag" -> true
+        | "Model_tags.M_Field_BrokerReceiptTime_Tag" -> true
+        | "Model_tags.M_Field_GSpread_Tag" -> true
+        | "Model_tags.M_Field_ZSpread_Tag" -> true
+        | "Model_tags.M_Field_ISpread_Tag" -> true
+        | "Model_tags.M_Field_ASWSpread_Tag" -> true
+        | "Model_tags.M_Field_OASSpread_Tag" -> true
+        | "Model_tags.M_Field_MKTXCostAnalysisGrp_Tag" -> true
+        | "Model_tags.M_Field_ClientBook_Tag" -> true
+        | "Model_tags.M_Field_DirtyPrice_Tag" -> true
+        | "Model_tags.M_Field_LastCapacity_Tag" -> true
+        | "Model_tags.M_Field_MKTXTradeStyle_Tag" -> true
+        | "Model_tags.M_Field_MKTXCompositeBidSpread_Tag" -> true
+        | "Model_tags.M_Field_MKTXCompositeOfferSpread_Tag" -> true
+        | "Model_tags.M_Field_MKTXCompositeBidPrice_Tag" -> true
+        | "Model_tags.M_Field_MKTXCompositeOfferPrice_Tag" -> true
+        | "Model_tags.M_Field_MKTXCompositeBidMMEYield_Tag" -> true
+        | "Model_tags.M_Field_MKTXCompositeOfferMMEYield_Tag" -> true
+        | "Model_tags.M_Field_MKTXCompositeLiquidityScore_Tag" -> true
+        | "Model_tags.M_Field_MKTXAutoExType_Tag" -> true
+        | "Model_tags.M_Field_MKTXAutoExStatus_Tag" -> true
+        | "Model_tags.M_Field_MKTXAutoExDesc_Tag" -> true
+        | "Model_tags.M_Field_MKTXAutoExRefLevel_Tag" -> true
+        | "Model_tags.M_Field_MKTXAutoExRefLevelType_Tag" -> true
+        | "Model_tags.M_Field_ExpireTime_Tag" -> true
+        | "Model_tags.M_Field_LastQty_Tag" -> true
+        | "Model_tags.M_Field_DKReason_Tag" -> true
+        | "Model_tags.M_Field_SecondaryOrderID_Tag" -> true
+        | "Model_tags.M_Field_EncodedTextLen_Tag" -> true
+        | "Model_tags.M_Field_EncodedText_Tag" -> true
         | _ -> false
     )
 ;;
 
 let isModelMessageTag (str : string)  =
     (match str with
-        | "Model_tags.M_Msg_ExecutionReport_Tag" -> true
         | "Model_tags.M_Msg_NewOrderSingle_Tag" -> true
+        | "Model_tags.M_Msg_OrderCancel_Tag" -> true
+        | "Model_tags.M_Msg_NewOrder_Multi_Leg_Tag" -> true
+        | "Model_tags.M_Msg_NewOrder_List_Tag" -> true
+        | "Model_tags.M_Msg_ListOrderCancel_Tag" -> true
+        | "Model_tags.M_Msg_OrderCancelReject_Tag" -> true
+        | "Model_tags.M_Msg_BusinessMessageReject_Tag" -> true
+        | "Model_tags.M_Msg_AllocationReport_Tag" -> true
+        | "Model_tags.M_Msg_AllocationReportACK_Tag" -> true
+        | "Model_tags.M_Msg_AllocationInstruction_Tag" -> true
+        | "Model_tags.M_Msg_AllocationInstructionACK_Tag" -> true
+        | "Model_tags.M_Msg_Heartbeat_Tag" -> true
+        | "Model_tags.M_Msg_TestRequest_Tag" -> true
+        | "Model_tags.M_Msg_ResendRequest_Tag" -> true
+        | "Model_tags.M_Msg_SessionLevelReject_Tag" -> true
+        | "Model_tags.M_Msg_SequenceResetRequest_Tag" -> true
+        | "Model_tags.M_Msg_Logout_Tag" -> true
+        | "Model_tags.M_Msg_FIXLogon_Tag" -> true
+        | "Model_tags.M_Msg_ExecutionReport_Tag" -> true
+        | "Model_tags.M_Msg_DontKnowTrade_Tag" -> true
         | _ -> false
     )
 ;;
 
 let isMessageField (str : string)  =
     (match str with
-        | "Model_messages.mod_f_ExecutionReport_ClOrdID" -> true
-        | "Model_messages.mod_f_ExecutionReport_OrderID" -> true
-        | "Model_messages.mod_f_ExecutionReport_ExecID" -> true
-        | "Model_messages.mod_f_ExecutionReport_ExecType" -> true
-        | "Model_messages.mod_f_ExecutionReport_AvgPx" -> true
-        | "Model_messages.mod_f_ExecutionReport_Side" -> true
-        | "Model_messages.mod_f_ExecutionReport_LeavesQty" -> true
-        | "Model_messages.mod_f_ExecutionReport_CumQty" -> true
-        | "Model_messages.mod_f_ExecutionReport_OrdStatus" -> true
-        | "Model_messages.mod_f_ExecutionReport_Instrument_Symbol" -> true
-        | "Model_messages.mod_f_ExecutionReport_Text" -> true
         | "Model_messages.mod_f_NewOrderSingle_ClOrdID" -> true
+        | "Model_messages.mod_f_NewOrderSingle_Currency" -> true
+        | "Model_messages.mod_f_NewOrderSingle_HandlInst" -> true
+        | "Model_messages.mod_f_NewOrderSingle_Parties_PartyIDsGrp" -> true
+        | "Model_messages.mod_f_NewOrderSingle_ExecInst" -> true
+        | "Model_messages.mod_f_NewOrderSingle_OrderQty" -> true
+        | "Model_messages.mod_f_NewOrderSingle_OrdType" -> true
+        | "Model_messages.mod_f_NewOrderSingle_Price" -> true
         | "Model_messages.mod_f_NewOrderSingle_Side" -> true
         | "Model_messages.mod_f_NewOrderSingle_TransactTime" -> true
-        | "Model_messages.mod_f_NewOrderSingle_OrdType" -> true
-        | "Model_messages.mod_f_NewOrderSingle_Instrument_Symbol" -> true
+        | "Model_messages.mod_f_NewOrderSingle_SettlType" -> true
+        | "Model_messages.mod_f_NewOrderSingle_SettlDate" -> true
+        | "Model_messages.mod_f_NewOrderSingle_OrderCapacity" -> true
+        | "Model_messages.mod_f_NewOrderSingle_QtyType" -> true
+        | "Model_messages.mod_f_NewOrderSingle_Instrument_CFICode" -> true
+        | "Model_messages.mod_f_NewOrderSingle_ForexReq" -> true
+        | "Model_messages.mod_f_NewOrderSingle_SettlCurrency" -> true
+        | "Model_messages.mod_f_NewOrderSingle_IncludeDealers" -> true
+        | "Model_messages.mod_f_NewOrderSingle_DealersGrp" -> true
+        | "Model_messages.mod_f_NewOrderSingle_TradingProtocol" -> true
+        | "Model_messages.mod_f_NewOrderSingle_MKTXPricingProcess" -> true
+        | "Model_messages.mod_f_NewOrderSingle_MKTXTargetLevel" -> true
+        | "Model_messages.mod_f_NewOrderSingle_MKTXExternalTargetLevel" -> true
+        | "Model_messages.mod_f_NewOrderSingle_MKTXRTSPurpose" -> true
+        | "Model_messages.mod_f_NewOrderSingle_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency" -> true
+        | "Model_messages.mod_f_NewOrderSingle_PriceType" -> true
+        | "Model_messages.mod_f_NewOrderSingle_Text" -> true
+        | "Model_messages.mod_f_NewOrderSingle_AllocID" -> true
+        | "Model_messages.mod_f_NewOrderSingle_AllocsGrp" -> true
+        | "Model_messages.mod_f_OrderCancel_OrigClOrdID" -> true
+        | "Model_messages.mod_f_OrderCancel_ClOrdID" -> true
+        | "Model_messages.mod_f_OrderCancel_Parties_PartyIDsGrp" -> true
+        | "Model_messages.mod_f_OrderCancel_Symbol" -> true
+        | "Model_messages.mod_f_OrderCancel_Side" -> true
+        | "Model_messages.mod_f_OrderCancel_TransactTime" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_ClOrdID" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_Parties_PartyIDsGrp" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_Side" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_Instrument_CFICode" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_OrderCapacity" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_LegsGrp" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_TransactTime" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_QtyType" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_OrderQty" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_OrdType" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_Text" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_Notes" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_IncludeDealers" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_DealersGrp" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_TradingProtocol" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_MKTXPricingProcess" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_MKTXRTSPurpose" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_AllocID" -> true
+        | "Model_messages.mod_f_NewOrder_Multi_Leg_LegAllocsGrp" -> true
+        | "Model_messages.mod_f_NewOrder_List_ListID" -> true
+        | "Model_messages.mod_f_NewOrder_List_BidType" -> true
+        | "Model_messages.mod_f_NewOrder_List_TotalNoOrders" -> true
+        | "Model_messages.mod_f_NewOrder_List_OrdersGrp" -> true
+        | "Model_messages.mod_f_NewOrder_List_IncludeDealers" -> true
+        | "Model_messages.mod_f_NewOrder_List_DealersGrp" -> true
+        | "Model_messages.mod_f_NewOrder_List_OrderCapacity" -> true
+        | "Model_messages.mod_f_NewOrder_List_MKTXPricingProcess" -> true
+        | "Model_messages.mod_f_NewOrder_List_MKTXExternalTargetLevel" -> true
+        | "Model_messages.mod_f_NewOrder_List_MKTXListType" -> true
+        | "Model_messages.mod_f_NewOrder_List_AllocID" -> true
+        | "Model_messages.mod_f_NewOrder_List_AllocsGrp" -> true
+        | "Model_messages.mod_f_ListOrderCancel_ListID" -> true
+        | "Model_messages.mod_f_ListOrderCancel_TransactTime" -> true
+        | "Model_messages.mod_f_OrderCancelReject_ListID" -> true
+        | "Model_messages.mod_f_OrderCancelReject_OrderID" -> true
+        | "Model_messages.mod_f_OrderCancelReject_ClOrdID" -> true
+        | "Model_messages.mod_f_OrderCancelReject_OrdStatus" -> true
+        | "Model_messages.mod_f_OrderCancelReject_OrigClOrdID" -> true
+        | "Model_messages.mod_f_OrderCancelReject_CxlRejResponseTo" -> true
+        | "Model_messages.mod_f_OrderCancelReject_CxlRejReason" -> true
+        | "Model_messages.mod_f_OrderCancelReject_TransactTime" -> true
+        | "Model_messages.mod_f_OrderCancelReject_Text" -> true
+        | "Model_messages.mod_f_BusinessMessageReject_RefSeqNum" -> true
+        | "Model_messages.mod_f_BusinessMessageReject_RefMsgTyp" -> true
+        | "Model_messages.mod_f_BusinessMessageReject_BusinessRejectRefID" -> true
+        | "Model_messages.mod_f_BusinessMessageReject_BusinessRejectReason" -> true
+        | "Model_messages.mod_f_BusinessMessageReject_Text" -> true
+        | "Model_messages.mod_f_AllocationReport_AllocReportID" -> true
+        | "Model_messages.mod_f_AllocationReport_AllocID" -> true
+        | "Model_messages.mod_f_AllocationReport_AllocTransType" -> true
+        | "Model_messages.mod_f_AllocationReport_AllocReportRefID" -> true
+        | "Model_messages.mod_f_AllocationReport_AllocCancReplaceReason" -> true
+        | "Model_messages.mod_f_AllocationReport_RefAllocID" -> true
+        | "Model_messages.mod_f_AllocationReport_AllocReportType" -> true
+        | "Model_messages.mod_f_AllocationReport_AllocStatus" -> true
+        | "Model_messages.mod_f_AllocationReport_AllocNoOrdersType" -> true
+        | "Model_messages.mod_f_AllocationReport_OrdersGrp" -> true
+        | "Model_messages.mod_f_AllocationReport_ExecsGrp" -> true
+        | "Model_messages.mod_f_AllocationReport_Side" -> true
+        | "Model_messages.mod_f_AllocationReport_Instrument_CFICode" -> true
+        | "Model_messages.mod_f_AllocationReport_Quantity" -> true
+        | "Model_messages.mod_f_AllocationReport_QtyType" -> true
+        | "Model_messages.mod_f_AllocationReport_PriceType" -> true
+        | "Model_messages.mod_f_AllocationReport_AvgPx" -> true
+        | "Model_messages.mod_f_AllocationReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency" -> true
+        | "Model_messages.mod_f_AllocationReport_Currency" -> true
+        | "Model_messages.mod_f_AllocationReport_Parties_PartyIDsGrp" -> true
+        | "Model_messages.mod_f_AllocationReport_TradeDate" -> true
+        | "Model_messages.mod_f_AllocationReport_TransactTime" -> true
+        | "Model_messages.mod_f_AllocationReport_SettlDate" -> true
+        | "Model_messages.mod_f_AllocationReport_GrossTradeAmt" -> true
+        | "Model_messages.mod_f_AllocationReport_NetMoney" -> true
+        | "Model_messages.mod_f_AllocationReport_Text" -> true
+        | "Model_messages.mod_f_AllocationReport_AccruedInterestAmt" -> true
+        | "Model_messages.mod_f_AllocationReport_YieldType" -> true
+        | "Model_messages.mod_f_AllocationReport_Yield" -> true
+        | "Model_messages.mod_f_AllocationReport_AllocsGrp" -> true
+        | "Model_messages.mod_f_AllocationReport_Notes" -> true
+        | "Model_messages.mod_f_AllocationReport_MKTXPricingProcess" -> true
+        | "Model_messages.mod_f_AllocationReportACK_AllocReportID" -> true
+        | "Model_messages.mod_f_AllocationReportACK_AllocID" -> true
+        | "Model_messages.mod_f_AllocationReportACK_TradeDate" -> true
+        | "Model_messages.mod_f_AllocationReportACK_TransactTime" -> true
+        | "Model_messages.mod_f_AllocationReportACK_AllocStatus" -> true
+        | "Model_messages.mod_f_AllocationReportACK_AllocRejCode" -> true
+        | "Model_messages.mod_f_AllocationReportACK_AllocReportType" -> true
+        | "Model_messages.mod_f_AllocationReportACK_Text" -> true
+        | "Model_messages.mod_f_AllocationInstruction_AllocID" -> true
+        | "Model_messages.mod_f_AllocationInstruction_AllocTransType" -> true
+        | "Model_messages.mod_f_AllocationInstruction_AllocType" -> true
+        | "Model_messages.mod_f_AllocationInstruction_RefAllocID" -> true
+        | "Model_messages.mod_f_AllocationInstruction_AllocCancReplaceReason" -> true
+        | "Model_messages.mod_f_AllocationInstruction_AllocNoOrdersType" -> true
+        | "Model_messages.mod_f_AllocationInstruction_OrdersGrp" -> true
+        | "Model_messages.mod_f_AllocationInstruction_ExecsGrp" -> true
+        | "Model_messages.mod_f_AllocationInstruction_Side" -> true
+        | "Model_messages.mod_f_AllocationInstruction_Instrument_CFICode" -> true
+        | "Model_messages.mod_f_AllocationInstruction_Quantity" -> true
+        | "Model_messages.mod_f_AllocationInstruction_AvgPx" -> true
+        | "Model_messages.mod_f_AllocationInstruction_TradeDate" -> true
+        | "Model_messages.mod_f_AllocationInstruction_TransactTime" -> true
+        | "Model_messages.mod_f_AllocationInstruction_Text" -> true
+        | "Model_messages.mod_f_AllocationInstruction_AllocsGrp" -> true
+        | "Model_messages.mod_f_AllocationInstructionACK_AllocID" -> true
+        | "Model_messages.mod_f_AllocationInstructionACK_Parties_PartyIDsGrp" -> true
+        | "Model_messages.mod_f_AllocationInstructionACK_TradeDate" -> true
+        | "Model_messages.mod_f_AllocationInstructionACK_TransactTime" -> true
+        | "Model_messages.mod_f_AllocationInstructionACK_AllocStatus" -> true
+        | "Model_messages.mod_f_AllocationInstructionACK_AllocRejCode" -> true
+        | "Model_messages.mod_f_AllocationInstructionACK_AllocType" -> true
+        | "Model_messages.mod_f_AllocationInstructionACK_Text" -> true
+        | "Model_messages.mod_f_Heartbeat_TestReqID" -> true
+        | "Model_messages.mod_f_TestRequest_TestReqID" -> true
+        | "Model_messages.mod_f_ResendRequest_BeginSeqNo" -> true
+        | "Model_messages.mod_f_ResendRequest_EndSeqNo" -> true
+        | "Model_messages.mod_f_SessionLevelReject_RefSeqNum" -> true
+        | "Model_messages.mod_f_SessionLevelReject_Text" -> true
+        | "Model_messages.mod_f_SessionLevelReject_RefTagID" -> true
+        | "Model_messages.mod_f_SessionLevelReject_RefMsgTyp" -> true
+        | "Model_messages.mod_f_SessionLevelReject_SessionRejectReason" -> true
+        | "Model_messages.mod_f_SequenceResetRequest_GapFillFlag" -> true
+        | "Model_messages.mod_f_SequenceResetRequest_NewSeqNo" -> true
+        | "Model_messages.mod_f_Logout_Text" -> true
+        | "Model_messages.mod_f_FIXLogon_EncryptMethod" -> true
+        | "Model_messages.mod_f_FIXLogon_HeartBtInt" -> true
+        | "Model_messages.mod_f_FIXLogon_ResetSeqNumFlag" -> true
+        | "Model_messages.mod_f_ExecutionReport_ClOrdID" -> true
+        | "Model_messages.mod_f_ExecutionReport_OrigClOrdID" -> true
+        | "Model_messages.mod_f_ExecutionReport_OrderID" -> true
+        | "Model_messages.mod_f_ExecutionReport_Parties_PartyIDsGrp" -> true
+        | "Model_messages.mod_f_ExecutionReport_ListID" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXCPTYLEI" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXPartyLEI" -> true
+        | "Model_messages.mod_f_ExecutionReport_OrderCapacity" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXInquiryID" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXTrdRegPublicationReason" -> true
+        | "Model_messages.mod_f_ExecutionReport_TrdRegPublicationsGrp" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXESCBStblty" -> true
+        | "Model_messages.mod_f_ExecutionReport_PreTradeWaiver" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXTradeReportingInd" -> true
+        | "Model_messages.mod_f_ExecutionReport_TradeReportingIndicator" -> true
+        | "Model_messages.mod_f_ExecutionReport_InternalCrossingFlag" -> true
+        | "Model_messages.mod_f_ExecutionReport_RegulatoryTradeIDsGrp" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXVenueTransactionID" -> true
+        | "Model_messages.mod_f_ExecutionReport_ExecID" -> true
+        | "Model_messages.mod_f_ExecutionReport_ExecRefID" -> true
+        | "Model_messages.mod_f_ExecutionReport_HandlInst" -> true
+        | "Model_messages.mod_f_ExecutionReport_LastMkt" -> true
+        | "Model_messages.mod_f_ExecutionReport_ExecType" -> true
+        | "Model_messages.mod_f_ExecutionReport_SecondaryExecID" -> true
+        | "Model_messages.mod_f_ExecutionReport_OrdStatus" -> true
+        | "Model_messages.mod_f_ExecutionReport_OrdRejReason" -> true
+        | "Model_messages.mod_f_ExecutionReport_SettlDate" -> true
+        | "Model_messages.mod_f_ExecutionReport_IssueDate" -> true
+        | "Model_messages.mod_f_ExecutionReport_Instrument_CFICode" -> true
+        | "Model_messages.mod_f_ExecutionReport_Price" -> true
+        | "Model_messages.mod_f_ExecutionReport_Side" -> true
+        | "Model_messages.mod_f_ExecutionReport_OrderQty" -> true
+        | "Model_messages.mod_f_ExecutionReport_PriceType" -> true
+        | "Model_messages.mod_f_ExecutionReport_Currency" -> true
+        | "Model_messages.mod_f_ExecutionReport_LastPx" -> true
+        | "Model_messages.mod_f_ExecutionReport_LastParPx" -> true
+        | "Model_messages.mod_f_ExecutionReport_LeavesQty" -> true
+        | "Model_messages.mod_f_ExecutionReport_CumQty" -> true
+        | "Model_messages.mod_f_ExecutionReport_AvgPx" -> true
+        | "Model_messages.mod_f_ExecutionReport_TradeDate" -> true
+        | "Model_messages.mod_f_ExecutionReport_TransactTime" -> true
+        | "Model_messages.mod_f_ExecutionReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency" -> true
+        | "Model_messages.mod_f_ExecutionReport_YieldType" -> true
+        | "Model_messages.mod_f_ExecutionReport_Yield" -> true
+        | "Model_messages.mod_f_ExecutionReport_GrossTradeAmt" -> true
+        | "Model_messages.mod_f_ExecutionReport_AccruedInterestAmt" -> true
+        | "Model_messages.mod_f_ExecutionReport_NetMoney" -> true
+        | "Model_messages.mod_f_ExecutionReport_SettlCurrAmt" -> true
+        | "Model_messages.mod_f_ExecutionReport_SettlCurrency" -> true
+        | "Model_messages.mod_f_ExecutionReport_SettlCurrFxRate" -> true
+        | "Model_messages.mod_f_ExecutionReport_SettlCurrFxRateCalc" -> true
+        | "Model_messages.mod_f_ExecutionReport_Text" -> true
+        | "Model_messages.mod_f_ExecutionReport_LegsGrp" -> true
+        | "Model_messages.mod_f_ExecutionReport_IncludeDealers" -> true
+        | "Model_messages.mod_f_ExecutionReport_DealersGrp" -> true
+        | "Model_messages.mod_f_ExecutionReport_Notes" -> true
+        | "Model_messages.mod_f_ExecutionReport_TradingProtocol" -> true
+        | "Model_messages.mod_f_ExecutionReport_NumberofTrades" -> true
+        | "Model_messages.mod_f_ExecutionReport_LegTransactionSeqNumberLegID" -> true
+        | "Model_messages.mod_f_ExecutionReport_InquiryQty" -> true
+        | "Model_messages.mod_f_ExecutionReport_NumDaysInterest" -> true
+        | "Model_messages.mod_f_ExecutionReport_DatedDate_2" -> true
+        | "Model_messages.mod_f_ExecutionReport_BrokerReceiptTime" -> true
+        | "Model_messages.mod_f_ExecutionReport_GSpread" -> true
+        | "Model_messages.mod_f_ExecutionReport_ZSpread" -> true
+        | "Model_messages.mod_f_ExecutionReport_ISpread" -> true
+        | "Model_messages.mod_f_ExecutionReport_ASWSpread" -> true
+        | "Model_messages.mod_f_ExecutionReport_OASSpread" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXCostAnalysisGrp" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXPricingProcess" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXTargetLevel" -> true
+        | "Model_messages.mod_f_ExecutionReport_ClientBook" -> true
+        | "Model_messages.mod_f_ExecutionReport_DirtyPrice" -> true
+        | "Model_messages.mod_f_ExecutionReport_LastCapacity" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXTradeStyle" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXCompositeBidSpread" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXCompositeOfferSpread" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXCompositeBidPrice" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXCompositeOfferPrice" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXCompositeBidMMEYield" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXCompositeOfferMMEYield" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXCompositeLiquidityScore" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXAutoExType" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXAutoExStatus" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXAutoExDesc" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXAutoExRefLevel" -> true
+        | "Model_messages.mod_f_ExecutionReport_MKTXAutoExRefLevelType" -> true
+        | "Model_messages.mod_f_ExecutionReport_ExpireTime" -> true
+        | "Model_messages.mod_f_ExecutionReport_LastQty" -> true
+        | "Model_messages.mod_f_DontKnowTrade_OrderID" -> true
+        | "Model_messages.mod_f_DontKnowTrade_ExecID" -> true
+        | "Model_messages.mod_f_DontKnowTrade_DKReason" -> true
+        | "Model_messages.mod_f_DontKnowTrade_Side" -> true
+        | "Model_messages.mod_f_DontKnowTrade_LastQty" -> true
+        | "Model_messages.mod_f_DontKnowTrade_LastPx" -> true
+        | "Model_messages.mod_f_DontKnowTrade_Text" -> true
+        | "Model_messages.mod_f_DontKnowTrade_SecondaryOrderID" -> true
+        | "Model_messages.mod_f_DontKnowTrade_EncodedTextLen" -> true
+        | "Model_messages.mod_f_DontKnowTrade_EncodedText" -> true
         | _ -> false
     )
 ;;
 
 let isMessage (str : string)  =
     (match str with
-        | "Model_messages.FIX_Msg_ExecutionReport" -> true
         | "Model_messages.FIX_Msg_NewOrderSingle" -> true
+        | "Model_messages.FIX_Msg_OrderCancel" -> true
+        | "Model_messages.FIX_Msg_NewOrder_Multi_Leg" -> true
+        | "Model_messages.FIX_Msg_NewOrder_List" -> true
+        | "Model_messages.FIX_Msg_ListOrderCancel" -> true
+        | "Model_messages.FIX_Msg_OrderCancelReject" -> true
+        | "Model_messages.FIX_Msg_BusinessMessageReject" -> true
+        | "Model_messages.FIX_Msg_AllocationReport" -> true
+        | "Model_messages.FIX_Msg_AllocationReportACK" -> true
+        | "Model_messages.FIX_Msg_AllocationInstruction" -> true
+        | "Model_messages.FIX_Msg_AllocationInstructionACK" -> true
+        | "Model_messages.FIX_Msg_Heartbeat" -> true
+        | "Model_messages.FIX_Msg_TestRequest" -> true
+        | "Model_messages.FIX_Msg_ResendRequest" -> true
+        | "Model_messages.FIX_Msg_SessionLevelReject" -> true
+        | "Model_messages.FIX_Msg_SequenceResetRequest" -> true
+        | "Model_messages.FIX_Msg_Logout" -> true
+        | "Model_messages.FIX_Msg_FIXLogon" -> true
+        | "Model_messages.FIX_Msg_ExecutionReport" -> true
+        | "Model_messages.FIX_Msg_DontKnowTrade" -> true
         | _ -> false
     )
 ;;
 
 let isMessageData (str : string)  =
     (match str with
-        | "Model_messages.mod_executionreport_data" -> true
         | "Model_messages.mod_newordersingle_data" -> true
+        | "Model_messages.mod_ordercancel_data" -> true
+        | "Model_messages.mod_neworder_multi_leg_data" -> true
+        | "Model_messages.mod_neworder_list_data" -> true
+        | "Model_messages.mod_listordercancel_data" -> true
+        | "Model_messages.mod_ordercancelreject_data" -> true
+        | "Model_messages.mod_businessmessagereject_data" -> true
+        | "Model_messages.mod_allocationreport_data" -> true
+        | "Model_messages.mod_allocationreportack_data" -> true
+        | "Model_messages.mod_allocationinstruction_data" -> true
+        | "Model_messages.mod_allocationinstructionack_data" -> true
+        | "Model_messages.mod_heartbeat_data" -> true
+        | "Model_messages.mod_testrequest_data" -> true
+        | "Model_messages.mod_resendrequest_data" -> true
+        | "Model_messages.mod_sessionlevelreject_data" -> true
+        | "Model_messages.mod_sequenceresetrequest_data" -> true
+        | "Model_messages.mod_logout_data" -> true
+        | "Model_messages.mod_fixlogon_data" -> true
+        | "Model_messages.mod_executionreport_data" -> true
+        | "Model_messages.mod_dontknowtrade_data" -> true
         | _ -> false
     )
 ;;
@@ -108,101 +527,381 @@ let isAssignableField (str : string)  =
 
 let isEnum (str : string)  =
     (match str with
-        | "Model_app_enums.model_fix_side" -> true
-        | "Model_app_enums.model_fix_ordtype" -> true
+        | "Model_app_enums.model_fix_securityidsource" -> true
+        | "Model_app_enums.model_fix_qtytype" -> true
+        | "Model_app_enums.model_fix_mktxlisttype" -> true
+        | "Model_app_enums.model_fix_mktxtrdregpublicationreason" -> true
+        | "Model_app_enums.model_fix_legproduct" -> true
+        | "Model_app_enums.model_fix_partyidsource" -> true
+        | "Model_app_enums.model_fix_allocreporttype" -> true
+        | "Model_app_enums.model_fix_mktxautoexrefleveltype" -> true
+        | "Model_app_enums.model_fix_dealeridsource" -> true
+        | "Model_app_enums.model_fix_yieldtype" -> true
+        | "Model_app_enums.model_fix_pricetype" -> true
+        | "Model_app_enums.model_fix_trdregpublicationtype" -> true
+        | "Model_app_enums.model_fix_partysubidtype" -> true
+        | "Model_app_enums.model_fix_alloctype" -> true
+        | "Model_app_enums.model_fix_ordercapacity" -> true
+        | "Model_app_enums.model_fix_businessrejectreason" -> true
+        | "Model_app_enums.model_fix_mktxpricingprocess" -> true
+        | "Model_app_enums.model_fix_mktxanalysisto" -> true
+        | "Model_app_enums.model_fix_allocrejcode" -> true
+        | "Model_app_enums.model_fix_lastcapacity" -> true
+        | "Model_app_enums.model_fix_dkreason" -> true
+        | "Model_app_enums.model_fix_alloccancreplacereason" -> true
+        | "Model_app_enums.model_fix_algorithm" -> true
+        | "Model_app_enums.model_fix_tradereportingindicator" -> true
+        | "Model_app_enums.model_fix_legsecurityidsource" -> true
+        | "Model_app_enums.model_fix_securityaltidsource" -> true
+        | "Model_app_enums.model_fix_execinst" -> true
+        | "Model_app_enums.model_fix_pretradewaiver" -> true
+        | "Model_app_enums.model_fix_competitivestatus" -> true
+        | "Model_app_enums.model_fix_mktxescbstblty" -> true
+        | "Model_app_enums.model_fix_internalcrossingflag" -> true
+        | "Model_app_enums.model_fix_mktxtradestyle" -> true
+        | "Model_app_enums.model_fix_settltype" -> true
         | "Model_app_enums.model_fix_ordstatus" -> true
+        | "Model_app_enums.model_fix_forexreq" -> true
+        | "Model_app_enums.model_fix_alloctranstype" -> true
+        | "Model_app_enums.model_fix_gapfillflag" -> true
+        | "Model_app_enums.model_fix_mktxautoextype" -> true
+        | "Model_app_enums.model_fix_legside" -> true
+        | "Model_app_enums.model_fix_exclude" -> true
+        | "Model_app_enums.model_fix_ordrejreason" -> true
+        | "Model_app_enums.model_fix_trdregpublicationreason" -> true
+        | "Model_app_enums.model_fix_product" -> true
+        | "Model_app_enums.model_fix_includedealers" -> true
+        | "Model_app_enums.model_fix_mktxautoexstatus" -> true
+        | "Model_app_enums.model_fix_side" -> true
+        | "Model_app_enums.model_fix_cxlrejreason" -> true
+        | "Model_app_enums.model_fix_handlinst" -> true
+        | "Model_app_enums.model_fix_regulatorytradeidtype" -> true
+        | "Model_app_enums.model_fix_legswaptype" -> true
+        | "Model_app_enums.model_fix_partyrole" -> true
+        | "Model_app_enums.model_fix_cxlrejresponseto" -> true
+        | "Model_app_enums.model_fix_allocnoorderstype" -> true
+        | "Model_app_enums.model_fix_mktxtradereportingind" -> true
         | "Model_app_enums.model_fix_exectype" -> true
+        | "Model_app_enums.model_fix_tradingprotocol" -> true
+        | "Model_app_enums.model_fix_mktxrtspurpose" -> true
+        | "Model_app_enums.model_fix_allocstatus" -> true
+        | "Model_app_enums.model_fix_sessionrejectreason" -> true
+        | "Model_app_enums.model_fix_benchmarkcurvename" -> true
+        | "Model_app_enums.model_fix_benchmarkpricetype" -> true
+        | "Model_app_enums.model_fix_benchmarksecurityidsource" -> true
         | _ -> false
     )
 ;;
 
 let isEnumCase (str : string)  =
     (match str with
+        | "Model_app_enums.MOD_FIX_SecurityIDSource_CUSIP" -> true
+        | "Model_app_enums.MOD_FIX_SecurityIDSource_ISIN" -> true
+        | "Model_app_enums.MOD_FIX_SecurityIDSource_Dummy_CUSIP" -> true
+        | "Model_app_enums.MOD_FIX_SecurityIDSource_WKN" -> true
+        | "Model_app_enums.MOD_FIX_QtyType_units__shares__par__currency___Always_interpreted_as_par_by_MarketAxess_" -> true
+        | "Model_app_enums.MOD_FIX_QtyType_Contracts" -> true
+        | "Model_app_enums.MOD_FIX_MKTXListType_Portfolio" -> true
+        | "Model_app_enums.MOD_FIX_MKTXTrdRegPublicationReason_LRGS" -> true
+        | "Model_app_enums.MOD_FIX_MKTXTrdRegPublicationReason_ILQD" -> true
+        | "Model_app_enums.MOD_FIX_MKTXTrdRegPublicationReason_SIZE" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_AGENCY" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_COMMODITY" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_Corporate" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_CURRENCY" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_EQUITY" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_Government" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_INDEX" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_LOAN" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_MONEYMARKET" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_MORTGAGE" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_MUNICIPAL" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_OTHER" -> true
+        | "Model_app_enums.MOD_FIX_LegProduct_FINANCING" -> true
+        | "Model_app_enums.MOD_FIX_PartyIDSource_BIC_code" -> true
+        | "Model_app_enums.MOD_FIX_PartyIDSource_Generally_accepted_market_participant_identifier__e_g__e_mail_address_" -> true
+        | "Model_app_enums.MOD_FIX_PartyIDSource_Proprietary_code" -> true
+        | "Model_app_enums.MOD_FIX_PartyIDSource_MIC" -> true
+        | "Model_app_enums.MOD_FIX_PartyIDSource_Legal_entity_identifier" -> true
+        | "Model_app_enums.MOD_FIX_PartyIDSource_Short_code" -> true
+        | "Model_app_enums.MOD_FIX_AllocReportType_Sellside_calculated_using_preliminary" -> true
+        | "Model_app_enums.MOD_FIX_AllocReportType_Sellside_calculated_without_preliminary" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAutoExRefLevelType_Level_was_provided_on_the_RTS_message_or_manually_entered_in_the_Limit_column_on_the_Workstation_" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAutoExRefLevelType_Composite_Plus_value_is_being_used_as_Execution_reference_" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAutoExRefLevelType_Level_was_manually_entered_in_the_Execution_Reference_column_on_the_Workstation_" -> true
+        | "Model_app_enums.MOD_FIX_DealerIDSource_BIC_code" -> true
+        | "Model_app_enums.MOD_FIX_DealerIDSource_Generally_accepted_market_participant_identifier" -> true
+        | "Model_app_enums.MOD_FIX_DealerIDSource_Proprietary_code" -> true
+        | "Model_app_enums.MOD_FIX_YieldType_CALL" -> true
+        | "Model_app_enums.MOD_FIX_YieldType_MATURITY" -> true
+        | "Model_app_enums.MOD_FIX_YieldType_PUT" -> true
+        | "Model_app_enums.MOD_FIX_PriceType_Percentage" -> true
+        | "Model_app_enums.MOD_FIX_PriceType_Spread" -> true
+        | "Model_app_enums.MOD_FIX_PriceType_Yield" -> true
+        | "Model_app_enums.MOD_FIX_PriceType_NEGATIVE_YIELD" -> true
+        | "Model_app_enums.MOD_FIX_PriceType_DECIMAL_UNIT_PRICE" -> true
+        | "Model_app_enums.MOD_FIX_TrdRegPublicationType_Pretrade_Transparency_Waiver" -> true
+        | "Model_app_enums.MOD_FIX_TrdRegPublicationType_Exempt_From_Publication" -> true
+        | "Model_app_enums.MOD_FIX_PartySubIDType_CSD_participant_code__DTCC_" -> true
+        | "Model_app_enums.MOD_FIX_AllocType_Buyside_preliminary" -> true
+        | "Model_app_enums.MOD_FIX_OrderCapacity_Any_Other_Trading_Capacity__AOTC_" -> true
+        | "Model_app_enums.MOD_FIX_OrderCapacity_Own_Account" -> true
+        | "Model_app_enums.MOD_FIX_OrderCapacity_Matched_Principal" -> true
+        | "Model_app_enums.MOD_FIX_BusinessRejectReason_Other" -> true
+        | "Model_app_enums.MOD_FIX_BusinessRejectReason_Unknown" -> true
+        | "Model_app_enums.MOD_FIX_BusinessRejectReason_Unknown_Security" -> true
+        | "Model_app_enums.MOD_FIX_BusinessRejectReason_Unsupported_Message" -> true
+        | "Model_app_enums.MOD_FIX_BusinessRejectReason_Application_Not_Available" -> true
+        | "Model_app_enums.MOD_FIX_BusinessRejectReason_Conditionally_required_field_missing" -> true
+        | "Model_app_enums.MOD_FIX_MKTXPricingProcess_Manual" -> true
+        | "Model_app_enums.MOD_FIX_MKTXPricingProcess_Phone_Spot" -> true
+        | "Model_app_enums.MOD_FIX_MKTXPricingProcess_Auto" -> true
+        | "Model_app_enums.MOD_FIX_MKTXPricingProcess_OneStep" -> true
+        | "Model_app_enums.MOD_FIX_MKTXPricingProcess_Standard" -> true
+        | "Model_app_enums.MOD_FIX_MKTXPricingProcess_Delayed_Spot" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAnalysisTo_Avg" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAnalysisTo_BondTicker" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAnalysisTo_CompositeClose" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAnalysisTo_CompositeMid" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAnalysisTo_Cover" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAnalysisTo_Internal_Target" -> true
+        | "Model_app_enums.MOD_FIX_AllocRejCode_Unknown_account_s_" -> true
+        | "Model_app_enums.MOD_FIX_AllocRejCode_Incorrect_quantity" -> true
+        | "Model_app_enums.MOD_FIX_AllocRejCode_Unknown_executing_broker__dealer_" -> true
+        | "Model_app_enums.MOD_FIX_AllocRejCode_unknown_OrderID" -> true
+        | "Model_app_enums.MOD_FIX_AllocRejCode_Unknown_ListID" -> true
+        | "Model_app_enums.MOD_FIX_AllocRejCode_Other" -> true
+        | "Model_app_enums.MOD_FIX_AllocRejCode_Incorrect_allocated_quantity" -> true
+        | "Model_app_enums.MOD_FIX_AllocRejCode_calculation_difference" -> true
+        | "Model_app_enums.MOD_FIX_AllocRejCode_unknown_or_stale_ExecID" -> true
+        | "Model_app_enums.MOD_FIX_AllocRejCode_mismatched_data_value" -> true
+        | "Model_app_enums.MOD_FIX_AllocRejCode_Unknown_ClOrdID" -> true
+        | "Model_app_enums.MOD_FIX_LastCapacity_Agent" -> true
+        | "Model_app_enums.MOD_FIX_LastCapacity_Cross_as_Agent" -> true
+        | "Model_app_enums.MOD_FIX_LastCapacity_Cross_as_Principal" -> true
+        | "Model_app_enums.MOD_FIX_LastCapacity_Principal" -> true
+        | "Model_app_enums.MOD_FIX_LastCapacity_Matched_Principal" -> true
+        | "Model_app_enums.MOD_FIX_DKReason_unknown_symbol__unknown_security_" -> true
+        | "Model_app_enums.MOD_FIX_DKReason_wrong_side" -> true
+        | "Model_app_enums.MOD_FIX_DKReason_quantity_exceeds_order" -> true
+        | "Model_app_enums.MOD_FIX_DKReason_no_matching_order" -> true
+        | "Model_app_enums.MOD_FIX_DKReason_Price_exceeds_limit" -> true
+        | "Model_app_enums.MOD_FIX_DKReason_calculation_difference" -> true
+        | "Model_app_enums.MOD_FIX_DKReason_other" -> true
+        | "Model_app_enums.MOD_FIX_AllocCancReplaceReason_Other" -> true
+        | "Model_app_enums.MOD_FIX_AllocCancReplaceReason_Original_details_incomplete___incorrect" -> true
+        | "Model_app_enums.MOD_FIX_Algorithm_Algorithm" -> true
+        | "Model_app_enums.MOD_FIX_TradeReportingIndicator_Trade_has_not_been_reported" -> true
+        | "Model_app_enums.MOD_FIX_TradeReportingIndicator_Trade_has_been_reported_by_a_trading_venue_as_an_On_book_trade" -> true
+        | "Model_app_enums.MOD_FIX_TradeReportingIndicator_Trade_has_been_reported_as_a_systematic_internaliser_seller_trade" -> true
+        | "Model_app_enums.MOD_FIX_TradeReportingIndicator_Trade_has_been_reported_as_a_systematic_internaliser_buyer_trade" -> true
+        | "Model_app_enums.MOD_FIX_TradeReportingIndicator_Trade_has_been_reported_as_a_nonsystematic_internaliser_seller_trade" -> true
+        | "Model_app_enums.MOD_FIX_LegSecurityIDSource_CUSIP" -> true
+        | "Model_app_enums.MOD_FIX_LegSecurityIDSource_ISIN" -> true
+        | "Model_app_enums.MOD_FIX_LegSecurityIDSource_MA_Dummy_CUSIP" -> true
+        | "Model_app_enums.MOD_FIX_LegSecurityIDSource_WKN" -> true
+        | "Model_app_enums.MOD_FIX_SecurityAltIDSource_CUSIP" -> true
+        | "Model_app_enums.MOD_FIX_SecurityAltIDSource_ISIN" -> true
+        | "Model_app_enums.MOD_FIX_SecurityAltIDSource_TRAX_ICMA_Number" -> true
+        | "Model_app_enums.MOD_FIX_SecurityAltIDSource_WKN" -> true
+        | "Model_app_enums.MOD_FIX_ExecInst_WORK" -> true
+        | "Model_app_enums.MOD_FIX_PreTradeWaiver_LRGS" -> true
+        | "Model_app_enums.MOD_FIX_PreTradeWaiver_ILQD" -> true
+        | "Model_app_enums.MOD_FIX_PreTradeWaiver_SIZE" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_Client_Passed" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_second_best" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_Did_not_trade" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_Traded___Amended" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_Done_Awaiting_Book_Confirmation" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_Done_Awaiting_Spot_Confirmation" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_Dealer_did_not_respond_to_enquiry_before_client_traded" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_price_expired" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_third_best__or_worse" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_Dealer_passed" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_For_Covered_or_Best" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_Tied_for_Cover" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_No_response_from_dealer" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_Timed_Out__R_" -> true
+        | "Model_app_enums.MOD_FIX_CompetitiveStatus_Traded" -> true
+        | "Model_app_enums.MOD_FIX_MKTXESCBStblty_Investment_Operations" -> true
+        | "Model_app_enums.MOD_FIX_MKTXESCBStblty_Stability_Operations" -> true
+        | "Model_app_enums.MOD_FIX_InternalCrossingFlag_FundCrossing" -> true
+        | "Model_app_enums.MOD_FIX_MKTXTradeStyle_Portfolio" -> true
+        | "Model_app_enums.MOD_FIX_SettlType_Regular" -> true
+        | "Model_app_enums.MOD_FIX_SettlType_Cash" -> true
+        | "Model_app_enums.MOD_FIX_SettlType_T_Plus_1__next_day_" -> true
+        | "Model_app_enums.MOD_FIX_SettlType_T_Plus_2" -> true
+        | "Model_app_enums.MOD_FIX_SettlType_T_Plus_3" -> true
+        | "Model_app_enums.MOD_FIX_SettlType_T_Plus_4" -> true
+        | "Model_app_enums.MOD_FIX_SettlType_Future" -> true
+        | "Model_app_enums.MOD_FIX_SettlType_When_and_if_issued" -> true
+        | "Model_app_enums.MOD_FIX_SettlType_Sellers_Option" -> true
+        | "Model_app_enums.MOD_FIX_SettlType_T_Plus_5" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_New_" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Partially_filled" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Filled_" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Cancelled" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Rejected" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Pending_New" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Accepted_for_bidding" -> true
+        | "Model_app_enums.MOD_FIX_ForexReq_No" -> true
+        | "Model_app_enums.MOD_FIX_ForexReq_Yes" -> true
+        | "Model_app_enums.MOD_FIX_AllocTransType_New" -> true
+        | "Model_app_enums.MOD_FIX_AllocTransType_Replace" -> true
+        | "Model_app_enums.MOD_FIX_AllocTransType_Cancel" -> true
+        | "Model_app_enums.MOD_FIX_AllocTransType_Preliminary" -> true
+        | "Model_app_enums.MOD_FIX_AllocTransType_Calculated" -> true
+        | "Model_app_enums.MOD_FIX_GapFillFlag_Sequence_Reset" -> true
+        | "Model_app_enums.MOD_FIX_GapFillFlag_Gap_Fill_Messages" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAutoExType_If_the_inquiry_is_submitted_for_auto_ex_via_auto_submit_" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAutoExType_If_the_inquiry_is_submitted_for_auto_ex_from_manual_workstation" -> true
+        | "Model_app_enums.MOD_FIX_LegSide_buy" -> true
+        | "Model_app_enums.MOD_FIX_LegSide_sell" -> true
+        | "Model_app_enums.MOD_FIX_LegSide_Opposite" -> true
+        | "Model_app_enums.MOD_FIX_Exclude_No__include_dealer_" -> true
+        | "Model_app_enums.MOD_FIX_Exclude_Yes__exclude_dealer_" -> true
+        | "Model_app_enums.MOD_FIX_OrdRejReason_Unknown_symbol" -> true
+        | "Model_app_enums.MOD_FIX_OrdRejReason_Duplicate_order" -> true
+        | "Model_app_enums.MOD_FIX_OrdRejReason_Unsupported_order_characteristic" -> true
+        | "Model_app_enums.MOD_FIX_OrdRejReason_Incorrect_quantity" -> true
+        | "Model_app_enums.MOD_FIX_OrdRejReason_Other" -> true
+        | "Model_app_enums.MOD_FIX_TrdRegPublicationReason_NLIQ" -> true
+        | "Model_app_enums.MOD_FIX_TrdRegPublicationReason_OLIQ" -> true
+        | "Model_app_enums.MOD_FIX_TrdRegPublicationReason_PRIC" -> true
+        | "Model_app_enums.MOD_FIX_TrdRegPublicationReason_RFPT" -> true
+        | "Model_app_enums.MOD_FIX_TrdRegPublicationReason_ILQD" -> true
+        | "Model_app_enums.MOD_FIX_TrdRegPublicationReason_SIZE" -> true
+        | "Model_app_enums.MOD_FIX_TrdRegPublicationReason_LRGS" -> true
+        | "Model_app_enums.MOD_FIX_TrdRegPublicationReason_ILQD_2" -> true
+        | "Model_app_enums.MOD_FIX_TrdRegPublicationReason_SIZE_2" -> true
+        | "Model_app_enums.MOD_FIX_Product_Corporate" -> true
+        | "Model_app_enums.MOD_FIX_Product_Preferred" -> true
+        | "Model_app_enums.MOD_FIX_Product_Government" -> true
+        | "Model_app_enums.MOD_FIX_Product_Municipal" -> true
+        | "Model_app_enums.MOD_FIX_Product_Other" -> true
+        | "Model_app_enums.MOD_FIX_IncludeDealers_Include_Only_Send_to_only_the_dealers" -> true
+        | "Model_app_enums.MOD_FIX_IncludeDealers_Include_at_Least__Send_to_dealers" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAutoExStatus_If_the_inquiry_was_auto_executed_" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAutoExStatus_If_the_inquiry_did_not_execute_either_manually_or_through_auto_ex_process_" -> true
+        | "Model_app_enums.MOD_FIX_MKTXAutoExStatus_If_the_inquiry_fail_to_auto_execute_but_was_later_executed_manually_" -> true
         | "Model_app_enums.MOD_FIX_Side_Buy" -> true
         | "Model_app_enums.MOD_FIX_Side_Sell" -> true
-        | "Model_app_enums.MOD_FIX_Side_BuyMinus" -> true
-        | "Model_app_enums.MOD_FIX_Side_SellPlus" -> true
-        | "Model_app_enums.MOD_FIX_Side_SellShort" -> true
-        | "Model_app_enums.MOD_FIX_Side_SellShortExempt" -> true
-        | "Model_app_enums.MOD_FIX_Side_Undisclosed" -> true
-        | "Model_app_enums.MOD_FIX_Side_Cross" -> true
-        | "Model_app_enums.MOD_FIX_Side_CrossShort" -> true
-        | "Model_app_enums.MOD_FIX_Side_CrossShortExempt" -> true
-        | "Model_app_enums.MOD_FIX_Side_AsDefined" -> true
-        | "Model_app_enums.MOD_FIX_Side_Opposite" -> true
-        | "Model_app_enums.MOD_FIX_Side_Subscribe" -> true
-        | "Model_app_enums.MOD_FIX_Side_Redeem" -> true
-        | "Model_app_enums.MOD_FIX_Side_Lend" -> true
-        | "Model_app_enums.MOD_FIX_Side_Borrow" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_Market" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_Limit" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_Stop" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_StopLimit" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_WithOrWithout" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_LimitOrBetter" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_LimitWithOrWithout" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_OnBasis" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_PreviouslyQuoted" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_PreviouslyIndicated" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_ForexSwap" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_Funari" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_MarketIfTouched" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_MarketWithLeftOverAsLimit" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_PreviousFundValuationPoint" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_NextFundValuationPoint" -> true
-        | "Model_app_enums.MOD_FIX_OrdType_Pegged" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_New" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_PartiallyFilled" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Filled" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_DoneForDay" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Canceled" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_PendingCancel" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Stopped" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Rejected" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Suspended" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_PendingNew" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Calculated" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Expired" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_AcceptedForBidding" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_PendingReplace" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Replaced" -> true
+        | "Model_app_enums.MOD_FIX_Side_As_Defined__for_multi_legs_" -> true
+        | "Model_app_enums.MOD_FIX_Side_Sell_Undisclosed" -> true
+        | "Model_app_enums.MOD_FIX_CxlRejReason_All_cases_where_it_is_too_late_to_cancel" -> true
+        | "Model_app_enums.MOD_FIX_CxlRejReason_Unknown_Order" -> true
+        | "Model_app_enums.MOD_FIX_HandlInst_Automated_execution_order" -> true
+        | "Model_app_enums.MOD_FIX_HandlInst_Manual_Order__best_execution" -> true
+        | "Model_app_enums.MOD_FIX_RegulatoryTradeIDType_Trading_venue_transaction_identifier" -> true
+        | "Model_app_enums.MOD_FIX_LegSwapType_Par_for_Par" -> true
+        | "Model_app_enums.MOD_FIX_LegSwapType_Modified_Duration" -> true
+        | "Model_app_enums.MOD_FIX_PartyRole_Executing_Firm" -> true
+        | "Model_app_enums.MOD_FIX_PartyRole_ClientID" -> true
+        | "Model_app_enums.MOD_FIX_PartyRole_Order_origination_trader__associated_with_order_origination_firm__e_g_g__trader_who_initiates___submits_the_order_" -> true
+        | "Model_app_enums.MOD_FIX_PartyRole_Executing_Trader" -> true
+        | "Model_app_enums.MOD_FIX_PartyRole_Order_origination_firm__e_g__Buy_side_firm_" -> true
+        | "Model_app_enums.MOD_FIX_PartyRole_Execution_venue" -> true
+        | "Model_app_enums.MOD_FIX_PartyRole_Investment_Decision_Maker__MIFID_II_Clients_" -> true
+        | "Model_app_enums.MOD_FIX_CxlRejResponseTo_Order_Cancel_Request_" -> true
+        | "Model_app_enums.MOD_FIX_AllocNoOrdersType_Not_specified" -> true
+        | "Model_app_enums.MOD_FIX_AllocNoOrdersType_Explicit_list_provided" -> true
+        | "Model_app_enums.MOD_FIX_MKTXTradeReportingInd_Trade_not_yet_reported" -> true
+        | "Model_app_enums.MOD_FIX_MKTXTradeReportingInd_Trade_reported_on_book" -> true
+        | "Model_app_enums.MOD_FIX_MKTXTradeReportingInd_Trade_reported_as_systematic_internaliser" -> true
+        | "Model_app_enums.MOD_FIX_MKTXTradeReportingInd_Trade_reported_as_nonsystematic_internaliser" -> true
+        | "Model_app_enums.MOD_FIX_MKTXTradeReportingInd_Trade_reported_under_sub_delegation_arrangement" -> true
         | "Model_app_enums.MOD_FIX_ExecType_New" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_DoneForDay" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Canceled" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Replaced" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_PendingCancel" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Stopped" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Cancelled" -> true
         | "Model_app_enums.MOD_FIX_ExecType_Rejected" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Suspended" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_PendingNew" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Calculated" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Expired" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Restated" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_PendingReplace" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Trade" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_TradeCorrect" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_TradeCancel" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_OrderStatus" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Trade__partial_fill_or_fill_" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Trade_Correct" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Trade_Cancel" -> true
+        | "Model_app_enums.MOD_FIX_TradingProtocol_DM" -> true
+        | "Model_app_enums.MOD_FIX_TradingProtocol_EU_Price" -> true
+        | "Model_app_enums.MOD_FIX_TradingProtocol_LMPrice" -> true
+        | "Model_app_enums.MOD_FIX_TradingProtocol_Price" -> true
+        | "Model_app_enums.MOD_FIX_TradingProtocol_Spread" -> true
+        | "Model_app_enums.MOD_FIX_TradingProtocol_USDPrice" -> true
+        | "Model_app_enums.MOD_FIX_TradingProtocol_Yield" -> true
+        | "Model_app_enums.MOD_FIX_TradingProtocol_PFDS_Price" -> true
+        | "Model_app_enums.MOD_FIX_MKTXRTSPurpose_FundCrossing" -> true
+        | "Model_app_enums.MOD_FIX_AllocStatus_Accepted" -> true
+        | "Model_app_enums.MOD_FIX_AllocStatus_received__not_yet_processed_" -> true
+        | "Model_app_enums.MOD_FIX_AllocStatus_block_level_reject" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Invalid_Tag_number" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Required_Tag_missing" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Tag_not_defined_for_this_message_type" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Undefined_Tag" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Tag_specified_without_a_value" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Value_is_incorrect__out_of_range__for_this_Tag" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Incorrect_data_format_for_value" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Decryption_problem" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Signature_problem" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_CompID_problem" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_SendingTime_accuracy_problem" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Invalid_MsgType" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_XML_Validation_error" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Tag_appears_more_than_once" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Tag_specified_out_of_required_order" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Repeating_group_fields_out_of_order" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Incorrect_NumInGroup_count_for_repeating_group" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Non_data_value_includes_field_delimiter__SOH_character_" -> true
+        | "Model_app_enums.MOD_FIX_SessionRejectReason_Other" -> true
+        | "Model_app_enums.MOD_FIX_BenchmarkCurveName_EDSF" -> true
+        | "Model_app_enums.MOD_FIX_BenchmarkCurveName_LIBOR__London_Inter_Bank_Offers_" -> true
+        | "Model_app_enums.MOD_FIX_BenchmarkCurveName_SWAP" -> true
+        | "Model_app_enums.MOD_FIX_BenchmarkPriceType_percent_of_par" -> true
+        | "Model_app_enums.MOD_FIX_BenchmarkSecurityIDSource_CUSIP" -> true
+        | "Model_app_enums.MOD_FIX_BenchmarkSecurityIDSource_ISIN" -> true
+        | "Model_app_enums.MOD_FIX_BenchmarkSecurityIDSource_WKN" -> true
         | _ -> false
     )
 ;;
 
 let isRepeatingGroup (str : string)  =
     (match str with
+        | "Model_repeating_groups.model_fix_rec_partysubidsgrp" -> true
+        | "Model_repeating_groups.model_fix_rec_mktxcostanalysisgrp" -> true
+        | "Model_repeating_groups.model_fix_rec_trdregpublicationsgrp" -> true
+        | "Model_repeating_groups.model_fix_rec_allocsgrp" -> true
+        | "Model_repeating_groups.model_fix_rec_dealersgrp" -> true
+        | "Model_repeating_groups.model_fix_rec_securityaltidgrp" -> true
+        | "Model_repeating_groups.model_fix_rec_regulatorytradeidsgrp" -> true
+        | "Model_repeating_groups.model_fix_rec_legsgrp" -> true
+        | "Model_repeating_groups.model_fix_rec_execsgrp" -> true
+        | "Model_repeating_groups.model_fix_rec_legallocsgrp" -> true
+        | "Model_repeating_groups.model_fix_rec_partyidsgrp" -> true
+        | "Model_repeating_groups.model_fix_rec_ordersgrp" -> true
         | _ -> false
     )
 ;;
 
 let name_of_action (x)  =
-    (match x with
-        | FIX_Action_x _ -> "Action:x"
-    )
+    ""
 ;;
 
 let name_of_model_msg (x)  =
     (match x with
-        | FIX_Msg_ExecutionReport _ -> "Msg:ExecutionReport"
         | FIX_Msg_NewOrderSingle _ -> "Msg:NewOrderSingle"
+        | FIX_Msg_OrderCancel _ -> "Msg:OrderCancel"
+        | FIX_Msg_NewOrder_Multi_Leg _ -> "Msg:NewOrder_Multi_Leg"
+        | FIX_Msg_NewOrder_List _ -> "Msg:NewOrder_List"
+        | FIX_Msg_ListOrderCancel _ -> "Msg:ListOrderCancel"
+        | FIX_Msg_OrderCancelReject _ -> "Msg:OrderCancelReject"
+        | FIX_Msg_BusinessMessageReject _ -> "Msg:BusinessMessageReject"
+        | FIX_Msg_AllocationReport _ -> "Msg:AllocationReport"
+        | FIX_Msg_AllocationReportACK _ -> "Msg:AllocationReportACK"
+        | FIX_Msg_AllocationInstruction _ -> "Msg:AllocationInstruction"
+        | FIX_Msg_AllocationInstructionACK _ -> "Msg:AllocationInstructionACK"
+        | FIX_Msg_Heartbeat _ -> "Msg:Heartbeat"
+        | FIX_Msg_TestRequest _ -> "Msg:TestRequest"
+        | FIX_Msg_ResendRequest _ -> "Msg:ResendRequest"
+        | FIX_Msg_SessionLevelReject _ -> "Msg:SessionLevelReject"
+        | FIX_Msg_SequenceResetRequest _ -> "Msg:SequenceResetRequest"
+        | FIX_Msg_Logout _ -> "Msg:Logout"
+        | FIX_Msg_FIXLogon _ -> "Msg:FIXLogon"
+        | FIX_Msg_ExecutionReport _ -> "Msg:ExecutionReport"
+        | FIX_Msg_DontKnowTrade _ -> "Msg:DontKnowTrade"
     )
 ;;
 

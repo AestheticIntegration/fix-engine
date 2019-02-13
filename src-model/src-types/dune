@@ -1,4 +1,11 @@
 (rule
+  (targets model_messages.ml)
+  (deps model_messages.iml)
+   (action
+    (with-stdout-to model_messages.ml
+       (run imandra-extract  model_messages.iml))))
+       
+(rule
   (targets model_repeating_groups.ml)
   (deps model_repeating_groups.iml)
    (action
@@ -6,11 +13,11 @@
        (run imandra-extract  model_repeating_groups.iml))))
        
 (rule
-  (targets model_records.ml)
-  (deps model_records.iml)
+  (targets state.ml)
+  (deps state.iml)
    (action
-    (with-stdout-to model_records.ml
-       (run imandra-extract  model_records.iml))))
+    (with-stdout-to state.ml
+       (run imandra-extract  state.iml))))
        
 (rule
   (targets model_tags.ml)
@@ -20,20 +27,6 @@
        (run imandra-extract  model_tags.iml))))
        
 (rule
-  (targets model_messages.ml)
-  (deps model_messages.iml)
-   (action
-    (with-stdout-to model_messages.ml
-       (run imandra-extract  model_messages.iml))))
-       
-(rule
-  (targets model_app_enums.ml)
-  (deps model_app_enums.iml)
-   (action
-    (with-stdout-to model_app_enums.ml
-       (run imandra-extract  model_app_enums.iml))))
-       
-(rule
   (targets actions.ml)
   (deps actions.iml)
    (action
@@ -41,11 +34,18 @@
        (run imandra-extract  actions.iml))))
        
 (rule
-  (targets state.ml)
-  (deps state.iml)
+  (targets model_records.ml)
+  (deps model_records.iml)
    (action
-    (with-stdout-to state.ml
-       (run imandra-extract  state.iml))))
+    (with-stdout-to model_records.ml
+       (run imandra-extract  model_records.iml))))
+       
+(rule
+  (targets model_app_enums.ml)
+  (deps model_app_enums.iml)
+   (action
+    (with-stdout-to model_app_enums.ml
+       (run imandra-extract  model_app_enums.iml))))
        
 (library
   (name venue_types)

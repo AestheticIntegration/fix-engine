@@ -1,26 +1,63 @@
-(* Aesthetic Integration copyright 2018 *)
+(* Aesthetic Integration copyright 2019 *)
 open Base_types_json;;
 open Datetime_json;;
 open Decoders_yojson.Basic.Decode;;
 open Decoders_yojson.Basic.Decode.Infix;;
 open Json_to_enum;;
 open Json_to_model_tag;;
+open Json_to_repeating_group;;
 open Model_messages;;
 
-let mod_message_executionreport_decoder  : mod_executionreport_data decoder =
-    (maybe (field "Text" string_decoder)) >>= (fun mod_f_ExecutionReport_Text -> (field "Instrument.Symbol" string_decoder) >>= (fun mod_f_ExecutionReport_Instrument_Symbol -> (field "OrdStatus" mod_enum_ordstatus_decoder) >>= (fun mod_f_ExecutionReport_OrdStatus -> (field "CumQty" float_6_decoder) >>= (fun mod_f_ExecutionReport_CumQty -> (field "LeavesQty" float_6_decoder) >>= (fun mod_f_ExecutionReport_LeavesQty -> (field "Side" mod_enum_side_decoder) >>= (fun mod_f_ExecutionReport_Side -> (field "AvgPx" float_6_decoder) >>= (fun mod_f_ExecutionReport_AvgPx -> (field "ExecType" mod_enum_exectype_decoder) >>= (fun mod_f_ExecutionReport_ExecType -> (field "ExecID" string_decoder) >>= (fun mod_f_ExecutionReport_ExecID -> (field "OrderID" string_decoder) >>= (fun mod_f_ExecutionReport_OrderID -> (field "ClOrdID" string_decoder) >>= (fun mod_f_ExecutionReport_ClOrdID -> succeed {
-        mod_f_ExecutionReport_ClOrdID = mod_f_ExecutionReport_ClOrdID;
-        mod_f_ExecutionReport_OrderID = mod_f_ExecutionReport_OrderID;
-        mod_f_ExecutionReport_ExecID = mod_f_ExecutionReport_ExecID;
-        mod_f_ExecutionReport_ExecType = mod_f_ExecutionReport_ExecType;
-        mod_f_ExecutionReport_AvgPx = mod_f_ExecutionReport_AvgPx;
-        mod_f_ExecutionReport_Side = mod_f_ExecutionReport_Side;
-        mod_f_ExecutionReport_LeavesQty = mod_f_ExecutionReport_LeavesQty;
-        mod_f_ExecutionReport_CumQty = mod_f_ExecutionReport_CumQty;
-        mod_f_ExecutionReport_OrdStatus = mod_f_ExecutionReport_OrdStatus;
-        mod_f_ExecutionReport_Instrument_Symbol = mod_f_ExecutionReport_Instrument_Symbol;
-        mod_f_ExecutionReport_Text = mod_f_ExecutionReport_Text
+let mod_message_newordersingle_decoder  : mod_newordersingle_data decoder =
+    (field "AllocsGrp" mod_rg_allocsgrp_decoder) >>= (fun mod_f_NewOrderSingle_AllocsGrp -> (maybe (field "AllocID" string_decoder)) >>= (fun mod_f_NewOrderSingle_AllocID -> (maybe (field "Text" string_decoder)) >>= (fun mod_f_NewOrderSingle_Text -> (maybe (field "PriceType" mod_enum_pricetype_decoder)) >>= (fun mod_f_NewOrderSingle_PriceType -> (maybe (field "SpreadorBenchmarkCurveData.BenchmarkCurveCurrency" float_6_decoder)) >>= (fun mod_f_NewOrderSingle_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency -> (maybe (field "MKTXRTSPurpose" mod_enum_mktxrtspurpose_decoder)) >>= (fun mod_f_NewOrderSingle_MKTXRTSPurpose -> (maybe (field "MKTXExternalTargetLevel" float_6_decoder)) >>= (fun mod_f_NewOrderSingle_MKTXExternalTargetLevel -> (maybe (field "MKTXTargetLevel" float_6_decoder)) >>= (fun mod_f_NewOrderSingle_MKTXTargetLevel -> (maybe (field "MKTXPricingProcess" mod_enum_mktxpricingprocess_decoder)) >>= (fun mod_f_NewOrderSingle_MKTXPricingProcess -> (maybe (field "TradingProtocol" mod_enum_tradingprotocol_decoder)) >>= (fun mod_f_NewOrderSingle_TradingProtocol -> (field "DealersGrp" mod_rg_dealersgrp_decoder) >>= (fun mod_f_NewOrderSingle_DealersGrp -> (maybe (field "IncludeDealers" mod_enum_includedealers_decoder)) >>= (fun mod_f_NewOrderSingle_IncludeDealers -> (maybe (field "SettlCurrency" string_decoder)) >>= (fun mod_f_NewOrderSingle_SettlCurrency -> (maybe (field "ForexReq" mod_enum_forexreq_decoder)) >>= (fun mod_f_NewOrderSingle_ForexReq -> (field "Instrument.CFICode" string_decoder) >>= (fun mod_f_NewOrderSingle_Instrument_CFICode -> (maybe (field "QtyType" mod_enum_qtytype_decoder)) >>= (fun mod_f_NewOrderSingle_QtyType -> (maybe (field "OrderCapacity" mod_enum_ordercapacity_decoder)) >>= (fun mod_f_NewOrderSingle_OrderCapacity -> (maybe (field "SettlDate" localmktdate_decoder)) >>= (fun mod_f_NewOrderSingle_SettlDate -> (maybe (field "SettlType" mod_enum_settltype_decoder)) >>= (fun mod_f_NewOrderSingle_SettlType -> (field "TransactTime" utctimestamp_milli_decoder) >>= (fun mod_f_NewOrderSingle_TransactTime -> (field "Side" mod_enum_side_decoder) >>= (fun mod_f_NewOrderSingle_Side -> (maybe (field "Price" float_6_decoder)) >>= (fun mod_f_NewOrderSingle_Price -> (field "OrdType" char_decoder) >>= (fun mod_f_NewOrderSingle_OrdType -> (field "OrderQty" float_6_decoder) >>= (fun mod_f_NewOrderSingle_OrderQty -> (maybe (field "ExecInst" mod_enum_execinst_decoder)) >>= (fun mod_f_NewOrderSingle_ExecInst -> (field "Parties.PartyIDsGrp" mod_rg_partyidsgrp_decoder) >>= (fun mod_f_NewOrderSingle_Parties_PartyIDsGrp -> (maybe (field "HandlInst" mod_enum_handlinst_decoder)) >>= (fun mod_f_NewOrderSingle_HandlInst -> (maybe (field "Currency" string_decoder)) >>= (fun mod_f_NewOrderSingle_Currency -> (field "ClOrdID" string_decoder) >>= (fun mod_f_NewOrderSingle_ClOrdID -> succeed {
+        mod_f_NewOrderSingle_ClOrdID = mod_f_NewOrderSingle_ClOrdID;
+        mod_f_NewOrderSingle_Currency = mod_f_NewOrderSingle_Currency;
+        mod_f_NewOrderSingle_HandlInst = mod_f_NewOrderSingle_HandlInst;
+        mod_f_NewOrderSingle_Parties_PartyIDsGrp = mod_f_NewOrderSingle_Parties_PartyIDsGrp;
+        mod_f_NewOrderSingle_ExecInst = mod_f_NewOrderSingle_ExecInst;
+        mod_f_NewOrderSingle_OrderQty = mod_f_NewOrderSingle_OrderQty;
+        mod_f_NewOrderSingle_OrdType = mod_f_NewOrderSingle_OrdType;
+        mod_f_NewOrderSingle_Price = mod_f_NewOrderSingle_Price;
+        mod_f_NewOrderSingle_Side = mod_f_NewOrderSingle_Side;
+        mod_f_NewOrderSingle_TransactTime = mod_f_NewOrderSingle_TransactTime;
+        mod_f_NewOrderSingle_SettlType = mod_f_NewOrderSingle_SettlType;
+        mod_f_NewOrderSingle_SettlDate = mod_f_NewOrderSingle_SettlDate;
+        mod_f_NewOrderSingle_OrderCapacity = mod_f_NewOrderSingle_OrderCapacity;
+        mod_f_NewOrderSingle_QtyType = mod_f_NewOrderSingle_QtyType;
+        mod_f_NewOrderSingle_Instrument_CFICode = mod_f_NewOrderSingle_Instrument_CFICode;
+        mod_f_NewOrderSingle_ForexReq = mod_f_NewOrderSingle_ForexReq;
+        mod_f_NewOrderSingle_SettlCurrency = mod_f_NewOrderSingle_SettlCurrency;
+        mod_f_NewOrderSingle_IncludeDealers = mod_f_NewOrderSingle_IncludeDealers;
+        mod_f_NewOrderSingle_DealersGrp = mod_f_NewOrderSingle_DealersGrp;
+        mod_f_NewOrderSingle_TradingProtocol = mod_f_NewOrderSingle_TradingProtocol;
+        mod_f_NewOrderSingle_MKTXPricingProcess = mod_f_NewOrderSingle_MKTXPricingProcess;
+        mod_f_NewOrderSingle_MKTXTargetLevel = mod_f_NewOrderSingle_MKTXTargetLevel;
+        mod_f_NewOrderSingle_MKTXExternalTargetLevel = mod_f_NewOrderSingle_MKTXExternalTargetLevel;
+        mod_f_NewOrderSingle_MKTXRTSPurpose = mod_f_NewOrderSingle_MKTXRTSPurpose;
+        mod_f_NewOrderSingle_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency = mod_f_NewOrderSingle_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency;
+        mod_f_NewOrderSingle_PriceType = mod_f_NewOrderSingle_PriceType;
+        mod_f_NewOrderSingle_Text = mod_f_NewOrderSingle_Text;
+        mod_f_NewOrderSingle_AllocID = mod_f_NewOrderSingle_AllocID;
+        mod_f_NewOrderSingle_AllocsGrp = mod_f_NewOrderSingle_AllocsGrp
     }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
     )
     )
     )
@@ -34,14 +71,558 @@ let mod_message_executionreport_decoder  : mod_executionreport_data decoder =
     )
 ;;
 
-let mod_message_newordersingle_decoder  : mod_newordersingle_data decoder =
-    (field "Instrument.Symbol" string_decoder) >>= (fun mod_f_NewOrderSingle_Instrument_Symbol -> (field "OrdType" mod_enum_ordtype_decoder) >>= (fun mod_f_NewOrderSingle_OrdType -> (field "TransactTime" utctimestamp_milli_decoder) >>= (fun mod_f_NewOrderSingle_TransactTime -> (field "Side" mod_enum_side_decoder) >>= (fun mod_f_NewOrderSingle_Side -> (field "ClOrdID" string_decoder) >>= (fun mod_f_NewOrderSingle_ClOrdID -> succeed {
-        mod_f_NewOrderSingle_ClOrdID = mod_f_NewOrderSingle_ClOrdID;
-        mod_f_NewOrderSingle_Side = mod_f_NewOrderSingle_Side;
-        mod_f_NewOrderSingle_TransactTime = mod_f_NewOrderSingle_TransactTime;
-        mod_f_NewOrderSingle_OrdType = mod_f_NewOrderSingle_OrdType;
-        mod_f_NewOrderSingle_Instrument_Symbol = mod_f_NewOrderSingle_Instrument_Symbol
+let mod_message_ordercancel_decoder  : mod_ordercancel_data decoder =
+    (field "TransactTime" utctimestamp_milli_decoder) >>= (fun mod_f_OrderCancel_TransactTime -> (field "Side" mod_enum_side_decoder) >>= (fun mod_f_OrderCancel_Side -> (field "Symbol" string_decoder) >>= (fun mod_f_OrderCancel_Symbol -> (field "Parties.PartyIDsGrp" mod_rg_partyidsgrp_decoder) >>= (fun mod_f_OrderCancel_Parties_PartyIDsGrp -> (field "ClOrdID" string_decoder) >>= (fun mod_f_OrderCancel_ClOrdID -> (field "OrigClOrdID" string_decoder) >>= (fun mod_f_OrderCancel_OrigClOrdID -> succeed {
+        mod_f_OrderCancel_OrigClOrdID = mod_f_OrderCancel_OrigClOrdID;
+        mod_f_OrderCancel_ClOrdID = mod_f_OrderCancel_ClOrdID;
+        mod_f_OrderCancel_Parties_PartyIDsGrp = mod_f_OrderCancel_Parties_PartyIDsGrp;
+        mod_f_OrderCancel_Symbol = mod_f_OrderCancel_Symbol;
+        mod_f_OrderCancel_Side = mod_f_OrderCancel_Side;
+        mod_f_OrderCancel_TransactTime = mod_f_OrderCancel_TransactTime
     }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_message_neworder_multi_leg_decoder  : mod_neworder_multi_leg_data decoder =
+    (field "LegAllocsGrp" mod_rg_legallocsgrp_decoder) >>= (fun mod_f_NewOrder_Multi_Leg_LegAllocsGrp -> (maybe (field "AllocID" string_decoder)) >>= (fun mod_f_NewOrder_Multi_Leg_AllocID -> (maybe (field "MKTXRTSPurpose" mod_enum_mktxrtspurpose_decoder)) >>= (fun mod_f_NewOrder_Multi_Leg_MKTXRTSPurpose -> (maybe (field "MKTXLegExternalTargetLevel" int_decoder)) >>= (fun mod_f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel -> (maybe (field "MKTXPricingProcess" mod_enum_mktxpricingprocess_decoder)) >>= (fun mod_f_NewOrder_Multi_Leg_MKTXPricingProcess -> (maybe (field "TradingProtocol" mod_enum_tradingprotocol_decoder)) >>= (fun mod_f_NewOrder_Multi_Leg_TradingProtocol -> (field "DealersGrp" mod_rg_dealersgrp_decoder) >>= (fun mod_f_NewOrder_Multi_Leg_DealersGrp -> (maybe (field "IncludeDealers" mod_enum_includedealers_decoder)) >>= (fun mod_f_NewOrder_Multi_Leg_IncludeDealers -> (maybe (field "Notes" string_decoder)) >>= (fun mod_f_NewOrder_Multi_Leg_Notes -> (maybe (field "Text" string_decoder)) >>= (fun mod_f_NewOrder_Multi_Leg_Text -> (field "OrdType" char_decoder) >>= (fun mod_f_NewOrder_Multi_Leg_OrdType -> (maybe (field "OrderQty" float_6_decoder)) >>= (fun mod_f_NewOrder_Multi_Leg_OrderQty -> (maybe (field "QtyType" mod_enum_qtytype_decoder)) >>= (fun mod_f_NewOrder_Multi_Leg_QtyType -> (field "TransactTime" utctimestamp_milli_decoder) >>= (fun mod_f_NewOrder_Multi_Leg_TransactTime -> (field "LegsGrp" mod_rg_legsgrp_decoder) >>= (fun mod_f_NewOrder_Multi_Leg_LegsGrp -> (maybe (field "OrderCapacity" mod_enum_ordercapacity_decoder)) >>= (fun mod_f_NewOrder_Multi_Leg_OrderCapacity -> (field "Instrument.CFICode" string_decoder) >>= (fun mod_f_NewOrder_Multi_Leg_Instrument_CFICode -> (maybe (field "Side" mod_enum_side_decoder)) >>= (fun mod_f_NewOrder_Multi_Leg_Side -> (field "Parties.PartyIDsGrp" mod_rg_partyidsgrp_decoder) >>= (fun mod_f_NewOrder_Multi_Leg_Parties_PartyIDsGrp -> (field "ClOrdID" string_decoder) >>= (fun mod_f_NewOrder_Multi_Leg_ClOrdID -> succeed {
+        mod_f_NewOrder_Multi_Leg_ClOrdID = mod_f_NewOrder_Multi_Leg_ClOrdID;
+        mod_f_NewOrder_Multi_Leg_Parties_PartyIDsGrp = mod_f_NewOrder_Multi_Leg_Parties_PartyIDsGrp;
+        mod_f_NewOrder_Multi_Leg_Side = mod_f_NewOrder_Multi_Leg_Side;
+        mod_f_NewOrder_Multi_Leg_Instrument_CFICode = mod_f_NewOrder_Multi_Leg_Instrument_CFICode;
+        mod_f_NewOrder_Multi_Leg_OrderCapacity = mod_f_NewOrder_Multi_Leg_OrderCapacity;
+        mod_f_NewOrder_Multi_Leg_LegsGrp = mod_f_NewOrder_Multi_Leg_LegsGrp;
+        mod_f_NewOrder_Multi_Leg_TransactTime = mod_f_NewOrder_Multi_Leg_TransactTime;
+        mod_f_NewOrder_Multi_Leg_QtyType = mod_f_NewOrder_Multi_Leg_QtyType;
+        mod_f_NewOrder_Multi_Leg_OrderQty = mod_f_NewOrder_Multi_Leg_OrderQty;
+        mod_f_NewOrder_Multi_Leg_OrdType = mod_f_NewOrder_Multi_Leg_OrdType;
+        mod_f_NewOrder_Multi_Leg_Text = mod_f_NewOrder_Multi_Leg_Text;
+        mod_f_NewOrder_Multi_Leg_Notes = mod_f_NewOrder_Multi_Leg_Notes;
+        mod_f_NewOrder_Multi_Leg_IncludeDealers = mod_f_NewOrder_Multi_Leg_IncludeDealers;
+        mod_f_NewOrder_Multi_Leg_DealersGrp = mod_f_NewOrder_Multi_Leg_DealersGrp;
+        mod_f_NewOrder_Multi_Leg_TradingProtocol = mod_f_NewOrder_Multi_Leg_TradingProtocol;
+        mod_f_NewOrder_Multi_Leg_MKTXPricingProcess = mod_f_NewOrder_Multi_Leg_MKTXPricingProcess;
+        mod_f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel = mod_f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel;
+        mod_f_NewOrder_Multi_Leg_MKTXRTSPurpose = mod_f_NewOrder_Multi_Leg_MKTXRTSPurpose;
+        mod_f_NewOrder_Multi_Leg_AllocID = mod_f_NewOrder_Multi_Leg_AllocID;
+        mod_f_NewOrder_Multi_Leg_LegAllocsGrp = mod_f_NewOrder_Multi_Leg_LegAllocsGrp
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_message_neworder_list_decoder  : mod_neworder_list_data decoder =
+    (field "AllocsGrp" mod_rg_allocsgrp_decoder) >>= (fun mod_f_NewOrder_List_AllocsGrp -> (maybe (field "AllocID" string_decoder)) >>= (fun mod_f_NewOrder_List_AllocID -> (maybe (field "MKTXListType" mod_enum_mktxlisttype_decoder)) >>= (fun mod_f_NewOrder_List_MKTXListType -> (maybe (field "MKTXExternalTargetLevel" float_6_decoder)) >>= (fun mod_f_NewOrder_List_MKTXExternalTargetLevel -> (maybe (field "MKTXPricingProcess" mod_enum_mktxpricingprocess_decoder)) >>= (fun mod_f_NewOrder_List_MKTXPricingProcess -> (maybe (field "OrderCapacity" mod_enum_ordercapacity_decoder)) >>= (fun mod_f_NewOrder_List_OrderCapacity -> (field "DealersGrp" mod_rg_dealersgrp_decoder) >>= (fun mod_f_NewOrder_List_DealersGrp -> (maybe (field "IncludeDealers" mod_enum_includedealers_decoder)) >>= (fun mod_f_NewOrder_List_IncludeDealers -> (field "OrdersGrp" mod_rg_ordersgrp_decoder) >>= (fun mod_f_NewOrder_List_OrdersGrp -> (field "TotalNoOrders" int_decoder) >>= (fun mod_f_NewOrder_List_TotalNoOrders -> (field "BidType" int_decoder) >>= (fun mod_f_NewOrder_List_BidType -> (field "ListID" string_decoder) >>= (fun mod_f_NewOrder_List_ListID -> succeed {
+        mod_f_NewOrder_List_ListID = mod_f_NewOrder_List_ListID;
+        mod_f_NewOrder_List_BidType = mod_f_NewOrder_List_BidType;
+        mod_f_NewOrder_List_TotalNoOrders = mod_f_NewOrder_List_TotalNoOrders;
+        mod_f_NewOrder_List_OrdersGrp = mod_f_NewOrder_List_OrdersGrp;
+        mod_f_NewOrder_List_IncludeDealers = mod_f_NewOrder_List_IncludeDealers;
+        mod_f_NewOrder_List_DealersGrp = mod_f_NewOrder_List_DealersGrp;
+        mod_f_NewOrder_List_OrderCapacity = mod_f_NewOrder_List_OrderCapacity;
+        mod_f_NewOrder_List_MKTXPricingProcess = mod_f_NewOrder_List_MKTXPricingProcess;
+        mod_f_NewOrder_List_MKTXExternalTargetLevel = mod_f_NewOrder_List_MKTXExternalTargetLevel;
+        mod_f_NewOrder_List_MKTXListType = mod_f_NewOrder_List_MKTXListType;
+        mod_f_NewOrder_List_AllocID = mod_f_NewOrder_List_AllocID;
+        mod_f_NewOrder_List_AllocsGrp = mod_f_NewOrder_List_AllocsGrp
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_message_listordercancel_decoder  : mod_listordercancel_data decoder =
+    (field "TransactTime" utctimestamp_milli_decoder) >>= (fun mod_f_ListOrderCancel_TransactTime -> (field "ListID" string_decoder) >>= (fun mod_f_ListOrderCancel_ListID -> succeed {
+        mod_f_ListOrderCancel_ListID = mod_f_ListOrderCancel_ListID;
+        mod_f_ListOrderCancel_TransactTime = mod_f_ListOrderCancel_TransactTime
+    }
+    )
+    )
+;;
+
+let mod_message_ordercancelreject_decoder  : mod_ordercancelreject_data decoder =
+    (field "Text" string_decoder) >>= (fun mod_f_OrderCancelReject_Text -> (field "TransactTime" utctimestamp_milli_decoder) >>= (fun mod_f_OrderCancelReject_TransactTime -> (maybe (field "CxlRejReason" mod_enum_cxlrejreason_decoder)) >>= (fun mod_f_OrderCancelReject_CxlRejReason -> (field "CxlRejResponseTo" mod_enum_cxlrejresponseto_decoder) >>= (fun mod_f_OrderCancelReject_CxlRejResponseTo -> (field "OrigClOrdID" string_decoder) >>= (fun mod_f_OrderCancelReject_OrigClOrdID -> (field "OrdStatus" mod_enum_ordstatus_decoder) >>= (fun mod_f_OrderCancelReject_OrdStatus -> (field "ClOrdID" string_decoder) >>= (fun mod_f_OrderCancelReject_ClOrdID -> (field "OrderID" string_decoder) >>= (fun mod_f_OrderCancelReject_OrderID -> (maybe (field "ListID" string_decoder)) >>= (fun mod_f_OrderCancelReject_ListID -> succeed {
+        mod_f_OrderCancelReject_ListID = mod_f_OrderCancelReject_ListID;
+        mod_f_OrderCancelReject_OrderID = mod_f_OrderCancelReject_OrderID;
+        mod_f_OrderCancelReject_ClOrdID = mod_f_OrderCancelReject_ClOrdID;
+        mod_f_OrderCancelReject_OrdStatus = mod_f_OrderCancelReject_OrdStatus;
+        mod_f_OrderCancelReject_OrigClOrdID = mod_f_OrderCancelReject_OrigClOrdID;
+        mod_f_OrderCancelReject_CxlRejResponseTo = mod_f_OrderCancelReject_CxlRejResponseTo;
+        mod_f_OrderCancelReject_CxlRejReason = mod_f_OrderCancelReject_CxlRejReason;
+        mod_f_OrderCancelReject_TransactTime = mod_f_OrderCancelReject_TransactTime;
+        mod_f_OrderCancelReject_Text = mod_f_OrderCancelReject_Text
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_message_businessmessagereject_decoder  : mod_businessmessagereject_data decoder =
+    (maybe (field "Text" string_decoder)) >>= (fun mod_f_BusinessMessageReject_Text -> (field "BusinessRejectReason" mod_enum_businessrejectreason_decoder) >>= (fun mod_f_BusinessMessageReject_BusinessRejectReason -> (maybe (field "BusinessRejectRefID" string_decoder)) >>= (fun mod_f_BusinessMessageReject_BusinessRejectRefID -> (field "RefMsgTyp" string_decoder) >>= (fun mod_f_BusinessMessageReject_RefMsgTyp -> (maybe (field "RefSeqNum" int_decoder)) >>= (fun mod_f_BusinessMessageReject_RefSeqNum -> succeed {
+        mod_f_BusinessMessageReject_RefSeqNum = mod_f_BusinessMessageReject_RefSeqNum;
+        mod_f_BusinessMessageReject_RefMsgTyp = mod_f_BusinessMessageReject_RefMsgTyp;
+        mod_f_BusinessMessageReject_BusinessRejectRefID = mod_f_BusinessMessageReject_BusinessRejectRefID;
+        mod_f_BusinessMessageReject_BusinessRejectReason = mod_f_BusinessMessageReject_BusinessRejectReason;
+        mod_f_BusinessMessageReject_Text = mod_f_BusinessMessageReject_Text
+    }
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_message_allocationreport_decoder  : mod_allocationreport_data decoder =
+    (maybe (field "MKTXPricingProcess" mod_enum_mktxpricingprocess_decoder)) >>= (fun mod_f_AllocationReport_MKTXPricingProcess -> (maybe (field "Notes" string_decoder)) >>= (fun mod_f_AllocationReport_Notes -> (field "AllocsGrp" mod_rg_allocsgrp_decoder) >>= (fun mod_f_AllocationReport_AllocsGrp -> (maybe (field "Yield" float_6_decoder)) >>= (fun mod_f_AllocationReport_Yield -> (maybe (field "YieldType" mod_enum_yieldtype_decoder)) >>= (fun mod_f_AllocationReport_YieldType -> (maybe (field "AccruedInterestAmt" float_6_decoder)) >>= (fun mod_f_AllocationReport_AccruedInterestAmt -> (maybe (field "Text" string_decoder)) >>= (fun mod_f_AllocationReport_Text -> (maybe (field "NetMoney" float_6_decoder)) >>= (fun mod_f_AllocationReport_NetMoney -> (maybe (field "GrossTradeAmt" float_6_decoder)) >>= (fun mod_f_AllocationReport_GrossTradeAmt -> (maybe (field "SettlDate" localmktdate_decoder)) >>= (fun mod_f_AllocationReport_SettlDate -> (maybe (field "TransactTime" utctimestamp_milli_decoder)) >>= (fun mod_f_AllocationReport_TransactTime -> (field "TradeDate" localmktdate_decoder) >>= (fun mod_f_AllocationReport_TradeDate -> (field "Parties.PartyIDsGrp" mod_rg_partyidsgrp_decoder) >>= (fun mod_f_AllocationReport_Parties_PartyIDsGrp -> (maybe (field "Currency" string_decoder)) >>= (fun mod_f_AllocationReport_Currency -> (maybe (field "SpreadorBenchmarkCurveData.BenchmarkCurveCurrency" float_6_decoder)) >>= (fun mod_f_AllocationReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency -> (field "AvgPx" float_6_decoder) >>= (fun mod_f_AllocationReport_AvgPx -> (maybe (field "PriceType" mod_enum_pricetype_decoder)) >>= (fun mod_f_AllocationReport_PriceType -> (maybe (field "QtyType" mod_enum_qtytype_decoder)) >>= (fun mod_f_AllocationReport_QtyType -> (field "Quantity" float_6_decoder) >>= (fun mod_f_AllocationReport_Quantity -> (field "Instrument.CFICode" string_decoder) >>= (fun mod_f_AllocationReport_Instrument_CFICode -> (field "Side" mod_enum_side_decoder) >>= (fun mod_f_AllocationReport_Side -> (field "ExecsGrp" mod_rg_execsgrp_decoder) >>= (fun mod_f_AllocationReport_ExecsGrp -> (field "OrdersGrp" mod_rg_ordersgrp_decoder) >>= (fun mod_f_AllocationReport_OrdersGrp -> (field "AllocNoOrdersType" mod_enum_allocnoorderstype_decoder) >>= (fun mod_f_AllocationReport_AllocNoOrdersType -> (field "AllocStatus" mod_enum_allocstatus_decoder) >>= (fun mod_f_AllocationReport_AllocStatus -> (field "AllocReportType" mod_enum_allocreporttype_decoder) >>= (fun mod_f_AllocationReport_AllocReportType -> (maybe (field "RefAllocID" string_decoder)) >>= (fun mod_f_AllocationReport_RefAllocID -> (maybe (field "AllocCancReplaceReason" mod_enum_alloccancreplacereason_decoder)) >>= (fun mod_f_AllocationReport_AllocCancReplaceReason -> (maybe (field "AllocReportRefID" string_decoder)) >>= (fun mod_f_AllocationReport_AllocReportRefID -> (field "AllocTransType" mod_enum_alloctranstype_decoder) >>= (fun mod_f_AllocationReport_AllocTransType -> (maybe (field "AllocID" string_decoder)) >>= (fun mod_f_AllocationReport_AllocID -> (field "AllocReportID" string_decoder) >>= (fun mod_f_AllocationReport_AllocReportID -> succeed {
+        mod_f_AllocationReport_AllocReportID = mod_f_AllocationReport_AllocReportID;
+        mod_f_AllocationReport_AllocID = mod_f_AllocationReport_AllocID;
+        mod_f_AllocationReport_AllocTransType = mod_f_AllocationReport_AllocTransType;
+        mod_f_AllocationReport_AllocReportRefID = mod_f_AllocationReport_AllocReportRefID;
+        mod_f_AllocationReport_AllocCancReplaceReason = mod_f_AllocationReport_AllocCancReplaceReason;
+        mod_f_AllocationReport_RefAllocID = mod_f_AllocationReport_RefAllocID;
+        mod_f_AllocationReport_AllocReportType = mod_f_AllocationReport_AllocReportType;
+        mod_f_AllocationReport_AllocStatus = mod_f_AllocationReport_AllocStatus;
+        mod_f_AllocationReport_AllocNoOrdersType = mod_f_AllocationReport_AllocNoOrdersType;
+        mod_f_AllocationReport_OrdersGrp = mod_f_AllocationReport_OrdersGrp;
+        mod_f_AllocationReport_ExecsGrp = mod_f_AllocationReport_ExecsGrp;
+        mod_f_AllocationReport_Side = mod_f_AllocationReport_Side;
+        mod_f_AllocationReport_Instrument_CFICode = mod_f_AllocationReport_Instrument_CFICode;
+        mod_f_AllocationReport_Quantity = mod_f_AllocationReport_Quantity;
+        mod_f_AllocationReport_QtyType = mod_f_AllocationReport_QtyType;
+        mod_f_AllocationReport_PriceType = mod_f_AllocationReport_PriceType;
+        mod_f_AllocationReport_AvgPx = mod_f_AllocationReport_AvgPx;
+        mod_f_AllocationReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency = mod_f_AllocationReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency;
+        mod_f_AllocationReport_Currency = mod_f_AllocationReport_Currency;
+        mod_f_AllocationReport_Parties_PartyIDsGrp = mod_f_AllocationReport_Parties_PartyIDsGrp;
+        mod_f_AllocationReport_TradeDate = mod_f_AllocationReport_TradeDate;
+        mod_f_AllocationReport_TransactTime = mod_f_AllocationReport_TransactTime;
+        mod_f_AllocationReport_SettlDate = mod_f_AllocationReport_SettlDate;
+        mod_f_AllocationReport_GrossTradeAmt = mod_f_AllocationReport_GrossTradeAmt;
+        mod_f_AllocationReport_NetMoney = mod_f_AllocationReport_NetMoney;
+        mod_f_AllocationReport_Text = mod_f_AllocationReport_Text;
+        mod_f_AllocationReport_AccruedInterestAmt = mod_f_AllocationReport_AccruedInterestAmt;
+        mod_f_AllocationReport_YieldType = mod_f_AllocationReport_YieldType;
+        mod_f_AllocationReport_Yield = mod_f_AllocationReport_Yield;
+        mod_f_AllocationReport_AllocsGrp = mod_f_AllocationReport_AllocsGrp;
+        mod_f_AllocationReport_Notes = mod_f_AllocationReport_Notes;
+        mod_f_AllocationReport_MKTXPricingProcess = mod_f_AllocationReport_MKTXPricingProcess
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_message_allocationreportack_decoder  : mod_allocationreportack_data decoder =
+    (maybe (field "Text" string_decoder)) >>= (fun mod_f_AllocationReportACK_Text -> (maybe (field "AllocReportType" mod_enum_allocreporttype_decoder)) >>= (fun mod_f_AllocationReportACK_AllocReportType -> (maybe (field "AllocRejCode" mod_enum_allocrejcode_decoder)) >>= (fun mod_f_AllocationReportACK_AllocRejCode -> (field "AllocStatus" mod_enum_allocstatus_decoder) >>= (fun mod_f_AllocationReportACK_AllocStatus -> (field "TransactTime" utctimestamp_milli_decoder) >>= (fun mod_f_AllocationReportACK_TransactTime -> (maybe (field "TradeDate" localmktdate_decoder)) >>= (fun mod_f_AllocationReportACK_TradeDate -> (field "AllocID" string_decoder) >>= (fun mod_f_AllocationReportACK_AllocID -> (field "AllocReportID" string_decoder) >>= (fun mod_f_AllocationReportACK_AllocReportID -> succeed {
+        mod_f_AllocationReportACK_AllocReportID = mod_f_AllocationReportACK_AllocReportID;
+        mod_f_AllocationReportACK_AllocID = mod_f_AllocationReportACK_AllocID;
+        mod_f_AllocationReportACK_TradeDate = mod_f_AllocationReportACK_TradeDate;
+        mod_f_AllocationReportACK_TransactTime = mod_f_AllocationReportACK_TransactTime;
+        mod_f_AllocationReportACK_AllocStatus = mod_f_AllocationReportACK_AllocStatus;
+        mod_f_AllocationReportACK_AllocRejCode = mod_f_AllocationReportACK_AllocRejCode;
+        mod_f_AllocationReportACK_AllocReportType = mod_f_AllocationReportACK_AllocReportType;
+        mod_f_AllocationReportACK_Text = mod_f_AllocationReportACK_Text
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_message_allocationinstruction_decoder  : mod_allocationinstruction_data decoder =
+    (field "AllocsGrp" mod_rg_allocsgrp_decoder) >>= (fun mod_f_AllocationInstruction_AllocsGrp -> (maybe (field "Text" string_decoder)) >>= (fun mod_f_AllocationInstruction_Text -> (maybe (field "TransactTime" utctimestamp_milli_decoder)) >>= (fun mod_f_AllocationInstruction_TransactTime -> (field "TradeDate" localmktdate_decoder) >>= (fun mod_f_AllocationInstruction_TradeDate -> (field "AvgPx" float_6_decoder) >>= (fun mod_f_AllocationInstruction_AvgPx -> (field "Quantity" float_6_decoder) >>= (fun mod_f_AllocationInstruction_Quantity -> (field "Instrument.CFICode" string_decoder) >>= (fun mod_f_AllocationInstruction_Instrument_CFICode -> (field "Side" mod_enum_side_decoder) >>= (fun mod_f_AllocationInstruction_Side -> (field "ExecsGrp" mod_rg_execsgrp_decoder) >>= (fun mod_f_AllocationInstruction_ExecsGrp -> (field "OrdersGrp" mod_rg_ordersgrp_decoder) >>= (fun mod_f_AllocationInstruction_OrdersGrp -> (field "AllocNoOrdersType" mod_enum_allocnoorderstype_decoder) >>= (fun mod_f_AllocationInstruction_AllocNoOrdersType -> (maybe (field "AllocCancReplaceReason" mod_enum_alloccancreplacereason_decoder)) >>= (fun mod_f_AllocationInstruction_AllocCancReplaceReason -> (maybe (field "RefAllocID" string_decoder)) >>= (fun mod_f_AllocationInstruction_RefAllocID -> (field "AllocType" mod_enum_alloctype_decoder) >>= (fun mod_f_AllocationInstruction_AllocType -> (field "AllocTransType" mod_enum_alloctranstype_decoder) >>= (fun mod_f_AllocationInstruction_AllocTransType -> (field "AllocID" string_decoder) >>= (fun mod_f_AllocationInstruction_AllocID -> succeed {
+        mod_f_AllocationInstruction_AllocID = mod_f_AllocationInstruction_AllocID;
+        mod_f_AllocationInstruction_AllocTransType = mod_f_AllocationInstruction_AllocTransType;
+        mod_f_AllocationInstruction_AllocType = mod_f_AllocationInstruction_AllocType;
+        mod_f_AllocationInstruction_RefAllocID = mod_f_AllocationInstruction_RefAllocID;
+        mod_f_AllocationInstruction_AllocCancReplaceReason = mod_f_AllocationInstruction_AllocCancReplaceReason;
+        mod_f_AllocationInstruction_AllocNoOrdersType = mod_f_AllocationInstruction_AllocNoOrdersType;
+        mod_f_AllocationInstruction_OrdersGrp = mod_f_AllocationInstruction_OrdersGrp;
+        mod_f_AllocationInstruction_ExecsGrp = mod_f_AllocationInstruction_ExecsGrp;
+        mod_f_AllocationInstruction_Side = mod_f_AllocationInstruction_Side;
+        mod_f_AllocationInstruction_Instrument_CFICode = mod_f_AllocationInstruction_Instrument_CFICode;
+        mod_f_AllocationInstruction_Quantity = mod_f_AllocationInstruction_Quantity;
+        mod_f_AllocationInstruction_AvgPx = mod_f_AllocationInstruction_AvgPx;
+        mod_f_AllocationInstruction_TradeDate = mod_f_AllocationInstruction_TradeDate;
+        mod_f_AllocationInstruction_TransactTime = mod_f_AllocationInstruction_TransactTime;
+        mod_f_AllocationInstruction_Text = mod_f_AllocationInstruction_Text;
+        mod_f_AllocationInstruction_AllocsGrp = mod_f_AllocationInstruction_AllocsGrp
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_message_allocationinstructionack_decoder  : mod_allocationinstructionack_data decoder =
+    (maybe (field "Text" string_decoder)) >>= (fun mod_f_AllocationInstructionACK_Text -> (maybe (field "AllocType" mod_enum_alloctype_decoder)) >>= (fun mod_f_AllocationInstructionACK_AllocType -> (maybe (field "AllocRejCode" mod_enum_allocrejcode_decoder)) >>= (fun mod_f_AllocationInstructionACK_AllocRejCode -> (field "AllocStatus" mod_enum_allocstatus_decoder) >>= (fun mod_f_AllocationInstructionACK_AllocStatus -> (field "TransactTime" utctimestamp_milli_decoder) >>= (fun mod_f_AllocationInstructionACK_TransactTime -> (maybe (field "TradeDate" localmktdate_decoder)) >>= (fun mod_f_AllocationInstructionACK_TradeDate -> (field "Parties.PartyIDsGrp" mod_rg_partyidsgrp_decoder) >>= (fun mod_f_AllocationInstructionACK_Parties_PartyIDsGrp -> (field "AllocID" string_decoder) >>= (fun mod_f_AllocationInstructionACK_AllocID -> succeed {
+        mod_f_AllocationInstructionACK_AllocID = mod_f_AllocationInstructionACK_AllocID;
+        mod_f_AllocationInstructionACK_Parties_PartyIDsGrp = mod_f_AllocationInstructionACK_Parties_PartyIDsGrp;
+        mod_f_AllocationInstructionACK_TradeDate = mod_f_AllocationInstructionACK_TradeDate;
+        mod_f_AllocationInstructionACK_TransactTime = mod_f_AllocationInstructionACK_TransactTime;
+        mod_f_AllocationInstructionACK_AllocStatus = mod_f_AllocationInstructionACK_AllocStatus;
+        mod_f_AllocationInstructionACK_AllocRejCode = mod_f_AllocationInstructionACK_AllocRejCode;
+        mod_f_AllocationInstructionACK_AllocType = mod_f_AllocationInstructionACK_AllocType;
+        mod_f_AllocationInstructionACK_Text = mod_f_AllocationInstructionACK_Text
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_message_heartbeat_decoder  : mod_heartbeat_data decoder =
+    (maybe (field "TestReqID" string_decoder)) >>= (fun mod_f_Heartbeat_TestReqID -> succeed {
+        mod_f_Heartbeat_TestReqID = mod_f_Heartbeat_TestReqID
+    }
+    )
+;;
+
+let mod_message_testrequest_decoder  : mod_testrequest_data decoder =
+    (field "TestReqID" string_decoder) >>= (fun mod_f_TestRequest_TestReqID -> succeed {
+        mod_f_TestRequest_TestReqID = mod_f_TestRequest_TestReqID
+    }
+    )
+;;
+
+let mod_message_resendrequest_decoder  : mod_resendrequest_data decoder =
+    (field "EndSeqNo" int_decoder) >>= (fun mod_f_ResendRequest_EndSeqNo -> (field "BeginSeqNo" int_decoder) >>= (fun mod_f_ResendRequest_BeginSeqNo -> succeed {
+        mod_f_ResendRequest_BeginSeqNo = mod_f_ResendRequest_BeginSeqNo;
+        mod_f_ResendRequest_EndSeqNo = mod_f_ResendRequest_EndSeqNo
+    }
+    )
+    )
+;;
+
+let mod_message_sessionlevelreject_decoder  : mod_sessionlevelreject_data decoder =
+    (field "SessionRejectReason" mod_enum_sessionrejectreason_decoder) >>= (fun mod_f_SessionLevelReject_SessionRejectReason -> (field "RefMsgTyp" string_decoder) >>= (fun mod_f_SessionLevelReject_RefMsgTyp -> (field "RefTagID" int_decoder) >>= (fun mod_f_SessionLevelReject_RefTagID -> (field "Text" string_decoder) >>= (fun mod_f_SessionLevelReject_Text -> (field "RefSeqNum" int_decoder) >>= (fun mod_f_SessionLevelReject_RefSeqNum -> succeed {
+        mod_f_SessionLevelReject_RefSeqNum = mod_f_SessionLevelReject_RefSeqNum;
+        mod_f_SessionLevelReject_Text = mod_f_SessionLevelReject_Text;
+        mod_f_SessionLevelReject_RefTagID = mod_f_SessionLevelReject_RefTagID;
+        mod_f_SessionLevelReject_RefMsgTyp = mod_f_SessionLevelReject_RefMsgTyp;
+        mod_f_SessionLevelReject_SessionRejectReason = mod_f_SessionLevelReject_SessionRejectReason
+    }
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_message_sequenceresetrequest_decoder  : mod_sequenceresetrequest_data decoder =
+    (field "NewSeqNo" int_decoder) >>= (fun mod_f_SequenceResetRequest_NewSeqNo -> (maybe (field "GapFillFlag" mod_enum_gapfillflag_decoder)) >>= (fun mod_f_SequenceResetRequest_GapFillFlag -> succeed {
+        mod_f_SequenceResetRequest_GapFillFlag = mod_f_SequenceResetRequest_GapFillFlag;
+        mod_f_SequenceResetRequest_NewSeqNo = mod_f_SequenceResetRequest_NewSeqNo
+    }
+    )
+    )
+;;
+
+let mod_message_logout_decoder  : mod_logout_data decoder =
+    (maybe (field "Text" string_decoder)) >>= (fun mod_f_Logout_Text -> succeed {
+        mod_f_Logout_Text = mod_f_Logout_Text
+    }
+    )
+;;
+
+let mod_message_fixlogon_decoder  : mod_fixlogon_data decoder =
+    (maybe (field "ResetSeqNumFlag" bool_decoder)) >>= (fun mod_f_FIXLogon_ResetSeqNumFlag -> (field "HeartBtInt" int_decoder) >>= (fun mod_f_FIXLogon_HeartBtInt -> (field "EncryptMethod" int_decoder) >>= (fun mod_f_FIXLogon_EncryptMethod -> succeed {
+        mod_f_FIXLogon_EncryptMethod = mod_f_FIXLogon_EncryptMethod;
+        mod_f_FIXLogon_HeartBtInt = mod_f_FIXLogon_HeartBtInt;
+        mod_f_FIXLogon_ResetSeqNumFlag = mod_f_FIXLogon_ResetSeqNumFlag
+    }
+    )
+    )
+    )
+;;
+
+let mod_message_executionreport_decoder  : mod_executionreport_data decoder =
+    (maybe (field "LastQty" float_6_decoder)) >>= (fun mod_f_ExecutionReport_LastQty -> (maybe (field "ExpireTime" utctimestamp_milli_decoder)) >>= (fun mod_f_ExecutionReport_ExpireTime -> (maybe (field "MKTXAutoExRefLevelType" mod_enum_mktxautoexrefleveltype_decoder)) >>= (fun mod_f_ExecutionReport_MKTXAutoExRefLevelType -> (maybe (field "MKTXAutoExRefLevel" string_decoder)) >>= (fun mod_f_ExecutionReport_MKTXAutoExRefLevel -> (maybe (field "MKTXAutoExDesc" string_decoder)) >>= (fun mod_f_ExecutionReport_MKTXAutoExDesc -> (maybe (field "MKTXAutoExStatus" mod_enum_mktxautoexstatus_decoder)) >>= (fun mod_f_ExecutionReport_MKTXAutoExStatus -> (maybe (field "MKTXAutoExType" mod_enum_mktxautoextype_decoder)) >>= (fun mod_f_ExecutionReport_MKTXAutoExType -> (maybe (field "MKTXCompositeLiquidityScore" float_6_decoder)) >>= (fun mod_f_ExecutionReport_MKTXCompositeLiquidityScore -> (maybe (field "MKTXCompositeOfferMMEYield" float_6_decoder)) >>= (fun mod_f_ExecutionReport_MKTXCompositeOfferMMEYield -> (maybe (field "MKTXCompositeBidMMEYield" float_6_decoder)) >>= (fun mod_f_ExecutionReport_MKTXCompositeBidMMEYield -> (maybe (field "MKTXCompositeOfferPrice" float_6_decoder)) >>= (fun mod_f_ExecutionReport_MKTXCompositeOfferPrice -> (maybe (field "MKTXCompositeBidPrice" float_6_decoder)) >>= (fun mod_f_ExecutionReport_MKTXCompositeBidPrice -> (maybe (field "MKTXCompositeOfferSpread" float_6_decoder)) >>= (fun mod_f_ExecutionReport_MKTXCompositeOfferSpread -> (maybe (field "MKTXCompositeBidSpread" string_decoder)) >>= (fun mod_f_ExecutionReport_MKTXCompositeBidSpread -> (maybe (field "MKTXTradeStyle" mod_enum_mktxtradestyle_decoder)) >>= (fun mod_f_ExecutionReport_MKTXTradeStyle -> (maybe (field "LastCapacity" mod_enum_lastcapacity_decoder)) >>= (fun mod_f_ExecutionReport_LastCapacity -> (maybe (field "DirtyPrice" float_6_decoder)) >>= (fun mod_f_ExecutionReport_DirtyPrice -> (maybe (field "ClientBook" string_decoder)) >>= (fun mod_f_ExecutionReport_ClientBook -> (maybe (field "MKTXTargetLevel" float_6_decoder)) >>= (fun mod_f_ExecutionReport_MKTXTargetLevel -> (maybe (field "MKTXPricingProcess" mod_enum_mktxpricingprocess_decoder)) >>= (fun mod_f_ExecutionReport_MKTXPricingProcess -> (field "MKTXCostAnalysisGrp" mod_rg_mktxcostanalysisgrp_decoder) >>= (fun mod_f_ExecutionReport_MKTXCostAnalysisGrp -> (maybe (field "OASSpread" float_6_decoder)) >>= (fun mod_f_ExecutionReport_OASSpread -> (maybe (field "ASWSpread" float_6_decoder)) >>= (fun mod_f_ExecutionReport_ASWSpread -> (maybe (field "ISpread" float_6_decoder)) >>= (fun mod_f_ExecutionReport_ISpread -> (maybe (field "ZSpread" float_6_decoder)) >>= (fun mod_f_ExecutionReport_ZSpread -> (maybe (field "GSpread" float_decoder)) >>= (fun mod_f_ExecutionReport_GSpread -> (maybe (field "BrokerReceiptTime" utctimestamp_milli_decoder)) >>= (fun mod_f_ExecutionReport_BrokerReceiptTime -> (maybe (field "DatedDate_2" localmktdate_decoder)) >>= (fun mod_f_ExecutionReport_DatedDate_2 -> (maybe (field "NumDaysInterest" int_decoder)) >>= (fun mod_f_ExecutionReport_NumDaysInterest -> (field "InquiryQty" float_6_decoder) >>= (fun mod_f_ExecutionReport_InquiryQty -> (maybe (field "LegTransactionSeqNumberLegID" string_decoder)) >>= (fun mod_f_ExecutionReport_LegTransactionSeqNumberLegID -> (maybe (field "NumberofTrades" int_decoder)) >>= (fun mod_f_ExecutionReport_NumberofTrades -> (maybe (field "TradingProtocol" mod_enum_tradingprotocol_decoder)) >>= (fun mod_f_ExecutionReport_TradingProtocol -> (maybe (field "Notes" string_decoder)) >>= (fun mod_f_ExecutionReport_Notes -> (field "DealersGrp" mod_rg_dealersgrp_decoder) >>= (fun mod_f_ExecutionReport_DealersGrp -> (maybe (field "IncludeDealers" mod_enum_includedealers_decoder)) >>= (fun mod_f_ExecutionReport_IncludeDealers -> (field "LegsGrp" mod_rg_legsgrp_decoder) >>= (fun mod_f_ExecutionReport_LegsGrp -> (maybe (field "Text" string_decoder)) >>= (fun mod_f_ExecutionReport_Text -> (maybe (field "SettlCurrFxRateCalc" char_decoder)) >>= (fun mod_f_ExecutionReport_SettlCurrFxRateCalc -> (maybe (field "SettlCurrFxRate" float_decoder)) >>= (fun mod_f_ExecutionReport_SettlCurrFxRate -> (maybe (field "SettlCurrency" string_decoder)) >>= (fun mod_f_ExecutionReport_SettlCurrency -> (maybe (field "SettlCurrAmt" float_6_decoder)) >>= (fun mod_f_ExecutionReport_SettlCurrAmt -> (maybe (field "NetMoney" float_6_decoder)) >>= (fun mod_f_ExecutionReport_NetMoney -> (maybe (field "AccruedInterestAmt" float_6_decoder)) >>= (fun mod_f_ExecutionReport_AccruedInterestAmt -> (maybe (field "GrossTradeAmt" float_6_decoder)) >>= (fun mod_f_ExecutionReport_GrossTradeAmt -> (maybe (field "Yield" float_6_decoder)) >>= (fun mod_f_ExecutionReport_Yield -> (maybe (field "YieldType" mod_enum_yieldtype_decoder)) >>= (fun mod_f_ExecutionReport_YieldType -> (field "SpreadorBenchmarkCurveData.BenchmarkCurveCurrency" float_6_decoder) >>= (fun mod_f_ExecutionReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency -> (maybe (field "TransactTime" utctimestamp_milli_decoder)) >>= (fun mod_f_ExecutionReport_TransactTime -> (maybe (field "TradeDate" localmktdate_decoder)) >>= (fun mod_f_ExecutionReport_TradeDate -> (field "AvgPx" float_6_decoder) >>= (fun mod_f_ExecutionReport_AvgPx -> (field "CumQty" float_6_decoder) >>= (fun mod_f_ExecutionReport_CumQty -> (field "LeavesQty" float_6_decoder) >>= (fun mod_f_ExecutionReport_LeavesQty -> (maybe (field "LastParPx" float_6_decoder)) >>= (fun mod_f_ExecutionReport_LastParPx -> (maybe (field "LastPx" float_6_decoder)) >>= (fun mod_f_ExecutionReport_LastPx -> (maybe (field "Currency" string_decoder)) >>= (fun mod_f_ExecutionReport_Currency -> (maybe (field "PriceType" mod_enum_pricetype_decoder)) >>= (fun mod_f_ExecutionReport_PriceType -> (maybe (field "OrderQty" float_6_decoder)) >>= (fun mod_f_ExecutionReport_OrderQty -> (field "Side" mod_enum_side_decoder) >>= (fun mod_f_ExecutionReport_Side -> (maybe (field "Price" float_6_decoder)) >>= (fun mod_f_ExecutionReport_Price -> (field "Instrument.CFICode" string_decoder) >>= (fun mod_f_ExecutionReport_Instrument_CFICode -> (maybe (field "IssueDate" localmktdate_decoder)) >>= (fun mod_f_ExecutionReport_IssueDate -> (maybe (field "SettlDate" localmktdate_decoder)) >>= (fun mod_f_ExecutionReport_SettlDate -> (maybe (field "OrdRejReason" mod_enum_ordrejreason_decoder)) >>= (fun mod_f_ExecutionReport_OrdRejReason -> (field "OrdStatus" mod_enum_ordstatus_decoder) >>= (fun mod_f_ExecutionReport_OrdStatus -> (maybe (field "SecondaryExecID" string_decoder)) >>= (fun mod_f_ExecutionReport_SecondaryExecID -> (maybe (field "ExecType" mod_enum_exectype_decoder)) >>= (fun mod_f_ExecutionReport_ExecType -> (maybe (field "LastMkt" string_decoder)) >>= (fun mod_f_ExecutionReport_LastMkt -> (maybe (field "HandlInst" mod_enum_handlinst_decoder)) >>= (fun mod_f_ExecutionReport_HandlInst -> (maybe (field "ExecRefID" string_decoder)) >>= (fun mod_f_ExecutionReport_ExecRefID -> (field "ExecID" string_decoder) >>= (fun mod_f_ExecutionReport_ExecID -> (maybe (field "MKTXVenueTransactionID" string_decoder)) >>= (fun mod_f_ExecutionReport_MKTXVenueTransactionID -> (field "RegulatoryTradeIDsGrp" mod_rg_regulatorytradeidsgrp_decoder) >>= (fun mod_f_ExecutionReport_RegulatoryTradeIDsGrp -> (maybe (field "InternalCrossingFlag" mod_enum_internalcrossingflag_decoder)) >>= (fun mod_f_ExecutionReport_InternalCrossingFlag -> (maybe (field "TradeReportingIndicator" mod_enum_tradereportingindicator_decoder)) >>= (fun mod_f_ExecutionReport_TradeReportingIndicator -> (maybe (field "MKTXTradeReportingInd" mod_enum_mktxtradereportingind_decoder)) >>= (fun mod_f_ExecutionReport_MKTXTradeReportingInd -> (maybe (field "PreTradeWaiver" mod_enum_pretradewaiver_decoder)) >>= (fun mod_f_ExecutionReport_PreTradeWaiver -> (maybe (field "MKTXESCBStblty" mod_enum_mktxescbstblty_decoder)) >>= (fun mod_f_ExecutionReport_MKTXESCBStblty -> (field "TrdRegPublicationsGrp" mod_rg_trdregpublicationsgrp_decoder) >>= (fun mod_f_ExecutionReport_TrdRegPublicationsGrp -> (maybe (field "MKTXTrdRegPublicationReason" mod_enum_mktxtrdregpublicationreason_decoder)) >>= (fun mod_f_ExecutionReport_MKTXTrdRegPublicationReason -> (maybe (field "MKTXInquiryID" string_decoder)) >>= (fun mod_f_ExecutionReport_MKTXInquiryID -> (maybe (field "OrderCapacity" mod_enum_ordercapacity_decoder)) >>= (fun mod_f_ExecutionReport_OrderCapacity -> (maybe (field "MKTXPartyLEI" string_decoder)) >>= (fun mod_f_ExecutionReport_MKTXPartyLEI -> (maybe (field "MKTXCPTYLEI" string_decoder)) >>= (fun mod_f_ExecutionReport_MKTXCPTYLEI -> (maybe (field "ListID" string_decoder)) >>= (fun mod_f_ExecutionReport_ListID -> (field "Parties.PartyIDsGrp" mod_rg_partyidsgrp_decoder) >>= (fun mod_f_ExecutionReport_Parties_PartyIDsGrp -> (field "OrderID" string_decoder) >>= (fun mod_f_ExecutionReport_OrderID -> (maybe (field "OrigClOrdID" string_decoder)) >>= (fun mod_f_ExecutionReport_OrigClOrdID -> (maybe (field "ClOrdID" string_decoder)) >>= (fun mod_f_ExecutionReport_ClOrdID -> succeed {
+        mod_f_ExecutionReport_ClOrdID = mod_f_ExecutionReport_ClOrdID;
+        mod_f_ExecutionReport_OrigClOrdID = mod_f_ExecutionReport_OrigClOrdID;
+        mod_f_ExecutionReport_OrderID = mod_f_ExecutionReport_OrderID;
+        mod_f_ExecutionReport_Parties_PartyIDsGrp = mod_f_ExecutionReport_Parties_PartyIDsGrp;
+        mod_f_ExecutionReport_ListID = mod_f_ExecutionReport_ListID;
+        mod_f_ExecutionReport_MKTXCPTYLEI = mod_f_ExecutionReport_MKTXCPTYLEI;
+        mod_f_ExecutionReport_MKTXPartyLEI = mod_f_ExecutionReport_MKTXPartyLEI;
+        mod_f_ExecutionReport_OrderCapacity = mod_f_ExecutionReport_OrderCapacity;
+        mod_f_ExecutionReport_MKTXInquiryID = mod_f_ExecutionReport_MKTXInquiryID;
+        mod_f_ExecutionReport_MKTXTrdRegPublicationReason = mod_f_ExecutionReport_MKTXTrdRegPublicationReason;
+        mod_f_ExecutionReport_TrdRegPublicationsGrp = mod_f_ExecutionReport_TrdRegPublicationsGrp;
+        mod_f_ExecutionReport_MKTXESCBStblty = mod_f_ExecutionReport_MKTXESCBStblty;
+        mod_f_ExecutionReport_PreTradeWaiver = mod_f_ExecutionReport_PreTradeWaiver;
+        mod_f_ExecutionReport_MKTXTradeReportingInd = mod_f_ExecutionReport_MKTXTradeReportingInd;
+        mod_f_ExecutionReport_TradeReportingIndicator = mod_f_ExecutionReport_TradeReportingIndicator;
+        mod_f_ExecutionReport_InternalCrossingFlag = mod_f_ExecutionReport_InternalCrossingFlag;
+        mod_f_ExecutionReport_RegulatoryTradeIDsGrp = mod_f_ExecutionReport_RegulatoryTradeIDsGrp;
+        mod_f_ExecutionReport_MKTXVenueTransactionID = mod_f_ExecutionReport_MKTXVenueTransactionID;
+        mod_f_ExecutionReport_ExecID = mod_f_ExecutionReport_ExecID;
+        mod_f_ExecutionReport_ExecRefID = mod_f_ExecutionReport_ExecRefID;
+        mod_f_ExecutionReport_HandlInst = mod_f_ExecutionReport_HandlInst;
+        mod_f_ExecutionReport_LastMkt = mod_f_ExecutionReport_LastMkt;
+        mod_f_ExecutionReport_ExecType = mod_f_ExecutionReport_ExecType;
+        mod_f_ExecutionReport_SecondaryExecID = mod_f_ExecutionReport_SecondaryExecID;
+        mod_f_ExecutionReport_OrdStatus = mod_f_ExecutionReport_OrdStatus;
+        mod_f_ExecutionReport_OrdRejReason = mod_f_ExecutionReport_OrdRejReason;
+        mod_f_ExecutionReport_SettlDate = mod_f_ExecutionReport_SettlDate;
+        mod_f_ExecutionReport_IssueDate = mod_f_ExecutionReport_IssueDate;
+        mod_f_ExecutionReport_Instrument_CFICode = mod_f_ExecutionReport_Instrument_CFICode;
+        mod_f_ExecutionReport_Price = mod_f_ExecutionReport_Price;
+        mod_f_ExecutionReport_Side = mod_f_ExecutionReport_Side;
+        mod_f_ExecutionReport_OrderQty = mod_f_ExecutionReport_OrderQty;
+        mod_f_ExecutionReport_PriceType = mod_f_ExecutionReport_PriceType;
+        mod_f_ExecutionReport_Currency = mod_f_ExecutionReport_Currency;
+        mod_f_ExecutionReport_LastPx = mod_f_ExecutionReport_LastPx;
+        mod_f_ExecutionReport_LastParPx = mod_f_ExecutionReport_LastParPx;
+        mod_f_ExecutionReport_LeavesQty = mod_f_ExecutionReport_LeavesQty;
+        mod_f_ExecutionReport_CumQty = mod_f_ExecutionReport_CumQty;
+        mod_f_ExecutionReport_AvgPx = mod_f_ExecutionReport_AvgPx;
+        mod_f_ExecutionReport_TradeDate = mod_f_ExecutionReport_TradeDate;
+        mod_f_ExecutionReport_TransactTime = mod_f_ExecutionReport_TransactTime;
+        mod_f_ExecutionReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency = mod_f_ExecutionReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency;
+        mod_f_ExecutionReport_YieldType = mod_f_ExecutionReport_YieldType;
+        mod_f_ExecutionReport_Yield = mod_f_ExecutionReport_Yield;
+        mod_f_ExecutionReport_GrossTradeAmt = mod_f_ExecutionReport_GrossTradeAmt;
+        mod_f_ExecutionReport_AccruedInterestAmt = mod_f_ExecutionReport_AccruedInterestAmt;
+        mod_f_ExecutionReport_NetMoney = mod_f_ExecutionReport_NetMoney;
+        mod_f_ExecutionReport_SettlCurrAmt = mod_f_ExecutionReport_SettlCurrAmt;
+        mod_f_ExecutionReport_SettlCurrency = mod_f_ExecutionReport_SettlCurrency;
+        mod_f_ExecutionReport_SettlCurrFxRate = mod_f_ExecutionReport_SettlCurrFxRate;
+        mod_f_ExecutionReport_SettlCurrFxRateCalc = mod_f_ExecutionReport_SettlCurrFxRateCalc;
+        mod_f_ExecutionReport_Text = mod_f_ExecutionReport_Text;
+        mod_f_ExecutionReport_LegsGrp = mod_f_ExecutionReport_LegsGrp;
+        mod_f_ExecutionReport_IncludeDealers = mod_f_ExecutionReport_IncludeDealers;
+        mod_f_ExecutionReport_DealersGrp = mod_f_ExecutionReport_DealersGrp;
+        mod_f_ExecutionReport_Notes = mod_f_ExecutionReport_Notes;
+        mod_f_ExecutionReport_TradingProtocol = mod_f_ExecutionReport_TradingProtocol;
+        mod_f_ExecutionReport_NumberofTrades = mod_f_ExecutionReport_NumberofTrades;
+        mod_f_ExecutionReport_LegTransactionSeqNumberLegID = mod_f_ExecutionReport_LegTransactionSeqNumberLegID;
+        mod_f_ExecutionReport_InquiryQty = mod_f_ExecutionReport_InquiryQty;
+        mod_f_ExecutionReport_NumDaysInterest = mod_f_ExecutionReport_NumDaysInterest;
+        mod_f_ExecutionReport_DatedDate_2 = mod_f_ExecutionReport_DatedDate_2;
+        mod_f_ExecutionReport_BrokerReceiptTime = mod_f_ExecutionReport_BrokerReceiptTime;
+        mod_f_ExecutionReport_GSpread = mod_f_ExecutionReport_GSpread;
+        mod_f_ExecutionReport_ZSpread = mod_f_ExecutionReport_ZSpread;
+        mod_f_ExecutionReport_ISpread = mod_f_ExecutionReport_ISpread;
+        mod_f_ExecutionReport_ASWSpread = mod_f_ExecutionReport_ASWSpread;
+        mod_f_ExecutionReport_OASSpread = mod_f_ExecutionReport_OASSpread;
+        mod_f_ExecutionReport_MKTXCostAnalysisGrp = mod_f_ExecutionReport_MKTXCostAnalysisGrp;
+        mod_f_ExecutionReport_MKTXPricingProcess = mod_f_ExecutionReport_MKTXPricingProcess;
+        mod_f_ExecutionReport_MKTXTargetLevel = mod_f_ExecutionReport_MKTXTargetLevel;
+        mod_f_ExecutionReport_ClientBook = mod_f_ExecutionReport_ClientBook;
+        mod_f_ExecutionReport_DirtyPrice = mod_f_ExecutionReport_DirtyPrice;
+        mod_f_ExecutionReport_LastCapacity = mod_f_ExecutionReport_LastCapacity;
+        mod_f_ExecutionReport_MKTXTradeStyle = mod_f_ExecutionReport_MKTXTradeStyle;
+        mod_f_ExecutionReport_MKTXCompositeBidSpread = mod_f_ExecutionReport_MKTXCompositeBidSpread;
+        mod_f_ExecutionReport_MKTXCompositeOfferSpread = mod_f_ExecutionReport_MKTXCompositeOfferSpread;
+        mod_f_ExecutionReport_MKTXCompositeBidPrice = mod_f_ExecutionReport_MKTXCompositeBidPrice;
+        mod_f_ExecutionReport_MKTXCompositeOfferPrice = mod_f_ExecutionReport_MKTXCompositeOfferPrice;
+        mod_f_ExecutionReport_MKTXCompositeBidMMEYield = mod_f_ExecutionReport_MKTXCompositeBidMMEYield;
+        mod_f_ExecutionReport_MKTXCompositeOfferMMEYield = mod_f_ExecutionReport_MKTXCompositeOfferMMEYield;
+        mod_f_ExecutionReport_MKTXCompositeLiquidityScore = mod_f_ExecutionReport_MKTXCompositeLiquidityScore;
+        mod_f_ExecutionReport_MKTXAutoExType = mod_f_ExecutionReport_MKTXAutoExType;
+        mod_f_ExecutionReport_MKTXAutoExStatus = mod_f_ExecutionReport_MKTXAutoExStatus;
+        mod_f_ExecutionReport_MKTXAutoExDesc = mod_f_ExecutionReport_MKTXAutoExDesc;
+        mod_f_ExecutionReport_MKTXAutoExRefLevel = mod_f_ExecutionReport_MKTXAutoExRefLevel;
+        mod_f_ExecutionReport_MKTXAutoExRefLevelType = mod_f_ExecutionReport_MKTXAutoExRefLevelType;
+        mod_f_ExecutionReport_ExpireTime = mod_f_ExecutionReport_ExpireTime;
+        mod_f_ExecutionReport_LastQty = mod_f_ExecutionReport_LastQty
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_message_dontknowtrade_decoder  : mod_dontknowtrade_data decoder =
+    (maybe (field "EncodedText" string_decoder)) >>= (fun mod_f_DontKnowTrade_EncodedText -> (maybe (field "EncodedTextLen" int_decoder)) >>= (fun mod_f_DontKnowTrade_EncodedTextLen -> (maybe (field "SecondaryOrderID" string_decoder)) >>= (fun mod_f_DontKnowTrade_SecondaryOrderID -> (maybe (field "Text" string_decoder)) >>= (fun mod_f_DontKnowTrade_Text -> (maybe (field "LastPx" float_6_decoder)) >>= (fun mod_f_DontKnowTrade_LastPx -> (maybe (field "LastQty" float_6_decoder)) >>= (fun mod_f_DontKnowTrade_LastQty -> (field "Side" mod_enum_side_decoder) >>= (fun mod_f_DontKnowTrade_Side -> (field "DKReason" mod_enum_dkreason_decoder) >>= (fun mod_f_DontKnowTrade_DKReason -> (field "ExecID" string_decoder) >>= (fun mod_f_DontKnowTrade_ExecID -> (field "OrderID" string_decoder) >>= (fun mod_f_DontKnowTrade_OrderID -> succeed {
+        mod_f_DontKnowTrade_OrderID = mod_f_DontKnowTrade_OrderID;
+        mod_f_DontKnowTrade_ExecID = mod_f_DontKnowTrade_ExecID;
+        mod_f_DontKnowTrade_DKReason = mod_f_DontKnowTrade_DKReason;
+        mod_f_DontKnowTrade_Side = mod_f_DontKnowTrade_Side;
+        mod_f_DontKnowTrade_LastQty = mod_f_DontKnowTrade_LastQty;
+        mod_f_DontKnowTrade_LastPx = mod_f_DontKnowTrade_LastPx;
+        mod_f_DontKnowTrade_Text = mod_f_DontKnowTrade_Text;
+        mod_f_DontKnowTrade_SecondaryOrderID = mod_f_DontKnowTrade_SecondaryOrderID;
+        mod_f_DontKnowTrade_EncodedTextLen = mod_f_DontKnowTrade_EncodedTextLen;
+        mod_f_DontKnowTrade_EncodedText = mod_f_DontKnowTrade_EncodedText
+    }
+    )
+    )
+    )
+    )
+    )
     )
     )
     )
@@ -51,9 +632,45 @@ let mod_message_newordersingle_decoder  : mod_newordersingle_data decoder =
 
 let model_message_decoder  : model_msg decoder =
     (field "tag" string) >>= (fun x -> (match x with
+        | "D" -> ((field "data" mod_message_newordersingle_decoder) >>= (fun y -> succeed (FIX_Msg_NewOrderSingle y)
+        ))
+        | "F" -> ((field "data" mod_message_ordercancel_decoder) >>= (fun y -> succeed (FIX_Msg_OrderCancel y)
+        ))
+        | "AB" -> ((field "data" mod_message_neworder_multi_leg_decoder) >>= (fun y -> succeed (FIX_Msg_NewOrder_Multi_Leg y)
+        ))
+        | "E" -> ((field "data" mod_message_neworder_list_decoder) >>= (fun y -> succeed (FIX_Msg_NewOrder_List y)
+        ))
+        | "K" -> ((field "data" mod_message_listordercancel_decoder) >>= (fun y -> succeed (FIX_Msg_ListOrderCancel y)
+        ))
+        | "9" -> ((field "data" mod_message_ordercancelreject_decoder) >>= (fun y -> succeed (FIX_Msg_OrderCancelReject y)
+        ))
+        | "j" -> ((field "data" mod_message_businessmessagereject_decoder) >>= (fun y -> succeed (FIX_Msg_BusinessMessageReject y)
+        ))
+        | "AS" -> ((field "data" mod_message_allocationreport_decoder) >>= (fun y -> succeed (FIX_Msg_AllocationReport y)
+        ))
+        | "AT" -> ((field "data" mod_message_allocationreportack_decoder) >>= (fun y -> succeed (FIX_Msg_AllocationReportACK y)
+        ))
+        | "J" -> ((field "data" mod_message_allocationinstruction_decoder) >>= (fun y -> succeed (FIX_Msg_AllocationInstruction y)
+        ))
+        | "P" -> ((field "data" mod_message_allocationinstructionack_decoder) >>= (fun y -> succeed (FIX_Msg_AllocationInstructionACK y)
+        ))
+        | "0" -> ((field "data" mod_message_heartbeat_decoder) >>= (fun y -> succeed (FIX_Msg_Heartbeat y)
+        ))
+        | "1" -> ((field "data" mod_message_testrequest_decoder) >>= (fun y -> succeed (FIX_Msg_TestRequest y)
+        ))
+        | "2" -> ((field "data" mod_message_resendrequest_decoder) >>= (fun y -> succeed (FIX_Msg_ResendRequest y)
+        ))
+        | "3" -> ((field "data" mod_message_sessionlevelreject_decoder) >>= (fun y -> succeed (FIX_Msg_SessionLevelReject y)
+        ))
+        | "4" -> ((field "data" mod_message_sequenceresetrequest_decoder) >>= (fun y -> succeed (FIX_Msg_SequenceResetRequest y)
+        ))
+        | "5" -> ((field "data" mod_message_logout_decoder) >>= (fun y -> succeed (FIX_Msg_Logout y)
+        ))
+        | "A" -> ((field "data" mod_message_fixlogon_decoder) >>= (fun y -> succeed (FIX_Msg_FIXLogon y)
+        ))
         | "8" -> ((field "data" mod_message_executionreport_decoder) >>= (fun y -> succeed (FIX_Msg_ExecutionReport y)
         ))
-        | "D" -> ((field "data" mod_message_newordersingle_decoder) >>= (fun y -> succeed (FIX_Msg_NewOrderSingle y)
+        | "Q" -> ((field "data" mod_message_dontknowtrade_decoder) >>= (fun y -> succeed (FIX_Msg_DontKnowTrade y)
         ))
         | d -> (fail ("Unknown Message ("^d^") in JSON decoding."))
     )

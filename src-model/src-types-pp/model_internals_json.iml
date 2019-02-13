@@ -1,4 +1,4 @@
-(* Aesthetic Integration copyright 2018 *)
+(* Aesthetic Integration copyright 2019 *)
 open State;;
 
 let json_of_fix_internals (x : internal_states_types)  =

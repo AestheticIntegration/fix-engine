@@ -1,13 +1,9 @@
-(* Aesthetic Integration copyright 2018 *)
+(* Aesthetic Integration copyright 2019 *)
 open Actions;;
 open State;;
 
-let is_valid_action_x (action_data : m_action_fix_x)  =
-    true
-;;
-
 let is_action_valid (action : fix_action) (m_state : model_state)  =
     (match action with
-        | FIX_Action_x d -> (is_valid_action_x d)
+        | _ -> true
     )
 ;;

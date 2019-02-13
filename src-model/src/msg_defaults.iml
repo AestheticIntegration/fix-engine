@@ -1,10 +1,82 @@
-(* Aesthetic Integration copyright 2018 *)
+(* Aesthetic Integration copyright 2019 *)
 open Model_messages;;
+
+let assign_defaults_NewOrderSingle (msg_data : mod_newordersingle_data)  =
+    msg_data
+;;
+
+let assign_defaults_OrderCancel (msg_data : mod_ordercancel_data)  =
+    msg_data
+;;
+
+let assign_defaults_NewOrder_Multi_Leg (msg_data : mod_neworder_multi_leg_data)  =
+    msg_data
+;;
+
+let assign_defaults_NewOrder_List (msg_data : mod_neworder_list_data)  =
+    msg_data
+;;
+
+let assign_defaults_ListOrderCancel (msg_data : mod_listordercancel_data)  =
+    msg_data
+;;
+
+let assign_defaults_OrderCancelReject (msg_data : mod_ordercancelreject_data)  =
+    msg_data
+;;
+
+let assign_defaults_BusinessMessageReject (msg_data : mod_businessmessagereject_data)  =
+    msg_data
+;;
+
+let assign_defaults_AllocationReport (msg_data : mod_allocationreport_data)  =
+    msg_data
+;;
+
+let assign_defaults_AllocationReportACK (msg_data : mod_allocationreportack_data)  =
+    msg_data
+;;
+
+let assign_defaults_AllocationInstruction (msg_data : mod_allocationinstruction_data)  =
+    msg_data
+;;
+
+let assign_defaults_AllocationInstructionACK (msg_data : mod_allocationinstructionack_data)  =
+    msg_data
+;;
+
+let assign_defaults_Heartbeat (msg_data : mod_heartbeat_data)  =
+    msg_data
+;;
+
+let assign_defaults_TestRequest (msg_data : mod_testrequest_data)  =
+    msg_data
+;;
+
+let assign_defaults_ResendRequest (msg_data : mod_resendrequest_data)  =
+    msg_data
+;;
+
+let assign_defaults_SessionLevelReject (msg_data : mod_sessionlevelreject_data)  =
+    msg_data
+;;
+
+let assign_defaults_SequenceResetRequest (msg_data : mod_sequenceresetrequest_data)  =
+    msg_data
+;;
+
+let assign_defaults_Logout (msg_data : mod_logout_data)  =
+    msg_data
+;;
+
+let assign_defaults_FIXLogon (msg_data : mod_fixlogon_data)  =
+    msg_data
+;;
 
 let assign_defaults_ExecutionReport (msg_data : mod_executionreport_data)  =
     msg_data
 ;;
 
-let assign_defaults_NewOrderSingle (msg_data : mod_newordersingle_data)  =
+let assign_defaults_DontKnowTrade (msg_data : mod_dontknowtrade_data)  =
     msg_data
 ;;

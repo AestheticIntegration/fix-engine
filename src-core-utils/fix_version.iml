@@ -1,4 +1,4 @@
-(* Aesthetic Integration copyright 2018 *)
+(* Aesthetic Integration copyright 2019 *)
 
 type session_details = {
     constant_begin_string : string

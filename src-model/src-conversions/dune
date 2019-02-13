@@ -1,9 +1,9 @@
 (rule
-  (targets enum_converter.ml)
-  (deps enum_converter.iml)
+  (targets type_converter.ml)
+  (deps type_converter.iml)
    (action
-    (with-stdout-to enum_converter.ml
-       (run imandra-extract  enum_converter.iml))))
+    (with-stdout-to type_converter.ml
+       (run imandra-extract  type_converter.iml))))
        
 (rule
   (targets repeating_groups_converter.ml)
@@ -13,11 +13,11 @@
        (run imandra-extract  repeating_groups_converter.iml))))
        
 (rule
-  (targets type_converter.ml)
-  (deps type_converter.iml)
+  (targets enum_converter.ml)
+  (deps enum_converter.iml)
    (action
-    (with-stdout-to type_converter.ml
-       (run imandra-extract  type_converter.iml))))
+    (with-stdout-to enum_converter.ml
+       (run imandra-extract  enum_converter.iml))))
        
 (library
   (name conversions)

@@ -1,11 +1,4 @@
 (rule
-  (targets full_app_records.ml)
-  (deps full_app_records.iml)
-   (action
-    (with-stdout-to full_app_records.ml
-       (run imandra-extract  full_app_records.iml))))
-       
-(rule
   (targets full_app_enums.ml)
   (deps full_app_enums.iml)
    (action
@@ -13,11 +6,11 @@
        (run imandra-extract  full_app_enums.iml))))
        
 (rule
-  (targets full_app_tags.ml)
-  (deps full_app_tags.iml)
+  (targets full_app_records.ml)
+  (deps full_app_records.iml)
    (action
-    (with-stdout-to full_app_tags.ml
-       (run imandra-extract  full_app_tags.iml))))
+    (with-stdout-to full_app_records.ml
+       (run imandra-extract  full_app_records.iml))))
        
 (rule
   (targets full_app_messages.ml)
@@ -25,6 +18,13 @@
    (action
     (with-stdout-to full_app_messages.ml
        (run imandra-extract  full_app_messages.iml))))
+       
+(rule
+  (targets full_app_tags.ml)
+  (deps full_app_tags.iml)
+   (action
+    (with-stdout-to full_app_tags.ml
+       (run imandra-extract  full_app_tags.iml))))
        
 (library
   (name protocol_exts)

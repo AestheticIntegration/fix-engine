@@ -1,4 +1,4 @@
-(* Aesthetic Integration copyright 2018 *)
+(* Aesthetic Integration copyright 2019 *)
 open Yojson;;
 
 let assoc_filter_nulls (x)  : json =

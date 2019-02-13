@@ -1,8 +1,72 @@
-(* Aesthetic Integration copyright 2018 *)
+(* Aesthetic Integration copyright 2019 *)
 open Model_messages;;
 open Msg_check_types;;
 open State;;
 
 let check_validate_NewOrderSingle (msg_data : mod_newordersingle_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_OrderCancel (msg_data : mod_ordercancel_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_NewOrder_Multi_Leg (msg_data : mod_neworder_multi_leg_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_NewOrder_List (msg_data : mod_neworder_list_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_ListOrderCancel (msg_data : mod_listordercancel_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_BusinessMessageReject (msg_data : mod_businessmessagereject_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_AllocationReport (msg_data : mod_allocationreport_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_AllocationReportACK (msg_data : mod_allocationreportack_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_AllocationInstruction (msg_data : mod_allocationinstruction_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_Heartbeat (msg_data : mod_heartbeat_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_TestRequest (msg_data : mod_testrequest_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_ResendRequest (msg_data : mod_resendrequest_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_SessionLevelReject (msg_data : mod_sessionlevelreject_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_SequenceResetRequest (msg_data : mod_sequenceresetrequest_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_Logout (msg_data : mod_logout_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_FIXLogon (msg_data : mod_fixlogon_data) (m_state : model_state)  =
+    no_invalid_validates
+;;
+
+let check_validate_DontKnowTrade (msg_data : mod_dontknowtrade_data) (m_state : model_state)  =
     no_invalid_validates
 ;;

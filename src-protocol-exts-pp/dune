@@ -1,23 +1,9 @@
 (rule
-  (targets full_app_records_json.ml)
-  (deps full_app_records_json.iml)
+  (targets encode_utils.ml)
+  (deps encode_utils.iml)
    (action
-    (with-stdout-to full_app_records_json.ml
-       (run imandra-extract  full_app_records_json.iml))))
-       
-(rule
-  (targets parse_app_messages.ml)
-  (deps parse_app_messages.iml)
-   (action
-    (with-stdout-to parse_app_messages.ml
-       (run imandra-extract  parse_app_messages.iml))))
-       
-(rule
-  (targets full_app_tags_json.ml)
-  (deps full_app_tags_json.iml)
-   (action
-    (with-stdout-to full_app_tags_json.ml
-       (run imandra-extract  full_app_tags_json.iml))))
+    (with-stdout-to encode_utils.ml
+       (run imandra-extract  encode_utils.iml))))
        
 (rule
   (targets encode_app_records.ml)
@@ -27,11 +13,18 @@
        (run imandra-extract  encode_app_records.iml))))
        
 (rule
-  (targets json_generator_utils.ml)
-  (deps json_generator_utils.iml)
+  (targets full_app_records_json.ml)
+  (deps full_app_records_json.iml)
    (action
-    (with-stdout-to json_generator_utils.ml
-       (run imandra-extract  json_generator_utils.iml))))
+    (with-stdout-to full_app_records_json.ml
+       (run imandra-extract  full_app_records_json.iml))))
+       
+(rule
+  (targets encode_app_enums.ml)
+  (deps encode_app_enums.iml)
+   (action
+    (with-stdout-to encode_app_enums.ml
+       (run imandra-extract  encode_app_enums.iml))))
        
 (rule
   (targets parse_app_records.ml)
@@ -39,6 +32,41 @@
    (action
     (with-stdout-to parse_app_records.ml
        (run imandra-extract  parse_app_records.iml))))
+       
+(rule
+  (targets parse_app_tags.ml)
+  (deps parse_app_tags.iml)
+   (action
+    (with-stdout-to parse_app_tags.ml
+       (run imandra-extract  parse_app_tags.iml))))
+       
+(rule
+  (targets full_app_enums_json.ml)
+  (deps full_app_enums_json.iml)
+   (action
+    (with-stdout-to full_app_enums_json.ml
+       (run imandra-extract  full_app_enums_json.iml))))
+       
+(rule
+  (targets encode_app_tags.ml)
+  (deps encode_app_tags.iml)
+   (action
+    (with-stdout-to encode_app_tags.ml
+       (run imandra-extract  encode_app_tags.iml))))
+       
+(rule
+  (targets full_app_tags_json.ml)
+  (deps full_app_tags_json.iml)
+   (action
+    (with-stdout-to full_app_tags_json.ml
+       (run imandra-extract  full_app_tags_json.iml))))
+       
+(rule
+  (targets parse_app_messages.ml)
+  (deps parse_app_messages.iml)
+   (action
+    (with-stdout-to parse_app_messages.ml
+       (run imandra-extract  parse_app_messages.iml))))
        
 (rule
   (targets parse_app_enums.ml)
@@ -55,46 +83,18 @@
        (run imandra-extract  full_app_messages_json.iml))))
        
 (rule
+  (targets json_generator_utils.ml)
+  (deps json_generator_utils.iml)
+   (action
+    (with-stdout-to json_generator_utils.ml
+       (run imandra-extract  json_generator_utils.iml))))
+       
+(rule
   (targets encode_app_messages.ml)
   (deps encode_app_messages.iml)
    (action
     (with-stdout-to encode_app_messages.ml
        (run imandra-extract  encode_app_messages.iml))))
-       
-(rule
-  (targets encode_app_tags.ml)
-  (deps encode_app_tags.iml)
-   (action
-    (with-stdout-to encode_app_tags.ml
-       (run imandra-extract  encode_app_tags.iml))))
-       
-(rule
-  (targets parse_app_tags.ml)
-  (deps parse_app_tags.iml)
-   (action
-    (with-stdout-to parse_app_tags.ml
-       (run imandra-extract  parse_app_tags.iml))))
-       
-(rule
-  (targets encode_app_enums.ml)
-  (deps encode_app_enums.iml)
-   (action
-    (with-stdout-to encode_app_enums.ml
-       (run imandra-extract  encode_app_enums.iml))))
-       
-(rule
-  (targets full_app_enums_json.ml)
-  (deps full_app_enums_json.iml)
-   (action
-    (with-stdout-to full_app_enums_json.ml
-       (run imandra-extract  full_app_enums_json.iml))))
-       
-(rule
-  (targets encode_utils.ml)
-  (deps encode_utils.iml)
-   (action
-    (with-stdout-to encode_utils.ml
-       (run imandra-extract  encode_utils.iml))))
        
 (library
   (name protocol_exts_pp)

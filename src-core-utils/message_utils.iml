@@ -1,4 +1,4 @@
-(* Aesthetic Integration copyright 2018 *)
+(* Aesthetic Integration copyright 2019 *)
 open Model_messages;;
 
 let get_resend_message (msg)  =
@@ -8,8 +8,9 @@ let get_resend_message (msg)  =
     )
 ;;
 
-let get_normal_message (msg) = 
+let get_normal_message (msg)  =
     (match msg with
-    | FIX_TL_Normal m -> Some m
-    | _ -> None)
+        | FIX_TL_Normal m -> (Some m)
+        | m -> None
+    )
 ;;

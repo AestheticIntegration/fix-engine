@@ -1,11 +1,4 @@
 (rule
-  (targets timeDefaults_parser.ml)
-  (deps timeDefaults_parser.iml)
-   (action
-    (with-stdout-to timeDefaults_parser.ml
-       (run imandra-extract  timeDefaults_parser.iml))))
-       
-(rule
   (targets timeDefaults_pp.ml)
   (deps timeDefaults_pp.iml)
    (action
@@ -18,6 +11,13 @@
    (action
     (with-stdout-to timeDefaults_current_time.ml
        (run imandra-extract  timeDefaults_current_time.iml))))
+       
+(rule
+  (targets timeDefaults_parser.ml)
+  (deps timeDefaults_parser.iml)
+   (action
+    (with-stdout-to timeDefaults_parser.ml
+       (run imandra-extract  timeDefaults_parser.iml))))
        
 (rule
   (targets timeDefaults_json.ml)

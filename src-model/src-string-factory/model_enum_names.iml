@@ -1,88 +1,1031 @@
-(* Aesthetic Integration copyright 2018 *)
+(* Aesthetic Integration copyright 2019 *)
 open Model_app_enums;;
 
-let mod_side_to_string (d)  =
+let mod_securityidsource_to_string (d)  =
     (match d with
-        | MOD_FIX_Side_Buy -> "Buy"
-        | MOD_FIX_Side_Sell -> "Sell"
-        | MOD_FIX_Side_BuyMinus -> "BuyMinus"
-        | MOD_FIX_Side_SellPlus -> "SellPlus"
-        | MOD_FIX_Side_SellShort -> "SellShort"
-        | MOD_FIX_Side_SellShortExempt -> "SellShortExempt"
-        | MOD_FIX_Side_Undisclosed -> "Undisclosed"
-        | MOD_FIX_Side_Cross -> "Cross"
-        | MOD_FIX_Side_CrossShort -> "CrossShort"
-        | MOD_FIX_Side_CrossShortExempt -> "CrossShortExempt"
-        | MOD_FIX_Side_AsDefined -> "AsDefined"
-        | MOD_FIX_Side_Opposite -> "Opposite"
-        | MOD_FIX_Side_Subscribe -> "Subscribe"
-        | MOD_FIX_Side_Redeem -> "Redeem"
-        | MOD_FIX_Side_Lend -> "Lend"
-        | MOD_FIX_Side_Borrow -> "Borrow"
+        | MOD_FIX_SecurityIDSource_CUSIP -> "CUSIP"
+        | MOD_FIX_SecurityIDSource_ISIN -> "ISIN"
+        | MOD_FIX_SecurityIDSource_Dummy_CUSIP -> "Dummy_CUSIP"
+        | MOD_FIX_SecurityIDSource_WKN -> "WKN"
     )
 ;;
 
-let mod_ordtype_to_string (d)  =
+let mod_qtytype_to_string (d)  =
     (match d with
-        | MOD_FIX_OrdType_Market -> "Market"
-        | MOD_FIX_OrdType_Limit -> "Limit"
-        | MOD_FIX_OrdType_Stop -> "Stop"
-        | MOD_FIX_OrdType_StopLimit -> "StopLimit"
-        | MOD_FIX_OrdType_WithOrWithout -> "WithOrWithout"
-        | MOD_FIX_OrdType_LimitOrBetter -> "LimitOrBetter"
-        | MOD_FIX_OrdType_LimitWithOrWithout -> "LimitWithOrWithout"
-        | MOD_FIX_OrdType_OnBasis -> "OnBasis"
-        | MOD_FIX_OrdType_PreviouslyQuoted -> "PreviouslyQuoted"
-        | MOD_FIX_OrdType_PreviouslyIndicated -> "PreviouslyIndicated"
-        | MOD_FIX_OrdType_ForexSwap -> "ForexSwap"
-        | MOD_FIX_OrdType_Funari -> "Funari"
-        | MOD_FIX_OrdType_MarketIfTouched -> "MarketIfTouched"
-        | MOD_FIX_OrdType_MarketWithLeftOverAsLimit -> "MarketWithLeftOverAsLimit"
-        | MOD_FIX_OrdType_PreviousFundValuationPoint -> "PreviousFundValuationPoint"
-        | MOD_FIX_OrdType_NextFundValuationPoint -> "NextFundValuationPoint"
-        | MOD_FIX_OrdType_Pegged -> "Pegged"
+        | MOD_FIX_QtyType_units__shares__par__currency___Always_interpreted_as_par_by_MarketAxess_ -> "units__shares__par__currency___Always_interpreted_as_par_by_MarketAxess_"
+        | MOD_FIX_QtyType_Contracts -> "Contracts"
+    )
+;;
+
+let mod_mktxlisttype_to_string (d)  =
+    (match d with
+        | MOD_FIX_MKTXListType_Portfolio -> "Portfolio"
+    )
+;;
+
+let mod_mktxtrdregpublicationreason_to_string (d)  =
+    (match d with
+        | MOD_FIX_MKTXTrdRegPublicationReason_LRGS -> "LRGS"
+        | MOD_FIX_MKTXTrdRegPublicationReason_ILQD -> "ILQD"
+        | MOD_FIX_MKTXTrdRegPublicationReason_SIZE -> "SIZE"
+    )
+;;
+
+let mod_legproduct_to_string (d)  =
+    (match d with
+        | MOD_FIX_LegProduct_AGENCY -> "AGENCY"
+        | MOD_FIX_LegProduct_COMMODITY -> "COMMODITY"
+        | MOD_FIX_LegProduct_Corporate -> "Corporate"
+        | MOD_FIX_LegProduct_CURRENCY -> "CURRENCY"
+        | MOD_FIX_LegProduct_EQUITY -> "EQUITY"
+        | MOD_FIX_LegProduct_Government -> "Government"
+        | MOD_FIX_LegProduct_INDEX -> "INDEX"
+        | MOD_FIX_LegProduct_LOAN -> "LOAN"
+        | MOD_FIX_LegProduct_MONEYMARKET -> "MONEYMARKET"
+        | MOD_FIX_LegProduct_MORTGAGE -> "MORTGAGE"
+        | MOD_FIX_LegProduct_MUNICIPAL -> "MUNICIPAL"
+        | MOD_FIX_LegProduct_OTHER -> "OTHER"
+        | MOD_FIX_LegProduct_FINANCING -> "FINANCING"
+    )
+;;
+
+let mod_partyidsource_to_string (d)  =
+    (match d with
+        | MOD_FIX_PartyIDSource_BIC_code -> "BIC_code"
+        | MOD_FIX_PartyIDSource_Generally_accepted_market_participant_identifier__e_g__e_mail_address_ -> "Generally_accepted_market_participant_identifier__e_g__e_mail_address_"
+        | MOD_FIX_PartyIDSource_Proprietary_code -> "Proprietary_code"
+        | MOD_FIX_PartyIDSource_MIC -> "MIC"
+        | MOD_FIX_PartyIDSource_Legal_entity_identifier -> "Legal_entity_identifier"
+        | MOD_FIX_PartyIDSource_Short_code -> "Short_code"
+    )
+;;
+
+let mod_allocreporttype_to_string (d)  =
+    (match d with
+        | MOD_FIX_AllocReportType_Sellside_calculated_using_preliminary -> "Sellside_calculated_using_preliminary"
+        | MOD_FIX_AllocReportType_Sellside_calculated_without_preliminary -> "Sellside_calculated_without_preliminary"
+    )
+;;
+
+let mod_mktxautoexrefleveltype_to_string (d)  =
+    (match d with
+        | MOD_FIX_MKTXAutoExRefLevelType_Level_was_provided_on_the_RTS_message_or_manually_entered_in_the_Limit_column_on_the_Workstation_ -> "Level_was_provided_on_the_RTS_message_or_manually_entered_in_the_Limit_column_on_the_Workstation_"
+        | MOD_FIX_MKTXAutoExRefLevelType_Composite_Plus_value_is_being_used_as_Execution_reference_ -> "Composite_Plus_value_is_being_used_as_Execution_reference_"
+        | MOD_FIX_MKTXAutoExRefLevelType_Level_was_manually_entered_in_the_Execution_Reference_column_on_the_Workstation_ -> "Level_was_manually_entered_in_the_Execution_Reference_column_on_the_Workstation_"
+    )
+;;
+
+let mod_dealeridsource_to_string (d)  =
+    (match d with
+        | MOD_FIX_DealerIDSource_BIC_code -> "BIC_code"
+        | MOD_FIX_DealerIDSource_Generally_accepted_market_participant_identifier -> "Generally_accepted_market_participant_identifier"
+        | MOD_FIX_DealerIDSource_Proprietary_code -> "Proprietary_code"
+    )
+;;
+
+let mod_yieldtype_to_string (d)  =
+    (match d with
+        | MOD_FIX_YieldType_CALL -> "CALL"
+        | MOD_FIX_YieldType_MATURITY -> "MATURITY"
+        | MOD_FIX_YieldType_PUT -> "PUT"
+    )
+;;
+
+let mod_pricetype_to_string (d)  =
+    (match d with
+        | MOD_FIX_PriceType_Percentage -> "Percentage"
+        | MOD_FIX_PriceType_Spread -> "Spread"
+        | MOD_FIX_PriceType_Yield -> "Yield"
+        | MOD_FIX_PriceType_NEGATIVE_YIELD -> "NEGATIVE_YIELD"
+        | MOD_FIX_PriceType_DECIMAL_UNIT_PRICE -> "DECIMAL_UNIT_PRICE"
+    )
+;;
+
+let mod_trdregpublicationtype_to_string (d)  =
+    (match d with
+        | MOD_FIX_TrdRegPublicationType_Pretrade_Transparency_Waiver -> "Pretrade_Transparency_Waiver"
+        | MOD_FIX_TrdRegPublicationType_Exempt_From_Publication -> "Exempt_From_Publication"
+    )
+;;
+
+let mod_partysubidtype_to_string (d)  =
+    (match d with
+        | MOD_FIX_PartySubIDType_CSD_participant_code__DTCC_ -> "CSD_participant_code__DTCC_"
+    )
+;;
+
+let mod_alloctype_to_string (d)  =
+    (match d with
+        | MOD_FIX_AllocType_Buyside_preliminary -> "Buyside_preliminary"
+    )
+;;
+
+let mod_ordercapacity_to_string (d)  =
+    (match d with
+        | MOD_FIX_OrderCapacity_Any_Other_Trading_Capacity__AOTC_ -> "Any_Other_Trading_Capacity__AOTC_"
+        | MOD_FIX_OrderCapacity_Own_Account -> "Own_Account"
+        | MOD_FIX_OrderCapacity_Matched_Principal -> "Matched_Principal"
+    )
+;;
+
+let mod_businessrejectreason_to_string (d)  =
+    (match d with
+        | MOD_FIX_BusinessRejectReason_Other -> "Other"
+        | MOD_FIX_BusinessRejectReason_Unknown -> "Unknown"
+        | MOD_FIX_BusinessRejectReason_Unknown_Security -> "Unknown_Security"
+        | MOD_FIX_BusinessRejectReason_Unsupported_Message -> "Unsupported_Message"
+        | MOD_FIX_BusinessRejectReason_Application_Not_Available -> "Application_Not_Available"
+        | MOD_FIX_BusinessRejectReason_Conditionally_required_field_missing -> "Conditionally_required_field_missing"
+    )
+;;
+
+let mod_mktxpricingprocess_to_string (d)  =
+    (match d with
+        | MOD_FIX_MKTXPricingProcess_Manual -> "Manual"
+        | MOD_FIX_MKTXPricingProcess_Phone_Spot -> "Phone_Spot"
+        | MOD_FIX_MKTXPricingProcess_Auto -> "Auto"
+        | MOD_FIX_MKTXPricingProcess_OneStep -> "OneStep"
+        | MOD_FIX_MKTXPricingProcess_Standard -> "Standard"
+        | MOD_FIX_MKTXPricingProcess_Delayed_Spot -> "Delayed_Spot"
+    )
+;;
+
+let mod_mktxanalysisto_to_string (d)  =
+    (match d with
+        | MOD_FIX_MKTXAnalysisTo_Avg -> "Avg"
+        | MOD_FIX_MKTXAnalysisTo_BondTicker -> "BondTicker"
+        | MOD_FIX_MKTXAnalysisTo_CompositeClose -> "CompositeClose"
+        | MOD_FIX_MKTXAnalysisTo_CompositeMid -> "CompositeMid"
+        | MOD_FIX_MKTXAnalysisTo_Cover -> "Cover"
+        | MOD_FIX_MKTXAnalysisTo_Internal_Target -> "Internal_Target"
+    )
+;;
+
+let mod_allocrejcode_to_string (d)  =
+    (match d with
+        | MOD_FIX_AllocRejCode_Unknown_account_s_ -> "Unknown_account_s_"
+        | MOD_FIX_AllocRejCode_Incorrect_quantity -> "Incorrect_quantity"
+        | MOD_FIX_AllocRejCode_Unknown_executing_broker__dealer_ -> "Unknown_executing_broker__dealer_"
+        | MOD_FIX_AllocRejCode_unknown_OrderID -> "unknown_OrderID"
+        | MOD_FIX_AllocRejCode_Unknown_ListID -> "Unknown_ListID"
+        | MOD_FIX_AllocRejCode_Other -> "Other"
+        | MOD_FIX_AllocRejCode_Incorrect_allocated_quantity -> "Incorrect_allocated_quantity"
+        | MOD_FIX_AllocRejCode_calculation_difference -> "calculation_difference"
+        | MOD_FIX_AllocRejCode_unknown_or_stale_ExecID -> "unknown_or_stale_ExecID"
+        | MOD_FIX_AllocRejCode_mismatched_data_value -> "mismatched_data_value"
+        | MOD_FIX_AllocRejCode_Unknown_ClOrdID -> "Unknown_ClOrdID"
+    )
+;;
+
+let mod_lastcapacity_to_string (d)  =
+    (match d with
+        | MOD_FIX_LastCapacity_Agent -> "Agent"
+        | MOD_FIX_LastCapacity_Cross_as_Agent -> "Cross_as_Agent"
+        | MOD_FIX_LastCapacity_Cross_as_Principal -> "Cross_as_Principal"
+        | MOD_FIX_LastCapacity_Principal -> "Principal"
+        | MOD_FIX_LastCapacity_Matched_Principal -> "Matched_Principal"
+    )
+;;
+
+let mod_dkreason_to_string (d)  =
+    (match d with
+        | MOD_FIX_DKReason_unknown_symbol__unknown_security_ -> "unknown_symbol__unknown_security_"
+        | MOD_FIX_DKReason_wrong_side -> "wrong_side"
+        | MOD_FIX_DKReason_quantity_exceeds_order -> "quantity_exceeds_order"
+        | MOD_FIX_DKReason_no_matching_order -> "no_matching_order"
+        | MOD_FIX_DKReason_Price_exceeds_limit -> "Price_exceeds_limit"
+        | MOD_FIX_DKReason_calculation_difference -> "calculation_difference"
+        | MOD_FIX_DKReason_other -> "other"
+    )
+;;
+
+let mod_alloccancreplacereason_to_string (d)  =
+    (match d with
+        | MOD_FIX_AllocCancReplaceReason_Other -> "Other"
+        | MOD_FIX_AllocCancReplaceReason_Original_details_incomplete___incorrect -> "Original_details_incomplete___incorrect"
+    )
+;;
+
+let mod_algorithm_to_string (d)  =
+    (match d with
+        | MOD_FIX_Algorithm_Algorithm -> "Algorithm"
+    )
+;;
+
+let mod_tradereportingindicator_to_string (d)  =
+    (match d with
+        | MOD_FIX_TradeReportingIndicator_Trade_has_not_been_reported -> "Trade_has_not_been_reported"
+        | MOD_FIX_TradeReportingIndicator_Trade_has_been_reported_by_a_trading_venue_as_an_On_book_trade -> "Trade_has_been_reported_by_a_trading_venue_as_an_On_book_trade"
+        | MOD_FIX_TradeReportingIndicator_Trade_has_been_reported_as_a_systematic_internaliser_seller_trade -> "Trade_has_been_reported_as_a_systematic_internaliser_seller_trade"
+        | MOD_FIX_TradeReportingIndicator_Trade_has_been_reported_as_a_systematic_internaliser_buyer_trade -> "Trade_has_been_reported_as_a_systematic_internaliser_buyer_trade"
+        | MOD_FIX_TradeReportingIndicator_Trade_has_been_reported_as_a_nonsystematic_internaliser_seller_trade -> "Trade_has_been_reported_as_a_nonsystematic_internaliser_seller_trade"
+    )
+;;
+
+let mod_legsecurityidsource_to_string (d)  =
+    (match d with
+        | MOD_FIX_LegSecurityIDSource_CUSIP -> "CUSIP"
+        | MOD_FIX_LegSecurityIDSource_ISIN -> "ISIN"
+        | MOD_FIX_LegSecurityIDSource_MA_Dummy_CUSIP -> "MA_Dummy_CUSIP"
+        | MOD_FIX_LegSecurityIDSource_WKN -> "WKN"
+    )
+;;
+
+let mod_securityaltidsource_to_string (d)  =
+    (match d with
+        | MOD_FIX_SecurityAltIDSource_CUSIP -> "CUSIP"
+        | MOD_FIX_SecurityAltIDSource_ISIN -> "ISIN"
+        | MOD_FIX_SecurityAltIDSource_TRAX_ICMA_Number -> "TRAX_ICMA_Number"
+        | MOD_FIX_SecurityAltIDSource_WKN -> "WKN"
+    )
+;;
+
+let mod_execinst_to_string (d)  =
+    (match d with
+        | MOD_FIX_ExecInst_WORK -> "WORK"
+    )
+;;
+
+let mod_pretradewaiver_to_string (d)  =
+    (match d with
+        | MOD_FIX_PreTradeWaiver_LRGS -> "LRGS"
+        | MOD_FIX_PreTradeWaiver_ILQD -> "ILQD"
+        | MOD_FIX_PreTradeWaiver_SIZE -> "SIZE"
+    )
+;;
+
+let mod_competitivestatus_to_string (d)  =
+    (match d with
+        | MOD_FIX_CompetitiveStatus_Client_Passed -> "Client_Passed"
+        | MOD_FIX_CompetitiveStatus_second_best -> "second_best"
+        | MOD_FIX_CompetitiveStatus_Did_not_trade -> "Did_not_trade"
+        | MOD_FIX_CompetitiveStatus_Traded___Amended -> "Traded___Amended"
+        | MOD_FIX_CompetitiveStatus_Done_Awaiting_Book_Confirmation -> "Done_Awaiting_Book_Confirmation"
+        | MOD_FIX_CompetitiveStatus_Done_Awaiting_Spot_Confirmation -> "Done_Awaiting_Spot_Confirmation"
+        | MOD_FIX_CompetitiveStatus_Dealer_did_not_respond_to_enquiry_before_client_traded -> "Dealer_did_not_respond_to_enquiry_before_client_traded"
+        | MOD_FIX_CompetitiveStatus_price_expired -> "price_expired"
+        | MOD_FIX_CompetitiveStatus_third_best__or_worse -> "third_best__or_worse"
+        | MOD_FIX_CompetitiveStatus_Dealer_passed -> "Dealer_passed"
+        | MOD_FIX_CompetitiveStatus_For_Covered_or_Best -> "For_Covered_or_Best"
+        | MOD_FIX_CompetitiveStatus_Tied_for_Cover -> "Tied_for_Cover"
+        | MOD_FIX_CompetitiveStatus_No_response_from_dealer -> "No_response_from_dealer"
+        | MOD_FIX_CompetitiveStatus_Timed_Out__R_ -> "Timed_Out__R_"
+        | MOD_FIX_CompetitiveStatus_Traded -> "Traded"
+    )
+;;
+
+let mod_mktxescbstblty_to_string (d)  =
+    (match d with
+        | MOD_FIX_MKTXESCBStblty_Investment_Operations -> "Investment_Operations"
+        | MOD_FIX_MKTXESCBStblty_Stability_Operations -> "Stability_Operations"
+    )
+;;
+
+let mod_internalcrossingflag_to_string (d)  =
+    (match d with
+        | MOD_FIX_InternalCrossingFlag_FundCrossing -> "FundCrossing"
+    )
+;;
+
+let mod_mktxtradestyle_to_string (d)  =
+    (match d with
+        | MOD_FIX_MKTXTradeStyle_Portfolio -> "Portfolio"
+    )
+;;
+
+let mod_settltype_to_string (d)  =
+    (match d with
+        | MOD_FIX_SettlType_Regular -> "Regular"
+        | MOD_FIX_SettlType_Cash -> "Cash"
+        | MOD_FIX_SettlType_T_Plus_1__next_day_ -> "T_Plus_1__next_day_"
+        | MOD_FIX_SettlType_T_Plus_2 -> "T_Plus_2"
+        | MOD_FIX_SettlType_T_Plus_3 -> "T_Plus_3"
+        | MOD_FIX_SettlType_T_Plus_4 -> "T_Plus_4"
+        | MOD_FIX_SettlType_Future -> "Future"
+        | MOD_FIX_SettlType_When_and_if_issued -> "When_and_if_issued"
+        | MOD_FIX_SettlType_Sellers_Option -> "Sellers_Option"
+        | MOD_FIX_SettlType_T_Plus_5 -> "T_Plus_5"
     )
 ;;
 
 let mod_ordstatus_to_string (d)  =
     (match d with
-        | MOD_FIX_OrdStatus_New -> "New"
-        | MOD_FIX_OrdStatus_PartiallyFilled -> "PartiallyFilled"
-        | MOD_FIX_OrdStatus_Filled -> "Filled"
-        | MOD_FIX_OrdStatus_DoneForDay -> "DoneForDay"
-        | MOD_FIX_OrdStatus_Canceled -> "Canceled"
-        | MOD_FIX_OrdStatus_PendingCancel -> "PendingCancel"
-        | MOD_FIX_OrdStatus_Stopped -> "Stopped"
+        | MOD_FIX_OrdStatus_New_ -> "New_"
+        | MOD_FIX_OrdStatus_Partially_filled -> "Partially_filled"
+        | MOD_FIX_OrdStatus_Filled_ -> "Filled_"
+        | MOD_FIX_OrdStatus_Cancelled -> "Cancelled"
         | MOD_FIX_OrdStatus_Rejected -> "Rejected"
-        | MOD_FIX_OrdStatus_Suspended -> "Suspended"
-        | MOD_FIX_OrdStatus_PendingNew -> "PendingNew"
-        | MOD_FIX_OrdStatus_Calculated -> "Calculated"
-        | MOD_FIX_OrdStatus_Expired -> "Expired"
-        | MOD_FIX_OrdStatus_AcceptedForBidding -> "AcceptedForBidding"
-        | MOD_FIX_OrdStatus_PendingReplace -> "PendingReplace"
-        | MOD_FIX_OrdStatus_Replaced -> "Replaced"
+        | MOD_FIX_OrdStatus_Pending_New -> "Pending_New"
+        | MOD_FIX_OrdStatus_Accepted_for_bidding -> "Accepted_for_bidding"
+    )
+;;
+
+let mod_forexreq_to_string (d)  =
+    (match d with
+        | MOD_FIX_ForexReq_No -> "No"
+        | MOD_FIX_ForexReq_Yes -> "Yes"
+    )
+;;
+
+let mod_alloctranstype_to_string (d)  =
+    (match d with
+        | MOD_FIX_AllocTransType_New -> "New"
+        | MOD_FIX_AllocTransType_Replace -> "Replace"
+        | MOD_FIX_AllocTransType_Cancel -> "Cancel"
+        | MOD_FIX_AllocTransType_Preliminary -> "Preliminary"
+        | MOD_FIX_AllocTransType_Calculated -> "Calculated"
+    )
+;;
+
+let mod_gapfillflag_to_string (d)  =
+    (match d with
+        | MOD_FIX_GapFillFlag_Sequence_Reset -> "Sequence_Reset"
+        | MOD_FIX_GapFillFlag_Gap_Fill_Messages -> "Gap_Fill_Messages"
+    )
+;;
+
+let mod_mktxautoextype_to_string (d)  =
+    (match d with
+        | MOD_FIX_MKTXAutoExType_If_the_inquiry_is_submitted_for_auto_ex_via_auto_submit_ -> "If_the_inquiry_is_submitted_for_auto_ex_via_auto_submit_"
+        | MOD_FIX_MKTXAutoExType_If_the_inquiry_is_submitted_for_auto_ex_from_manual_workstation -> "If_the_inquiry_is_submitted_for_auto_ex_from_manual_workstation"
+    )
+;;
+
+let mod_legside_to_string (d)  =
+    (match d with
+        | MOD_FIX_LegSide_buy -> "buy"
+        | MOD_FIX_LegSide_sell -> "sell"
+        | MOD_FIX_LegSide_Opposite -> "Opposite"
+    )
+;;
+
+let mod_exclude_to_string (d)  =
+    (match d with
+        | MOD_FIX_Exclude_No__include_dealer_ -> "No__include_dealer_"
+        | MOD_FIX_Exclude_Yes__exclude_dealer_ -> "Yes__exclude_dealer_"
+    )
+;;
+
+let mod_ordrejreason_to_string (d)  =
+    (match d with
+        | MOD_FIX_OrdRejReason_Unknown_symbol -> "Unknown_symbol"
+        | MOD_FIX_OrdRejReason_Duplicate_order -> "Duplicate_order"
+        | MOD_FIX_OrdRejReason_Unsupported_order_characteristic -> "Unsupported_order_characteristic"
+        | MOD_FIX_OrdRejReason_Incorrect_quantity -> "Incorrect_quantity"
+        | MOD_FIX_OrdRejReason_Other -> "Other"
+    )
+;;
+
+let mod_trdregpublicationreason_to_string (d)  =
+    (match d with
+        | MOD_FIX_TrdRegPublicationReason_NLIQ -> "NLIQ"
+        | MOD_FIX_TrdRegPublicationReason_OLIQ -> "OLIQ"
+        | MOD_FIX_TrdRegPublicationReason_PRIC -> "PRIC"
+        | MOD_FIX_TrdRegPublicationReason_RFPT -> "RFPT"
+        | MOD_FIX_TrdRegPublicationReason_ILQD -> "ILQD"
+        | MOD_FIX_TrdRegPublicationReason_SIZE -> "SIZE"
+        | MOD_FIX_TrdRegPublicationReason_LRGS -> "LRGS"
+        | MOD_FIX_TrdRegPublicationReason_ILQD_2 -> "ILQD_2"
+        | MOD_FIX_TrdRegPublicationReason_SIZE_2 -> "SIZE_2"
+    )
+;;
+
+let mod_product_to_string (d)  =
+    (match d with
+        | MOD_FIX_Product_Corporate -> "Corporate"
+        | MOD_FIX_Product_Preferred -> "Preferred"
+        | MOD_FIX_Product_Government -> "Government"
+        | MOD_FIX_Product_Municipal -> "Municipal"
+        | MOD_FIX_Product_Other -> "Other"
+    )
+;;
+
+let mod_includedealers_to_string (d)  =
+    (match d with
+        | MOD_FIX_IncludeDealers_Include_Only_Send_to_only_the_dealers -> "Include_Only_Send_to_only_the_dealers"
+        | MOD_FIX_IncludeDealers_Include_at_Least__Send_to_dealers -> "Include_at_Least__Send_to_dealers"
+    )
+;;
+
+let mod_mktxautoexstatus_to_string (d)  =
+    (match d with
+        | MOD_FIX_MKTXAutoExStatus_If_the_inquiry_was_auto_executed_ -> "If_the_inquiry_was_auto_executed_"
+        | MOD_FIX_MKTXAutoExStatus_If_the_inquiry_did_not_execute_either_manually_or_through_auto_ex_process_ -> "If_the_inquiry_did_not_execute_either_manually_or_through_auto_ex_process_"
+        | MOD_FIX_MKTXAutoExStatus_If_the_inquiry_fail_to_auto_execute_but_was_later_executed_manually_ -> "If_the_inquiry_fail_to_auto_execute_but_was_later_executed_manually_"
+    )
+;;
+
+let mod_side_to_string (d)  =
+    (match d with
+        | MOD_FIX_Side_Buy -> "Buy"
+        | MOD_FIX_Side_Sell -> "Sell"
+        | MOD_FIX_Side_As_Defined__for_multi_legs_ -> "As_Defined__for_multi_legs_"
+        | MOD_FIX_Side_Sell_Undisclosed -> "Sell_Undisclosed"
+    )
+;;
+
+let mod_cxlrejreason_to_string (d)  =
+    (match d with
+        | MOD_FIX_CxlRejReason_All_cases_where_it_is_too_late_to_cancel -> "All_cases_where_it_is_too_late_to_cancel"
+        | MOD_FIX_CxlRejReason_Unknown_Order -> "Unknown_Order"
+    )
+;;
+
+let mod_handlinst_to_string (d)  =
+    (match d with
+        | MOD_FIX_HandlInst_Automated_execution_order -> "Automated_execution_order"
+        | MOD_FIX_HandlInst_Manual_Order__best_execution -> "Manual_Order__best_execution"
+    )
+;;
+
+let mod_regulatorytradeidtype_to_string (d)  =
+    (match d with
+        | MOD_FIX_RegulatoryTradeIDType_Trading_venue_transaction_identifier -> "Trading_venue_transaction_identifier"
+    )
+;;
+
+let mod_legswaptype_to_string (d)  =
+    (match d with
+        | MOD_FIX_LegSwapType_Par_for_Par -> "Par_for_Par"
+        | MOD_FIX_LegSwapType_Modified_Duration -> "Modified_Duration"
+    )
+;;
+
+let mod_partyrole_to_string (d)  =
+    (match d with
+        | MOD_FIX_PartyRole_Executing_Firm -> "Executing_Firm"
+        | MOD_FIX_PartyRole_ClientID -> "ClientID"
+        | MOD_FIX_PartyRole_Order_origination_trader__associated_with_order_origination_firm__e_g_g__trader_who_initiates___submits_the_order_ -> "Order_origination_trader__associated_with_order_origination_firm__e_g_g__trader_who_initiates___submits_the_order_"
+        | MOD_FIX_PartyRole_Executing_Trader -> "Executing_Trader"
+        | MOD_FIX_PartyRole_Order_origination_firm__e_g__Buy_side_firm_ -> "Order_origination_firm__e_g__Buy_side_firm_"
+        | MOD_FIX_PartyRole_Execution_venue -> "Execution_venue"
+        | MOD_FIX_PartyRole_Investment_Decision_Maker__MIFID_II_Clients_ -> "Investment_Decision_Maker__MIFID_II_Clients_"
+    )
+;;
+
+let mod_cxlrejresponseto_to_string (d)  =
+    (match d with
+        | MOD_FIX_CxlRejResponseTo_Order_Cancel_Request_ -> "Order_Cancel_Request_"
+    )
+;;
+
+let mod_allocnoorderstype_to_string (d)  =
+    (match d with
+        | MOD_FIX_AllocNoOrdersType_Not_specified -> "Not_specified"
+        | MOD_FIX_AllocNoOrdersType_Explicit_list_provided -> "Explicit_list_provided"
+    )
+;;
+
+let mod_mktxtradereportingind_to_string (d)  =
+    (match d with
+        | MOD_FIX_MKTXTradeReportingInd_Trade_not_yet_reported -> "Trade_not_yet_reported"
+        | MOD_FIX_MKTXTradeReportingInd_Trade_reported_on_book -> "Trade_reported_on_book"
+        | MOD_FIX_MKTXTradeReportingInd_Trade_reported_as_systematic_internaliser -> "Trade_reported_as_systematic_internaliser"
+        | MOD_FIX_MKTXTradeReportingInd_Trade_reported_as_nonsystematic_internaliser -> "Trade_reported_as_nonsystematic_internaliser"
+        | MOD_FIX_MKTXTradeReportingInd_Trade_reported_under_sub_delegation_arrangement -> "Trade_reported_under_sub_delegation_arrangement"
     )
 ;;
 
 let mod_exectype_to_string (d)  =
     (match d with
         | MOD_FIX_ExecType_New -> "New"
-        | MOD_FIX_ExecType_DoneForDay -> "DoneForDay"
-        | MOD_FIX_ExecType_Canceled -> "Canceled"
-        | MOD_FIX_ExecType_Replaced -> "Replaced"
-        | MOD_FIX_ExecType_PendingCancel -> "PendingCancel"
-        | MOD_FIX_ExecType_Stopped -> "Stopped"
+        | MOD_FIX_ExecType_Cancelled -> "Cancelled"
         | MOD_FIX_ExecType_Rejected -> "Rejected"
-        | MOD_FIX_ExecType_Suspended -> "Suspended"
-        | MOD_FIX_ExecType_PendingNew -> "PendingNew"
-        | MOD_FIX_ExecType_Calculated -> "Calculated"
-        | MOD_FIX_ExecType_Expired -> "Expired"
-        | MOD_FIX_ExecType_Restated -> "Restated"
-        | MOD_FIX_ExecType_PendingReplace -> "PendingReplace"
-        | MOD_FIX_ExecType_Trade -> "Trade"
-        | MOD_FIX_ExecType_TradeCorrect -> "TradeCorrect"
-        | MOD_FIX_ExecType_TradeCancel -> "TradeCancel"
-        | MOD_FIX_ExecType_OrderStatus -> "OrderStatus"
+        | MOD_FIX_ExecType_Trade__partial_fill_or_fill_ -> "Trade__partial_fill_or_fill_"
+        | MOD_FIX_ExecType_Trade_Correct -> "Trade_Correct"
+        | MOD_FIX_ExecType_Trade_Cancel -> "Trade_Cancel"
+    )
+;;
+
+let mod_tradingprotocol_to_string (d)  =
+    (match d with
+        | MOD_FIX_TradingProtocol_DM -> "DM"
+        | MOD_FIX_TradingProtocol_EU_Price -> "EU_Price"
+        | MOD_FIX_TradingProtocol_LMPrice -> "LMPrice"
+        | MOD_FIX_TradingProtocol_Price -> "Price"
+        | MOD_FIX_TradingProtocol_Spread -> "Spread"
+        | MOD_FIX_TradingProtocol_USDPrice -> "USDPrice"
+        | MOD_FIX_TradingProtocol_Yield -> "Yield"
+        | MOD_FIX_TradingProtocol_PFDS_Price -> "PFDS_Price"
+    )
+;;
+
+let mod_mktxrtspurpose_to_string (d)  =
+    (match d with
+        | MOD_FIX_MKTXRTSPurpose_FundCrossing -> "FundCrossing"
+    )
+;;
+
+let mod_allocstatus_to_string (d)  =
+    (match d with
+        | MOD_FIX_AllocStatus_Accepted -> "Accepted"
+        | MOD_FIX_AllocStatus_received__not_yet_processed_ -> "received__not_yet_processed_"
+        | MOD_FIX_AllocStatus_block_level_reject -> "block_level_reject"
+    )
+;;
+
+let mod_sessionrejectreason_to_string (d)  =
+    (match d with
+        | MOD_FIX_SessionRejectReason_Invalid_Tag_number -> "Invalid_Tag_number"
+        | MOD_FIX_SessionRejectReason_Required_Tag_missing -> "Required_Tag_missing"
+        | MOD_FIX_SessionRejectReason_Tag_not_defined_for_this_message_type -> "Tag_not_defined_for_this_message_type"
+        | MOD_FIX_SessionRejectReason_Undefined_Tag -> "Undefined_Tag"
+        | MOD_FIX_SessionRejectReason_Tag_specified_without_a_value -> "Tag_specified_without_a_value"
+        | MOD_FIX_SessionRejectReason_Value_is_incorrect__out_of_range__for_this_Tag -> "Value_is_incorrect__out_of_range__for_this_Tag"
+        | MOD_FIX_SessionRejectReason_Incorrect_data_format_for_value -> "Incorrect_data_format_for_value"
+        | MOD_FIX_SessionRejectReason_Decryption_problem -> "Decryption_problem"
+        | MOD_FIX_SessionRejectReason_Signature_problem -> "Signature_problem"
+        | MOD_FIX_SessionRejectReason_CompID_problem -> "CompID_problem"
+        | MOD_FIX_SessionRejectReason_SendingTime_accuracy_problem -> "SendingTime_accuracy_problem"
+        | MOD_FIX_SessionRejectReason_Invalid_MsgType -> "Invalid_MsgType"
+        | MOD_FIX_SessionRejectReason_XML_Validation_error -> "XML_Validation_error"
+        | MOD_FIX_SessionRejectReason_Tag_appears_more_than_once -> "Tag_appears_more_than_once"
+        | MOD_FIX_SessionRejectReason_Tag_specified_out_of_required_order -> "Tag_specified_out_of_required_order"
+        | MOD_FIX_SessionRejectReason_Repeating_group_fields_out_of_order -> "Repeating_group_fields_out_of_order"
+        | MOD_FIX_SessionRejectReason_Incorrect_NumInGroup_count_for_repeating_group -> "Incorrect_NumInGroup_count_for_repeating_group"
+        | MOD_FIX_SessionRejectReason_Non_data_value_includes_field_delimiter__SOH_character_ -> "Non_data_value_includes_field_delimiter__SOH_character_"
+        | MOD_FIX_SessionRejectReason_Other -> "Other"
+    )
+;;
+
+let mod_benchmarkcurvename_to_string (d)  =
+    (match d with
+        | MOD_FIX_BenchmarkCurveName_EDSF -> "EDSF"
+        | MOD_FIX_BenchmarkCurveName_LIBOR__London_Inter_Bank_Offers_ -> "LIBOR__London_Inter_Bank_Offers_"
+        | MOD_FIX_BenchmarkCurveName_SWAP -> "SWAP"
+    )
+;;
+
+let mod_benchmarkpricetype_to_string (d)  =
+    (match d with
+        | MOD_FIX_BenchmarkPriceType_percent_of_par -> "percent_of_par"
+    )
+;;
+
+let mod_benchmarksecurityidsource_to_string (d)  =
+    (match d with
+        | MOD_FIX_BenchmarkSecurityIDSource_CUSIP -> "CUSIP"
+        | MOD_FIX_BenchmarkSecurityIDSource_ISIN -> "ISIN"
+        | MOD_FIX_BenchmarkSecurityIDSource_WKN -> "WKN"
+    )
+;;
+
+let string_to_mod_securityidsource_opt (d)  =
+    (match d with
+        | "CUSIP" -> (Some (MOD_FIX_SecurityIDSource_CUSIP))
+        | "ISIN" -> (Some (MOD_FIX_SecurityIDSource_ISIN))
+        | "Dummy_CUSIP" -> (Some (MOD_FIX_SecurityIDSource_Dummy_CUSIP))
+        | "WKN" -> (Some (MOD_FIX_SecurityIDSource_WKN))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_qtytype_opt (d)  =
+    (match d with
+        | "units__shares__par__currency___Always_interpreted_as_par_by_MarketAxess_" -> (Some (MOD_FIX_QtyType_units__shares__par__currency___Always_interpreted_as_par_by_MarketAxess_))
+        | "Contracts" -> (Some (MOD_FIX_QtyType_Contracts))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_mktxlisttype_opt (d)  =
+    (match d with
+        | "Portfolio" -> (Some (MOD_FIX_MKTXListType_Portfolio))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_mktxtrdregpublicationreason_opt (d)  =
+    (match d with
+        | "LRGS" -> (Some (MOD_FIX_MKTXTrdRegPublicationReason_LRGS))
+        | "ILQD" -> (Some (MOD_FIX_MKTXTrdRegPublicationReason_ILQD))
+        | "SIZE" -> (Some (MOD_FIX_MKTXTrdRegPublicationReason_SIZE))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_legproduct_opt (d)  =
+    (match d with
+        | "AGENCY" -> (Some (MOD_FIX_LegProduct_AGENCY))
+        | "COMMODITY" -> (Some (MOD_FIX_LegProduct_COMMODITY))
+        | "Corporate" -> (Some (MOD_FIX_LegProduct_Corporate))
+        | "CURRENCY" -> (Some (MOD_FIX_LegProduct_CURRENCY))
+        | "EQUITY" -> (Some (MOD_FIX_LegProduct_EQUITY))
+        | "Government" -> (Some (MOD_FIX_LegProduct_Government))
+        | "INDEX" -> (Some (MOD_FIX_LegProduct_INDEX))
+        | "LOAN" -> (Some (MOD_FIX_LegProduct_LOAN))
+        | "MONEYMARKET" -> (Some (MOD_FIX_LegProduct_MONEYMARKET))
+        | "MORTGAGE" -> (Some (MOD_FIX_LegProduct_MORTGAGE))
+        | "MUNICIPAL" -> (Some (MOD_FIX_LegProduct_MUNICIPAL))
+        | "OTHER" -> (Some (MOD_FIX_LegProduct_OTHER))
+        | "FINANCING" -> (Some (MOD_FIX_LegProduct_FINANCING))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_partyidsource_opt (d)  =
+    (match d with
+        | "BIC_code" -> (Some (MOD_FIX_PartyIDSource_BIC_code))
+        | "Generally_accepted_market_participant_identifier__e_g__e_mail_address_" -> (Some (MOD_FIX_PartyIDSource_Generally_accepted_market_participant_identifier__e_g__e_mail_address_))
+        | "Proprietary_code" -> (Some (MOD_FIX_PartyIDSource_Proprietary_code))
+        | "MIC" -> (Some (MOD_FIX_PartyIDSource_MIC))
+        | "Legal_entity_identifier" -> (Some (MOD_FIX_PartyIDSource_Legal_entity_identifier))
+        | "Short_code" -> (Some (MOD_FIX_PartyIDSource_Short_code))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_allocreporttype_opt (d)  =
+    (match d with
+        | "Sellside_calculated_using_preliminary" -> (Some (MOD_FIX_AllocReportType_Sellside_calculated_using_preliminary))
+        | "Sellside_calculated_without_preliminary" -> (Some (MOD_FIX_AllocReportType_Sellside_calculated_without_preliminary))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_mktxautoexrefleveltype_opt (d)  =
+    (match d with
+        | "Level_was_provided_on_the_RTS_message_or_manually_entered_in_the_Limit_column_on_the_Workstation_" -> (Some (MOD_FIX_MKTXAutoExRefLevelType_Level_was_provided_on_the_RTS_message_or_manually_entered_in_the_Limit_column_on_the_Workstation_))
+        | "Composite_Plus_value_is_being_used_as_Execution_reference_" -> (Some (MOD_FIX_MKTXAutoExRefLevelType_Composite_Plus_value_is_being_used_as_Execution_reference_))
+        | "Level_was_manually_entered_in_the_Execution_Reference_column_on_the_Workstation_" -> (Some (MOD_FIX_MKTXAutoExRefLevelType_Level_was_manually_entered_in_the_Execution_Reference_column_on_the_Workstation_))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_dealeridsource_opt (d)  =
+    (match d with
+        | "BIC_code" -> (Some (MOD_FIX_DealerIDSource_BIC_code))
+        | "Generally_accepted_market_participant_identifier" -> (Some (MOD_FIX_DealerIDSource_Generally_accepted_market_participant_identifier))
+        | "Proprietary_code" -> (Some (MOD_FIX_DealerIDSource_Proprietary_code))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_yieldtype_opt (d)  =
+    (match d with
+        | "CALL" -> (Some (MOD_FIX_YieldType_CALL))
+        | "MATURITY" -> (Some (MOD_FIX_YieldType_MATURITY))
+        | "PUT" -> (Some (MOD_FIX_YieldType_PUT))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_pricetype_opt (d)  =
+    (match d with
+        | "Percentage" -> (Some (MOD_FIX_PriceType_Percentage))
+        | "Spread" -> (Some (MOD_FIX_PriceType_Spread))
+        | "Yield" -> (Some (MOD_FIX_PriceType_Yield))
+        | "NEGATIVE_YIELD" -> (Some (MOD_FIX_PriceType_NEGATIVE_YIELD))
+        | "DECIMAL_UNIT_PRICE" -> (Some (MOD_FIX_PriceType_DECIMAL_UNIT_PRICE))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_trdregpublicationtype_opt (d)  =
+    (match d with
+        | "Pretrade_Transparency_Waiver" -> (Some (MOD_FIX_TrdRegPublicationType_Pretrade_Transparency_Waiver))
+        | "Exempt_From_Publication" -> (Some (MOD_FIX_TrdRegPublicationType_Exempt_From_Publication))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_partysubidtype_opt (d)  =
+    (match d with
+        | "CSD_participant_code__DTCC_" -> (Some (MOD_FIX_PartySubIDType_CSD_participant_code__DTCC_))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_alloctype_opt (d)  =
+    (match d with
+        | "Buyside_preliminary" -> (Some (MOD_FIX_AllocType_Buyside_preliminary))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_ordercapacity_opt (d)  =
+    (match d with
+        | "Any_Other_Trading_Capacity__AOTC_" -> (Some (MOD_FIX_OrderCapacity_Any_Other_Trading_Capacity__AOTC_))
+        | "Own_Account" -> (Some (MOD_FIX_OrderCapacity_Own_Account))
+        | "Matched_Principal" -> (Some (MOD_FIX_OrderCapacity_Matched_Principal))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_businessrejectreason_opt (d)  =
+    (match d with
+        | "Other" -> (Some (MOD_FIX_BusinessRejectReason_Other))
+        | "Unknown" -> (Some (MOD_FIX_BusinessRejectReason_Unknown))
+        | "Unknown_Security" -> (Some (MOD_FIX_BusinessRejectReason_Unknown_Security))
+        | "Unsupported_Message" -> (Some (MOD_FIX_BusinessRejectReason_Unsupported_Message))
+        | "Application_Not_Available" -> (Some (MOD_FIX_BusinessRejectReason_Application_Not_Available))
+        | "Conditionally_required_field_missing" -> (Some (MOD_FIX_BusinessRejectReason_Conditionally_required_field_missing))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_mktxpricingprocess_opt (d)  =
+    (match d with
+        | "Manual" -> (Some (MOD_FIX_MKTXPricingProcess_Manual))
+        | "Phone_Spot" -> (Some (MOD_FIX_MKTXPricingProcess_Phone_Spot))
+        | "Auto" -> (Some (MOD_FIX_MKTXPricingProcess_Auto))
+        | "OneStep" -> (Some (MOD_FIX_MKTXPricingProcess_OneStep))
+        | "Standard" -> (Some (MOD_FIX_MKTXPricingProcess_Standard))
+        | "Delayed_Spot" -> (Some (MOD_FIX_MKTXPricingProcess_Delayed_Spot))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_mktxanalysisto_opt (d)  =
+    (match d with
+        | "Avg" -> (Some (MOD_FIX_MKTXAnalysisTo_Avg))
+        | "BondTicker" -> (Some (MOD_FIX_MKTXAnalysisTo_BondTicker))
+        | "CompositeClose" -> (Some (MOD_FIX_MKTXAnalysisTo_CompositeClose))
+        | "CompositeMid" -> (Some (MOD_FIX_MKTXAnalysisTo_CompositeMid))
+        | "Cover" -> (Some (MOD_FIX_MKTXAnalysisTo_Cover))
+        | "Internal_Target" -> (Some (MOD_FIX_MKTXAnalysisTo_Internal_Target))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_allocrejcode_opt (d)  =
+    (match d with
+        | "Unknown_account_s_" -> (Some (MOD_FIX_AllocRejCode_Unknown_account_s_))
+        | "Incorrect_quantity" -> (Some (MOD_FIX_AllocRejCode_Incorrect_quantity))
+        | "Unknown_executing_broker__dealer_" -> (Some (MOD_FIX_AllocRejCode_Unknown_executing_broker__dealer_))
+        | "unknown_OrderID" -> (Some (MOD_FIX_AllocRejCode_unknown_OrderID))
+        | "Unknown_ListID" -> (Some (MOD_FIX_AllocRejCode_Unknown_ListID))
+        | "Other" -> (Some (MOD_FIX_AllocRejCode_Other))
+        | "Incorrect_allocated_quantity" -> (Some (MOD_FIX_AllocRejCode_Incorrect_allocated_quantity))
+        | "calculation_difference" -> (Some (MOD_FIX_AllocRejCode_calculation_difference))
+        | "unknown_or_stale_ExecID" -> (Some (MOD_FIX_AllocRejCode_unknown_or_stale_ExecID))
+        | "mismatched_data_value" -> (Some (MOD_FIX_AllocRejCode_mismatched_data_value))
+        | "Unknown_ClOrdID" -> (Some (MOD_FIX_AllocRejCode_Unknown_ClOrdID))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_lastcapacity_opt (d)  =
+    (match d with
+        | "Agent" -> (Some (MOD_FIX_LastCapacity_Agent))
+        | "Cross_as_Agent" -> (Some (MOD_FIX_LastCapacity_Cross_as_Agent))
+        | "Cross_as_Principal" -> (Some (MOD_FIX_LastCapacity_Cross_as_Principal))
+        | "Principal" -> (Some (MOD_FIX_LastCapacity_Principal))
+        | "Matched_Principal" -> (Some (MOD_FIX_LastCapacity_Matched_Principal))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_dkreason_opt (d)  =
+    (match d with
+        | "unknown_symbol__unknown_security_" -> (Some (MOD_FIX_DKReason_unknown_symbol__unknown_security_))
+        | "wrong_side" -> (Some (MOD_FIX_DKReason_wrong_side))
+        | "quantity_exceeds_order" -> (Some (MOD_FIX_DKReason_quantity_exceeds_order))
+        | "no_matching_order" -> (Some (MOD_FIX_DKReason_no_matching_order))
+        | "Price_exceeds_limit" -> (Some (MOD_FIX_DKReason_Price_exceeds_limit))
+        | "calculation_difference" -> (Some (MOD_FIX_DKReason_calculation_difference))
+        | "other" -> (Some (MOD_FIX_DKReason_other))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_alloccancreplacereason_opt (d)  =
+    (match d with
+        | "Other" -> (Some (MOD_FIX_AllocCancReplaceReason_Other))
+        | "Original_details_incomplete___incorrect" -> (Some (MOD_FIX_AllocCancReplaceReason_Original_details_incomplete___incorrect))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_algorithm_opt (d)  =
+    (match d with
+        | "Algorithm" -> (Some (MOD_FIX_Algorithm_Algorithm))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_tradereportingindicator_opt (d)  =
+    (match d with
+        | "Trade_has_not_been_reported" -> (Some (MOD_FIX_TradeReportingIndicator_Trade_has_not_been_reported))
+        | "Trade_has_been_reported_by_a_trading_venue_as_an_On_book_trade" -> (Some (MOD_FIX_TradeReportingIndicator_Trade_has_been_reported_by_a_trading_venue_as_an_On_book_trade))
+        | "Trade_has_been_reported_as_a_systematic_internaliser_seller_trade" -> (Some (MOD_FIX_TradeReportingIndicator_Trade_has_been_reported_as_a_systematic_internaliser_seller_trade))
+        | "Trade_has_been_reported_as_a_systematic_internaliser_buyer_trade" -> (Some (MOD_FIX_TradeReportingIndicator_Trade_has_been_reported_as_a_systematic_internaliser_buyer_trade))
+        | "Trade_has_been_reported_as_a_nonsystematic_internaliser_seller_trade" -> (Some (MOD_FIX_TradeReportingIndicator_Trade_has_been_reported_as_a_nonsystematic_internaliser_seller_trade))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_legsecurityidsource_opt (d)  =
+    (match d with
+        | "CUSIP" -> (Some (MOD_FIX_LegSecurityIDSource_CUSIP))
+        | "ISIN" -> (Some (MOD_FIX_LegSecurityIDSource_ISIN))
+        | "MA_Dummy_CUSIP" -> (Some (MOD_FIX_LegSecurityIDSource_MA_Dummy_CUSIP))
+        | "WKN" -> (Some (MOD_FIX_LegSecurityIDSource_WKN))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_securityaltidsource_opt (d)  =
+    (match d with
+        | "CUSIP" -> (Some (MOD_FIX_SecurityAltIDSource_CUSIP))
+        | "ISIN" -> (Some (MOD_FIX_SecurityAltIDSource_ISIN))
+        | "TRAX_ICMA_Number" -> (Some (MOD_FIX_SecurityAltIDSource_TRAX_ICMA_Number))
+        | "WKN" -> (Some (MOD_FIX_SecurityAltIDSource_WKN))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_execinst_opt (d)  =
+    (match d with
+        | "WORK" -> (Some (MOD_FIX_ExecInst_WORK))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_pretradewaiver_opt (d)  =
+    (match d with
+        | "LRGS" -> (Some (MOD_FIX_PreTradeWaiver_LRGS))
+        | "ILQD" -> (Some (MOD_FIX_PreTradeWaiver_ILQD))
+        | "SIZE" -> (Some (MOD_FIX_PreTradeWaiver_SIZE))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_competitivestatus_opt (d)  =
+    (match d with
+        | "Client_Passed" -> (Some (MOD_FIX_CompetitiveStatus_Client_Passed))
+        | "second_best" -> (Some (MOD_FIX_CompetitiveStatus_second_best))
+        | "Did_not_trade" -> (Some (MOD_FIX_CompetitiveStatus_Did_not_trade))
+        | "Traded___Amended" -> (Some (MOD_FIX_CompetitiveStatus_Traded___Amended))
+        | "Done_Awaiting_Book_Confirmation" -> (Some (MOD_FIX_CompetitiveStatus_Done_Awaiting_Book_Confirmation))
+        | "Done_Awaiting_Spot_Confirmation" -> (Some (MOD_FIX_CompetitiveStatus_Done_Awaiting_Spot_Confirmation))
+        | "Dealer_did_not_respond_to_enquiry_before_client_traded" -> (Some (MOD_FIX_CompetitiveStatus_Dealer_did_not_respond_to_enquiry_before_client_traded))
+        | "price_expired" -> (Some (MOD_FIX_CompetitiveStatus_price_expired))
+        | "third_best__or_worse" -> (Some (MOD_FIX_CompetitiveStatus_third_best__or_worse))
+        | "Dealer_passed" -> (Some (MOD_FIX_CompetitiveStatus_Dealer_passed))
+        | "For_Covered_or_Best" -> (Some (MOD_FIX_CompetitiveStatus_For_Covered_or_Best))
+        | "Tied_for_Cover" -> (Some (MOD_FIX_CompetitiveStatus_Tied_for_Cover))
+        | "No_response_from_dealer" -> (Some (MOD_FIX_CompetitiveStatus_No_response_from_dealer))
+        | "Timed_Out__R_" -> (Some (MOD_FIX_CompetitiveStatus_Timed_Out__R_))
+        | "Traded" -> (Some (MOD_FIX_CompetitiveStatus_Traded))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_mktxescbstblty_opt (d)  =
+    (match d with
+        | "Investment_Operations" -> (Some (MOD_FIX_MKTXESCBStblty_Investment_Operations))
+        | "Stability_Operations" -> (Some (MOD_FIX_MKTXESCBStblty_Stability_Operations))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_internalcrossingflag_opt (d)  =
+    (match d with
+        | "FundCrossing" -> (Some (MOD_FIX_InternalCrossingFlag_FundCrossing))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_mktxtradestyle_opt (d)  =
+    (match d with
+        | "Portfolio" -> (Some (MOD_FIX_MKTXTradeStyle_Portfolio))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_settltype_opt (d)  =
+    (match d with
+        | "Regular" -> (Some (MOD_FIX_SettlType_Regular))
+        | "Cash" -> (Some (MOD_FIX_SettlType_Cash))
+        | "T_Plus_1__next_day_" -> (Some (MOD_FIX_SettlType_T_Plus_1__next_day_))
+        | "T_Plus_2" -> (Some (MOD_FIX_SettlType_T_Plus_2))
+        | "T_Plus_3" -> (Some (MOD_FIX_SettlType_T_Plus_3))
+        | "T_Plus_4" -> (Some (MOD_FIX_SettlType_T_Plus_4))
+        | "Future" -> (Some (MOD_FIX_SettlType_Future))
+        | "When_and_if_issued" -> (Some (MOD_FIX_SettlType_When_and_if_issued))
+        | "Sellers_Option" -> (Some (MOD_FIX_SettlType_Sellers_Option))
+        | "T_Plus_5" -> (Some (MOD_FIX_SettlType_T_Plus_5))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_ordstatus_opt (d)  =
+    (match d with
+        | "New_" -> (Some (MOD_FIX_OrdStatus_New_))
+        | "Partially_filled" -> (Some (MOD_FIX_OrdStatus_Partially_filled))
+        | "Filled_" -> (Some (MOD_FIX_OrdStatus_Filled_))
+        | "Cancelled" -> (Some (MOD_FIX_OrdStatus_Cancelled))
+        | "Rejected" -> (Some (MOD_FIX_OrdStatus_Rejected))
+        | "Pending_New" -> (Some (MOD_FIX_OrdStatus_Pending_New))
+        | "Accepted_for_bidding" -> (Some (MOD_FIX_OrdStatus_Accepted_for_bidding))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_forexreq_opt (d)  =
+    (match d with
+        | "No" -> (Some (MOD_FIX_ForexReq_No))
+        | "Yes" -> (Some (MOD_FIX_ForexReq_Yes))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_alloctranstype_opt (d)  =
+    (match d with
+        | "New" -> (Some (MOD_FIX_AllocTransType_New))
+        | "Replace" -> (Some (MOD_FIX_AllocTransType_Replace))
+        | "Cancel" -> (Some (MOD_FIX_AllocTransType_Cancel))
+        | "Preliminary" -> (Some (MOD_FIX_AllocTransType_Preliminary))
+        | "Calculated" -> (Some (MOD_FIX_AllocTransType_Calculated))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_gapfillflag_opt (d)  =
+    (match d with
+        | "Sequence_Reset" -> (Some (MOD_FIX_GapFillFlag_Sequence_Reset))
+        | "Gap_Fill_Messages" -> (Some (MOD_FIX_GapFillFlag_Gap_Fill_Messages))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_mktxautoextype_opt (d)  =
+    (match d with
+        | "If_the_inquiry_is_submitted_for_auto_ex_via_auto_submit_" -> (Some (MOD_FIX_MKTXAutoExType_If_the_inquiry_is_submitted_for_auto_ex_via_auto_submit_))
+        | "If_the_inquiry_is_submitted_for_auto_ex_from_manual_workstation" -> (Some (MOD_FIX_MKTXAutoExType_If_the_inquiry_is_submitted_for_auto_ex_from_manual_workstation))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_legside_opt (d)  =
+    (match d with
+        | "buy" -> (Some (MOD_FIX_LegSide_buy))
+        | "sell" -> (Some (MOD_FIX_LegSide_sell))
+        | "Opposite" -> (Some (MOD_FIX_LegSide_Opposite))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_exclude_opt (d)  =
+    (match d with
+        | "No__include_dealer_" -> (Some (MOD_FIX_Exclude_No__include_dealer_))
+        | "Yes__exclude_dealer_" -> (Some (MOD_FIX_Exclude_Yes__exclude_dealer_))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_ordrejreason_opt (d)  =
+    (match d with
+        | "Unknown_symbol" -> (Some (MOD_FIX_OrdRejReason_Unknown_symbol))
+        | "Duplicate_order" -> (Some (MOD_FIX_OrdRejReason_Duplicate_order))
+        | "Unsupported_order_characteristic" -> (Some (MOD_FIX_OrdRejReason_Unsupported_order_characteristic))
+        | "Incorrect_quantity" -> (Some (MOD_FIX_OrdRejReason_Incorrect_quantity))
+        | "Other" -> (Some (MOD_FIX_OrdRejReason_Other))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_trdregpublicationreason_opt (d)  =
+    (match d with
+        | "NLIQ" -> (Some (MOD_FIX_TrdRegPublicationReason_NLIQ))
+        | "OLIQ" -> (Some (MOD_FIX_TrdRegPublicationReason_OLIQ))
+        | "PRIC" -> (Some (MOD_FIX_TrdRegPublicationReason_PRIC))
+        | "RFPT" -> (Some (MOD_FIX_TrdRegPublicationReason_RFPT))
+        | "ILQD" -> (Some (MOD_FIX_TrdRegPublicationReason_ILQD))
+        | "SIZE" -> (Some (MOD_FIX_TrdRegPublicationReason_SIZE))
+        | "LRGS" -> (Some (MOD_FIX_TrdRegPublicationReason_LRGS))
+        | "ILQD_2" -> (Some (MOD_FIX_TrdRegPublicationReason_ILQD_2))
+        | "SIZE_2" -> (Some (MOD_FIX_TrdRegPublicationReason_SIZE_2))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_product_opt (d)  =
+    (match d with
+        | "Corporate" -> (Some (MOD_FIX_Product_Corporate))
+        | "Preferred" -> (Some (MOD_FIX_Product_Preferred))
+        | "Government" -> (Some (MOD_FIX_Product_Government))
+        | "Municipal" -> (Some (MOD_FIX_Product_Municipal))
+        | "Other" -> (Some (MOD_FIX_Product_Other))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_includedealers_opt (d)  =
+    (match d with
+        | "Include_Only_Send_to_only_the_dealers" -> (Some (MOD_FIX_IncludeDealers_Include_Only_Send_to_only_the_dealers))
+        | "Include_at_Least__Send_to_dealers" -> (Some (MOD_FIX_IncludeDealers_Include_at_Least__Send_to_dealers))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_mktxautoexstatus_opt (d)  =
+    (match d with
+        | "If_the_inquiry_was_auto_executed_" -> (Some (MOD_FIX_MKTXAutoExStatus_If_the_inquiry_was_auto_executed_))
+        | "If_the_inquiry_did_not_execute_either_manually_or_through_auto_ex_process_" -> (Some (MOD_FIX_MKTXAutoExStatus_If_the_inquiry_did_not_execute_either_manually_or_through_auto_ex_process_))
+        | "If_the_inquiry_fail_to_auto_execute_but_was_later_executed_manually_" -> (Some (MOD_FIX_MKTXAutoExStatus_If_the_inquiry_fail_to_auto_execute_but_was_later_executed_manually_))
+        | _ -> (None)
     )
 ;;
 
@@ -90,64 +1033,78 @@ let string_to_mod_side_opt (d)  =
     (match d with
         | "Buy" -> (Some (MOD_FIX_Side_Buy))
         | "Sell" -> (Some (MOD_FIX_Side_Sell))
-        | "BuyMinus" -> (Some (MOD_FIX_Side_BuyMinus))
-        | "SellPlus" -> (Some (MOD_FIX_Side_SellPlus))
-        | "SellShort" -> (Some (MOD_FIX_Side_SellShort))
-        | "SellShortExempt" -> (Some (MOD_FIX_Side_SellShortExempt))
-        | "Undisclosed" -> (Some (MOD_FIX_Side_Undisclosed))
-        | "Cross" -> (Some (MOD_FIX_Side_Cross))
-        | "CrossShort" -> (Some (MOD_FIX_Side_CrossShort))
-        | "CrossShortExempt" -> (Some (MOD_FIX_Side_CrossShortExempt))
-        | "AsDefined" -> (Some (MOD_FIX_Side_AsDefined))
-        | "Opposite" -> (Some (MOD_FIX_Side_Opposite))
-        | "Subscribe" -> (Some (MOD_FIX_Side_Subscribe))
-        | "Redeem" -> (Some (MOD_FIX_Side_Redeem))
-        | "Lend" -> (Some (MOD_FIX_Side_Lend))
-        | "Borrow" -> (Some (MOD_FIX_Side_Borrow))
+        | "As_Defined__for_multi_legs_" -> (Some (MOD_FIX_Side_As_Defined__for_multi_legs_))
+        | "Sell_Undisclosed" -> (Some (MOD_FIX_Side_Sell_Undisclosed))
         | _ -> (None)
     )
 ;;
 
-let string_to_mod_ordtype_opt (d)  =
+let string_to_mod_cxlrejreason_opt (d)  =
     (match d with
-        | "Market" -> (Some (MOD_FIX_OrdType_Market))
-        | "Limit" -> (Some (MOD_FIX_OrdType_Limit))
-        | "Stop" -> (Some (MOD_FIX_OrdType_Stop))
-        | "StopLimit" -> (Some (MOD_FIX_OrdType_StopLimit))
-        | "WithOrWithout" -> (Some (MOD_FIX_OrdType_WithOrWithout))
-        | "LimitOrBetter" -> (Some (MOD_FIX_OrdType_LimitOrBetter))
-        | "LimitWithOrWithout" -> (Some (MOD_FIX_OrdType_LimitWithOrWithout))
-        | "OnBasis" -> (Some (MOD_FIX_OrdType_OnBasis))
-        | "PreviouslyQuoted" -> (Some (MOD_FIX_OrdType_PreviouslyQuoted))
-        | "PreviouslyIndicated" -> (Some (MOD_FIX_OrdType_PreviouslyIndicated))
-        | "ForexSwap" -> (Some (MOD_FIX_OrdType_ForexSwap))
-        | "Funari" -> (Some (MOD_FIX_OrdType_Funari))
-        | "MarketIfTouched" -> (Some (MOD_FIX_OrdType_MarketIfTouched))
-        | "MarketWithLeftOverAsLimit" -> (Some (MOD_FIX_OrdType_MarketWithLeftOverAsLimit))
-        | "PreviousFundValuationPoint" -> (Some (MOD_FIX_OrdType_PreviousFundValuationPoint))
-        | "NextFundValuationPoint" -> (Some (MOD_FIX_OrdType_NextFundValuationPoint))
-        | "Pegged" -> (Some (MOD_FIX_OrdType_Pegged))
+        | "All_cases_where_it_is_too_late_to_cancel" -> (Some (MOD_FIX_CxlRejReason_All_cases_where_it_is_too_late_to_cancel))
+        | "Unknown_Order" -> (Some (MOD_FIX_CxlRejReason_Unknown_Order))
         | _ -> (None)
     )
 ;;
 
-let string_to_mod_ordstatus_opt (d)  =
+let string_to_mod_handlinst_opt (d)  =
     (match d with
-        | "New" -> (Some (MOD_FIX_OrdStatus_New))
-        | "PartiallyFilled" -> (Some (MOD_FIX_OrdStatus_PartiallyFilled))
-        | "Filled" -> (Some (MOD_FIX_OrdStatus_Filled))
-        | "DoneForDay" -> (Some (MOD_FIX_OrdStatus_DoneForDay))
-        | "Canceled" -> (Some (MOD_FIX_OrdStatus_Canceled))
-        | "PendingCancel" -> (Some (MOD_FIX_OrdStatus_PendingCancel))
-        | "Stopped" -> (Some (MOD_FIX_OrdStatus_Stopped))
-        | "Rejected" -> (Some (MOD_FIX_OrdStatus_Rejected))
-        | "Suspended" -> (Some (MOD_FIX_OrdStatus_Suspended))
-        | "PendingNew" -> (Some (MOD_FIX_OrdStatus_PendingNew))
-        | "Calculated" -> (Some (MOD_FIX_OrdStatus_Calculated))
-        | "Expired" -> (Some (MOD_FIX_OrdStatus_Expired))
-        | "AcceptedForBidding" -> (Some (MOD_FIX_OrdStatus_AcceptedForBidding))
-        | "PendingReplace" -> (Some (MOD_FIX_OrdStatus_PendingReplace))
-        | "Replaced" -> (Some (MOD_FIX_OrdStatus_Replaced))
+        | "Automated_execution_order" -> (Some (MOD_FIX_HandlInst_Automated_execution_order))
+        | "Manual_Order__best_execution" -> (Some (MOD_FIX_HandlInst_Manual_Order__best_execution))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_regulatorytradeidtype_opt (d)  =
+    (match d with
+        | "Trading_venue_transaction_identifier" -> (Some (MOD_FIX_RegulatoryTradeIDType_Trading_venue_transaction_identifier))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_legswaptype_opt (d)  =
+    (match d with
+        | "Par_for_Par" -> (Some (MOD_FIX_LegSwapType_Par_for_Par))
+        | "Modified_Duration" -> (Some (MOD_FIX_LegSwapType_Modified_Duration))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_partyrole_opt (d)  =
+    (match d with
+        | "Executing_Firm" -> (Some (MOD_FIX_PartyRole_Executing_Firm))
+        | "ClientID" -> (Some (MOD_FIX_PartyRole_ClientID))
+        | "Order_origination_trader__associated_with_order_origination_firm__e_g_g__trader_who_initiates___submits_the_order_" -> (Some (MOD_FIX_PartyRole_Order_origination_trader__associated_with_order_origination_firm__e_g_g__trader_who_initiates___submits_the_order_))
+        | "Executing_Trader" -> (Some (MOD_FIX_PartyRole_Executing_Trader))
+        | "Order_origination_firm__e_g__Buy_side_firm_" -> (Some (MOD_FIX_PartyRole_Order_origination_firm__e_g__Buy_side_firm_))
+        | "Execution_venue" -> (Some (MOD_FIX_PartyRole_Execution_venue))
+        | "Investment_Decision_Maker__MIFID_II_Clients_" -> (Some (MOD_FIX_PartyRole_Investment_Decision_Maker__MIFID_II_Clients_))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_cxlrejresponseto_opt (d)  =
+    (match d with
+        | "Order_Cancel_Request_" -> (Some (MOD_FIX_CxlRejResponseTo_Order_Cancel_Request_))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_allocnoorderstype_opt (d)  =
+    (match d with
+        | "Not_specified" -> (Some (MOD_FIX_AllocNoOrdersType_Not_specified))
+        | "Explicit_list_provided" -> (Some (MOD_FIX_AllocNoOrdersType_Explicit_list_provided))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_mktxtradereportingind_opt (d)  =
+    (match d with
+        | "Trade_not_yet_reported" -> (Some (MOD_FIX_MKTXTradeReportingInd_Trade_not_yet_reported))
+        | "Trade_reported_on_book" -> (Some (MOD_FIX_MKTXTradeReportingInd_Trade_reported_on_book))
+        | "Trade_reported_as_systematic_internaliser" -> (Some (MOD_FIX_MKTXTradeReportingInd_Trade_reported_as_systematic_internaliser))
+        | "Trade_reported_as_nonsystematic_internaliser" -> (Some (MOD_FIX_MKTXTradeReportingInd_Trade_reported_as_nonsystematic_internaliser))
+        | "Trade_reported_under_sub_delegation_arrangement" -> (Some (MOD_FIX_MKTXTradeReportingInd_Trade_reported_under_sub_delegation_arrangement))
         | _ -> (None)
     )
 ;;
@@ -155,22 +1112,91 @@ let string_to_mod_ordstatus_opt (d)  =
 let string_to_mod_exectype_opt (d)  =
     (match d with
         | "New" -> (Some (MOD_FIX_ExecType_New))
-        | "DoneForDay" -> (Some (MOD_FIX_ExecType_DoneForDay))
-        | "Canceled" -> (Some (MOD_FIX_ExecType_Canceled))
-        | "Replaced" -> (Some (MOD_FIX_ExecType_Replaced))
-        | "PendingCancel" -> (Some (MOD_FIX_ExecType_PendingCancel))
-        | "Stopped" -> (Some (MOD_FIX_ExecType_Stopped))
+        | "Cancelled" -> (Some (MOD_FIX_ExecType_Cancelled))
         | "Rejected" -> (Some (MOD_FIX_ExecType_Rejected))
-        | "Suspended" -> (Some (MOD_FIX_ExecType_Suspended))
-        | "PendingNew" -> (Some (MOD_FIX_ExecType_PendingNew))
-        | "Calculated" -> (Some (MOD_FIX_ExecType_Calculated))
-        | "Expired" -> (Some (MOD_FIX_ExecType_Expired))
-        | "Restated" -> (Some (MOD_FIX_ExecType_Restated))
-        | "PendingReplace" -> (Some (MOD_FIX_ExecType_PendingReplace))
-        | "Trade" -> (Some (MOD_FIX_ExecType_Trade))
-        | "TradeCorrect" -> (Some (MOD_FIX_ExecType_TradeCorrect))
-        | "TradeCancel" -> (Some (MOD_FIX_ExecType_TradeCancel))
-        | "OrderStatus" -> (Some (MOD_FIX_ExecType_OrderStatus))
+        | "Trade__partial_fill_or_fill_" -> (Some (MOD_FIX_ExecType_Trade__partial_fill_or_fill_))
+        | "Trade_Correct" -> (Some (MOD_FIX_ExecType_Trade_Correct))
+        | "Trade_Cancel" -> (Some (MOD_FIX_ExecType_Trade_Cancel))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_tradingprotocol_opt (d)  =
+    (match d with
+        | "DM" -> (Some (MOD_FIX_TradingProtocol_DM))
+        | "EU_Price" -> (Some (MOD_FIX_TradingProtocol_EU_Price))
+        | "LMPrice" -> (Some (MOD_FIX_TradingProtocol_LMPrice))
+        | "Price" -> (Some (MOD_FIX_TradingProtocol_Price))
+        | "Spread" -> (Some (MOD_FIX_TradingProtocol_Spread))
+        | "USDPrice" -> (Some (MOD_FIX_TradingProtocol_USDPrice))
+        | "Yield" -> (Some (MOD_FIX_TradingProtocol_Yield))
+        | "PFDS_Price" -> (Some (MOD_FIX_TradingProtocol_PFDS_Price))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_mktxrtspurpose_opt (d)  =
+    (match d with
+        | "FundCrossing" -> (Some (MOD_FIX_MKTXRTSPurpose_FundCrossing))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_allocstatus_opt (d)  =
+    (match d with
+        | "Accepted" -> (Some (MOD_FIX_AllocStatus_Accepted))
+        | "received__not_yet_processed_" -> (Some (MOD_FIX_AllocStatus_received__not_yet_processed_))
+        | "block_level_reject" -> (Some (MOD_FIX_AllocStatus_block_level_reject))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_sessionrejectreason_opt (d)  =
+    (match d with
+        | "Invalid_Tag_number" -> (Some (MOD_FIX_SessionRejectReason_Invalid_Tag_number))
+        | "Required_Tag_missing" -> (Some (MOD_FIX_SessionRejectReason_Required_Tag_missing))
+        | "Tag_not_defined_for_this_message_type" -> (Some (MOD_FIX_SessionRejectReason_Tag_not_defined_for_this_message_type))
+        | "Undefined_Tag" -> (Some (MOD_FIX_SessionRejectReason_Undefined_Tag))
+        | "Tag_specified_without_a_value" -> (Some (MOD_FIX_SessionRejectReason_Tag_specified_without_a_value))
+        | "Value_is_incorrect__out_of_range__for_this_Tag" -> (Some (MOD_FIX_SessionRejectReason_Value_is_incorrect__out_of_range__for_this_Tag))
+        | "Incorrect_data_format_for_value" -> (Some (MOD_FIX_SessionRejectReason_Incorrect_data_format_for_value))
+        | "Decryption_problem" -> (Some (MOD_FIX_SessionRejectReason_Decryption_problem))
+        | "Signature_problem" -> (Some (MOD_FIX_SessionRejectReason_Signature_problem))
+        | "CompID_problem" -> (Some (MOD_FIX_SessionRejectReason_CompID_problem))
+        | "SendingTime_accuracy_problem" -> (Some (MOD_FIX_SessionRejectReason_SendingTime_accuracy_problem))
+        | "Invalid_MsgType" -> (Some (MOD_FIX_SessionRejectReason_Invalid_MsgType))
+        | "XML_Validation_error" -> (Some (MOD_FIX_SessionRejectReason_XML_Validation_error))
+        | "Tag_appears_more_than_once" -> (Some (MOD_FIX_SessionRejectReason_Tag_appears_more_than_once))
+        | "Tag_specified_out_of_required_order" -> (Some (MOD_FIX_SessionRejectReason_Tag_specified_out_of_required_order))
+        | "Repeating_group_fields_out_of_order" -> (Some (MOD_FIX_SessionRejectReason_Repeating_group_fields_out_of_order))
+        | "Incorrect_NumInGroup_count_for_repeating_group" -> (Some (MOD_FIX_SessionRejectReason_Incorrect_NumInGroup_count_for_repeating_group))
+        | "Non_data_value_includes_field_delimiter__SOH_character_" -> (Some (MOD_FIX_SessionRejectReason_Non_data_value_includes_field_delimiter__SOH_character_))
+        | "Other" -> (Some (MOD_FIX_SessionRejectReason_Other))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_benchmarkcurvename_opt (d)  =
+    (match d with
+        | "EDSF" -> (Some (MOD_FIX_BenchmarkCurveName_EDSF))
+        | "LIBOR__London_Inter_Bank_Offers_" -> (Some (MOD_FIX_BenchmarkCurveName_LIBOR__London_Inter_Bank_Offers_))
+        | "SWAP" -> (Some (MOD_FIX_BenchmarkCurveName_SWAP))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_benchmarkpricetype_opt (d)  =
+    (match d with
+        | "percent_of_par" -> (Some (MOD_FIX_BenchmarkPriceType_percent_of_par))
+        | _ -> (None)
+    )
+;;
+
+let string_to_mod_benchmarksecurityidsource_opt (d)  =
+    (match d with
+        | "CUSIP" -> (Some (MOD_FIX_BenchmarkSecurityIDSource_CUSIP))
+        | "ISIN" -> (Some (MOD_FIX_BenchmarkSecurityIDSource_ISIN))
+        | "WKN" -> (Some (MOD_FIX_BenchmarkSecurityIDSource_WKN))
         | _ -> (None)
     )
 ;;

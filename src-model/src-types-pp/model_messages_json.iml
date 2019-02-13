@@ -1,28 +1,719 @@
-(* Aesthetic Integration copyright 2018 *)
+(* Aesthetic Integration copyright 2019 *)
 open Base_types_json;;
 open Datetime_json;;
 open Json_generator_utils;;
 open Model_enums_json;;
 open Model_messages;;
+open Model_repeating_groups_json;;
 open Model_tags_json;;
 open Yojson;;
 
-let mod_executionreport_to_json (x)  : json =
-    assoc_filter_nulls (("ClOrdID",string_to_json x.mod_f_ExecutionReport_ClOrdID) :: (("OrderID",string_to_json x.mod_f_ExecutionReport_OrderID) :: (("ExecID",string_to_json x.mod_f_ExecutionReport_ExecID) :: (("ExecType",mod_exectype_to_json x.mod_f_ExecutionReport_ExecType) :: (("AvgPx",float_6_to_json x.mod_f_ExecutionReport_AvgPx) :: (("Side",mod_side_to_json x.mod_f_ExecutionReport_Side) :: (("LeavesQty",float_6_to_json x.mod_f_ExecutionReport_LeavesQty) :: (("CumQty",float_6_to_json x.mod_f_ExecutionReport_CumQty) :: (("OrdStatus",mod_ordstatus_to_json x.mod_f_ExecutionReport_OrdStatus) :: (("Instrument.Symbol",string_to_json x.mod_f_ExecutionReport_Instrument_Symbol) :: (("Text",(match x.mod_f_ExecutionReport_Text with
+let mod_newordersingle_to_json (x)  : json =
+    assoc_filter_nulls (("ClOrdID",string_to_json x.mod_f_NewOrderSingle_ClOrdID) :: (("Currency",(match x.mod_f_NewOrderSingle_Currency with
         | None -> `Null
         | Some x -> (string_to_json x)
     )
-    ) :: [])))))))))))
+    ) :: (("HandlInst",(match x.mod_f_NewOrderSingle_HandlInst with
+        | None -> `Null
+        | Some x -> (mod_handlinst_to_json x)
+    )
+    ) :: (("Parties.PartyIDsGrp",mod_partyidsgrp_to_json x.mod_f_NewOrderSingle_Parties_PartyIDsGrp) :: (("ExecInst",(match x.mod_f_NewOrderSingle_ExecInst with
+        | None -> `Null
+        | Some x -> (mod_execinst_to_json x)
+    )
+    ) :: (("OrderQty",float_6_to_json x.mod_f_NewOrderSingle_OrderQty) :: (("OrdType",char_to_json x.mod_f_NewOrderSingle_OrdType) :: (("Price",(match x.mod_f_NewOrderSingle_Price with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("Side",mod_side_to_json x.mod_f_NewOrderSingle_Side) :: (("TransactTime",utctimestamp_milli_to_json x.mod_f_NewOrderSingle_TransactTime) :: (("SettlType",(match x.mod_f_NewOrderSingle_SettlType with
+        | None -> `Null
+        | Some x -> (mod_settltype_to_json x)
+    )
+    ) :: (("SettlDate",(match x.mod_f_NewOrderSingle_SettlDate with
+        | None -> `Null
+        | Some x -> (localmktdate_to_json x)
+    )
+    ) :: (("OrderCapacity",(match x.mod_f_NewOrderSingle_OrderCapacity with
+        | None -> `Null
+        | Some x -> (mod_ordercapacity_to_json x)
+    )
+    ) :: (("QtyType",(match x.mod_f_NewOrderSingle_QtyType with
+        | None -> `Null
+        | Some x -> (mod_qtytype_to_json x)
+    )
+    ) :: (("Instrument.CFICode",string_to_json x.mod_f_NewOrderSingle_Instrument_CFICode) :: (("ForexReq",(match x.mod_f_NewOrderSingle_ForexReq with
+        | None -> `Null
+        | Some x -> (mod_forexreq_to_json x)
+    )
+    ) :: (("SettlCurrency",(match x.mod_f_NewOrderSingle_SettlCurrency with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("IncludeDealers",(match x.mod_f_NewOrderSingle_IncludeDealers with
+        | None -> `Null
+        | Some x -> (mod_includedealers_to_json x)
+    )
+    ) :: (("DealersGrp",mod_dealersgrp_to_json x.mod_f_NewOrderSingle_DealersGrp) :: (("TradingProtocol",(match x.mod_f_NewOrderSingle_TradingProtocol with
+        | None -> `Null
+        | Some x -> (mod_tradingprotocol_to_json x)
+    )
+    ) :: (("MKTXPricingProcess",(match x.mod_f_NewOrderSingle_MKTXPricingProcess with
+        | None -> `Null
+        | Some x -> (mod_mktxpricingprocess_to_json x)
+    )
+    ) :: (("MKTXTargetLevel",(match x.mod_f_NewOrderSingle_MKTXTargetLevel with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("MKTXExternalTargetLevel",(match x.mod_f_NewOrderSingle_MKTXExternalTargetLevel with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("MKTXRTSPurpose",(match x.mod_f_NewOrderSingle_MKTXRTSPurpose with
+        | None -> `Null
+        | Some x -> (mod_mktxrtspurpose_to_json x)
+    )
+    ) :: (("SpreadorBenchmarkCurveData.BenchmarkCurveCurrency",(match x.mod_f_NewOrderSingle_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("PriceType",(match x.mod_f_NewOrderSingle_PriceType with
+        | None -> `Null
+        | Some x -> (mod_pricetype_to_json x)
+    )
+    ) :: (("Text",(match x.mod_f_NewOrderSingle_Text with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("AllocID",(match x.mod_f_NewOrderSingle_AllocID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("AllocsGrp",mod_allocsgrp_to_json x.mod_f_NewOrderSingle_AllocsGrp) :: [])))))))))))))))))))))))))))))
 ;;
 
-let mod_newordersingle_to_json (x)  : json =
-    assoc_filter_nulls (("ClOrdID",string_to_json x.mod_f_NewOrderSingle_ClOrdID) :: (("Side",mod_side_to_json x.mod_f_NewOrderSingle_Side) :: (("TransactTime",utctimestamp_milli_to_json x.mod_f_NewOrderSingle_TransactTime) :: (("OrdType",mod_ordtype_to_json x.mod_f_NewOrderSingle_OrdType) :: (("Instrument.Symbol",string_to_json x.mod_f_NewOrderSingle_Instrument_Symbol) :: [])))))
+let mod_ordercancel_to_json (x)  : json =
+    assoc_filter_nulls (("OrigClOrdID",string_to_json x.mod_f_OrderCancel_OrigClOrdID) :: (("ClOrdID",string_to_json x.mod_f_OrderCancel_ClOrdID) :: (("Parties.PartyIDsGrp",mod_partyidsgrp_to_json x.mod_f_OrderCancel_Parties_PartyIDsGrp) :: (("Symbol",string_to_json x.mod_f_OrderCancel_Symbol) :: (("Side",mod_side_to_json x.mod_f_OrderCancel_Side) :: (("TransactTime",utctimestamp_milli_to_json x.mod_f_OrderCancel_TransactTime) :: []))))))
+;;
+
+let mod_neworder_multi_leg_to_json (x)  : json =
+    assoc_filter_nulls (("ClOrdID",string_to_json x.mod_f_NewOrder_Multi_Leg_ClOrdID) :: (("Parties.PartyIDsGrp",mod_partyidsgrp_to_json x.mod_f_NewOrder_Multi_Leg_Parties_PartyIDsGrp) :: (("Side",(match x.mod_f_NewOrder_Multi_Leg_Side with
+        | None -> `Null
+        | Some x -> (mod_side_to_json x)
+    )
+    ) :: (("Instrument.CFICode",string_to_json x.mod_f_NewOrder_Multi_Leg_Instrument_CFICode) :: (("OrderCapacity",(match x.mod_f_NewOrder_Multi_Leg_OrderCapacity with
+        | None -> `Null
+        | Some x -> (mod_ordercapacity_to_json x)
+    )
+    ) :: (("LegsGrp",mod_legsgrp_to_json x.mod_f_NewOrder_Multi_Leg_LegsGrp) :: (("TransactTime",utctimestamp_milli_to_json x.mod_f_NewOrder_Multi_Leg_TransactTime) :: (("QtyType",(match x.mod_f_NewOrder_Multi_Leg_QtyType with
+        | None -> `Null
+        | Some x -> (mod_qtytype_to_json x)
+    )
+    ) :: (("OrderQty",(match x.mod_f_NewOrder_Multi_Leg_OrderQty with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("OrdType",char_to_json x.mod_f_NewOrder_Multi_Leg_OrdType) :: (("Text",(match x.mod_f_NewOrder_Multi_Leg_Text with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("Notes",(match x.mod_f_NewOrder_Multi_Leg_Notes with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("IncludeDealers",(match x.mod_f_NewOrder_Multi_Leg_IncludeDealers with
+        | None -> `Null
+        | Some x -> (mod_includedealers_to_json x)
+    )
+    ) :: (("DealersGrp",mod_dealersgrp_to_json x.mod_f_NewOrder_Multi_Leg_DealersGrp) :: (("TradingProtocol",(match x.mod_f_NewOrder_Multi_Leg_TradingProtocol with
+        | None -> `Null
+        | Some x -> (mod_tradingprotocol_to_json x)
+    )
+    ) :: (("MKTXPricingProcess",(match x.mod_f_NewOrder_Multi_Leg_MKTXPricingProcess with
+        | None -> `Null
+        | Some x -> (mod_mktxpricingprocess_to_json x)
+    )
+    ) :: (("MKTXLegExternalTargetLevel",(match x.mod_f_NewOrder_Multi_Leg_MKTXLegExternalTargetLevel with
+        | None -> `Null
+        | Some x -> (int_to_json x)
+    )
+    ) :: (("MKTXRTSPurpose",(match x.mod_f_NewOrder_Multi_Leg_MKTXRTSPurpose with
+        | None -> `Null
+        | Some x -> (mod_mktxrtspurpose_to_json x)
+    )
+    ) :: (("AllocID",(match x.mod_f_NewOrder_Multi_Leg_AllocID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("LegAllocsGrp",mod_legallocsgrp_to_json x.mod_f_NewOrder_Multi_Leg_LegAllocsGrp) :: []))))))))))))))))))))
+;;
+
+let mod_neworder_list_to_json (x)  : json =
+    assoc_filter_nulls (("ListID",string_to_json x.mod_f_NewOrder_List_ListID) :: (("BidType",int_to_json x.mod_f_NewOrder_List_BidType) :: (("TotalNoOrders",int_to_json x.mod_f_NewOrder_List_TotalNoOrders) :: (("OrdersGrp",mod_ordersgrp_to_json x.mod_f_NewOrder_List_OrdersGrp) :: (("IncludeDealers",(match x.mod_f_NewOrder_List_IncludeDealers with
+        | None -> `Null
+        | Some x -> (mod_includedealers_to_json x)
+    )
+    ) :: (("DealersGrp",mod_dealersgrp_to_json x.mod_f_NewOrder_List_DealersGrp) :: (("OrderCapacity",(match x.mod_f_NewOrder_List_OrderCapacity with
+        | None -> `Null
+        | Some x -> (mod_ordercapacity_to_json x)
+    )
+    ) :: (("MKTXPricingProcess",(match x.mod_f_NewOrder_List_MKTXPricingProcess with
+        | None -> `Null
+        | Some x -> (mod_mktxpricingprocess_to_json x)
+    )
+    ) :: (("MKTXExternalTargetLevel",(match x.mod_f_NewOrder_List_MKTXExternalTargetLevel with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("MKTXListType",(match x.mod_f_NewOrder_List_MKTXListType with
+        | None -> `Null
+        | Some x -> (mod_mktxlisttype_to_json x)
+    )
+    ) :: (("AllocID",(match x.mod_f_NewOrder_List_AllocID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("AllocsGrp",mod_allocsgrp_to_json x.mod_f_NewOrder_List_AllocsGrp) :: []))))))))))))
+;;
+
+let mod_listordercancel_to_json (x)  : json =
+    assoc_filter_nulls (("ListID",string_to_json x.mod_f_ListOrderCancel_ListID) :: (("TransactTime",utctimestamp_milli_to_json x.mod_f_ListOrderCancel_TransactTime) :: []))
+;;
+
+let mod_ordercancelreject_to_json (x)  : json =
+    assoc_filter_nulls (("ListID",(match x.mod_f_OrderCancelReject_ListID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("OrderID",string_to_json x.mod_f_OrderCancelReject_OrderID) :: (("ClOrdID",string_to_json x.mod_f_OrderCancelReject_ClOrdID) :: (("OrdStatus",mod_ordstatus_to_json x.mod_f_OrderCancelReject_OrdStatus) :: (("OrigClOrdID",string_to_json x.mod_f_OrderCancelReject_OrigClOrdID) :: (("CxlRejResponseTo",mod_cxlrejresponseto_to_json x.mod_f_OrderCancelReject_CxlRejResponseTo) :: (("CxlRejReason",(match x.mod_f_OrderCancelReject_CxlRejReason with
+        | None -> `Null
+        | Some x -> (mod_cxlrejreason_to_json x)
+    )
+    ) :: (("TransactTime",utctimestamp_milli_to_json x.mod_f_OrderCancelReject_TransactTime) :: (("Text",string_to_json x.mod_f_OrderCancelReject_Text) :: [])))))))))
+;;
+
+let mod_businessmessagereject_to_json (x)  : json =
+    assoc_filter_nulls (("RefSeqNum",(match x.mod_f_BusinessMessageReject_RefSeqNum with
+        | None -> `Null
+        | Some x -> (int_to_json x)
+    )
+    ) :: (("RefMsgTyp",string_to_json x.mod_f_BusinessMessageReject_RefMsgTyp) :: (("BusinessRejectRefID",(match x.mod_f_BusinessMessageReject_BusinessRejectRefID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("BusinessRejectReason",mod_businessrejectreason_to_json x.mod_f_BusinessMessageReject_BusinessRejectReason) :: (("Text",(match x.mod_f_BusinessMessageReject_Text with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: [])))))
+;;
+
+let mod_allocationreport_to_json (x)  : json =
+    assoc_filter_nulls (("AllocReportID",string_to_json x.mod_f_AllocationReport_AllocReportID) :: (("AllocID",(match x.mod_f_AllocationReport_AllocID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("AllocTransType",mod_alloctranstype_to_json x.mod_f_AllocationReport_AllocTransType) :: (("AllocReportRefID",(match x.mod_f_AllocationReport_AllocReportRefID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("AllocCancReplaceReason",(match x.mod_f_AllocationReport_AllocCancReplaceReason with
+        | None -> `Null
+        | Some x -> (mod_alloccancreplacereason_to_json x)
+    )
+    ) :: (("RefAllocID",(match x.mod_f_AllocationReport_RefAllocID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("AllocReportType",mod_allocreporttype_to_json x.mod_f_AllocationReport_AllocReportType) :: (("AllocStatus",mod_allocstatus_to_json x.mod_f_AllocationReport_AllocStatus) :: (("AllocNoOrdersType",mod_allocnoorderstype_to_json x.mod_f_AllocationReport_AllocNoOrdersType) :: (("OrdersGrp",mod_ordersgrp_to_json x.mod_f_AllocationReport_OrdersGrp) :: (("ExecsGrp",mod_execsgrp_to_json x.mod_f_AllocationReport_ExecsGrp) :: (("Side",mod_side_to_json x.mod_f_AllocationReport_Side) :: (("Instrument.CFICode",string_to_json x.mod_f_AllocationReport_Instrument_CFICode) :: (("Quantity",float_6_to_json x.mod_f_AllocationReport_Quantity) :: (("QtyType",(match x.mod_f_AllocationReport_QtyType with
+        | None -> `Null
+        | Some x -> (mod_qtytype_to_json x)
+    )
+    ) :: (("PriceType",(match x.mod_f_AllocationReport_PriceType with
+        | None -> `Null
+        | Some x -> (mod_pricetype_to_json x)
+    )
+    ) :: (("AvgPx",float_6_to_json x.mod_f_AllocationReport_AvgPx) :: (("SpreadorBenchmarkCurveData.BenchmarkCurveCurrency",(match x.mod_f_AllocationReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("Currency",(match x.mod_f_AllocationReport_Currency with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("Parties.PartyIDsGrp",mod_partyidsgrp_to_json x.mod_f_AllocationReport_Parties_PartyIDsGrp) :: (("TradeDate",localmktdate_to_json x.mod_f_AllocationReport_TradeDate) :: (("TransactTime",utctimestamp_milli_opt_to_json x.mod_f_AllocationReport_TransactTime) :: (("SettlDate",(match x.mod_f_AllocationReport_SettlDate with
+        | None -> `Null
+        | Some x -> (localmktdate_to_json x)
+    )
+    ) :: (("GrossTradeAmt",(match x.mod_f_AllocationReport_GrossTradeAmt with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("NetMoney",(match x.mod_f_AllocationReport_NetMoney with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("Text",(match x.mod_f_AllocationReport_Text with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("AccruedInterestAmt",(match x.mod_f_AllocationReport_AccruedInterestAmt with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("YieldType",(match x.mod_f_AllocationReport_YieldType with
+        | None -> `Null
+        | Some x -> (mod_yieldtype_to_json x)
+    )
+    ) :: (("Yield",(match x.mod_f_AllocationReport_Yield with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("AllocsGrp",mod_allocsgrp_to_json x.mod_f_AllocationReport_AllocsGrp) :: (("Notes",(match x.mod_f_AllocationReport_Notes with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("MKTXPricingProcess",(match x.mod_f_AllocationReport_MKTXPricingProcess with
+        | None -> `Null
+        | Some x -> (mod_mktxpricingprocess_to_json x)
+    )
+    ) :: []))))))))))))))))))))))))))))))))
+;;
+
+let mod_allocationreportack_to_json (x)  : json =
+    assoc_filter_nulls (("AllocReportID",string_to_json x.mod_f_AllocationReportACK_AllocReportID) :: (("AllocID",string_to_json x.mod_f_AllocationReportACK_AllocID) :: (("TradeDate",(match x.mod_f_AllocationReportACK_TradeDate with
+        | None -> `Null
+        | Some x -> (localmktdate_to_json x)
+    )
+    ) :: (("TransactTime",utctimestamp_milli_to_json x.mod_f_AllocationReportACK_TransactTime) :: (("AllocStatus",mod_allocstatus_to_json x.mod_f_AllocationReportACK_AllocStatus) :: (("AllocRejCode",(match x.mod_f_AllocationReportACK_AllocRejCode with
+        | None -> `Null
+        | Some x -> (mod_allocrejcode_to_json x)
+    )
+    ) :: (("AllocReportType",(match x.mod_f_AllocationReportACK_AllocReportType with
+        | None -> `Null
+        | Some x -> (mod_allocreporttype_to_json x)
+    )
+    ) :: (("Text",(match x.mod_f_AllocationReportACK_Text with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: []))))))))
+;;
+
+let mod_allocationinstruction_to_json (x)  : json =
+    assoc_filter_nulls (("AllocID",string_to_json x.mod_f_AllocationInstruction_AllocID) :: (("AllocTransType",mod_alloctranstype_to_json x.mod_f_AllocationInstruction_AllocTransType) :: (("AllocType",mod_alloctype_to_json x.mod_f_AllocationInstruction_AllocType) :: (("RefAllocID",(match x.mod_f_AllocationInstruction_RefAllocID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("AllocCancReplaceReason",(match x.mod_f_AllocationInstruction_AllocCancReplaceReason with
+        | None -> `Null
+        | Some x -> (mod_alloccancreplacereason_to_json x)
+    )
+    ) :: (("AllocNoOrdersType",mod_allocnoorderstype_to_json x.mod_f_AllocationInstruction_AllocNoOrdersType) :: (("OrdersGrp",mod_ordersgrp_to_json x.mod_f_AllocationInstruction_OrdersGrp) :: (("ExecsGrp",mod_execsgrp_to_json x.mod_f_AllocationInstruction_ExecsGrp) :: (("Side",mod_side_to_json x.mod_f_AllocationInstruction_Side) :: (("Instrument.CFICode",string_to_json x.mod_f_AllocationInstruction_Instrument_CFICode) :: (("Quantity",float_6_to_json x.mod_f_AllocationInstruction_Quantity) :: (("AvgPx",float_6_to_json x.mod_f_AllocationInstruction_AvgPx) :: (("TradeDate",localmktdate_to_json x.mod_f_AllocationInstruction_TradeDate) :: (("TransactTime",utctimestamp_milli_opt_to_json x.mod_f_AllocationInstruction_TransactTime) :: (("Text",(match x.mod_f_AllocationInstruction_Text with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("AllocsGrp",mod_allocsgrp_to_json x.mod_f_AllocationInstruction_AllocsGrp) :: []))))))))))))))))
+;;
+
+let mod_allocationinstructionack_to_json (x)  : json =
+    assoc_filter_nulls (("AllocID",string_to_json x.mod_f_AllocationInstructionACK_AllocID) :: (("Parties.PartyIDsGrp",mod_partyidsgrp_to_json x.mod_f_AllocationInstructionACK_Parties_PartyIDsGrp) :: (("TradeDate",(match x.mod_f_AllocationInstructionACK_TradeDate with
+        | None -> `Null
+        | Some x -> (localmktdate_to_json x)
+    )
+    ) :: (("TransactTime",utctimestamp_milli_to_json x.mod_f_AllocationInstructionACK_TransactTime) :: (("AllocStatus",mod_allocstatus_to_json x.mod_f_AllocationInstructionACK_AllocStatus) :: (("AllocRejCode",(match x.mod_f_AllocationInstructionACK_AllocRejCode with
+        | None -> `Null
+        | Some x -> (mod_allocrejcode_to_json x)
+    )
+    ) :: (("AllocType",(match x.mod_f_AllocationInstructionACK_AllocType with
+        | None -> `Null
+        | Some x -> (mod_alloctype_to_json x)
+    )
+    ) :: (("Text",(match x.mod_f_AllocationInstructionACK_Text with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: []))))))))
+;;
+
+let mod_heartbeat_to_json (x)  : json =
+    assoc_filter_nulls (("TestReqID",(match x.mod_f_Heartbeat_TestReqID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: [])
+;;
+
+let mod_testrequest_to_json (x)  : json =
+    assoc_filter_nulls (("TestReqID",string_to_json x.mod_f_TestRequest_TestReqID) :: [])
+;;
+
+let mod_resendrequest_to_json (x)  : json =
+    assoc_filter_nulls (("BeginSeqNo",int_to_json x.mod_f_ResendRequest_BeginSeqNo) :: (("EndSeqNo",int_to_json x.mod_f_ResendRequest_EndSeqNo) :: []))
+;;
+
+let mod_sessionlevelreject_to_json (x)  : json =
+    assoc_filter_nulls (("RefSeqNum",int_to_json x.mod_f_SessionLevelReject_RefSeqNum) :: (("Text",string_to_json x.mod_f_SessionLevelReject_Text) :: (("RefTagID",int_to_json x.mod_f_SessionLevelReject_RefTagID) :: (("RefMsgTyp",string_to_json x.mod_f_SessionLevelReject_RefMsgTyp) :: (("SessionRejectReason",mod_sessionrejectreason_to_json x.mod_f_SessionLevelReject_SessionRejectReason) :: [])))))
+;;
+
+let mod_sequenceresetrequest_to_json (x)  : json =
+    assoc_filter_nulls (("GapFillFlag",(match x.mod_f_SequenceResetRequest_GapFillFlag with
+        | None -> `Null
+        | Some x -> (mod_gapfillflag_to_json x)
+    )
+    ) :: (("NewSeqNo",int_to_json x.mod_f_SequenceResetRequest_NewSeqNo) :: []))
+;;
+
+let mod_logout_to_json (x)  : json =
+    assoc_filter_nulls (("Text",(match x.mod_f_Logout_Text with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: [])
+;;
+
+let mod_fixlogon_to_json (x)  : json =
+    assoc_filter_nulls (("EncryptMethod",int_to_json x.mod_f_FIXLogon_EncryptMethod) :: (("HeartBtInt",int_to_json x.mod_f_FIXLogon_HeartBtInt) :: (("ResetSeqNumFlag",(match x.mod_f_FIXLogon_ResetSeqNumFlag with
+        | None -> `Null
+        | Some x -> (bool_to_json x)
+    )
+    ) :: [])))
+;;
+
+let mod_executionreport_to_json (x)  : json =
+    assoc_filter_nulls (("ClOrdID",(match x.mod_f_ExecutionReport_ClOrdID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("OrigClOrdID",(match x.mod_f_ExecutionReport_OrigClOrdID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("OrderID",string_to_json x.mod_f_ExecutionReport_OrderID) :: (("Parties.PartyIDsGrp",mod_partyidsgrp_to_json x.mod_f_ExecutionReport_Parties_PartyIDsGrp) :: (("ListID",(match x.mod_f_ExecutionReport_ListID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("MKTXCPTYLEI",(match x.mod_f_ExecutionReport_MKTXCPTYLEI with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("MKTXPartyLEI",(match x.mod_f_ExecutionReport_MKTXPartyLEI with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("OrderCapacity",(match x.mod_f_ExecutionReport_OrderCapacity with
+        | None -> `Null
+        | Some x -> (mod_ordercapacity_to_json x)
+    )
+    ) :: (("MKTXInquiryID",(match x.mod_f_ExecutionReport_MKTXInquiryID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("MKTXTrdRegPublicationReason",(match x.mod_f_ExecutionReport_MKTXTrdRegPublicationReason with
+        | None -> `Null
+        | Some x -> (mod_mktxtrdregpublicationreason_to_json x)
+    )
+    ) :: (("TrdRegPublicationsGrp",mod_trdregpublicationsgrp_to_json x.mod_f_ExecutionReport_TrdRegPublicationsGrp) :: (("MKTXESCBStblty",(match x.mod_f_ExecutionReport_MKTXESCBStblty with
+        | None -> `Null
+        | Some x -> (mod_mktxescbstblty_to_json x)
+    )
+    ) :: (("PreTradeWaiver",(match x.mod_f_ExecutionReport_PreTradeWaiver with
+        | None -> `Null
+        | Some x -> (mod_pretradewaiver_to_json x)
+    )
+    ) :: (("MKTXTradeReportingInd",(match x.mod_f_ExecutionReport_MKTXTradeReportingInd with
+        | None -> `Null
+        | Some x -> (mod_mktxtradereportingind_to_json x)
+    )
+    ) :: (("TradeReportingIndicator",(match x.mod_f_ExecutionReport_TradeReportingIndicator with
+        | None -> `Null
+        | Some x -> (mod_tradereportingindicator_to_json x)
+    )
+    ) :: (("InternalCrossingFlag",(match x.mod_f_ExecutionReport_InternalCrossingFlag with
+        | None -> `Null
+        | Some x -> (mod_internalcrossingflag_to_json x)
+    )
+    ) :: (("RegulatoryTradeIDsGrp",mod_regulatorytradeidsgrp_to_json x.mod_f_ExecutionReport_RegulatoryTradeIDsGrp) :: (("MKTXVenueTransactionID",(match x.mod_f_ExecutionReport_MKTXVenueTransactionID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("ExecID",string_to_json x.mod_f_ExecutionReport_ExecID) :: (("ExecRefID",(match x.mod_f_ExecutionReport_ExecRefID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("HandlInst",(match x.mod_f_ExecutionReport_HandlInst with
+        | None -> `Null
+        | Some x -> (mod_handlinst_to_json x)
+    )
+    ) :: (("LastMkt",(match x.mod_f_ExecutionReport_LastMkt with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("ExecType",(match x.mod_f_ExecutionReport_ExecType with
+        | None -> `Null
+        | Some x -> (mod_exectype_to_json x)
+    )
+    ) :: (("SecondaryExecID",(match x.mod_f_ExecutionReport_SecondaryExecID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("OrdStatus",mod_ordstatus_to_json x.mod_f_ExecutionReport_OrdStatus) :: (("OrdRejReason",(match x.mod_f_ExecutionReport_OrdRejReason with
+        | None -> `Null
+        | Some x -> (mod_ordrejreason_to_json x)
+    )
+    ) :: (("SettlDate",(match x.mod_f_ExecutionReport_SettlDate with
+        | None -> `Null
+        | Some x -> (localmktdate_to_json x)
+    )
+    ) :: (("IssueDate",(match x.mod_f_ExecutionReport_IssueDate with
+        | None -> `Null
+        | Some x -> (localmktdate_to_json x)
+    )
+    ) :: (("Instrument.CFICode",string_to_json x.mod_f_ExecutionReport_Instrument_CFICode) :: (("Price",(match x.mod_f_ExecutionReport_Price with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("Side",mod_side_to_json x.mod_f_ExecutionReport_Side) :: (("OrderQty",(match x.mod_f_ExecutionReport_OrderQty with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("PriceType",(match x.mod_f_ExecutionReport_PriceType with
+        | None -> `Null
+        | Some x -> (mod_pricetype_to_json x)
+    )
+    ) :: (("Currency",(match x.mod_f_ExecutionReport_Currency with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("LastPx",(match x.mod_f_ExecutionReport_LastPx with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("LastParPx",(match x.mod_f_ExecutionReport_LastParPx with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("LeavesQty",float_6_to_json x.mod_f_ExecutionReport_LeavesQty) :: (("CumQty",float_6_to_json x.mod_f_ExecutionReport_CumQty) :: (("AvgPx",float_6_to_json x.mod_f_ExecutionReport_AvgPx) :: (("TradeDate",(match x.mod_f_ExecutionReport_TradeDate with
+        | None -> `Null
+        | Some x -> (localmktdate_to_json x)
+    )
+    ) :: (("TransactTime",utctimestamp_milli_opt_to_json x.mod_f_ExecutionReport_TransactTime) :: (("SpreadorBenchmarkCurveData.BenchmarkCurveCurrency",float_6_to_json x.mod_f_ExecutionReport_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency) :: (("YieldType",(match x.mod_f_ExecutionReport_YieldType with
+        | None -> `Null
+        | Some x -> (mod_yieldtype_to_json x)
+    )
+    ) :: (("Yield",(match x.mod_f_ExecutionReport_Yield with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("GrossTradeAmt",(match x.mod_f_ExecutionReport_GrossTradeAmt with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("AccruedInterestAmt",(match x.mod_f_ExecutionReport_AccruedInterestAmt with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("NetMoney",(match x.mod_f_ExecutionReport_NetMoney with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("SettlCurrAmt",(match x.mod_f_ExecutionReport_SettlCurrAmt with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("SettlCurrency",(match x.mod_f_ExecutionReport_SettlCurrency with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("SettlCurrFxRate",(match x.mod_f_ExecutionReport_SettlCurrFxRate with
+        | None -> `Null
+        | Some x -> (float_to_json x)
+    )
+    ) :: (("SettlCurrFxRateCalc",(match x.mod_f_ExecutionReport_SettlCurrFxRateCalc with
+        | None -> `Null
+        | Some x -> (char_to_json x)
+    )
+    ) :: (("Text",(match x.mod_f_ExecutionReport_Text with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("LegsGrp",mod_legsgrp_to_json x.mod_f_ExecutionReport_LegsGrp) :: (("IncludeDealers",(match x.mod_f_ExecutionReport_IncludeDealers with
+        | None -> `Null
+        | Some x -> (mod_includedealers_to_json x)
+    )
+    ) :: (("DealersGrp",mod_dealersgrp_to_json x.mod_f_ExecutionReport_DealersGrp) :: (("Notes",(match x.mod_f_ExecutionReport_Notes with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("TradingProtocol",(match x.mod_f_ExecutionReport_TradingProtocol with
+        | None -> `Null
+        | Some x -> (mod_tradingprotocol_to_json x)
+    )
+    ) :: (("NumberofTrades",(match x.mod_f_ExecutionReport_NumberofTrades with
+        | None -> `Null
+        | Some x -> (int_to_json x)
+    )
+    ) :: (("LegTransactionSeqNumberLegID",(match x.mod_f_ExecutionReport_LegTransactionSeqNumberLegID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("InquiryQty",float_6_to_json x.mod_f_ExecutionReport_InquiryQty) :: (("NumDaysInterest",(match x.mod_f_ExecutionReport_NumDaysInterest with
+        | None -> `Null
+        | Some x -> (int_to_json x)
+    )
+    ) :: (("DatedDate_2",(match x.mod_f_ExecutionReport_DatedDate_2 with
+        | None -> `Null
+        | Some x -> (localmktdate_to_json x)
+    )
+    ) :: (("BrokerReceiptTime",utctimestamp_milli_opt_to_json x.mod_f_ExecutionReport_BrokerReceiptTime) :: (("GSpread",(match x.mod_f_ExecutionReport_GSpread with
+        | None -> `Null
+        | Some x -> (float_to_json x)
+    )
+    ) :: (("ZSpread",(match x.mod_f_ExecutionReport_ZSpread with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("ISpread",(match x.mod_f_ExecutionReport_ISpread with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("ASWSpread",(match x.mod_f_ExecutionReport_ASWSpread with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("OASSpread",(match x.mod_f_ExecutionReport_OASSpread with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("MKTXCostAnalysisGrp",mod_mktxcostanalysisgrp_to_json x.mod_f_ExecutionReport_MKTXCostAnalysisGrp) :: (("MKTXPricingProcess",(match x.mod_f_ExecutionReport_MKTXPricingProcess with
+        | None -> `Null
+        | Some x -> (mod_mktxpricingprocess_to_json x)
+    )
+    ) :: (("MKTXTargetLevel",(match x.mod_f_ExecutionReport_MKTXTargetLevel with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("ClientBook",(match x.mod_f_ExecutionReport_ClientBook with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("DirtyPrice",(match x.mod_f_ExecutionReport_DirtyPrice with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("LastCapacity",(match x.mod_f_ExecutionReport_LastCapacity with
+        | None -> `Null
+        | Some x -> (mod_lastcapacity_to_json x)
+    )
+    ) :: (("MKTXTradeStyle",(match x.mod_f_ExecutionReport_MKTXTradeStyle with
+        | None -> `Null
+        | Some x -> (mod_mktxtradestyle_to_json x)
+    )
+    ) :: (("MKTXCompositeBidSpread",(match x.mod_f_ExecutionReport_MKTXCompositeBidSpread with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("MKTXCompositeOfferSpread",(match x.mod_f_ExecutionReport_MKTXCompositeOfferSpread with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("MKTXCompositeBidPrice",(match x.mod_f_ExecutionReport_MKTXCompositeBidPrice with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("MKTXCompositeOfferPrice",(match x.mod_f_ExecutionReport_MKTXCompositeOfferPrice with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("MKTXCompositeBidMMEYield",(match x.mod_f_ExecutionReport_MKTXCompositeBidMMEYield with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("MKTXCompositeOfferMMEYield",(match x.mod_f_ExecutionReport_MKTXCompositeOfferMMEYield with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("MKTXCompositeLiquidityScore",(match x.mod_f_ExecutionReport_MKTXCompositeLiquidityScore with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("MKTXAutoExType",(match x.mod_f_ExecutionReport_MKTXAutoExType with
+        | None -> `Null
+        | Some x -> (mod_mktxautoextype_to_json x)
+    )
+    ) :: (("MKTXAutoExStatus",(match x.mod_f_ExecutionReport_MKTXAutoExStatus with
+        | None -> `Null
+        | Some x -> (mod_mktxautoexstatus_to_json x)
+    )
+    ) :: (("MKTXAutoExDesc",(match x.mod_f_ExecutionReport_MKTXAutoExDesc with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("MKTXAutoExRefLevel",(match x.mod_f_ExecutionReport_MKTXAutoExRefLevel with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("MKTXAutoExRefLevelType",(match x.mod_f_ExecutionReport_MKTXAutoExRefLevelType with
+        | None -> `Null
+        | Some x -> (mod_mktxautoexrefleveltype_to_json x)
+    )
+    ) :: (("ExpireTime",utctimestamp_milli_opt_to_json x.mod_f_ExecutionReport_ExpireTime) :: (("LastQty",(match x.mod_f_ExecutionReport_LastQty with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: [])))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+;;
+
+let mod_dontknowtrade_to_json (x)  : json =
+    assoc_filter_nulls (("OrderID",string_to_json x.mod_f_DontKnowTrade_OrderID) :: (("ExecID",string_to_json x.mod_f_DontKnowTrade_ExecID) :: (("DKReason",mod_dkreason_to_json x.mod_f_DontKnowTrade_DKReason) :: (("Side",mod_side_to_json x.mod_f_DontKnowTrade_Side) :: (("LastQty",(match x.mod_f_DontKnowTrade_LastQty with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("LastPx",(match x.mod_f_DontKnowTrade_LastPx with
+        | None -> `Null
+        | Some x -> (float_6_to_json x)
+    )
+    ) :: (("Text",(match x.mod_f_DontKnowTrade_Text with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("SecondaryOrderID",(match x.mod_f_DontKnowTrade_SecondaryOrderID with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: (("EncodedTextLen",(match x.mod_f_DontKnowTrade_EncodedTextLen with
+        | None -> `Null
+        | Some x -> (int_to_json x)
+    )
+    ) :: (("EncodedText",(match x.mod_f_DontKnowTrade_EncodedText with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ) :: []))))))))))
 ;;
 
 let json_of_model_msg (x)  : json =
     (match x with
-        | FIX_Msg_ExecutionReport x -> (`Assoc (("tag",`String "8") :: (("data",mod_executionreport_to_json x) :: [])))
         | FIX_Msg_NewOrderSingle x -> (`Assoc (("tag",`String "D") :: (("data",mod_newordersingle_to_json x) :: [])))
+        | FIX_Msg_OrderCancel x -> (`Assoc (("tag",`String "F") :: (("data",mod_ordercancel_to_json x) :: [])))
+        | FIX_Msg_NewOrder_Multi_Leg x -> (`Assoc (("tag",`String "AB") :: (("data",mod_neworder_multi_leg_to_json x) :: [])))
+        | FIX_Msg_NewOrder_List x -> (`Assoc (("tag",`String "E") :: (("data",mod_neworder_list_to_json x) :: [])))
+        | FIX_Msg_ListOrderCancel x -> (`Assoc (("tag",`String "K") :: (("data",mod_listordercancel_to_json x) :: [])))
+        | FIX_Msg_OrderCancelReject x -> (`Assoc (("tag",`String "9") :: (("data",mod_ordercancelreject_to_json x) :: [])))
+        | FIX_Msg_BusinessMessageReject x -> (`Assoc (("tag",`String "j") :: (("data",mod_businessmessagereject_to_json x) :: [])))
+        | FIX_Msg_AllocationReport x -> (`Assoc (("tag",`String "AS") :: (("data",mod_allocationreport_to_json x) :: [])))
+        | FIX_Msg_AllocationReportACK x -> (`Assoc (("tag",`String "AT") :: (("data",mod_allocationreportack_to_json x) :: [])))
+        | FIX_Msg_AllocationInstruction x -> (`Assoc (("tag",`String "J") :: (("data",mod_allocationinstruction_to_json x) :: [])))
+        | FIX_Msg_AllocationInstructionACK x -> (`Assoc (("tag",`String "P") :: (("data",mod_allocationinstructionack_to_json x) :: [])))
+        | FIX_Msg_Heartbeat x -> (`Assoc (("tag",`String "0") :: (("data",mod_heartbeat_to_json x) :: [])))
+        | FIX_Msg_TestRequest x -> (`Assoc (("tag",`String "1") :: (("data",mod_testrequest_to_json x) :: [])))
+        | FIX_Msg_ResendRequest x -> (`Assoc (("tag",`String "2") :: (("data",mod_resendrequest_to_json x) :: [])))
+        | FIX_Msg_SessionLevelReject x -> (`Assoc (("tag",`String "3") :: (("data",mod_sessionlevelreject_to_json x) :: [])))
+        | FIX_Msg_SequenceResetRequest x -> (`Assoc (("tag",`String "4") :: (("data",mod_sequenceresetrequest_to_json x) :: [])))
+        | FIX_Msg_Logout x -> (`Assoc (("tag",`String "5") :: (("data",mod_logout_to_json x) :: [])))
+        | FIX_Msg_FIXLogon x -> (`Assoc (("tag",`String "A") :: (("data",mod_fixlogon_to_json x) :: [])))
+        | FIX_Msg_ExecutionReport x -> (`Assoc (("tag",`String "8") :: (("data",mod_executionreport_to_json x) :: [])))
+        | FIX_Msg_DontKnowTrade x -> (`Assoc (("tag",`String "Q") :: (("data",mod_dontknowtrade_to_json x) :: [])))
     )
 ;;
 

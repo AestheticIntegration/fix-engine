@@ -12,7 +12,7 @@ build: [["dune" "build" "-p" name "-j" jobs]]
 depends: [
   "dune" {build}
   "cmdliner"
-  "lwt" {= "3.2.0"}
+  "lwt" {= "3.1.0"}
   "lwt-zmq"
   "yojson"
   "zmq"

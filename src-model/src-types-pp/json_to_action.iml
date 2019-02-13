@@ -1,21 +1,10 @@
-(* Aesthetic Integration copyright 2018 *)
+(* Aesthetic Integration copyright 2019 *)
 open Actions;;
-open Base_types_json;;
-open Datetime_json;;
 open Decoders_yojson.Basic.Decode;;
 open Decoders_yojson.Basic.Decode.Infix;;
 
-let mod_action_x_decoder  : m_action_fix_x decoder =
-    (field "x" int_decoder) >>= (fun mod_f_x_x -> succeed {
-        mod_f_x_x = mod_f_x_x
-    }
-    )
-;;
-
 let fix_action_decoder  : fix_action decoder =
     (field "tag" string) >>= (fun x -> (match x with
-        | "x" -> ((field "data" mod_action_x_decoder) >>= (fun y -> succeed (FIX_Action_x y)
-        ))
         | d -> (fail ("Unknown Action ("^d^") in JSON decoding."))
     )
     )

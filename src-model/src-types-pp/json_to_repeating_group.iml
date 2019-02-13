@@ -1,2 +1,462 @@
-(* Aesthetic Integration copyright 2018 *)
+(* Aesthetic Integration copyright 2019 *)
+open Base_types_json;;
+open Datetime_json;;
+open Decoders_yojson.Basic.Decode;;
+open Decoders_yojson.Basic.Decode.Infix;;
+open Json_to_enum;;
+open Model_repeating_groups;;
+open Model_repeating_groups_json;;
 
+let partysubidsgrp_rg_decoder  : model_fix_inner_partysubidsgrp decoder =
+    (maybe (field "PartySubIDType" mod_enum_partysubidtype_decoder)) >>= (fun mod_f_PartySubIDsGrp_PartySubIDType -> (maybe (field "PartySubID" string_decoder)) >>= (fun mod_f_PartySubIDsGrp_PartySubID -> succeed {
+        mod_f_PartySubIDsGrp_PartySubID = mod_f_PartySubIDsGrp_PartySubID;
+        mod_f_PartySubIDsGrp_PartySubIDType = mod_f_PartySubIDsGrp_PartySubIDType
+    }
+    )
+    )
+;;
+
+let mod_rg_partysubidsgrp_decoder  : model_fix_rec_partysubidsgrp decoder =
+    (maybe (field "NoPartySubIDs" int_decoder)) >>= (fun mod_f_PartySubIDsGrp_NoPartySubIDs -> (maybe (field "4" partysubidsgrp_rg_decoder)) >>= (fun rg_PartySubIDsGrp_element_4 -> (maybe (field "3" partysubidsgrp_rg_decoder)) >>= (fun rg_PartySubIDsGrp_element_3 -> (maybe (field "2" partysubidsgrp_rg_decoder)) >>= (fun rg_PartySubIDsGrp_element_2 -> (maybe (field "1" partysubidsgrp_rg_decoder)) >>= (fun rg_PartySubIDsGrp_element_1 -> (maybe (field "0" partysubidsgrp_rg_decoder)) >>= (fun rg_PartySubIDsGrp_element_0 -> succeed {
+        mod_f_PartySubIDsGrp_NoPartySubIDs = mod_f_PartySubIDsGrp_NoPartySubIDs;
+        rg_PartySubIDsGrp_element_0 = rg_PartySubIDsGrp_element_0;
+        rg_PartySubIDsGrp_element_1 = rg_PartySubIDsGrp_element_1;
+        rg_PartySubIDsGrp_element_2 = rg_PartySubIDsGrp_element_2;
+        rg_PartySubIDsGrp_element_3 = rg_PartySubIDsGrp_element_3;
+        rg_PartySubIDsGrp_element_4 = rg_PartySubIDsGrp_element_4
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mktxcostanalysisgrp_rg_decoder  : model_fix_inner_mktxcostanalysisgrp decoder =
+    (maybe (field "MKTXPriceDiff" float_6_decoder)) >>= (fun mod_f_MKTXCostAnalysisGrp_MKTXPriceDiff -> (maybe (field "MKTXComparisonPrice" float_6_decoder)) >>= (fun mod_f_MKTXCostAnalysisGrp_MKTXComparisonPrice -> (maybe (field "MKTXBenefit" float_6_decoder)) >>= (fun mod_f_MKTXCostAnalysisGrp_MKTXBenefit -> (maybe (field "MKTXAnalysisTo" mod_enum_mktxanalysisto_decoder)) >>= (fun mod_f_MKTXCostAnalysisGrp_MKTXAnalysisTo -> succeed {
+        mod_f_MKTXCostAnalysisGrp_MKTXAnalysisTo = mod_f_MKTXCostAnalysisGrp_MKTXAnalysisTo;
+        mod_f_MKTXCostAnalysisGrp_MKTXBenefit = mod_f_MKTXCostAnalysisGrp_MKTXBenefit;
+        mod_f_MKTXCostAnalysisGrp_MKTXComparisonPrice = mod_f_MKTXCostAnalysisGrp_MKTXComparisonPrice;
+        mod_f_MKTXCostAnalysisGrp_MKTXPriceDiff = mod_f_MKTXCostAnalysisGrp_MKTXPriceDiff
+    }
+    )
+    )
+    )
+    )
+;;
+
+let mod_rg_mktxcostanalysisgrp_decoder  : model_fix_rec_mktxcostanalysisgrp decoder =
+    (maybe (field "NoMKTXCostAnalysis" int_decoder)) >>= (fun mod_f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis -> (maybe (field "4" mktxcostanalysisgrp_rg_decoder)) >>= (fun rg_MKTXCostAnalysisGrp_element_4 -> (maybe (field "3" mktxcostanalysisgrp_rg_decoder)) >>= (fun rg_MKTXCostAnalysisGrp_element_3 -> (maybe (field "2" mktxcostanalysisgrp_rg_decoder)) >>= (fun rg_MKTXCostAnalysisGrp_element_2 -> (maybe (field "1" mktxcostanalysisgrp_rg_decoder)) >>= (fun rg_MKTXCostAnalysisGrp_element_1 -> (maybe (field "0" mktxcostanalysisgrp_rg_decoder)) >>= (fun rg_MKTXCostAnalysisGrp_element_0 -> succeed {
+        mod_f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis = mod_f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis;
+        rg_MKTXCostAnalysisGrp_element_0 = rg_MKTXCostAnalysisGrp_element_0;
+        rg_MKTXCostAnalysisGrp_element_1 = rg_MKTXCostAnalysisGrp_element_1;
+        rg_MKTXCostAnalysisGrp_element_2 = rg_MKTXCostAnalysisGrp_element_2;
+        rg_MKTXCostAnalysisGrp_element_3 = rg_MKTXCostAnalysisGrp_element_3;
+        rg_MKTXCostAnalysisGrp_element_4 = rg_MKTXCostAnalysisGrp_element_4
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let trdregpublicationsgrp_rg_decoder  : model_fix_inner_trdregpublicationsgrp decoder =
+    (maybe (field "TrdRegPublicationReason" mod_enum_trdregpublicationreason_decoder)) >>= (fun mod_f_TrdRegPublicationsGrp_TrdRegPublicationReason -> (maybe (field "TrdRegPublicationType" mod_enum_trdregpublicationtype_decoder)) >>= (fun mod_f_TrdRegPublicationsGrp_TrdRegPublicationType -> succeed {
+        mod_f_TrdRegPublicationsGrp_TrdRegPublicationType = mod_f_TrdRegPublicationsGrp_TrdRegPublicationType;
+        mod_f_TrdRegPublicationsGrp_TrdRegPublicationReason = mod_f_TrdRegPublicationsGrp_TrdRegPublicationReason
+    }
+    )
+    )
+;;
+
+let mod_rg_trdregpublicationsgrp_decoder  : model_fix_rec_trdregpublicationsgrp decoder =
+    (maybe (field "NoTrdRegPublications" int_decoder)) >>= (fun mod_f_TrdRegPublicationsGrp_NoTrdRegPublications -> (maybe (field "4" trdregpublicationsgrp_rg_decoder)) >>= (fun rg_TrdRegPublicationsGrp_element_4 -> (maybe (field "3" trdregpublicationsgrp_rg_decoder)) >>= (fun rg_TrdRegPublicationsGrp_element_3 -> (maybe (field "2" trdregpublicationsgrp_rg_decoder)) >>= (fun rg_TrdRegPublicationsGrp_element_2 -> (maybe (field "1" trdregpublicationsgrp_rg_decoder)) >>= (fun rg_TrdRegPublicationsGrp_element_1 -> (maybe (field "0" trdregpublicationsgrp_rg_decoder)) >>= (fun rg_TrdRegPublicationsGrp_element_0 -> succeed {
+        mod_f_TrdRegPublicationsGrp_NoTrdRegPublications = mod_f_TrdRegPublicationsGrp_NoTrdRegPublications;
+        rg_TrdRegPublicationsGrp_element_0 = rg_TrdRegPublicationsGrp_element_0;
+        rg_TrdRegPublicationsGrp_element_1 = rg_TrdRegPublicationsGrp_element_1;
+        rg_TrdRegPublicationsGrp_element_2 = rg_TrdRegPublicationsGrp_element_2;
+        rg_TrdRegPublicationsGrp_element_3 = rg_TrdRegPublicationsGrp_element_3;
+        rg_TrdRegPublicationsGrp_element_4 = rg_TrdRegPublicationsGrp_element_4
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let allocsgrp_rg_decoder  : model_fix_inner_allocsgrp decoder =
+    (maybe (field "AllocAccruedInterestAmt" float_6_decoder)) >>= (fun mod_f_AllocsGrp_AllocAccruedInterestAmt -> (maybe (field "SettlCurrFxRateCalc" char_decoder)) >>= (fun mod_f_AllocsGrp_SettlCurrFxRateCalc -> (maybe (field "SettlCurrFxRate" float_decoder)) >>= (fun mod_f_AllocsGrp_SettlCurrFxRate -> (maybe (field "AllocSettlCurrency" string_decoder)) >>= (fun mod_f_AllocsGrp_AllocSettlCurrency -> (maybe (field "AllocSettlCurrAmt" float_6_decoder)) >>= (fun mod_f_AllocsGrp_AllocSettlCurrAmt -> (maybe (field "AllocNetMoney" float_6_decoder)) >>= (fun mod_f_AllocsGrp_AllocNetMoney -> (maybe (field "IndividualAllocID" string_decoder)) >>= (fun mod_f_AllocsGrp_IndividualAllocID -> (maybe (field "AllocQty" float_6_decoder)) >>= (fun mod_f_AllocsGrp_AllocQty -> (maybe (field "AllocAccount" string_decoder)) >>= (fun mod_f_AllocsGrp_AllocAccount -> succeed {
+        mod_f_AllocsGrp_AllocAccount = mod_f_AllocsGrp_AllocAccount;
+        mod_f_AllocsGrp_AllocQty = mod_f_AllocsGrp_AllocQty;
+        mod_f_AllocsGrp_IndividualAllocID = mod_f_AllocsGrp_IndividualAllocID;
+        mod_f_AllocsGrp_AllocNetMoney = mod_f_AllocsGrp_AllocNetMoney;
+        mod_f_AllocsGrp_AllocSettlCurrAmt = mod_f_AllocsGrp_AllocSettlCurrAmt;
+        mod_f_AllocsGrp_AllocSettlCurrency = mod_f_AllocsGrp_AllocSettlCurrency;
+        mod_f_AllocsGrp_SettlCurrFxRate = mod_f_AllocsGrp_SettlCurrFxRate;
+        mod_f_AllocsGrp_SettlCurrFxRateCalc = mod_f_AllocsGrp_SettlCurrFxRateCalc;
+        mod_f_AllocsGrp_AllocAccruedInterestAmt = mod_f_AllocsGrp_AllocAccruedInterestAmt
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_rg_allocsgrp_decoder  : model_fix_rec_allocsgrp decoder =
+    (maybe (field "NoAllocs" int_decoder)) >>= (fun mod_f_AllocsGrp_NoAllocs -> (maybe (field "4" allocsgrp_rg_decoder)) >>= (fun rg_AllocsGrp_element_4 -> (maybe (field "3" allocsgrp_rg_decoder)) >>= (fun rg_AllocsGrp_element_3 -> (maybe (field "2" allocsgrp_rg_decoder)) >>= (fun rg_AllocsGrp_element_2 -> (maybe (field "1" allocsgrp_rg_decoder)) >>= (fun rg_AllocsGrp_element_1 -> (maybe (field "0" allocsgrp_rg_decoder)) >>= (fun rg_AllocsGrp_element_0 -> succeed {
+        mod_f_AllocsGrp_NoAllocs = mod_f_AllocsGrp_NoAllocs;
+        rg_AllocsGrp_element_0 = rg_AllocsGrp_element_0;
+        rg_AllocsGrp_element_1 = rg_AllocsGrp_element_1;
+        rg_AllocsGrp_element_2 = rg_AllocsGrp_element_2;
+        rg_AllocsGrp_element_3 = rg_AllocsGrp_element_3;
+        rg_AllocsGrp_element_4 = rg_AllocsGrp_element_4
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let dealersgrp_rg_decoder  : model_fix_inner_dealersgrp decoder =
+    (maybe (field "DealerFXRate" string_decoder)) >>= (fun mod_f_DealersGrp_DealerFXRate -> (maybe (field "QuoteRank" string_decoder)) >>= (fun mod_f_DealersGrp_QuoteRank -> (maybe (field "TraderID" string_decoder)) >>= (fun mod_f_DealersGrp_TraderID -> (maybe (field "CompetitiveStatus" mod_enum_competitivestatus_decoder)) >>= (fun mod_f_DealersGrp_CompetitiveStatus -> (maybe (field "DealerQuoteText" string_decoder)) >>= (fun mod_f_DealersGrp_DealerQuoteText -> (maybe (field "DealerQuoteOrdQty" float_6_decoder)) >>= (fun mod_f_DealersGrp_DealerQuoteOrdQty -> (maybe (field "DealerQuotePrice" float_6_decoder)) >>= (fun mod_f_DealersGrp_DealerQuotePrice -> (maybe (field "ReferencePrice" float_6_decoder)) >>= (fun mod_f_DealersGrp_ReferencePrice -> (maybe (field "DealerQuotePriceType" int_decoder)) >>= (fun mod_f_DealersGrp_DealerQuotePriceType -> (maybe (field "Exclude" mod_enum_exclude_decoder)) >>= (fun mod_f_DealersGrp_Exclude -> (maybe (field "DealerIDSource" mod_enum_dealeridsource_decoder)) >>= (fun mod_f_DealersGrp_DealerIDSource -> (maybe (field "DealerID" string_decoder)) >>= (fun mod_f_DealersGrp_DealerID -> succeed {
+        mod_f_DealersGrp_DealerID = mod_f_DealersGrp_DealerID;
+        mod_f_DealersGrp_DealerIDSource = mod_f_DealersGrp_DealerIDSource;
+        mod_f_DealersGrp_Exclude = mod_f_DealersGrp_Exclude;
+        mod_f_DealersGrp_DealerQuotePriceType = mod_f_DealersGrp_DealerQuotePriceType;
+        mod_f_DealersGrp_ReferencePrice = mod_f_DealersGrp_ReferencePrice;
+        mod_f_DealersGrp_DealerQuotePrice = mod_f_DealersGrp_DealerQuotePrice;
+        mod_f_DealersGrp_DealerQuoteOrdQty = mod_f_DealersGrp_DealerQuoteOrdQty;
+        mod_f_DealersGrp_DealerQuoteText = mod_f_DealersGrp_DealerQuoteText;
+        mod_f_DealersGrp_CompetitiveStatus = mod_f_DealersGrp_CompetitiveStatus;
+        mod_f_DealersGrp_TraderID = mod_f_DealersGrp_TraderID;
+        mod_f_DealersGrp_QuoteRank = mod_f_DealersGrp_QuoteRank;
+        mod_f_DealersGrp_DealerFXRate = mod_f_DealersGrp_DealerFXRate
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_rg_dealersgrp_decoder  : model_fix_rec_dealersgrp decoder =
+    (maybe (field "NoDealers" int_decoder)) >>= (fun mod_f_DealersGrp_NoDealers -> (maybe (field "4" dealersgrp_rg_decoder)) >>= (fun rg_DealersGrp_element_4 -> (maybe (field "3" dealersgrp_rg_decoder)) >>= (fun rg_DealersGrp_element_3 -> (maybe (field "2" dealersgrp_rg_decoder)) >>= (fun rg_DealersGrp_element_2 -> (maybe (field "1" dealersgrp_rg_decoder)) >>= (fun rg_DealersGrp_element_1 -> (maybe (field "0" dealersgrp_rg_decoder)) >>= (fun rg_DealersGrp_element_0 -> succeed {
+        mod_f_DealersGrp_NoDealers = mod_f_DealersGrp_NoDealers;
+        rg_DealersGrp_element_0 = rg_DealersGrp_element_0;
+        rg_DealersGrp_element_1 = rg_DealersGrp_element_1;
+        rg_DealersGrp_element_2 = rg_DealersGrp_element_2;
+        rg_DealersGrp_element_3 = rg_DealersGrp_element_3;
+        rg_DealersGrp_element_4 = rg_DealersGrp_element_4
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let securityaltidgrp_rg_decoder  : model_fix_inner_securityaltidgrp decoder =
+    (maybe (field "SecurityAltIDSource" mod_enum_securityaltidsource_decoder)) >>= (fun mod_f_SecurityAltIDGrp_SecurityAltIDSource -> (maybe (field "SecurityAltID" string_decoder)) >>= (fun mod_f_SecurityAltIDGrp_SecurityAltID -> succeed {
+        mod_f_SecurityAltIDGrp_SecurityAltID = mod_f_SecurityAltIDGrp_SecurityAltID;
+        mod_f_SecurityAltIDGrp_SecurityAltIDSource = mod_f_SecurityAltIDGrp_SecurityAltIDSource
+    }
+    )
+    )
+;;
+
+let mod_rg_securityaltidgrp_decoder  : model_fix_rec_securityaltidgrp decoder =
+    (maybe (field "NoSecurityAltID" int_decoder)) >>= (fun mod_f_SecurityAltIDGrp_NoSecurityAltID -> (maybe (field "4" securityaltidgrp_rg_decoder)) >>= (fun rg_SecurityAltIDGrp_element_4 -> (maybe (field "3" securityaltidgrp_rg_decoder)) >>= (fun rg_SecurityAltIDGrp_element_3 -> (maybe (field "2" securityaltidgrp_rg_decoder)) >>= (fun rg_SecurityAltIDGrp_element_2 -> (maybe (field "1" securityaltidgrp_rg_decoder)) >>= (fun rg_SecurityAltIDGrp_element_1 -> (maybe (field "0" securityaltidgrp_rg_decoder)) >>= (fun rg_SecurityAltIDGrp_element_0 -> succeed {
+        mod_f_SecurityAltIDGrp_NoSecurityAltID = mod_f_SecurityAltIDGrp_NoSecurityAltID;
+        rg_SecurityAltIDGrp_element_0 = rg_SecurityAltIDGrp_element_0;
+        rg_SecurityAltIDGrp_element_1 = rg_SecurityAltIDGrp_element_1;
+        rg_SecurityAltIDGrp_element_2 = rg_SecurityAltIDGrp_element_2;
+        rg_SecurityAltIDGrp_element_3 = rg_SecurityAltIDGrp_element_3;
+        rg_SecurityAltIDGrp_element_4 = rg_SecurityAltIDGrp_element_4
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let regulatorytradeidsgrp_rg_decoder  : model_fix_inner_regulatorytradeidsgrp decoder =
+    (maybe (field "RegulatoryTradeIDType" mod_enum_regulatorytradeidtype_decoder)) >>= (fun mod_f_RegulatoryTradeIDsGrp_RegulatoryTradeIDType -> (maybe (field "RegulatoryTradeID" string_decoder)) >>= (fun mod_f_RegulatoryTradeIDsGrp_RegulatoryTradeID -> succeed {
+        mod_f_RegulatoryTradeIDsGrp_RegulatoryTradeID = mod_f_RegulatoryTradeIDsGrp_RegulatoryTradeID;
+        mod_f_RegulatoryTradeIDsGrp_RegulatoryTradeIDType = mod_f_RegulatoryTradeIDsGrp_RegulatoryTradeIDType
+    }
+    )
+    )
+;;
+
+let mod_rg_regulatorytradeidsgrp_decoder  : model_fix_rec_regulatorytradeidsgrp decoder =
+    (maybe (field "NoRegulatoryTradeIDs" int_decoder)) >>= (fun mod_f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs -> (maybe (field "4" regulatorytradeidsgrp_rg_decoder)) >>= (fun rg_RegulatoryTradeIDsGrp_element_4 -> (maybe (field "3" regulatorytradeidsgrp_rg_decoder)) >>= (fun rg_RegulatoryTradeIDsGrp_element_3 -> (maybe (field "2" regulatorytradeidsgrp_rg_decoder)) >>= (fun rg_RegulatoryTradeIDsGrp_element_2 -> (maybe (field "1" regulatorytradeidsgrp_rg_decoder)) >>= (fun rg_RegulatoryTradeIDsGrp_element_1 -> (maybe (field "0" regulatorytradeidsgrp_rg_decoder)) >>= (fun rg_RegulatoryTradeIDsGrp_element_0 -> succeed {
+        mod_f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs = mod_f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs;
+        rg_RegulatoryTradeIDsGrp_element_0 = rg_RegulatoryTradeIDsGrp_element_0;
+        rg_RegulatoryTradeIDsGrp_element_1 = rg_RegulatoryTradeIDsGrp_element_1;
+        rg_RegulatoryTradeIDsGrp_element_2 = rg_RegulatoryTradeIDsGrp_element_2;
+        rg_RegulatoryTradeIDsGrp_element_3 = rg_RegulatoryTradeIDsGrp_element_3;
+        rg_RegulatoryTradeIDsGrp_element_4 = rg_RegulatoryTradeIDsGrp_element_4
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let legsgrp_rg_decoder  : model_fix_inner_legsgrp decoder =
+    (maybe (field "PortfolioName" string_decoder)) >>= (fun mod_f_LegsGrp_PortfolioName -> (maybe (field "LegSettlDate" localmktdate_decoder)) >>= (fun mod_f_LegsGrp_LegSettlDate -> (maybe (field "LegPrice" float_6_decoder)) >>= (fun mod_f_LegsGrp_LegPrice -> (maybe (field "LegRefID" string_decoder)) >>= (fun mod_f_LegsGrp_LegRefID -> (maybe (field "LegSwapType" mod_enum_legswaptype_decoder)) >>= (fun mod_f_LegsGrp_LegSwapType -> (maybe (field "LegQty" float_6_decoder)) >>= (fun mod_f_LegsGrp_LegQty -> (maybe (field "InstrumentLeg" string_decoder)) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegCurrency -> (maybe (field "InstrumentLeg" mod_enum_legside_decoder)) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegSide -> (maybe (field "InstrumentLeg" string_decoder)) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegSecurityDesc -> (maybe (field "InstrumentLeg" string_decoder)) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegIssuer -> (maybe (field "InstrumentLeg" float_6_decoder)) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegCouponRate -> (maybe (field "InstrumentLeg" localmktdate_decoder)) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegMaturityDate -> (maybe (field "InstrumentLeg" string_decoder)) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegSecurityType -> (maybe (field "InstrumentLeg" localmktdate_decoder)) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegDatedDate -> (maybe (field "InstrumentLeg" localmktdate_decoder)) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegIssueDate -> (maybe (field "InstrumentLeg" mod_enum_legproduct_decoder)) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegProduct -> (field "InstrumentLeg" mod_enum_legsecurityidsource_decoder) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegSecurityIDSource -> (field "InstrumentLeg" string_decoder) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegSecurityID -> (field "InstrumentLeg" string_decoder) >>= (fun mod_f_LegsGrp_InstrumentLeg_LegSymbol -> succeed {
+        mod_f_LegsGrp_InstrumentLeg_LegSymbol = mod_f_LegsGrp_InstrumentLeg_LegSymbol;
+        mod_f_LegsGrp_InstrumentLeg_LegSecurityID = mod_f_LegsGrp_InstrumentLeg_LegSecurityID;
+        mod_f_LegsGrp_InstrumentLeg_LegSecurityIDSource = mod_f_LegsGrp_InstrumentLeg_LegSecurityIDSource;
+        mod_f_LegsGrp_InstrumentLeg_LegProduct = mod_f_LegsGrp_InstrumentLeg_LegProduct;
+        mod_f_LegsGrp_InstrumentLeg_LegIssueDate = mod_f_LegsGrp_InstrumentLeg_LegIssueDate;
+        mod_f_LegsGrp_InstrumentLeg_LegDatedDate = mod_f_LegsGrp_InstrumentLeg_LegDatedDate;
+        mod_f_LegsGrp_InstrumentLeg_LegSecurityType = mod_f_LegsGrp_InstrumentLeg_LegSecurityType;
+        mod_f_LegsGrp_InstrumentLeg_LegMaturityDate = mod_f_LegsGrp_InstrumentLeg_LegMaturityDate;
+        mod_f_LegsGrp_InstrumentLeg_LegCouponRate = mod_f_LegsGrp_InstrumentLeg_LegCouponRate;
+        mod_f_LegsGrp_InstrumentLeg_LegIssuer = mod_f_LegsGrp_InstrumentLeg_LegIssuer;
+        mod_f_LegsGrp_InstrumentLeg_LegSecurityDesc = mod_f_LegsGrp_InstrumentLeg_LegSecurityDesc;
+        mod_f_LegsGrp_InstrumentLeg_LegSide = mod_f_LegsGrp_InstrumentLeg_LegSide;
+        mod_f_LegsGrp_InstrumentLeg_LegCurrency = mod_f_LegsGrp_InstrumentLeg_LegCurrency;
+        mod_f_LegsGrp_LegQty = mod_f_LegsGrp_LegQty;
+        mod_f_LegsGrp_LegSwapType = mod_f_LegsGrp_LegSwapType;
+        mod_f_LegsGrp_LegRefID = mod_f_LegsGrp_LegRefID;
+        mod_f_LegsGrp_LegPrice = mod_f_LegsGrp_LegPrice;
+        mod_f_LegsGrp_LegSettlDate = mod_f_LegsGrp_LegSettlDate;
+        mod_f_LegsGrp_PortfolioName = mod_f_LegsGrp_PortfolioName
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_rg_legsgrp_decoder  : model_fix_rec_legsgrp decoder =
+    (maybe (field "NoLegs" int_decoder)) >>= (fun mod_f_LegsGrp_NoLegs -> (maybe (field "4" legsgrp_rg_decoder)) >>= (fun rg_LegsGrp_element_4 -> (maybe (field "3" legsgrp_rg_decoder)) >>= (fun rg_LegsGrp_element_3 -> (maybe (field "2" legsgrp_rg_decoder)) >>= (fun rg_LegsGrp_element_2 -> (maybe (field "1" legsgrp_rg_decoder)) >>= (fun rg_LegsGrp_element_1 -> (maybe (field "0" legsgrp_rg_decoder)) >>= (fun rg_LegsGrp_element_0 -> succeed {
+        mod_f_LegsGrp_NoLegs = mod_f_LegsGrp_NoLegs;
+        rg_LegsGrp_element_0 = rg_LegsGrp_element_0;
+        rg_LegsGrp_element_1 = rg_LegsGrp_element_1;
+        rg_LegsGrp_element_2 = rg_LegsGrp_element_2;
+        rg_LegsGrp_element_3 = rg_LegsGrp_element_3;
+        rg_LegsGrp_element_4 = rg_LegsGrp_element_4
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let execsgrp_rg_decoder  : model_fix_inner_execsgrp decoder =
+    (maybe (field "LastParPx" float_6_decoder)) >>= (fun mod_f_ExecsGrp_LastParPx -> (maybe (field "LastPx" float_6_decoder)) >>= (fun mod_f_ExecsGrp_LastPx -> (maybe (field "SecondaryExecID" string_decoder)) >>= (fun mod_f_ExecsGrp_SecondaryExecID -> (maybe (field "ExecID" string_decoder)) >>= (fun mod_f_ExecsGrp_ExecID -> (maybe (field "LastQty" float_6_decoder)) >>= (fun mod_f_ExecsGrp_LastQty -> succeed {
+        mod_f_ExecsGrp_LastQty = mod_f_ExecsGrp_LastQty;
+        mod_f_ExecsGrp_ExecID = mod_f_ExecsGrp_ExecID;
+        mod_f_ExecsGrp_SecondaryExecID = mod_f_ExecsGrp_SecondaryExecID;
+        mod_f_ExecsGrp_LastPx = mod_f_ExecsGrp_LastPx;
+        mod_f_ExecsGrp_LastParPx = mod_f_ExecsGrp_LastParPx
+    }
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_rg_execsgrp_decoder  : model_fix_rec_execsgrp decoder =
+    (maybe (field "NoExecs" int_decoder)) >>= (fun mod_f_ExecsGrp_NoExecs -> (maybe (field "4" execsgrp_rg_decoder)) >>= (fun rg_ExecsGrp_element_4 -> (maybe (field "3" execsgrp_rg_decoder)) >>= (fun rg_ExecsGrp_element_3 -> (maybe (field "2" execsgrp_rg_decoder)) >>= (fun rg_ExecsGrp_element_2 -> (maybe (field "1" execsgrp_rg_decoder)) >>= (fun rg_ExecsGrp_element_1 -> (maybe (field "0" execsgrp_rg_decoder)) >>= (fun rg_ExecsGrp_element_0 -> succeed {
+        mod_f_ExecsGrp_NoExecs = mod_f_ExecsGrp_NoExecs;
+        rg_ExecsGrp_element_0 = rg_ExecsGrp_element_0;
+        rg_ExecsGrp_element_1 = rg_ExecsGrp_element_1;
+        rg_ExecsGrp_element_2 = rg_ExecsGrp_element_2;
+        rg_ExecsGrp_element_3 = rg_ExecsGrp_element_3;
+        rg_ExecsGrp_element_4 = rg_ExecsGrp_element_4
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let legallocsgrp_rg_decoder  : model_fix_inner_legallocsgrp decoder =
+    (maybe (field "LegAllocQty" float_6_decoder)) >>= (fun mod_f_LegAllocsGrp_LegAllocQty -> (maybe (field "LegAllocAccount" string_decoder)) >>= (fun mod_f_LegAllocsGrp_LegAllocAccount -> succeed {
+        mod_f_LegAllocsGrp_LegAllocAccount = mod_f_LegAllocsGrp_LegAllocAccount;
+        mod_f_LegAllocsGrp_LegAllocQty = mod_f_LegAllocsGrp_LegAllocQty
+    }
+    )
+    )
+;;
+
+let mod_rg_legallocsgrp_decoder  : model_fix_rec_legallocsgrp decoder =
+    (maybe (field "NoLegAllocs" int_decoder)) >>= (fun mod_f_LegAllocsGrp_NoLegAllocs -> (maybe (field "4" legallocsgrp_rg_decoder)) >>= (fun rg_LegAllocsGrp_element_4 -> (maybe (field "3" legallocsgrp_rg_decoder)) >>= (fun rg_LegAllocsGrp_element_3 -> (maybe (field "2" legallocsgrp_rg_decoder)) >>= (fun rg_LegAllocsGrp_element_2 -> (maybe (field "1" legallocsgrp_rg_decoder)) >>= (fun rg_LegAllocsGrp_element_1 -> (maybe (field "0" legallocsgrp_rg_decoder)) >>= (fun rg_LegAllocsGrp_element_0 -> succeed {
+        mod_f_LegAllocsGrp_NoLegAllocs = mod_f_LegAllocsGrp_NoLegAllocs;
+        rg_LegAllocsGrp_element_0 = rg_LegAllocsGrp_element_0;
+        rg_LegAllocsGrp_element_1 = rg_LegAllocsGrp_element_1;
+        rg_LegAllocsGrp_element_2 = rg_LegAllocsGrp_element_2;
+        rg_LegAllocsGrp_element_3 = rg_LegAllocsGrp_element_3;
+        rg_LegAllocsGrp_element_4 = rg_LegAllocsGrp_element_4
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let partyidsgrp_rg_decoder  : model_fix_inner_partyidsgrp decoder =
+    (field "PartySubIDsGrp" mod_rg_partysubidsgrp_decoder) >>= (fun mod_f_PartyIDsGrp_PartySubIDsGrp -> (maybe (field "Algorithm" mod_enum_algorithm_decoder)) >>= (fun mod_f_PartyIDsGrp_Algorithm -> (maybe (field "PartyRole" mod_enum_partyrole_decoder)) >>= (fun mod_f_PartyIDsGrp_PartyRole -> (maybe (field "PartyIDSource" mod_enum_partyidsource_decoder)) >>= (fun mod_f_PartyIDsGrp_PartyIDSource -> (maybe (field "PartyID" string_decoder)) >>= (fun mod_f_PartyIDsGrp_PartyID -> succeed {
+        mod_f_PartyIDsGrp_PartyID = mod_f_PartyIDsGrp_PartyID;
+        mod_f_PartyIDsGrp_PartyIDSource = mod_f_PartyIDsGrp_PartyIDSource;
+        mod_f_PartyIDsGrp_PartyRole = mod_f_PartyIDsGrp_PartyRole;
+        mod_f_PartyIDsGrp_Algorithm = mod_f_PartyIDsGrp_Algorithm;
+        mod_f_PartyIDsGrp_PartySubIDsGrp = mod_f_PartyIDsGrp_PartySubIDsGrp
+    }
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_rg_partyidsgrp_decoder  : model_fix_rec_partyidsgrp decoder =
+    (maybe (field "NoPartyIDs" int_decoder)) >>= (fun mod_f_PartyIDsGrp_NoPartyIDs -> (maybe (field "4" partyidsgrp_rg_decoder)) >>= (fun rg_PartyIDsGrp_element_4 -> (maybe (field "3" partyidsgrp_rg_decoder)) >>= (fun rg_PartyIDsGrp_element_3 -> (maybe (field "2" partyidsgrp_rg_decoder)) >>= (fun rg_PartyIDsGrp_element_2 -> (maybe (field "1" partyidsgrp_rg_decoder)) >>= (fun rg_PartyIDsGrp_element_1 -> (maybe (field "0" partyidsgrp_rg_decoder)) >>= (fun rg_PartyIDsGrp_element_0 -> succeed {
+        mod_f_PartyIDsGrp_NoPartyIDs = mod_f_PartyIDsGrp_NoPartyIDs;
+        rg_PartyIDsGrp_element_0 = rg_PartyIDsGrp_element_0;
+        rg_PartyIDsGrp_element_1 = rg_PartyIDsGrp_element_1;
+        rg_PartyIDsGrp_element_2 = rg_PartyIDsGrp_element_2;
+        rg_PartyIDsGrp_element_3 = rg_PartyIDsGrp_element_3;
+        rg_PartyIDsGrp_element_4 = rg_PartyIDsGrp_element_4
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let ordersgrp_rg_decoder  : model_fix_inner_ordersgrp decoder =
+    (maybe (field "OrderAvgPx" float_6_decoder)) >>= (fun mod_f_OrdersGrp_OrderAvgPx -> (maybe (field "ListID" string_decoder)) >>= (fun mod_f_OrdersGrp_ListID -> (maybe (field "OrderID" string_decoder)) >>= (fun mod_f_OrdersGrp_OrderID -> (maybe (field "TradingProtocol" mod_enum_tradingprotocol_decoder)) >>= (fun mod_f_OrdersGrp_TradingProtocol -> (maybe (field "OrderQty" float_6_decoder)) >>= (fun mod_f_OrdersGrp_OrderQty -> (maybe (field "TransactTime" utctimestamp_milli_decoder)) >>= (fun mod_f_OrdersGrp_TransactTime -> (maybe (field "Price" float_6_decoder)) >>= (fun mod_f_OrdersGrp_Price -> (maybe (field "Side" mod_enum_side_decoder)) >>= (fun mod_f_OrdersGrp_Side -> (maybe (field "Instrument" string_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_SecuritySubType -> (maybe (field "Instrument" localmktdate_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_DatedDate -> (maybe (field "Instrument" float_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_Factor -> (maybe (field "Instrument" localmktdate_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_IssueDate -> (field "Instrument" mod_rg_securityaltidgrp_decoder) >>= (fun mod_f_OrdersGrp_Instrument_SecurityAltIDGrp -> (maybe (field "Instrument" string_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_Issuer -> (maybe (field "Instrument" float_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_CouponRate -> (maybe (field "Instrument" float_6_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_PrevClosePx -> (maybe (field "Instrument" string_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_SecurityDesc -> (maybe (field "Instrument" localmktdate_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_MaturityDate -> (maybe (field "Instrument" string_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_SecurityType -> (maybe (field "Instrument" string_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_CountryOfIssue -> (maybe (field "Instrument" string_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_CFICode -> (maybe (field "Instrument" mod_enum_product_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_Product -> (maybe (field "Instrument" mod_enum_securityidsource_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_SecurityIDSource -> (maybe (field "Instrument" string_decoder)) >>= (fun mod_f_OrdersGrp_Instrument_SecurityID -> (field "Instrument" string_decoder) >>= (fun mod_f_OrdersGrp_Instrument_Symbol -> (maybe (field "SettlDate" localmktdate_decoder)) >>= (fun mod_f_OrdersGrp_SettlDate -> (field "Parties" mod_rg_partyidsgrp_decoder) >>= (fun mod_f_OrdersGrp_Parties_PartyIDsGrp -> (maybe (field "Notes" string_decoder)) >>= (fun mod_f_OrdersGrp_Notes -> (maybe (field "PortfolioName" string_decoder)) >>= (fun mod_f_OrdersGrp_PortfolioName -> (maybe (field "ListSeqNo" int_decoder)) >>= (fun mod_f_OrdersGrp_ListSeqNo -> (maybe (field "ClOrdID" string_decoder)) >>= (fun mod_f_OrdersGrp_ClOrdID -> succeed {
+        mod_f_OrdersGrp_ClOrdID = mod_f_OrdersGrp_ClOrdID;
+        mod_f_OrdersGrp_ListSeqNo = mod_f_OrdersGrp_ListSeqNo;
+        mod_f_OrdersGrp_PortfolioName = mod_f_OrdersGrp_PortfolioName;
+        mod_f_OrdersGrp_Notes = mod_f_OrdersGrp_Notes;
+        mod_f_OrdersGrp_Parties_PartyIDsGrp = mod_f_OrdersGrp_Parties_PartyIDsGrp;
+        mod_f_OrdersGrp_SettlDate = mod_f_OrdersGrp_SettlDate;
+        mod_f_OrdersGrp_Instrument_Symbol = mod_f_OrdersGrp_Instrument_Symbol;
+        mod_f_OrdersGrp_Instrument_SecurityID = mod_f_OrdersGrp_Instrument_SecurityID;
+        mod_f_OrdersGrp_Instrument_SecurityIDSource = mod_f_OrdersGrp_Instrument_SecurityIDSource;
+        mod_f_OrdersGrp_Instrument_Product = mod_f_OrdersGrp_Instrument_Product;
+        mod_f_OrdersGrp_Instrument_CFICode = mod_f_OrdersGrp_Instrument_CFICode;
+        mod_f_OrdersGrp_Instrument_CountryOfIssue = mod_f_OrdersGrp_Instrument_CountryOfIssue;
+        mod_f_OrdersGrp_Instrument_SecurityType = mod_f_OrdersGrp_Instrument_SecurityType;
+        mod_f_OrdersGrp_Instrument_MaturityDate = mod_f_OrdersGrp_Instrument_MaturityDate;
+        mod_f_OrdersGrp_Instrument_SecurityDesc = mod_f_OrdersGrp_Instrument_SecurityDesc;
+        mod_f_OrdersGrp_Instrument_PrevClosePx = mod_f_OrdersGrp_Instrument_PrevClosePx;
+        mod_f_OrdersGrp_Instrument_CouponRate = mod_f_OrdersGrp_Instrument_CouponRate;
+        mod_f_OrdersGrp_Instrument_Issuer = mod_f_OrdersGrp_Instrument_Issuer;
+        mod_f_OrdersGrp_Instrument_SecurityAltIDGrp = mod_f_OrdersGrp_Instrument_SecurityAltIDGrp;
+        mod_f_OrdersGrp_Instrument_IssueDate = mod_f_OrdersGrp_Instrument_IssueDate;
+        mod_f_OrdersGrp_Instrument_Factor = mod_f_OrdersGrp_Instrument_Factor;
+        mod_f_OrdersGrp_Instrument_DatedDate = mod_f_OrdersGrp_Instrument_DatedDate;
+        mod_f_OrdersGrp_Instrument_SecuritySubType = mod_f_OrdersGrp_Instrument_SecuritySubType;
+        mod_f_OrdersGrp_Side = mod_f_OrdersGrp_Side;
+        mod_f_OrdersGrp_Price = mod_f_OrdersGrp_Price;
+        mod_f_OrdersGrp_TransactTime = mod_f_OrdersGrp_TransactTime;
+        mod_f_OrdersGrp_OrderQty = mod_f_OrdersGrp_OrderQty;
+        mod_f_OrdersGrp_TradingProtocol = mod_f_OrdersGrp_TradingProtocol;
+        mod_f_OrdersGrp_OrderID = mod_f_OrdersGrp_OrderID;
+        mod_f_OrdersGrp_ListID = mod_f_OrdersGrp_ListID;
+        mod_f_OrdersGrp_OrderAvgPx = mod_f_OrdersGrp_OrderAvgPx
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let mod_rg_ordersgrp_decoder  : model_fix_rec_ordersgrp decoder =
+    (maybe (field "NoOrders" int_decoder)) >>= (fun mod_f_OrdersGrp_NoOrders -> (maybe (field "4" ordersgrp_rg_decoder)) >>= (fun rg_OrdersGrp_element_4 -> (maybe (field "3" ordersgrp_rg_decoder)) >>= (fun rg_OrdersGrp_element_3 -> (maybe (field "2" ordersgrp_rg_decoder)) >>= (fun rg_OrdersGrp_element_2 -> (maybe (field "1" ordersgrp_rg_decoder)) >>= (fun rg_OrdersGrp_element_1 -> (maybe (field "0" ordersgrp_rg_decoder)) >>= (fun rg_OrdersGrp_element_0 -> succeed {
+        mod_f_OrdersGrp_NoOrders = mod_f_OrdersGrp_NoOrders;
+        rg_OrdersGrp_element_0 = rg_OrdersGrp_element_0;
+        rg_OrdersGrp_element_1 = rg_OrdersGrp_element_1;
+        rg_OrdersGrp_element_2 = rg_OrdersGrp_element_2;
+        rg_OrdersGrp_element_3 = rg_OrdersGrp_element_3;
+        rg_OrdersGrp_element_4 = rg_OrdersGrp_element_4
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+;;
