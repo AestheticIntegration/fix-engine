@@ -1,0 +1,35 @@
+(* Aesthetic Integration copyright 2019 *)
+open Actions;;
+open Model_actions_json;;
+open Model_internals_json;;
+open Model_messages;;
+open Model_messages_json;;
+open State;;
+
+type step_message =
+    | Incoming of model_msg
+    | Outgoing of model_msg list
+    | Action of fix_action
+;;
+
+type step = {
+    message : step_message;
+    internals : internal_states_types
+}
+;;
+
+let json_of_step_message (x : step_message)  =
+    (match x with
+        | Incoming d -> (`Assoc (("type",`String "Incoming") :: (("message",json_of_model_msg d) :: [])))
+        | Outgoing d -> (`Assoc (("type",`String "Outgoing") :: (("messages",`List (List.map json_of_model_msg d)) :: [])))
+        | Action d -> (`Assoc (("type",`String "Action") :: (("action",json_of_fix_action d) :: [])))
+    )
+;;
+
+let json_of_step (x : step)  =
+    `Assoc (("internals",json_of_fix_internals x.internals) :: (("message",json_of_step_message x.message) :: []))
+;;
+
+let json_of_steps (x : step list)  =
+    `List (List.map json_of_step x)
+;;
