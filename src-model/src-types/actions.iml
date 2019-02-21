@@ -1,5 +1,21 @@
 (* Aesthetic Integration copyright 2019 *)
+open Datetime;;
+open Model_records;;
+open Numeric;;
+
+type m_action_fix_move = {
+    mod_f_Move_pos : model_fix_rec_position
+}
+;;
+
+type m_action_fix_setstate = {
+    mod_f_SetState_pos : model_fix_rec_position;
+    mod_f_SetState_nmap : (model_fix_rec_position,bool) Map.t;
+    mod_f_SetState_nfuel : int
+}
+;;
 
 type fix_action =
-    | EmptyAction 
+    | FIX_Action_Move of m_action_fix_move
+    | FIX_Action_SetState of m_action_fix_setstate
 ;;

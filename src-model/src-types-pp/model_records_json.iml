@@ -1,2 +1,17 @@
 (* Aesthetic Integration copyright 2019 *)
+open Base_types_json;;
+open Datetime_json;;
+open Json_generator_utils;;
+open Model_records;;
+open Yojson;;
 
+let mod_rec_position_opt_to_json (y)  : json =
+    (match y with
+        | None -> `Null
+        | Some x -> (assoc_filter_nulls (("x",int_to_json x.mod_f_Position_x) :: (("y",int_to_json x.mod_f_Position_y) :: [])))
+    )
+;;
+
+let mod_rec_position_to_json (x)  : json =
+    assoc_filter_nulls (("x",int_to_json x.mod_f_Position_x) :: (("y",int_to_json x.mod_f_Position_y) :: []))
+;;

@@ -1,8 +1,31 @@
 (* Aesthetic Integration copyright 2019 *)
 open Actions;;
+open Datetime;;
+open Model_app_enums;;
 open Model_messages;;
+open Model_records;;
+open Numeric;;
+
+type fix_internal_state = {
+    mod_f_internal_state_status : model_fix_status;
+    mod_f_internal_state_fuel : int;
+    mod_f_internal_state_position : model_fix_rec_position;
+    mod_f_internal_state_islands : (model_fix_rec_position,bool) Map.t
+}
+;;
+
+let init_fix_internal_state = {
+    mod_f_internal_state_status = MOD_FIX_Status_flying;
+    mod_f_internal_state_fuel = 5;
+    mod_f_internal_state_position = {
+        mod_f_Position_y = 0;
+        mod_f_Position_x = 0
+    };
+    mod_f_internal_state_islands = Map.const false
+};;
 
 type model_state = {
+    f_internal_state : fix_internal_state;
     incoming_action : fix_action option;
     outgoing_msgs : model_msg list;
     incoming_msg : model_top_level_msg
@@ -10,20 +33,19 @@ type model_state = {
 ;;
 
 let init_model_state = {
+    f_internal_state = init_fix_internal_state;
     incoming_action = None;
     outgoing_msgs = [];
     incoming_msg = FIX_TL_None
 };;
 
-let send_msg (msg : model_msg) (m_state : model_state)  =
-    { m_state with
-        outgoing_msgs = msg :: m_state.outgoing_msgs
-    }
-;;
-
-type internal_states_types = int list
+type internal_states_types = {
+    int_el_state : fix_internal_state
+}
 ;;
 
 let get_internal_states_types (m_state : model_state)  : internal_states_types =
-    []
+    {
+        int_el_state = m_state.f_internal_state
+    }
 ;;

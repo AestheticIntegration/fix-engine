@@ -1,2 +1,29 @@
 (* Aesthetic Integration copyright 2019 *)
+open Base_types_json;;
+open Datetime;;
+open Datetime_json;;
+open Decoders_yojson.Basic.Decode;;
+open Decoders_yojson.Basic.Decode.Infix;;
+open Json_to_enum;;
+open Json_to_records;;
+open Model_app_enums;;
+open Model_records;;
+open Numeric;;
+open State;;
 
+let internal_state_decoder  : fix_internal_state decoder =
+    (field "state.islands" ((field "mapdefault" bool_decoder) >>= (fun y -> field "mapvalues" ((list ((field "mapkey" mod_record_position_decoder) >>= (fun mk -> (field "mapvalue" bool_decoder) >>= (fun mv -> succeed (mk,mv)
+    )
+    ))) >>= (fun l -> succeed (Map.of_list ~default: (y) l)
+    ))
+    ))) >>= (fun mod_f_internal_state_islands -> (field "state.position" mod_record_position_decoder) >>= (fun mod_f_internal_state_position -> (field "state.fuel" int_decoder) >>= (fun mod_f_internal_state_fuel -> (field "state.status" mod_enum_status_decoder) >>= (fun mod_f_internal_state_status -> succeed {
+        mod_f_internal_state_status = mod_f_internal_state_status;
+        mod_f_internal_state_fuel = mod_f_internal_state_fuel;
+        mod_f_internal_state_position = mod_f_internal_state_position;
+        mod_f_internal_state_islands = mod_f_internal_state_islands
+    }
+    )
+    )
+    )
+    )
+;;

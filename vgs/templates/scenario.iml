@@ -16,8 +16,8 @@ type template = {
 ;;
 
 let templates = {
-    name = "OrderCancelReject";
-    template = Template_OrderCancel :: (Template_OrderCancelReject :: [])
+    name = "OneStep";
+    template = Template_SetState :: (Template_Move :: [])
 } :: [];;
 
 let mod_state_with_event (e) (s)  =
@@ -25,8 +25,6 @@ let mod_state_with_event (e) (s)  =
         | Action a -> { s with
             incoming_action = Some a
         }
-        | Message m -> { s with
-            incoming_msg = FIX_TL_Normal m
-        }
+        | Message m -> s
     )
 ;;

@@ -1,2 +1,15 @@
 (* Aesthetic Integration copyright 2019 *)
+open Base_types_json;;
+open Datetime_json;;
+open Decoders_yojson.Basic.Decode;;
+open Decoders_yojson.Basic.Decode.Infix;;
+open Model_records;;
 
+let mod_record_position_decoder  : model_fix_rec_position decoder =
+    (field "y" int_decoder) >>= (fun mod_f_Position_y -> (field "x" int_decoder) >>= (fun mod_f_Position_x -> succeed {
+        mod_f_Position_x = mod_f_Position_x;
+        mod_f_Position_y = mod_f_Position_y
+    }
+    )
+    )
+;;

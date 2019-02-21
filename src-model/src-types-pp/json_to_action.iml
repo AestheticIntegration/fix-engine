@@ -1,10 +1,39 @@
 (* Aesthetic Integration copyright 2019 *)
 open Actions;;
+open Base_types_json;;
+open Datetime_json;;
 open Decoders_yojson.Basic.Decode;;
 open Decoders_yojson.Basic.Decode.Infix;;
+open Json_to_records;;
+
+let mod_action_move_decoder  : m_action_fix_move decoder =
+    (field "pos" mod_record_position_decoder) >>= (fun mod_f_Move_pos -> succeed {
+        mod_f_Move_pos = mod_f_Move_pos
+    }
+    )
+;;
+
+let mod_action_setstate_decoder  : m_action_fix_setstate decoder =
+    (field "nfuel" int_decoder) >>= (fun mod_f_SetState_nfuel -> (field "nmap" ((field "mapdefault" bool_decoder) >>= (fun y -> field "mapvalues" ((list ((field "mapkey" mod_record_position_decoder) >>= (fun mk -> (field "mapvalue" bool_decoder) >>= (fun mv -> succeed (mk,mv)
+    )
+    ))) >>= (fun l -> succeed (Map.of_list ~default: (y) l)
+    ))
+    ))) >>= (fun mod_f_SetState_nmap -> (field "pos" mod_record_position_decoder) >>= (fun mod_f_SetState_pos -> succeed {
+        mod_f_SetState_pos = mod_f_SetState_pos;
+        mod_f_SetState_nmap = mod_f_SetState_nmap;
+        mod_f_SetState_nfuel = mod_f_SetState_nfuel
+    }
+    )
+    )
+    )
+;;
 
 let fix_action_decoder  : fix_action decoder =
     (field "tag" string) >>= (fun x -> (match x with
+        | "Move" -> ((field "data" mod_action_move_decoder) >>= (fun y -> succeed (FIX_Action_Move y)
+        ))
+        | "SetState" -> ((field "data" mod_action_setstate_decoder) >>= (fun y -> succeed (FIX_Action_SetState y)
+        ))
         | d -> (fail ("Unknown Action ("^d^") in JSON decoding."))
     )
     )

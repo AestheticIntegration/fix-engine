@@ -1,5 +1,104 @@
 (* Aesthetic Integration copyright 2019 *)
 open Act_checks;;
 open Actions;;
+open Datetime;;
+open Model_app_enums;;
+open Model_records;;
+open Numeric;;
 open State;;
 
+let receive_action_Move (m_state : model_state) (action_data : m_action_fix_move)  =
+    let local_internal_state = m_state.f_internal_state in
+    let local_adx = abs ((-) local_internal_state.mod_f_internal_state_position.mod_f_Position_x action_data.mod_f_Move_pos.mod_f_Position_x) in
+    let local_ady = abs ((-) local_internal_state.mod_f_internal_state_position.mod_f_Position_y action_data.mod_f_Move_pos.mod_f_Position_y) in
+    let local_l = if ((>) local_adx local_ady) then
+        local_adx
+    else
+        local_ady
+     in
+    let local_m = if ((>) local_adx local_ady) then
+        local_ady
+    else
+        local_adx
+     in
+    let local_used_fuel = if ((<) local_m 3) then
+        local_l
+    else
+        (if ((&&) ((=) local_m 3) ((=) local_l 3)) then
+            4
+        else
+            (if ((>) ((+) local_m local_l) 8) then
+                6
+            else
+                5
+            )
+        )
+     in
+    let (local_internal_state) = if ((>) local_used_fuel local_internal_state.mod_f_internal_state_fuel) then
+        let local_internal_state = { local_internal_state with
+            mod_f_internal_state_status = MOD_FIX_Status_crashed
+        } in
+        (local_internal_state)
+    else
+        let (local_internal_state) = if ((&&) ((=) local_internal_state.mod_f_internal_state_position.mod_f_Position_x 9) ((=) local_internal_state.mod_f_internal_state_position.mod_f_Position_y 9)) then
+            let local_internal_state = { local_internal_state with
+                mod_f_internal_state_status = MOD_FIX_Status_reached
+            } in
+            (local_internal_state)
+        else
+            let local_internal_state = { local_internal_state with
+                mod_f_internal_state_status = MOD_FIX_Status_flying
+            } in
+            (local_internal_state)
+         in
+        (local_internal_state)
+     in
+    if ((>) local_used_fuel local_internal_state.mod_f_internal_state_fuel) then
+        { m_state with
+            f_internal_state = local_internal_state
+        }
+    else
+        let local_internal_state = { local_internal_state with
+            mod_f_internal_state_position = action_data.mod_f_Move_pos
+        } in
+        let (local_internal_state) = if (Map.get local_internal_state.mod_f_internal_state_position local_internal_state.mod_f_internal_state_islands) then
+            let local_internal_state = { local_internal_state with
+                mod_f_internal_state_islands = Map.add local_internal_state.mod_f_internal_state_position false local_internal_state.mod_f_internal_state_islands
+            } in
+            let local_internal_state = { local_internal_state with
+                mod_f_internal_state_fuel = 5
+            } in
+            (local_internal_state)
+        else
+            let local_internal_state = { local_internal_state with
+                mod_f_internal_state_fuel = (-) local_internal_state.mod_f_internal_state_fuel local_used_fuel
+            } in
+            (local_internal_state)
+         in
+        { m_state with
+            f_internal_state = local_internal_state
+        }
+;;
+
+let receive_action_SetState (m_state : model_state) (action_data : m_action_fix_setstate)  =
+    let local_internal_state = m_state.f_internal_state in
+    let local_internal_state = { local_internal_state with
+        mod_f_internal_state_fuel = action_data.mod_f_SetState_nfuel;
+        mod_f_internal_state_position = action_data.mod_f_SetState_pos;
+        mod_f_internal_state_islands = action_data.mod_f_SetState_nmap
+    } in
+    { m_state with
+        f_internal_state = local_internal_state
+    }
+;;
+
+let receive_action (m_state : model_state) (action : fix_action)  =
+    if (is_action_valid action m_state) then
+        ((match action with
+            | FIX_Action_Move d -> (receive_action_Move m_state d)
+            | FIX_Action_SetState d -> (receive_action_SetState m_state d)
+        )
+        )
+    else
+        m_state
+;;

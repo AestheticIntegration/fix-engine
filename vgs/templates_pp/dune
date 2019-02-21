@@ -1,0 +1,14 @@
+(rule
+  (targets step.ml)
+  (deps step.iml)
+   (action
+    (with-stdout-to step.ml
+       (run imandra-extract  step.iml))))
+       
+(library
+  (name templates_pp)
+  (public_name fix-engine.templates_pp)
+  (wrapped false)
+  (flags (:standard -open Imandra_prelude -warn-error -a))
+  (libraries imandra-prelude types_pp venue_types)
+)

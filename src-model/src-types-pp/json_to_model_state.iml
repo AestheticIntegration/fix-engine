@@ -2,15 +2,19 @@
 open Decoders_yojson.Basic.Decode;;
 open Decoders_yojson.Basic.Decode.Infix;;
 open Json_to_action;;
+open Json_to_internal;;
 open Json_to_message;;
+open Model_messages;;
 open State;;
 
 let model_state_decoder  : model_state decoder =
-    (nullable (field "incoming_action" fix_action_decoder)) >>= (fun incoming_action -> (field "incoming_msg" top_level_message_decoder) >>= (fun incoming_msg -> (list (field "outgoing_msgs" model_message_decoder)) >>= (fun outgoing_msgs -> succeed {
+    (field "state" internal_state_decoder) >>= (fun f_internal_state -> (nullable (field "incoming_action" fix_action_decoder)) >>= (fun incoming_action -> (field "incoming_msg" top_level_message_decoder) >>= (fun incoming_msg -> (list (field "outgoing_msgs" model_message_decoder)) >>= (fun outgoing_msgs -> succeed {
+        f_internal_state = f_internal_state;
         incoming_action = incoming_action;
-        incoming_msg = incoming_msg;
+        incoming_msg = FIX_TL_None;
         outgoing_msgs = outgoing_msgs
     }
+    )
     )
     )
     )

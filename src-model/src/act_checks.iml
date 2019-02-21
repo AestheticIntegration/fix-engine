@@ -1,9 +1,19 @@
 (* Aesthetic Integration copyright 2019 *)
 open Actions;;
+open Model_app_enums;;
 open State;;
+
+let is_valid_action_Move (local_internal_state : fix_internal_state) (action_data : m_action_fix_move)  =
+    (&&) (not ((<>) local_internal_state.mod_f_internal_state_status MOD_FIX_Status_flying)) true
+;;
+
+let is_valid_action_SetState (local_internal_state : fix_internal_state) (action_data : m_action_fix_setstate)  =
+    true
+;;
 
 let is_action_valid (action : fix_action) (m_state : model_state)  =
     (match action with
-        | _ -> true
+        | FIX_Action_Move d -> (is_valid_action_Move m_state.f_internal_state d)
+        | FIX_Action_SetState d -> (is_valid_action_SetState m_state.f_internal_state d)
     )
 ;;

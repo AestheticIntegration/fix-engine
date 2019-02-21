@@ -1,2 +1,9 @@
 (* Aesthetic Integration copyright 2019 *)
+open Datetime;;
+open Numeric;;
 
+type model_fix_rec_position = {
+    mod_f_Position_x : int;
+    mod_f_Position_y : int
+}
+;;

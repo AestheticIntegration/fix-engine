@@ -1,0 +1,21 @@
+(rule
+  (targets scenario.ml)
+  (deps scenario.iml)
+   (action
+    (with-stdout-to scenario.ml
+       (run imandra-extract  scenario.iml))))
+       
+(rule
+  (targets template.ml)
+  (deps template.iml)
+   (action
+    (with-stdout-to template.ml
+       (run imandra-extract  template.iml))))
+       
+(library
+  (name templates)
+  (public_name fix-engine.templates)
+  (wrapped false)
+  (flags (:standard -open Imandra_prelude -warn-error -a))
+  (libraries imandra-prelude venue_types)
+)

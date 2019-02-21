@@ -20,12 +20,3 @@ let field_tag_decoder  : m_field_tag decoder =
     )
     )
 ;;
-
-let field_missing_data_decoder  : field_missing_data decoder =
-    (field "m_msg_tag" message_tag_decoder) >>= (fun msg -> (field "m_field_tag" field_tag_decoder) >>= (fun f -> succeed {
-        field_missing_data_field = f;
-        field_missing_data_msg = msg
-    }
-    )
-    )
-;;

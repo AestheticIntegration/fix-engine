@@ -1,74 +1,9 @@
 (* Aesthetic Integration copyright 2019 *)
 open Base_types_json;;
 open Datetime_json;;
-open Full_app_enums_json;;
 open Full_app_records;;
 open Json_generator_utils;;
 open Yojson;;
-
-let spreadorbenchmarkcurvedata_to_string (d)  =
-    ""
-;;
-
-let spreadorbenchmarkcurvedata_to_json (x)  : json =
-    assoc_filter_nulls (("Spread",float_6_opt_to_json x.f_SpreadorBenchmarkCurveData_Spread) :: (("BenchmarkCurveCurrency",float_6_opt_to_json x.f_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency) :: (("BenchmarkCurveName",benchmarkcurvename_opt_to_json x.f_SpreadorBenchmarkCurveData_BenchmarkCurveName) :: (("BenchmarkCurvePoint",string_opt_to_json x.f_SpreadorBenchmarkCurveData_BenchmarkCurvePoint) :: (("BenchmarkPrice",float_6_opt_to_json x.f_SpreadorBenchmarkCurveData_BenchmarkPrice) :: (("BenchmarkPriceType",benchmarkpricetype_opt_to_json x.f_SpreadorBenchmarkCurveData_BenchmarkPriceType) :: (("BenchmarkSecurityID",string_opt_to_json x.f_SpreadorBenchmarkCurveData_BenchmarkSecurityID) :: (("BenchmarkSecurityIDSource",benchmarksecurityidsource_opt_to_json x.f_SpreadorBenchmarkCurveData_BenchmarkSecurityIDSource) :: (("BenchmarkYield",float_6_opt_to_json x.f_SpreadorBenchmarkCurveData_BenchmarkYield) :: [])))))))))
-;;
-
-let regulatorytradeidsgrp_to_string (d)  =
-    ""
-;;
-
-let regulatorytradeidsgrp_to_json (x)  : json =
-    assoc_filter_nulls (("NoRegulatoryTradeIDs",int_opt_to_json x.f_RegulatoryTradeIDsGrp_NoRegulatoryTradeIDs) :: (("RegulatoryTradeID",string_opt_to_json x.f_RegulatoryTradeIDsGrp_RegulatoryTradeID) :: (("RegulatoryTradeIDType",regulatorytradeidtype_opt_to_json x.f_RegulatoryTradeIDsGrp_RegulatoryTradeIDType) :: [])))
-;;
-
-let execsgrp_to_string (d)  =
-    ""
-;;
-
-let execsgrp_to_json (x)  : json =
-    assoc_filter_nulls (("NoExecs",int_opt_to_json x.f_ExecsGrp_NoExecs) :: (("LastQty",float_6_opt_to_json x.f_ExecsGrp_LastQty) :: (("ExecID",string_opt_to_json x.f_ExecsGrp_ExecID) :: (("SecondaryExecID",string_opt_to_json x.f_ExecsGrp_SecondaryExecID) :: (("LastPx",float_6_opt_to_json x.f_ExecsGrp_LastPx) :: (("LastParPx",float_6_opt_to_json x.f_ExecsGrp_LastParPx) :: []))))))
-;;
-
-let securityaltidgrp_to_string (d)  =
-    ""
-;;
-
-let securityaltidgrp_to_json (x)  : json =
-    assoc_filter_nulls (("NoSecurityAltID",int_opt_to_json x.f_SecurityAltIDGrp_NoSecurityAltID) :: (("SecurityAltID",string_opt_to_json x.f_SecurityAltIDGrp_SecurityAltID) :: (("SecurityAltIDSource",securityaltidsource_opt_to_json x.f_SecurityAltIDGrp_SecurityAltIDSource) :: [])))
-;;
-
-let instrumentleg_to_string (d)  =
-    ""
-;;
-
-let instrumentleg_to_json (x)  : json =
-    assoc_filter_nulls (("LegSymbol",string_opt_to_json x.f_InstrumentLeg_LegSymbol) :: (("LegSecurityID",string_opt_to_json x.f_InstrumentLeg_LegSecurityID) :: (("LegSecurityIDSource",legsecurityidsource_opt_to_json x.f_InstrumentLeg_LegSecurityIDSource) :: (("LegProduct",legproduct_opt_to_json x.f_InstrumentLeg_LegProduct) :: (("LegIssueDate",localmktdate_opt_to_json x.f_InstrumentLeg_LegIssueDate) :: (("LegDatedDate",localmktdate_opt_to_json x.f_InstrumentLeg_LegDatedDate) :: (("LegSecurityType",string_opt_to_json x.f_InstrumentLeg_LegSecurityType) :: (("LegMaturityDate",localmktdate_opt_to_json x.f_InstrumentLeg_LegMaturityDate) :: (("LegCouponRate",float_6_opt_to_json x.f_InstrumentLeg_LegCouponRate) :: (("LegIssuer",string_opt_to_json x.f_InstrumentLeg_LegIssuer) :: (("LegSecurityDesc",string_opt_to_json x.f_InstrumentLeg_LegSecurityDesc) :: (("LegSide",legside_opt_to_json x.f_InstrumentLeg_LegSide) :: (("LegCurrency",string_opt_to_json x.f_InstrumentLeg_LegCurrency) :: [])))))))))))))
-;;
-
-let allocsgrp_to_string (d)  =
-    ""
-;;
-
-let allocsgrp_to_json (x)  : json =
-    assoc_filter_nulls (("NoAllocs",int_opt_to_json x.f_AllocsGrp_NoAllocs) :: (("AllocAccount",string_opt_to_json x.f_AllocsGrp_AllocAccount) :: (("AllocQty",float_6_opt_to_json x.f_AllocsGrp_AllocQty) :: (("IndividualAllocID",string_opt_to_json x.f_AllocsGrp_IndividualAllocID) :: (("AllocNetMoney",float_6_opt_to_json x.f_AllocsGrp_AllocNetMoney) :: (("AllocSettlCurrAmt",float_6_opt_to_json x.f_AllocsGrp_AllocSettlCurrAmt) :: (("AllocSettlCurrency",string_opt_to_json x.f_AllocsGrp_AllocSettlCurrency) :: (("SettlCurrFxRate",float_opt_to_json x.f_AllocsGrp_SettlCurrFxRate) :: (("SettlCurrFxRateCalc",char_opt_to_json x.f_AllocsGrp_SettlCurrFxRateCalc) :: (("AllocAccruedInterestAmt",float_6_opt_to_json x.f_AllocsGrp_AllocAccruedInterestAmt) :: []))))))))))
-;;
-
-let partysubidsgrp_to_string (d)  =
-    ""
-;;
-
-let partysubidsgrp_to_json (x)  : json =
-    assoc_filter_nulls (("NoPartySubIDs",int_opt_to_json x.f_PartySubIDsGrp_NoPartySubIDs) :: (("PartySubID",string_opt_to_json x.f_PartySubIDsGrp_PartySubID) :: (("PartySubIDType",partysubidtype_opt_to_json x.f_PartySubIDsGrp_PartySubIDType) :: [])))
-;;
-
-let mktxcostanalysisgrp_to_string (d)  =
-    ""
-;;
-
-let mktxcostanalysisgrp_to_json (x)  : json =
-    assoc_filter_nulls (("NoMKTXCostAnalysis",int_opt_to_json x.f_MKTXCostAnalysisGrp_NoMKTXCostAnalysis) :: (("MKTXAnalysisTo",mktxanalysisto_opt_to_json x.f_MKTXCostAnalysisGrp_MKTXAnalysisTo) :: (("MKTXBenefit",float_6_opt_to_json x.f_MKTXCostAnalysisGrp_MKTXBenefit) :: (("MKTXComparisonPrice",float_6_opt_to_json x.f_MKTXCostAnalysisGrp_MKTXComparisonPrice) :: (("MKTXPriceDiff",float_6_opt_to_json x.f_MKTXCostAnalysisGrp_MKTXPriceDiff) :: [])))))
-;;
 
 let interval_to_string (d)  =
     ""
@@ -78,66 +13,10 @@ let interval_to_json (x)  : json =
     assoc_filter_nulls (("start_time",utctimestamp_milli_opt_to_json x.f_interval_start_time) :: (("duration",duration_opt_to_json x.f_interval_duration) :: []))
 ;;
 
-let dealersgrp_to_string (d)  =
+let position_to_string (d)  =
     ""
 ;;
 
-let dealersgrp_to_json (x)  : json =
-    assoc_filter_nulls (("NoDealers",int_opt_to_json x.f_DealersGrp_NoDealers) :: (("DealerID",string_opt_to_json x.f_DealersGrp_DealerID) :: (("DealerIDSource",dealeridsource_opt_to_json x.f_DealersGrp_DealerIDSource) :: (("Exclude",exclude_opt_to_json x.f_DealersGrp_Exclude) :: (("DealerQuotePriceType",int_opt_to_json x.f_DealersGrp_DealerQuotePriceType) :: (("ReferencePrice",float_6_opt_to_json x.f_DealersGrp_ReferencePrice) :: (("DealerQuotePrice",float_6_opt_to_json x.f_DealersGrp_DealerQuotePrice) :: (("DealerQuoteOrdQty",float_6_opt_to_json x.f_DealersGrp_DealerQuoteOrdQty) :: (("DealerQuoteText",string_opt_to_json x.f_DealersGrp_DealerQuoteText) :: (("CompetitiveStatus",competitivestatus_opt_to_json x.f_DealersGrp_CompetitiveStatus) :: (("TraderID",string_opt_to_json x.f_DealersGrp_TraderID) :: (("QuoteRank",string_opt_to_json x.f_DealersGrp_QuoteRank) :: (("DealerFXRate",string_opt_to_json x.f_DealersGrp_DealerFXRate) :: [])))))))))))))
-;;
-
-let trdregpublicationsgrp_to_string (d)  =
-    ""
-;;
-
-let trdregpublicationsgrp_to_json (x)  : json =
-    assoc_filter_nulls (("NoTrdRegPublications",int_opt_to_json x.f_TrdRegPublicationsGrp_NoTrdRegPublications) :: (("TrdRegPublicationType",trdregpublicationtype_opt_to_json x.f_TrdRegPublicationsGrp_TrdRegPublicationType) :: (("TrdRegPublicationReason",trdregpublicationreason_opt_to_json x.f_TrdRegPublicationsGrp_TrdRegPublicationReason) :: [])))
-;;
-
-let legallocsgrp_to_string (d)  =
-    ""
-;;
-
-let legallocsgrp_to_json (x)  : json =
-    assoc_filter_nulls (("NoLegAllocs",int_opt_to_json x.f_LegAllocsGrp_NoLegAllocs) :: (("LegAllocAccount",string_opt_to_json x.f_LegAllocsGrp_LegAllocAccount) :: (("LegAllocQty",float_6_opt_to_json x.f_LegAllocsGrp_LegAllocQty) :: [])))
-;;
-
-let partyidsgrp_to_string (d)  =
-    ""
-;;
-
-let partyidsgrp_to_json (x)  : json =
-    assoc_filter_nulls (("NoPartyIDs",int_opt_to_json x.f_PartyIDsGrp_NoPartyIDs) :: (("PartyID",string_opt_to_json x.f_PartyIDsGrp_PartyID) :: (("PartyIDSource",partyidsource_opt_to_json x.f_PartyIDsGrp_PartyIDSource) :: (("PartyRole",partyrole_opt_to_json x.f_PartyIDsGrp_PartyRole) :: (("Algorithm",algorithm_opt_to_json x.f_PartyIDsGrp_Algorithm) :: (("PartySubIDsGrp",rg_for_json partysubidsgrp_to_json x.f_PartyIDsGrp_PartySubIDsGrp) :: []))))))
-;;
-
-let legsgrp_to_string (d)  =
-    ""
-;;
-
-let legsgrp_to_json (x)  : json =
-    assoc_filter_nulls (("InstrumentLeg",instrumentleg_to_json x.f_LegsGrp_InstrumentLeg) :: (("NoLegs",int_opt_to_json x.f_LegsGrp_NoLegs) :: (("LegQty",float_6_opt_to_json x.f_LegsGrp_LegQty) :: (("LegSwapType",legswaptype_opt_to_json x.f_LegsGrp_LegSwapType) :: (("LegRefID",string_opt_to_json x.f_LegsGrp_LegRefID) :: (("LegPrice",float_6_opt_to_json x.f_LegsGrp_LegPrice) :: (("LegSettlDate",localmktdate_opt_to_json x.f_LegsGrp_LegSettlDate) :: (("PortfolioName",string_opt_to_json x.f_LegsGrp_PortfolioName) :: []))))))))
-;;
-
-let instrument_to_string (d)  =
-    ""
-;;
-
-let instrument_to_json (x)  : json =
-    assoc_filter_nulls (("Symbol",string_opt_to_json x.f_Instrument_Symbol) :: (("SecurityID",string_opt_to_json x.f_Instrument_SecurityID) :: (("SecurityIDSource",securityidsource_opt_to_json x.f_Instrument_SecurityIDSource) :: (("Product",product_opt_to_json x.f_Instrument_Product) :: (("CFICode",string_opt_to_json x.f_Instrument_CFICode) :: (("CountryOfIssue",string_opt_to_json x.f_Instrument_CountryOfIssue) :: (("SecurityType",string_opt_to_json x.f_Instrument_SecurityType) :: (("MaturityDate",localmktdate_opt_to_json x.f_Instrument_MaturityDate) :: (("SecurityDesc",string_opt_to_json x.f_Instrument_SecurityDesc) :: (("PrevClosePx",float_6_opt_to_json x.f_Instrument_PrevClosePx) :: (("CouponRate",float_opt_to_json x.f_Instrument_CouponRate) :: (("Issuer",string_opt_to_json x.f_Instrument_Issuer) :: (("IssueDate",localmktdate_opt_to_json x.f_Instrument_IssueDate) :: (("Factor",float_opt_to_json x.f_Instrument_Factor) :: (("DatedDate",localmktdate_opt_to_json x.f_Instrument_DatedDate) :: (("SecuritySubType",string_opt_to_json x.f_Instrument_SecuritySubType) :: (("SecurityAltIDGrp",rg_for_json securityaltidgrp_to_json x.f_Instrument_SecurityAltIDGrp) :: [])))))))))))))))))
-;;
-
-let parties_to_string (d)  =
-    ""
-;;
-
-let parties_to_json (x)  : json =
-    assoc_filter_nulls (("PartyIDsGrp",rg_for_json partyidsgrp_to_json x.f_Parties_PartyIDsGrp) :: [])
-;;
-
-let ordersgrp_to_string (d)  =
-    ""
-;;
-
-let ordersgrp_to_json (x)  : json =
-    assoc_filter_nulls (("Parties",parties_to_json x.f_OrdersGrp_Parties) :: (("Instrument",instrument_to_json x.f_OrdersGrp_Instrument) :: (("NoOrders",int_opt_to_json x.f_OrdersGrp_NoOrders) :: (("ClOrdID",string_opt_to_json x.f_OrdersGrp_ClOrdID) :: (("ListSeqNo",int_opt_to_json x.f_OrdersGrp_ListSeqNo) :: (("PortfolioName",string_opt_to_json x.f_OrdersGrp_PortfolioName) :: (("Notes",string_opt_to_json x.f_OrdersGrp_Notes) :: (("SettlDate",localmktdate_opt_to_json x.f_OrdersGrp_SettlDate) :: (("Side",side_opt_to_json x.f_OrdersGrp_Side) :: (("Price",float_6_opt_to_json x.f_OrdersGrp_Price) :: (("TransactTime",utctimestamp_milli_opt_to_json x.f_OrdersGrp_TransactTime) :: (("OrderQty",float_6_opt_to_json x.f_OrdersGrp_OrderQty) :: (("TradingProtocol",tradingprotocol_opt_to_json x.f_OrdersGrp_TradingProtocol) :: (("OrderID",string_opt_to_json x.f_OrdersGrp_OrderID) :: (("ListID",string_opt_to_json x.f_OrdersGrp_ListID) :: (("OrderAvgPx",float_6_opt_to_json x.f_OrdersGrp_OrderAvgPx) :: []))))))))))))))))
+let position_to_json (x)  : json =
+    assoc_filter_nulls (("x",int_opt_to_json x.f_Position_x) :: (("y",int_opt_to_json x.f_Position_y) :: []))
 ;;

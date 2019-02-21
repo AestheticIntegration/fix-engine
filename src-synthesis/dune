@@ -1,0 +1,21 @@
+(rule
+  (targets repeating_groups_override.ml)
+  (deps repeating_groups_override.iml)
+   (action
+    (with-stdout-to repeating_groups_override.ml
+       (run imandra-extract  repeating_groups_override.iml))))
+       
+(rule
+  (targets message_synthesis.ml)
+  (deps message_synthesis.iml)
+   (action
+    (with-stdout-to message_synthesis.ml
+       (run imandra-extract  message_synthesis.iml))))
+       
+(library
+  (name venue_synthesis)
+  (public_name fix-engine.venue_synthesis)
+  (wrapped false)
+  (flags (:standard -open Imandra_prelude -warn-error -a))
+  (libraries imandra-prelude )
+)

@@ -1,16 +1,9 @@
 (rule
-  (targets model_records_json.ml)
-  (deps model_records_json.iml)
+  (targets json_to_enum.ml)
+  (deps json_to_enum.iml)
    (action
-    (with-stdout-to model_records_json.ml
-       (run imandra-extract  model_records_json.iml))))
-       
-(rule
-  (targets json_to_repeating_group.ml)
-  (deps json_to_repeating_group.iml)
-   (action
-    (with-stdout-to json_to_repeating_group.ml
-       (run imandra-extract  json_to_repeating_group.iml))))
+    (with-stdout-to json_to_enum.ml
+       (run imandra-extract  json_to_enum.iml))))
        
 (rule
   (targets json_to_model_tag.ml)
@@ -20,18 +13,11 @@
        (run imandra-extract  json_to_model_tag.iml))))
        
 (rule
-  (targets model_actions_json.ml)
-  (deps model_actions_json.iml)
+  (targets json_to_repeating_group.ml)
+  (deps json_to_repeating_group.iml)
    (action
-    (with-stdout-to model_actions_json.ml
-       (run imandra-extract  model_actions_json.iml))))
-       
-(rule
-  (targets json_to_model_state.ml)
-  (deps json_to_model_state.iml)
-   (action
-    (with-stdout-to json_to_model_state.ml
-       (run imandra-extract  json_to_model_state.iml))))
+    (with-stdout-to json_to_repeating_group.ml
+       (run imandra-extract  json_to_repeating_group.iml))))
        
 (rule
   (targets json_to_records.ml)
@@ -39,27 +25,6 @@
    (action
     (with-stdout-to json_to_records.ml
        (run imandra-extract  json_to_records.iml))))
-       
-(rule
-  (targets model_enums_json.ml)
-  (deps model_enums_json.iml)
-   (action
-    (with-stdout-to model_enums_json.ml
-       (run imandra-extract  model_enums_json.iml))))
-       
-(rule
-  (targets json_to_message.ml)
-  (deps json_to_message.iml)
-   (action
-    (with-stdout-to json_to_message.ml
-       (run imandra-extract  json_to_message.iml))))
-       
-(rule
-  (targets model_state_json.ml)
-  (deps model_state_json.iml)
-   (action
-    (with-stdout-to model_state_json.ml
-       (run imandra-extract  model_state_json.iml))))
        
 (rule
   (targets model_messages_json.ml)
@@ -76,6 +41,55 @@
        (run imandra-extract  model_repeating_groups_json.iml))))
        
 (rule
+  (targets json_to_message.ml)
+  (deps json_to_message.iml)
+   (action
+    (with-stdout-to json_to_message.ml
+       (run imandra-extract  json_to_message.iml))))
+       
+(rule
+  (targets json_to_internal.ml)
+  (deps json_to_internal.iml)
+   (action
+    (with-stdout-to json_to_internal.ml
+       (run imandra-extract  json_to_internal.iml))))
+       
+(rule
+  (targets model_actions_json.ml)
+  (deps model_actions_json.iml)
+   (action
+    (with-stdout-to model_actions_json.ml
+       (run imandra-extract  model_actions_json.iml))))
+       
+(rule
+  (targets json_to_model_state.ml)
+  (deps json_to_model_state.iml)
+   (action
+    (with-stdout-to json_to_model_state.ml
+       (run imandra-extract  json_to_model_state.iml))))
+       
+(rule
+  (targets model_enums_json.ml)
+  (deps model_enums_json.iml)
+   (action
+    (with-stdout-to model_enums_json.ml
+       (run imandra-extract  model_enums_json.iml))))
+       
+(rule
+  (targets model_state_json.ml)
+  (deps model_state_json.iml)
+   (action
+    (with-stdout-to model_state_json.ml
+       (run imandra-extract  model_state_json.iml))))
+       
+(rule
+  (targets json_to_action.ml)
+  (deps json_to_action.iml)
+   (action
+    (with-stdout-to json_to_action.ml
+       (run imandra-extract  json_to_action.iml))))
+       
+(rule
   (targets model_internals_json.ml)
   (deps model_internals_json.iml)
    (action
@@ -90,30 +104,16 @@
        (run imandra-extract  model_tags_json.iml))))
        
 (rule
-  (targets json_to_enum.ml)
-  (deps json_to_enum.iml)
+  (targets model_records_json.ml)
+  (deps model_records_json.iml)
    (action
-    (with-stdout-to json_to_enum.ml
-       (run imandra-extract  json_to_enum.iml))))
-       
-(rule
-  (targets json_to_internal.ml)
-  (deps json_to_internal.iml)
-   (action
-    (with-stdout-to json_to_internal.ml
-       (run imandra-extract  json_to_internal.iml))))
-       
-(rule
-  (targets json_to_action.ml)
-  (deps json_to_action.iml)
-   (action
-    (with-stdout-to json_to_action.ml
-       (run imandra-extract  json_to_action.iml))))
+    (with-stdout-to model_records_json.ml
+       (run imandra-extract  model_records_json.iml))))
        
 (library
   (name types_pp)
   (public_name fix-engine.types_pp)
   (wrapped false)
   (flags (:standard -open Imandra_prelude -warn-error -a))
-  (libraries imandra-prelude decoders-yojson core_pp protocol_exts_pp string_factory venue_types yojson)
+  (libraries imandra-prelude decoders-yojson core core_pp protocol_exts_pp string_factory venue_types yojson)
 )

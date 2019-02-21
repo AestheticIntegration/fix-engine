@@ -1,6 +1,24 @@
 (* Aesthetic Integration copyright 2019 *)
+open Base_types_json;;
+open Datetime;;
+open Datetime_json;;
+open Json_generator_utils;;
+open Model_app_enums;;
+open Model_enums_json;;
+open Model_records;;
+open Model_records_json;;
+open Numeric;;
 open State;;
+open Yojson;;
+
+let mod_internal_state_to_json (x)  : json =
+    assoc_filter_nulls (("state.status",mod_status_to_json x.mod_f_internal_state_status) :: (("state.fuel",int_to_json x.mod_f_internal_state_fuel) :: (("state.position",mod_rec_position_to_json x.mod_f_internal_state_position) :: (("state.islands",(match Map.extract x.mod_f_internal_state_islands with
+        | (l,d) -> (`Assoc (("mapdefault",bool_to_json d) :: (("mapvalues",`List (List.map (fun (x,y) -> `Assoc (("mapkey",mod_rec_position_to_json x) :: (("mapvalue",bool_to_json y) :: []))
+        ) l)) :: [])))
+    )
+    ) :: []))))
+;;
 
 let json_of_fix_internals (x : internal_states_types)  =
-    `Assoc []
+    `Assoc (("state",mod_internal_state_to_json x.int_el_state) :: [])
 ;;

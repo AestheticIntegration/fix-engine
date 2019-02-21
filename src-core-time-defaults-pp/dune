@@ -6,11 +6,11 @@
        (run imandra-extract  timeDefaults_pp.iml))))
        
 (rule
-  (targets timeDefaults_current_time.ml)
-  (deps timeDefaults_current_time.iml)
+  (targets timeDefaults_json.ml)
+  (deps timeDefaults_json.iml)
    (action
-    (with-stdout-to timeDefaults_current_time.ml
-       (run imandra-extract  timeDefaults_current_time.iml))))
+    (with-stdout-to timeDefaults_json.ml
+       (run imandra-extract  timeDefaults_json.iml))))
        
 (rule
   (targets timeDefaults_parser.ml)
@@ -20,11 +20,11 @@
        (run imandra-extract  timeDefaults_parser.iml))))
        
 (rule
-  (targets timeDefaults_json.ml)
-  (deps timeDefaults_json.iml)
+  (targets timeDefaults_current_time.ml)
+  (deps timeDefaults_current_time.iml)
    (action
-    (with-stdout-to timeDefaults_json.ml
-       (run imandra-extract  timeDefaults_json.iml))))
+    (with-stdout-to timeDefaults_current_time.ml
+       (run imandra-extract  timeDefaults_current_time.iml))))
        
 (library
   (name core_time_defaults_pp)

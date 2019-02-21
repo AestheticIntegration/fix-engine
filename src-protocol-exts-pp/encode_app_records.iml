@@ -1,74 +1,13 @@
 (* Aesthetic Integration copyright 2019 *)
-open Encode_app_enums;;
 open Encode_base_types;;
 open Encode_datetime;;
 open Encode_utils;;
 open Full_app_records;;
 
-let encode_SpreadorBenchmarkCurveData (msg)  =
-    (@) (("218",enc_opt encode_float_6 msg.f_SpreadorBenchmarkCurveData_Spread) :: (("220",enc_opt encode_float_6 msg.f_SpreadorBenchmarkCurveData_BenchmarkCurveCurrency) :: (("221",enc_opt encode_BenchmarkCurveName msg.f_SpreadorBenchmarkCurveData_BenchmarkCurveName) :: (("222",enc_opt encode_string msg.f_SpreadorBenchmarkCurveData_BenchmarkCurvePoint) :: (("662",enc_opt encode_float_6 msg.f_SpreadorBenchmarkCurveData_BenchmarkPrice) :: (("663",enc_opt encode_BenchmarkPriceType msg.f_SpreadorBenchmarkCurveData_BenchmarkPriceType) :: (("699",enc_opt encode_string msg.f_SpreadorBenchmarkCurveData_BenchmarkSecurityID) :: (("761",enc_opt encode_BenchmarkSecurityIDSource msg.f_SpreadorBenchmarkCurveData_BenchmarkSecurityIDSource) :: (("6707",enc_opt encode_float_6 msg.f_SpreadorBenchmarkCurveData_BenchmarkYield) :: []))))))))) []
-;;
-
-let encode_RegulatoryTradeIDsGrp (msg)  =
-    (@) (("1903",enc_opt encode_string msg.f_RegulatoryTradeIDsGrp_RegulatoryTradeID) :: (("1906",enc_opt encode_RegulatoryTradeIDType msg.f_RegulatoryTradeIDsGrp_RegulatoryTradeIDType) :: [])) []
-;;
-
-let encode_ExecsGrp (msg)  =
-    (@) (("32",enc_opt encode_float_6 msg.f_ExecsGrp_LastQty) :: (("17",enc_opt encode_string msg.f_ExecsGrp_ExecID) :: (("527",enc_opt encode_string msg.f_ExecsGrp_SecondaryExecID) :: (("31",enc_opt encode_float_6 msg.f_ExecsGrp_LastPx) :: (("669",enc_opt encode_float_6 msg.f_ExecsGrp_LastParPx) :: []))))) []
-;;
-
-let encode_SecurityAltIDGrp (msg)  =
-    (@) (("455",enc_opt encode_string msg.f_SecurityAltIDGrp_SecurityAltID) :: (("456",enc_opt encode_SecurityAltIDSource msg.f_SecurityAltIDGrp_SecurityAltIDSource) :: [])) []
-;;
-
-let encode_InstrumentLeg (msg)  =
-    (@) (("600",enc_opt encode_string msg.f_InstrumentLeg_LegSymbol) :: (("602",enc_opt encode_string msg.f_InstrumentLeg_LegSecurityID) :: (("603",enc_opt encode_LegSecurityIDSource msg.f_InstrumentLeg_LegSecurityIDSource) :: (("607",enc_opt encode_LegProduct msg.f_InstrumentLeg_LegProduct) :: (("249",enc_opt encode_LocalMktDate msg.f_InstrumentLeg_LegIssueDate) :: (("739",enc_opt encode_LocalMktDate msg.f_InstrumentLeg_LegDatedDate) :: (("609",enc_opt encode_string msg.f_InstrumentLeg_LegSecurityType) :: (("611",enc_opt encode_LocalMktDate msg.f_InstrumentLeg_LegMaturityDate) :: (("615",enc_opt encode_float_6 msg.f_InstrumentLeg_LegCouponRate) :: (("617",enc_opt encode_string msg.f_InstrumentLeg_LegIssuer) :: (("620",enc_opt encode_string msg.f_InstrumentLeg_LegSecurityDesc) :: (("624",enc_opt encode_LegSide msg.f_InstrumentLeg_LegSide) :: (("556",enc_opt encode_string msg.f_InstrumentLeg_LegCurrency) :: []))))))))))))) []
-;;
-
-let encode_AllocsGrp (msg)  =
-    (@) (("79",enc_opt encode_string msg.f_AllocsGrp_AllocAccount) :: (("80",enc_opt encode_float_6 msg.f_AllocsGrp_AllocQty) :: (("467",enc_opt encode_string msg.f_AllocsGrp_IndividualAllocID) :: (("154",enc_opt encode_float_6 msg.f_AllocsGrp_AllocNetMoney) :: (("737",enc_opt encode_float_6 msg.f_AllocsGrp_AllocSettlCurrAmt) :: (("736",enc_opt encode_string msg.f_AllocsGrp_AllocSettlCurrency) :: (("155",enc_opt encode_float msg.f_AllocsGrp_SettlCurrFxRate) :: (("156",enc_opt encode_char msg.f_AllocsGrp_SettlCurrFxRateCalc) :: (("742",enc_opt encode_float_6 msg.f_AllocsGrp_AllocAccruedInterestAmt) :: []))))))))) []
-;;
-
-let encode_PartySubIDsGrp (msg)  =
-    (@) (("523",enc_opt encode_string msg.f_PartySubIDsGrp_PartySubID) :: (("803",enc_opt encode_PartySubIDType msg.f_PartySubIDsGrp_PartySubIDType) :: [])) []
-;;
-
-let encode_MKTXCostAnalysisGrp (msg)  =
-    (@) (("5662",enc_opt encode_MKTXAnalysisTo msg.f_MKTXCostAnalysisGrp_MKTXAnalysisTo) :: (("5663",enc_opt encode_float_6 msg.f_MKTXCostAnalysisGrp_MKTXBenefit) :: (("5664",enc_opt encode_float_6 msg.f_MKTXCostAnalysisGrp_MKTXComparisonPrice) :: (("5665",enc_opt encode_float_6 msg.f_MKTXCostAnalysisGrp_MKTXPriceDiff) :: [])))) []
-;;
-
 let encode_interval (msg)  =
     (@) (("",enc_opt encode_UTCTimestamp_milli msg.f_interval_start_time) :: (("",enc_opt encode_Duration msg.f_interval_duration) :: [])) []
 ;;
 
-let encode_DealersGrp (msg)  =
-    (@) (("9691",enc_opt encode_string msg.f_DealersGrp_DealerID) :: (("9692",enc_opt encode_DealerIDSource msg.f_DealersGrp_DealerIDSource) :: (("7762",enc_opt encode_Exclude msg.f_DealersGrp_Exclude) :: (("9693",enc_opt encode_int msg.f_DealersGrp_DealerQuotePriceType) :: (("5691",enc_opt encode_float_6 msg.f_DealersGrp_ReferencePrice) :: (("9694",enc_opt encode_float_6 msg.f_DealersGrp_DealerQuotePrice) :: (("9695",enc_opt encode_float_6 msg.f_DealersGrp_DealerQuoteOrdQty) :: (("9696",enc_opt encode_string msg.f_DealersGrp_DealerQuoteText) :: (("9697",enc_opt encode_CompetitiveStatus msg.f_DealersGrp_CompetitiveStatus) :: (("29732",enc_opt encode_string msg.f_DealersGrp_TraderID) :: (("7761",enc_opt encode_string msg.f_DealersGrp_QuoteRank) :: (("9698",enc_opt encode_string msg.f_DealersGrp_DealerFXRate) :: [])))))))))))) []
-;;
-
-let encode_TrdRegPublicationsGrp (msg)  =
-    (@) (("2669",enc_opt encode_TrdRegPublicationType msg.f_TrdRegPublicationsGrp_TrdRegPublicationType) :: (("2670",enc_opt encode_TrdRegPublicationReason msg.f_TrdRegPublicationsGrp_TrdRegPublicationReason) :: [])) []
-;;
-
-let encode_LegAllocsGrp (msg)  =
-    (@) (("671",enc_opt encode_string msg.f_LegAllocsGrp_LegAllocAccount) :: (("673",enc_opt encode_float_6 msg.f_LegAllocsGrp_LegAllocQty) :: [])) []
-;;
-
-let encode_PartyIDsGrp (msg)  =
-    (@) (("448",enc_opt encode_string msg.f_PartyIDsGrp_PartyID) :: (("447",enc_opt encode_PartyIDSource msg.f_PartyIDsGrp_PartyIDSource) :: (("452",enc_opt encode_PartyRole msg.f_PartyIDsGrp_PartyRole) :: (("2376",enc_opt encode_Algorithm msg.f_PartyIDsGrp_Algorithm) :: [])))) ((@) (enc_repeat encode_PartySubIDsGrp "802" msg.f_PartyIDsGrp_PartySubIDsGrp) [])
-;;
-
-let encode_LegsGrp (msg)  =
-    (@) (encode_InstrumentLeg msg.f_LegsGrp_InstrumentLeg) ((@) (("687",enc_opt encode_float_6 msg.f_LegsGrp_LegQty) :: (("690",enc_opt encode_LegSwapType msg.f_LegsGrp_LegSwapType) :: (("654",enc_opt encode_string msg.f_LegsGrp_LegRefID) :: (("566",enc_opt encode_float_6 msg.f_LegsGrp_LegPrice) :: (("588",enc_opt encode_LocalMktDate msg.f_LegsGrp_LegSettlDate) :: (("9864",enc_opt encode_string msg.f_LegsGrp_PortfolioName) :: [])))))) [])
-;;
-
-let encode_Instrument (msg)  =
-    (@) (("55",enc_opt encode_string msg.f_Instrument_Symbol) :: (("48",enc_opt encode_string msg.f_Instrument_SecurityID) :: (("22",enc_opt encode_SecurityIDSource msg.f_Instrument_SecurityIDSource) :: (("460",enc_opt encode_Product msg.f_Instrument_Product) :: (("461",enc_opt encode_string msg.f_Instrument_CFICode) :: (("470",enc_opt encode_string msg.f_Instrument_CountryOfIssue) :: (("167",enc_opt encode_string msg.f_Instrument_SecurityType) :: (("541",enc_opt encode_LocalMktDate msg.f_Instrument_MaturityDate) :: (("107",enc_opt encode_string msg.f_Instrument_SecurityDesc) :: (("140",enc_opt encode_float_6 msg.f_Instrument_PrevClosePx) :: (("223",enc_opt encode_float msg.f_Instrument_CouponRate) :: (("106",enc_opt encode_string msg.f_Instrument_Issuer) :: (("225",enc_opt encode_LocalMktDate msg.f_Instrument_IssueDate) :: (("228",enc_opt encode_float msg.f_Instrument_Factor) :: (("873",enc_opt encode_LocalMktDate msg.f_Instrument_DatedDate) :: (("762",enc_opt encode_string msg.f_Instrument_SecuritySubType) :: [])))))))))))))))) ((@) (enc_repeat encode_SecurityAltIDGrp "454" msg.f_Instrument_SecurityAltIDGrp) [])
-;;
-
-let encode_Parties (msg)  =
-    (@) [] ((@) (enc_repeat encode_PartyIDsGrp "453" msg.f_Parties_PartyIDsGrp) [])
-;;
-
-let encode_OrdersGrp (msg)  =
-    (@) (encode_Instrument msg.f_OrdersGrp_Instrument) ((@) (encode_Parties msg.f_OrdersGrp_Parties) ((@) (("11112",enc_opt encode_string msg.f_OrdersGrp_ClOrdID) :: (("67",enc_opt encode_int msg.f_OrdersGrp_ListSeqNo) :: (("9864",enc_opt encode_string msg.f_OrdersGrp_PortfolioName) :: (("6122",enc_opt encode_string msg.f_OrdersGrp_Notes) :: (("64",enc_opt encode_LocalMktDate msg.f_OrdersGrp_SettlDate) :: (("54",enc_opt encode_Side msg.f_OrdersGrp_Side) :: (("44",enc_opt encode_float_6 msg.f_OrdersGrp_Price) :: (("60",enc_opt encode_UTCTimestamp_milli msg.f_OrdersGrp_TransactTime) :: (("38",enc_opt encode_float_6 msg.f_OrdersGrp_OrderQty) :: (("5961",enc_opt encode_TradingProtocol msg.f_OrdersGrp_TradingProtocol) :: (("37",enc_opt encode_string msg.f_OrdersGrp_OrderID) :: (("66",enc_opt encode_string msg.f_OrdersGrp_ListID) :: (("799",enc_opt encode_float_6 msg.f_OrdersGrp_OrderAvgPx) :: []))))))))))))) []))
+let encode_Position (msg)  =
+    (@) (("",enc_opt encode_int msg.f_Position_x) :: (("",enc_opt encode_int msg.f_Position_y) :: [])) []
 ;;

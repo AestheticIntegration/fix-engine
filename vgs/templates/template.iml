@@ -1,20 +1,20 @@
 (* Aesthetic Integration copyright 2019 *)
 
 type t =
-    | Template_OrderCancel 
-    | Template_OrderCancelReject 
+    | Template_Move 
+    | Template_SetState 
 ;;
 
 let data (x : t)  =
     (match x with
-        | Template_OrderCancel -> "Model_messages.mod_ordercancel_data"
-        | Template_OrderCancelReject -> "Model_messages.mod_ordercancelreject_data"
+        | Template_Move -> "Actions.m_action_fix_move"
+        | Template_SetState -> "Actions.m_action_fix_setstate"
     )
 ;;
 
 let concrete (x : t)  =
     (match x with
-        | Template_OrderCancel -> ("Scenario.Message" :: ("Model_messages.FIX_Msg_OrderCancel" :: []))
-        | Template_OrderCancelReject -> ("Scenario.Message" :: ("Model_messages.FIX_Msg_OrderCancelReject" :: []))
+        | Template_Move -> ("Scenario.Action" :: ("Actions.FIX_Action_Move" :: []))
+        | Template_SetState -> ("Scenario.Action" :: ("Actions.FIX_Action_SetState" :: []))
     )
 ;;
