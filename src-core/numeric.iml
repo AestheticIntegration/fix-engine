@@ -1998,6 +1998,15 @@ let float_LessThan_3_1 (f : fix_float_3) (x : fix_float_1)  : bool =
     )
 ;;
 
+let float_LessThan_3_1_opt (f : fix_float_3 option) (x : fix_float_1 option)  : bool =
+(match (f,x) with
+    | (Some Float_3 f,Some Float_1 x) -> ((<) f (( * ) x 100))
+    | Some _, None -> false
+    | None, Some _ -> true
+    | None, None -> false
+)
+;;
+
 let float_LessThan_3_2 (f : fix_float_3) (x : fix_float_2)  : bool =
     (match (f,x) with
         | (Float_3 f,Float_2 x) -> ((<) f (( * ) x 10))

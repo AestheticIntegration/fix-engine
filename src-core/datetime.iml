@@ -244,7 +244,15 @@ let utctimestamp_Equal_milli_milli ( tOne: fix_utctimestamp_milli) (tTwo : fix_u
   (tOne = tTwo)
 ;;
 
+let utctimestamp_Equal_milli_milli_opt ( tOne: fix_utctimestamp_milli option) (tTwo : fix_utctimestamp_milli option) =
+  (tOne = tTwo)
+;;
+
 let utctimestamp_Equal_micro_micro ( tOne: fix_utctimestamp_micro) (tTwo : fix_utctimestamp_micro  ) =
+  (tOne = tTwo)
+;;
+
+let utctimestamp_Equal_micro_micro_opt ( tOne: fix_utctimestamp_micro option) (tTwo : fix_utctimestamp_micro option) =
   (tOne = tTwo)
 ;;
 
@@ -261,6 +269,12 @@ let utctimestamp_Equal_milli_micro ( tOne: fix_utctimestamp_milli) (tTwo : fix_u
         | Some x -> Some (x/1000)}) 
 ;;
 
+let utctimestamp_Equal_milli_micro_opt ( tOne: fix_utctimestamp_milli option) (tTwo : fix_utctimestamp_micro option) =
+    match tOne, tTwo with 
+    | Some tOne, Some tTwo -> utctimestamp_Equal_milli_micro tOne tTwo
+    | None, None -> true
+    | _-> false
+
 let utctimestamp_Equal_micro_milli ( tOne: fix_utctimestamp_micro) (tTwo : fix_utctimestamp_milli  ) =
   ({
     utc_timestamp_year      = tOne.utc_timestamp_year;
@@ -273,6 +287,13 @@ let utctimestamp_Equal_micro_milli ( tOne: fix_utctimestamp_micro) (tTwo : fix_u
       | None -> None
       | Some x -> Some (x/1000)} = tTwo)
 ;; 
+
+
+let utctimestamp_Equal_micro_milli_opt ( tOne: fix_utctimestamp_micro option) (tTwo : fix_utctimestamp_milli option) =
+    match tOne, tTwo with 
+    | Some tOne, Some tTwo -> utctimestamp_Equal_micro_milli tOne tTwo
+    | None, None -> true
+    | _-> false
 
 (** UTC Timestamp milli base comparison operator *)
 let utctimestamp_GreaterThan_milli_milli ( tOne: fix_utctimestamp_milli) (tTwo : fix_utctimestamp_milli ) =
@@ -298,6 +319,12 @@ let utctimestamp_GreaterThan_milli_milli ( tOne: fix_utctimestamp_milli) (tTwo :
     | Some one  , Some two  -> one > two
 ;;
 
+let utctimestamp_GreaterThan_milli_milli_opt ( tOne: fix_utctimestamp_milli option) (tTwo : fix_utctimestamp_milli option) =
+  match tOne, tTwo with 
+  | Some tOne, Some tTwo -> utctimestamp_GreaterThan_milli_milli tOne tTwo
+  | Some _, None -> true 
+  | _ -> false;;
+
 (** UTC Timestamp milli base comparison operator *)
 let utctimestamp_GreaterThan_micro_micro ( tOne: fix_utctimestamp_micro) (tTwo : fix_utctimestamp_micro ) =
   if utctimestamp_Equal_micro_micro tOne tTwo then false
@@ -321,6 +348,12 @@ let utctimestamp_GreaterThan_micro_micro ( tOne: fix_utctimestamp_micro) (tTwo :
     | None      , Some _    -> false
     | Some one  , Some two  -> one > two
 ;;
+
+let utctimestamp_GreaterThan_micro_micro_opt ( tOne: fix_utctimestamp_micro option) (tTwo : fix_utctimestamp_micro option) =
+  match tOne, tTwo with 
+  | Some tOne, Some tTwo -> utctimestamp_GreaterThan_micro_micro tOne tTwo
+  | Some _, None -> true 
+  | _ -> false;;
 
 (** UTC Timestamp base comparison operator - milli to micro *)
 let utctimestamp_GreaterThan_milli_micro ( tOne: fix_utctimestamp_milli) (tTwo : fix_utctimestamp_micro ) =
@@ -346,6 +379,12 @@ let utctimestamp_GreaterThan_milli_micro ( tOne: fix_utctimestamp_milli) (tTwo :
     | Some one  , Some two  -> one > two/1000
 ;;
 
+let utctimestamp_GreaterThan_milli_micro_opt ( tOne: fix_utctimestamp_milli option) (tTwo : fix_utctimestamp_micro option) =
+  match tOne, tTwo with 
+  | Some tOne, Some tTwo -> utctimestamp_GreaterThan_milli_micro tOne tTwo
+  | Some _, None -> true 
+  | _ -> false;;
+
 (** UTC Timestamp base comparison operator - micro to milli *)
 let utctimestamp_GreaterThan_micro_milli ( tOne: fix_utctimestamp_micro) (tTwo : fix_utctimestamp_milli ) =
   if utctimestamp_Equal_micro_milli tOne tTwo then false
@@ -370,11 +409,25 @@ let utctimestamp_GreaterThan_micro_milli ( tOne: fix_utctimestamp_micro) (tTwo :
     | Some one  , Some two  -> one/1000 > two
 ;;
 
+let utctimestamp_GreaterThan_micro_milli_opt ( tOne: fix_utctimestamp_micro option) (tTwo : fix_utctimestamp_milli option) =
+  match tOne, tTwo with 
+  | Some tOne, Some tTwo -> utctimestamp_GreaterThan_micro_milli tOne tTwo
+  | Some _, None -> true 
+  | _ -> false;;
+
 let utctimestamp_GreaterThanEqual_milli_milli ( tOne:fix_utctimestamp_milli) (tTwo : fix_utctimestamp_milli) =
   utctimestamp_GreaterThan_milli_milli tOne tTwo || utctimestamp_Equal_milli_milli tOne tTwo
 ;;
 
+let utctimestamp_GreaterThanEqual_milli_milli_opt ( tOne:fix_utctimestamp_milli option) (tTwo : fix_utctimestamp_milli option) =
+  utctimestamp_GreaterThan_milli_milli_opt tOne tTwo || utctimestamp_Equal_milli_milli_opt tOne tTwo
+;;
+
 let utctimestamp_GreaterThanEqual_micro_micro ( tOne:fix_utctimestamp_micro) (tTwo : fix_utctimestamp_micro) =
+  utctimestamp_GreaterThan_micro_micro tOne tTwo || utctimestamp_Equal_micro_micro tOne tTwo
+;;
+
+let utctimestamp_GreaterThanEqual_micro_micro_opt ( tOne:fix_utctimestamp_micro) (tTwo : fix_utctimestamp_micro) =
   utctimestamp_GreaterThan_micro_micro tOne tTwo || utctimestamp_Equal_micro_micro tOne tTwo
 ;;
 
@@ -382,40 +435,80 @@ let utctimestamp_GreaterThanEqual_milli_micro ( tOne:fix_utctimestamp_milli) (tT
   utctimestamp_GreaterThan_milli_micro tOne tTwo || utctimestamp_Equal_milli_micro tOne tTwo
 ;;
 
+let utctimestamp_GreaterThanEqual_milli_micro_opt ( tOne:fix_utctimestamp_milli option) (tTwo : fix_utctimestamp_micro option) =
+  utctimestamp_GreaterThan_milli_micro_opt tOne tTwo || utctimestamp_Equal_milli_micro_opt tOne tTwo
+;;
+
 let utctimestamp_GreaterThanEqual_micro_milli ( tOne:fix_utctimestamp_micro) (tTwo : fix_utctimestamp_milli) =
   utctimestamp_GreaterThan_micro_milli tOne tTwo || utctimestamp_Equal_micro_milli tOne tTwo
+;;
+
+let utctimestamp_GreaterThanEqual_micro_milli_opt ( tOne:fix_utctimestamp_micro option) (tTwo : fix_utctimestamp_milli option) =
+  utctimestamp_GreaterThan_micro_milli_opt tOne tTwo || utctimestamp_Equal_micro_milli_opt tOne tTwo
 ;;
 
 let utctimestamp_LessThan_milli_milli ( tOne :fix_utctimestamp_milli) (tTwo : fix_utctimestamp_milli  ) =
   not ( utctimestamp_GreaterThan_milli_milli tOne tTwo || utctimestamp_Equal_milli_milli tOne tTwo)
 ;;
 
+let utctimestamp_LessThan_milli_milli_opt ( tOne :fix_utctimestamp_milli option) (tTwo : fix_utctimestamp_milli option) =
+  not ( utctimestamp_GreaterThan_milli_milli_opt tOne tTwo || utctimestamp_Equal_milli_milli_opt tOne tTwo)
+;;
+
 let utctimestamp_LessThan_micro_micro ( tOne :fix_utctimestamp_micro) (tTwo : fix_utctimestamp_micro  ) =
   not ( utctimestamp_GreaterThan_micro_micro tOne tTwo || utctimestamp_Equal_micro_micro tOne tTwo)
+;;
+
+let utctimestamp_LessThan_micro_micro_opt ( tOne :fix_utctimestamp_micro option) (tTwo : fix_utctimestamp_micro option) =
+  not ( utctimestamp_GreaterThan_micro_micro_opt tOne tTwo || utctimestamp_Equal_micro_micro_opt tOne tTwo)
 ;;
 
 let utctimestamp_LessThan_milli_micro ( tOne :fix_utctimestamp_milli) (tTwo : fix_utctimestamp_micro  ) =
   not ( utctimestamp_GreaterThan_milli_micro tOne tTwo || utctimestamp_Equal_milli_micro tOne tTwo)
 ;;
 
+let utctimestamp_LessThan_milli_micro_opt ( tOne :fix_utctimestamp_milli option) (tTwo : fix_utctimestamp_micro option ) =
+  not ( utctimestamp_GreaterThan_milli_micro_opt tOne tTwo || utctimestamp_Equal_milli_micro_opt tOne tTwo)
+;;
+
 let utctimestamp_LessThan_micro_milli ( tOne :fix_utctimestamp_micro) (tTwo : fix_utctimestamp_milli  ) =
   not ( utctimestamp_GreaterThan_micro_milli tOne tTwo || utctimestamp_Equal_micro_milli tOne tTwo)
+;;
+
+let utctimestamp_LessThan_micro_milli_opt ( tOne :fix_utctimestamp_micro option) (tTwo : fix_utctimestamp_milli option ) =
+  not ( utctimestamp_GreaterThan_micro_milli_opt tOne tTwo || utctimestamp_Equal_micro_milli_opt tOne tTwo)
 ;;
 
 let utctimestamp_LessThanEqual_milli_milli ( tOne : fix_utctimestamp_milli) (tTwo : fix_utctimestamp_milli  ) =
   not ( utctimestamp_GreaterThan_milli_milli tOne tTwo )
 ;;
 
+let utctimestamp_LessThanEqual_milli_milli_opt ( tOne : fix_utctimestamp_milli option) (tTwo : fix_utctimestamp_milli option ) =
+  not ( utctimestamp_GreaterThan_milli_milli_opt tOne tTwo )
+;;
+
 let utctimestamp_LessThanEqual_micro_micro ( tOne : fix_utctimestamp_micro) (tTwo : fix_utctimestamp_micro  ) =
   not ( utctimestamp_GreaterThan_micro_micro tOne tTwo )
+;;
+
+let utctimestamp_LessThanEqual_micro_micro_opt ( tOne : fix_utctimestamp_micro option) (tTwo : fix_utctimestamp_micro  option) =
+  not ( utctimestamp_GreaterThan_micro_micro_opt tOne tTwo )
 ;;
 
 let utctimestamp_LessThanEqual_milli_micro ( tOne : fix_utctimestamp_milli) (tTwo : fix_utctimestamp_micro  ) =
   not ( utctimestamp_GreaterThan_milli_micro tOne tTwo )
 ;;
 
+let utctimestamp_LessThanEqual_milli_micro_opt ( tOne : fix_utctimestamp_milli option) (tTwo : fix_utctimestamp_micro option) =
+  not ( utctimestamp_GreaterThan_milli_micro_opt tOne tTwo )
+;;
+
 let utctimestamp_LessThanEqual_micro_milli ( tOne : fix_utctimestamp_micro) (tTwo : fix_utctimestamp_milli  ) =
   not ( utctimestamp_GreaterThan_micro_milli tOne tTwo )
+;;
+
+let utctimestamp_LessThanEqual_micro_milli_opt ( tOne : fix_utctimestamp_micro option) (tTwo : fix_utctimestamp_milli  option) =
+  not ( utctimestamp_GreaterThan_micro_milli_opt tOne tTwo )
 ;;
 
 (** LocalMktDate type denotes a particular date*)
@@ -456,6 +549,13 @@ let localmktdate_GreaterThan ( lmdOne: fix_localmktdate) (lmdTwo : fix_localmktd
     lmdOne.localmktdate_day > lmdTwo.localmktdate_day
 ;;
 
+let localmktdate_GreaterThan_opt ( lmdOne: fix_localmktdate option) (lmdTwo : fix_localmktdate option ) = 
+  match lmdOne, lmdTwo with 
+  | Some lmdOne, Some lmdTwo -> localmktdate_GreaterThan lmdOne lmdTwo
+  | Some _, None -> true 
+  | _ -> false
+;;
+
 let localmktdate_LessThan ( lmdOne: fix_localmktdate) (lmdTwo : fix_localmktdate ) = 
   if lmdOne.localmktdate_year < lmdTwo.localmktdate_year then true else
   if lmdOne.localmktdate_year > lmdTwo.localmktdate_year then false else 
@@ -464,18 +564,39 @@ let localmktdate_LessThan ( lmdOne: fix_localmktdate) (lmdTwo : fix_localmktdate
     lmdOne.localmktdate_day < lmdTwo.localmktdate_day
 ;;
 
+let localmktdate_LessThan_opt ( lmdOne: fix_localmktdate option) (lmdTwo : fix_localmktdate option ) = 
+  match lmdOne, lmdTwo with 
+  | Some lmdOne, Some lmdTwo -> localmktdate_LessThan lmdOne lmdTwo
+  | None, Some _ -> true 
+  | _ -> false
+;;
+
 let localmktdate_Equal ( lmdOne :fix_localmktdate) (lmdTwo : fix_localmktdate  ) = 
   lmdOne.localmktdate_year = lmdTwo.localmktdate_year &&
   lmdOne.localmktdate_month = lmdTwo.localmktdate_month &&
   lmdOne.localmktdate_day = lmdTwo.localmktdate_day
 ;;
 
+let localmktdate_Equal_opt ( lmdOne :fix_localmktdate option) (lmdTwo : fix_localmktdate option ) = 
+  match lmdOne, lmdTwo with 
+  | Some lmdOne, Some lmdTwo -> localmktdate_Equal lmdOne lmdTwo 
+  | None, None -> true
+  | _ -> false;;
+
 let localmktdate_GreaterThanEqual ( lmdOne: fix_localmktdate) (lmdTwo : fix_localmktdate  ) = 
   localmktdate_GreaterThan lmdOne lmdTwo || localmktdate_Equal lmdOne lmdTwo
 ;;
 
+let localmktdate_GreaterThanEqual_opt ( lmdOne: fix_localmktdate option) (lmdTwo : fix_localmktdate option) = 
+  localmktdate_GreaterThan_opt lmdOne lmdTwo || localmktdate_Equal_opt lmdOne lmdTwo
+;;
+
 let localmktdate_LessThanEqual ( lmdOne: fix_localmktdate) (lmdTwo :  fix_localmktdate ) =
   localmktdate_LessThan lmdOne lmdTwo || localmktdate_Equal lmdOne lmdTwo
+;;
+
+let localmktdate_LessThanEqual_opt ( lmdOne: fix_localmktdate option) (lmdTwo :  fix_localmktdate option) =
+  localmktdate_LessThan_opt lmdOne lmdTwo || localmktdate_Equal_opt lmdOne lmdTwo
 ;;
 
 (** Week *)
@@ -526,7 +647,7 @@ let is_valid_monthyear ( my : fix_monthyear ) =
     | _, _ -> true
   )
 ;;
-
+(* GOT TO HERE...*)
 (** TODO: Add support for weeks! *)
 let monthyear_GreaterThan ( myOne: fix_monthyear) (myTwo : fix_monthyear ) =
   if myOne.monthyear_year > myTwo.monthyear_year then true else
