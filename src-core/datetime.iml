@@ -647,7 +647,7 @@ let is_valid_monthyear ( my : fix_monthyear ) =
     | _, _ -> true
   )
 ;;
-(* GOT TO HERE...*)
+
 (** TODO: Add support for weeks! *)
 let monthyear_GreaterThan ( myOne: fix_monthyear) (myTwo : fix_monthyear ) =
   if myOne.monthyear_year > myTwo.monthyear_year then true else
@@ -661,6 +661,13 @@ let monthyear_GreaterThan ( myOne: fix_monthyear) (myTwo : fix_monthyear ) =
     | Some d_one, Some d_two -> d_one > d_two
 ;;
 
+let monthyear_GreaterThan_opt (myOne: fix_monthyear option)  (myTwo : fix_monthyear option) =
+  match myOne, myTwo with 
+  | Some myOne, Some myTwo -> monthyear_GreaterThan myOne myTwo
+  | Some _,None -> true 
+  | _ -> false
+;;
+ (* UPDATES ARE HERE *)
 let monthyear_LessThan ( myOne: fix_monthyear) (myTwo : fix_monthyear ) =
   if myOne.monthyear_year < myTwo.monthyear_year then true else
   if myOne.monthyear_year > myTwo.monthyear_year then false else
