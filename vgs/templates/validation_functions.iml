@@ -1,10 +1,13 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 
 
 let validation_functions  =
+    [(("Act_checks.is_valid_action_x",""))]
+;;
+
+let exclude_functions  =
     []
-    [@@macro]
 ;;
 
 [@@@logic]

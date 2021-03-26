@@ -1,0 +1,34 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@program]
+[@@@import "../src-model/src-types/actions.iml"]
+open Actions;;
+[@@@import "../src-core-pp/encode_base_types.iml"]
+open Encode_base_types;;
+[@@@import "../src-core-pp/encode_datetime.iml"]
+open Encode_datetime;;
+[@@@import "itiviti_printers.iml"]
+open Itiviti_printers;;
+[@@@import "../src-model/src-types/model_records.iml"]
+open Model_records;;
+
+
+let action_print (a)  =
+    (match a with
+        | FIX_Action_x x -> let a = []
+        in
+        let a = let x = x.mod_f_x_x
+        in
+        ({
+            name = "x";
+            value = Value (encode_int x)
+        }) :: a
+        in
+        a
+    ) and 
+record_print (a)  =
+    (match a with
+        | _ -> []
+    )
+;;
+
+[@@@logic]

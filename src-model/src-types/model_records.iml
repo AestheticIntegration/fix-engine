@@ -1,2 +1,14 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
+[@@@import "../../src-core/datetime.iml"]
+open Datetime;;
+[@@@import "../../src-core/numeric.iml"]
+open Numeric;;
+[@@@import "../../src-core-time-defaults/time_defaults.iml"]
+open Time_defaults;;
+
+
+type m_action_fix_x = {
+    mod_f_x_x : int
+}
+;;
 

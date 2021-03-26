@@ -1,29 +1,31 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@import "../src-types/model_app_enums.iml"]
 open Model_app_enums;;
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
 [@@@import "../src-types/model_tags.iml"]
 open Model_tags;;
+[@@@import "msg_check_types.iml"]
+open Msg_check_types;;
 [@@@import "../../src-core/numeric.iml"]
 open Numeric;;
 [@@@import "../src-types/state.iml"]
 open State;;
 
 
-let reject_NewOrderSingle_missingfield (m_state : model_state) (reject_text : string)  =
+let reject_NewOrderSingle_missingfield (m_state : model_state) (rej_info : reject_info_defrej)  =
     let msg_data_inner = {
-        mod_f_ExecutionReport_AvgPx = float_Create_6 0;
+        mod_f_ExecutionReport_AvgPx = float_Create_6 (0);
         mod_f_ExecutionReport_ClOrdID = "None";
-        mod_f_ExecutionReport_CumQty = float_Create_6 0;
+        mod_f_ExecutionReport_CumQty = float_Create_6 (0);
         mod_f_ExecutionReport_ExecID = "Test";
         mod_f_ExecutionReport_ExecType = MOD_FIX_ExecType_Calculated;
         mod_f_ExecutionReport_Instrument_Symbol = "None";
-        mod_f_ExecutionReport_LeavesQty = float_Create_6 0;
+        mod_f_ExecutionReport_LeavesQty = float_Create_6 (0);
         mod_f_ExecutionReport_OrdStatus = MOD_FIX_OrdStatus_New;
         mod_f_ExecutionReport_OrderID = "None";
         mod_f_ExecutionReport_Side = MOD_FIX_Side_Buy;
-        mod_f_ExecutionReport_Text = Some reject_text
+        mod_f_ExecutionReport_Text = Some rej_info.mod_builtin_rejectInfo_text
     }
     in
     let m_state = send_msg (FIX_Msg_ExecutionReport msg_data_inner) m_state
@@ -32,19 +34,19 @@ let reject_NewOrderSingle_missingfield (m_state : model_state) (reject_text : st
     [@@macro]
 ;;
 
-let reject_NewOrderSingle_invalidfield (m_state : model_state) (msg_data : mod_newordersingle_data) (reject_text : string)  =
+let reject_NewOrderSingle_invalidfield (m_state : model_state) (msg_data : mod_newordersingle_data) (rej_info : reject_info_defrej)  =
     let msg_data_inner = {
-        mod_f_ExecutionReport_AvgPx = float_Create_6 0;
+        mod_f_ExecutionReport_AvgPx = float_Create_6 (0);
         mod_f_ExecutionReport_ClOrdID = msg_data.mod_f_NewOrderSingle_ClOrdID;
-        mod_f_ExecutionReport_CumQty = float_Create_6 0;
+        mod_f_ExecutionReport_CumQty = float_Create_6 (0);
         mod_f_ExecutionReport_ExecID = "Test";
         mod_f_ExecutionReport_ExecType = MOD_FIX_ExecType_Calculated;
         mod_f_ExecutionReport_Instrument_Symbol = msg_data.mod_f_NewOrderSingle_Instrument_Symbol;
-        mod_f_ExecutionReport_LeavesQty = float_Create_6 0;
+        mod_f_ExecutionReport_LeavesQty = float_Create_6 (0);
         mod_f_ExecutionReport_OrdStatus = MOD_FIX_OrdStatus_New;
         mod_f_ExecutionReport_OrderID = msg_data.mod_f_NewOrderSingle_ClOrdID;
         mod_f_ExecutionReport_Side = MOD_FIX_Side_Buy;
-        mod_f_ExecutionReport_Text = Some reject_text
+        mod_f_ExecutionReport_Text = Some rej_info.mod_builtin_rejectInfo_text
     }
     in
     let m_state = send_msg (FIX_Msg_ExecutionReport msg_data_inner) m_state
@@ -53,54 +55,79 @@ let reject_NewOrderSingle_invalidfield (m_state : model_state) (msg_data : mod_n
     [@@macro]
 ;;
 
-let reject_NewOrderSingle_invalid (m_state : model_state) (msg_data : mod_newordersingle_data) (reject_text : string)  =
+let reject_NewOrderSingle_invalid (m_state : model_state) (msg_data : mod_newordersingle_data) (rej_info : reject_info_defrej)  =
     let msg_data_inner = {
-        mod_f_ExecutionReport_AvgPx = float_Create_6 0;
+        mod_f_ExecutionReport_AvgPx = float_Create_6 (0);
         mod_f_ExecutionReport_ClOrdID = msg_data.mod_f_NewOrderSingle_ClOrdID;
-        mod_f_ExecutionReport_CumQty = float_Create_6 0;
+        mod_f_ExecutionReport_CumQty = float_Create_6 (0);
         mod_f_ExecutionReport_ExecID = "Test";
         mod_f_ExecutionReport_ExecType = MOD_FIX_ExecType_Calculated;
         mod_f_ExecutionReport_Instrument_Symbol = "None";
-        mod_f_ExecutionReport_LeavesQty = float_Create_6 0;
+        mod_f_ExecutionReport_LeavesQty = float_Create_6 (0);
         mod_f_ExecutionReport_OrdStatus = MOD_FIX_OrdStatus_New;
         mod_f_ExecutionReport_OrderID = msg_data.mod_f_NewOrderSingle_ClOrdID;
         mod_f_ExecutionReport_Side = MOD_FIX_Side_Buy;
-        mod_f_ExecutionReport_Text = Some reject_text
+        mod_f_ExecutionReport_Text = Some rej_info.mod_builtin_rejectInfo_text
     }
     in
     let m_state = send_msg (FIX_Msg_ExecutionReport msg_data_inner) m_state
     in
+    m_state
+    [@@macro]
+;;
+
+let reject_ExecutionReport_invalidfield (m_state : model_state) (msg_data : mod_executionreport_data) (rej_info : reject_info_defrej)  =
+    m_state
+    [@@macro]
+;;
+
+let reject_ExecutionReport_invalid (m_state : model_state) (msg_data : mod_executionreport_data) (rej_info : reject_info_defrej)  =
     m_state
     [@@macro]
 ;;
 
 let reject_field_missing (m_state : model_state) (missing_info : field_missing_data)  =
     (match (missing_info.field_missing_data_msg,missing_info.field_missing_data_field) with
-        | (M_Msg_NewOrderSingle_Tag,M_Field_ClOrdID_Tag) -> { (reject_NewOrderSingle_missingfield m_state "Field ClOrdID of Message NewOrderSingle is missing.") with
+        | (M_Msg_NewOrderSingle_Tag,M_Field_ClOrdID_Tag) -> { (reject_NewOrderSingle_missingfield m_state {
+            mod_builtin_rejectInfo_text = "Field ClOrdID of Message NewOrderSingle is missing.";
+            mod_builtin_rejectInfo_field = Some "ClOrdID"
+        }) with
             event_info = {
                 state_event_counter = m_state.event_counter;
                 state_event_reject_text = Some "Field ClOrdID of Message NewOrderSingle is missing."
             } :: m_state.event_info
         }
-        | (M_Msg_NewOrderSingle_Tag,M_Field_Side_Tag) -> { (reject_NewOrderSingle_missingfield m_state "Field Side of Message NewOrderSingle is missing.") with
+        | (M_Msg_NewOrderSingle_Tag,M_Field_Side_Tag) -> { (reject_NewOrderSingle_missingfield m_state {
+            mod_builtin_rejectInfo_text = "Field Side of Message NewOrderSingle is missing.";
+            mod_builtin_rejectInfo_field = Some "Side"
+        }) with
             event_info = {
                 state_event_counter = m_state.event_counter;
                 state_event_reject_text = Some "Field Side of Message NewOrderSingle is missing."
             } :: m_state.event_info
         }
-        | (M_Msg_NewOrderSingle_Tag,M_Field_TransactTime_Tag) -> { (reject_NewOrderSingle_missingfield m_state "Field TransactTime of Message NewOrderSingle is missing.") with
+        | (M_Msg_NewOrderSingle_Tag,M_Field_TransactTime_Tag) -> { (reject_NewOrderSingle_missingfield m_state {
+            mod_builtin_rejectInfo_text = "Field TransactTime of Message NewOrderSingle is missing.";
+            mod_builtin_rejectInfo_field = Some "TransactTime"
+        }) with
             event_info = {
                 state_event_counter = m_state.event_counter;
                 state_event_reject_text = Some "Field TransactTime of Message NewOrderSingle is missing."
             } :: m_state.event_info
         }
-        | (M_Msg_NewOrderSingle_Tag,M_Field_OrdType_Tag) -> { (reject_NewOrderSingle_missingfield m_state "Field OrdType of Message NewOrderSingle is missing.") with
+        | (M_Msg_NewOrderSingle_Tag,M_Field_OrdType_Tag) -> { (reject_NewOrderSingle_missingfield m_state {
+            mod_builtin_rejectInfo_text = "Field OrdType of Message NewOrderSingle is missing.";
+            mod_builtin_rejectInfo_field = Some "OrdType"
+        }) with
             event_info = {
                 state_event_counter = m_state.event_counter;
                 state_event_reject_text = Some "Field OrdType of Message NewOrderSingle is missing."
             } :: m_state.event_info
         }
-        | (M_Msg_NewOrderSingle_Tag,M_Field_Symbol_Tag) -> { (reject_NewOrderSingle_missingfield m_state "Field Symbol of Message NewOrderSingle is missing.") with
+        | (M_Msg_NewOrderSingle_Tag,M_Field_Symbol_Tag) -> { (reject_NewOrderSingle_missingfield m_state {
+            mod_builtin_rejectInfo_text = "Field Symbol of Message NewOrderSingle is missing.";
+            mod_builtin_rejectInfo_field = Some "Symbol"
+        }) with
             event_info = {
                 state_event_counter = m_state.event_counter;
                 state_event_reject_text = Some "Field Symbol of Message NewOrderSingle is missing."
@@ -109,3 +136,4 @@ let reject_field_missing (m_state : model_state) (missing_info : field_missing_d
         | (_,_) -> m_state
     )
 ;;
+

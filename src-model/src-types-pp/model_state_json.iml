@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@import "model_actions_json.iml"]
 open Model_actions_json;;
@@ -9,17 +9,17 @@ open State;;
 
 
 let model_state_to_json (m_state)  =
-    `Assoc (("incoming_action",(match m_state.incoming_action with
+    `Assoc ([(("incoming_action",(match m_state.incoming_action with
         | None -> `Null
         | Some x -> (json_of_fix_action x)
     )
-    ) :: (("incoming_msg",json_of_top_level_msg m_state.incoming_msg) :: (("outgoing_msgs",`List (List.map (fun x -> `Assoc (("outgoing_msg_counter",`Int (Z.to_int x.outgoing_msg_counter)) :: (("outgoing_msg_msg",json_of_model_msg x.outgoing_msg_msg) :: []))
-    ) m_state.outgoing_msgs)) :: (("event_counter",`Int (Z.to_int m_state.event_counter)) :: (("event_info",`List (List.map (fun x -> `Assoc (("state_event_counter",`Int (Z.to_int x.state_event_counter)) :: (("state_event_reject_text",(match x.state_event_reject_text with
+    ));(("incoming_msg",json_of_top_level_msg m_state.incoming_msg));(("outgoing_msgs",`List (List.map (fun x -> `Assoc ([(("outgoing_msg_counter",`String (Z.to_string x.outgoing_msg_counter)));(("outgoing_msg_msg",json_of_model_msg x.outgoing_msg_msg))])
+    ) m_state.outgoing_msgs)));(("event_counter",`String (Z.to_string m_state.event_counter)));(("event_info",`List (List.map (fun x -> `Assoc ([(("state_event_counter",`String (Z.to_string x.state_event_counter)));(("state_event_reject_text",(match x.state_event_reject_text with
         | None -> `Null
         | Some y -> (`String y)
     )
-    ) :: []))
-    ) m_state.event_info)) :: [])))))
+    ))])
+    ) m_state.event_info)))])
 ;;
 
 [@@@logic]

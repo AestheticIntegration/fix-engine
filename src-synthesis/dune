@@ -1,0 +1,7 @@
+(library
+  (name venue_synthesis)
+  (public_name fix-engine.venue_synthesis)
+  (wrapped false)
+  (flags (:standard -open Imandra_interactive -open Imandra_prelude -warn-error -A+8+39 -alert -deprecated -w -33-58))
+  (libraries imandra-base.prelude imandra-base.interactive venue_types)
+)

@@ -1,6 +1,13 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
+[@@@import "model_records.iml"]
+open Model_records;;
 
 
 type fix_action =
-    | EmptyAction 
+    | FIX_Action_x of m_action_fix_x
 ;;
+
+type fix_model_record =
+    | EmptyRecords 
+;;
+

@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@require "decoders-yojson"]
 open Decoders_yojson.Basic.Decode;;
@@ -18,7 +18,6 @@ let message_tag_decoder  : m_msg_tag decoder =
         | Some y -> (succeed y)
     )
     )
-    [@@macro]
 ;;
 
 let field_tag_decoder  : m_field_tag decoder =
@@ -27,7 +26,6 @@ let field_tag_decoder  : m_field_tag decoder =
         | Some y -> (succeed y)
     )
     )
-    [@@macro]
 ;;
 
 let field_missing_data_decoder  : field_missing_data decoder =
@@ -37,7 +35,6 @@ let field_missing_data_decoder  : field_missing_data decoder =
     }
     )
     )
-    [@@macro]
 ;;
 
 [@@@logic]

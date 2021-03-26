@@ -1,6 +1,12 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
+[@@@import "act_checks.iml"]
+open Act_checks;;
+[@@@import "act_process.iml"]
+open Act_process;;
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
+[@@@import "msg_minimal_invalid.iml"]
+open Msg_minimal_invalid;;
 [@@@import "msg_process.iml"]
 open Msg_process;;
 [@@@import "../src-types/state.iml"]
@@ -8,13 +14,49 @@ open State;;
 
 
 let one_step (m_state : model_state)  =
-    (match m_state.incoming_msg with
-        | FIX_TL_None -> m_state
-        | msg -> let s' = process_msg m_state msg
+    (match m_state.incoming_action with
+        | Some act -> let s' = receive_action m_state act
         in
         { s' with
-            incoming_msg = FIX_TL_None;
+            incoming_action = None;
             event_counter = (+) m_state.event_counter 1
         }
+        | None -> ((match m_state.incoming_msg with
+            | FIX_TL_None -> m_state
+            | msg -> let s' = process_msg m_state msg
+            in
+            { s' with
+                incoming_msg = FIX_TL_None;
+                event_counter = (+) m_state.event_counter 1
+            }
+        )
+        )
     )
 ;;
+
+let is_valid (m_state : model_state)  : bool =
+    (match m_state.incoming_action with
+        | Some act -> (is_action_valid act m_state)
+        | None -> ((match m_state.incoming_msg with
+            | FIX_TL_Normal msg -> let msg = convert_inner m_state msg
+            in
+            is_message_valid msg m_state
+            | _ -> false
+        )
+        )
+    )
+;;
+
+let is_minimal_invalid (m_state : model_state)  : bool =
+    (match m_state.incoming_action with
+        | Some act -> (is_action_valid act m_state)
+        | None -> ((match m_state.incoming_msg with
+            | FIX_TL_Normal msg -> let msg = convert_inner m_state msg
+            in
+            is_message_minimal_invalid msg m_state
+            | _ -> false
+        )
+        )
+    )
+;;
+

@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@import "../../src-model/src-types/actions.iml"]
 open Actions;;
@@ -37,12 +37,10 @@ let json_of_step_message (x : step_message)  =
 
 let json_of_step (x : step)  =
     `Assoc (("internals",json_of_fix_internals x.internals) :: (("message",json_of_step_message x.message) :: []))
-    [@@macro]
 ;;
 
 let json_of_steps (x : step list)  =
     `List (List.map json_of_step x)
-    [@@macro]
 ;;
 
 [@@@logic]

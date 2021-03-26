@@ -1,6 +1,8 @@
-(* Imandra Inc. copyright 2019 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
+[@@@require "yojson"]
 open Yojson.Basic;;
+
 
 let assoc_filter_nulls (x)  : json =
     `Assoc (List.filter (function (_,`Null) -> false |_ -> true
@@ -13,4 +15,5 @@ let rg_for_json (f) (lst)  : json =
         | lst -> (`List (List.map f lst))
     )
 ;;
+
 [@@@logic]

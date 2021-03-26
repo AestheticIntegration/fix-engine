@@ -15,7 +15,7 @@ outbound message ExecutionReport {
 }
 
 message NewOrderSingle {
-    req ClOrdID unique      
+    req ClOrdID 
     req Side
     req TransactTime
     req OrdType

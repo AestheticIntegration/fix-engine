@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@import "../src-types/model_tags.iml"]
 open Model_tags;;
@@ -6,6 +6,7 @@ open Model_tags;;
 
 let tag_to_message (x)  =
     (match x with
+        | "8" -> (Some M_Msg_ExecutionReport_Tag)
         | "D" -> (Some M_Msg_NewOrderSingle_Tag)
         | _ -> None
     )
@@ -13,11 +14,18 @@ let tag_to_message (x)  =
 
 let tag_to_field (x)  =
     (match x with
+        | "17" -> (Some M_Field_ExecID_Tag)
+        | "37" -> (Some M_Field_OrderID_Tag)
+        | "14" -> (Some M_Field_CumQty_Tag)
+        | "150" -> (Some M_Field_ExecType_Tag)
+        | "11" -> (Some M_Field_ClOrdID_Tag)
+        | "6" -> (Some M_Field_AvgPx_Tag)
+        | "54" -> (Some M_Field_Side_Tag)
+        | "151" -> (Some M_Field_LeavesQty_Tag)
+        | "40" -> (Some M_Field_OrdType_Tag)
+        | "39" -> (Some M_Field_OrdStatus_Tag)
         | "55" -> (Some M_Field_Symbol_Tag)
         | "60" -> (Some M_Field_TransactTime_Tag)
-        | "54" -> (Some M_Field_Side_Tag)
-        | "11" -> (Some M_Field_ClOrdID_Tag)
-        | "40" -> (Some M_Field_OrdType_Tag)
         | _ -> None
     )
 ;;

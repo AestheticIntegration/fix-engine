@@ -1,0 +1,46 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@import "../src-types/model_messages.iml"]
+open Model_messages;;
+[@@@import "../src-types/state.iml"]
+open State;;
+
+
+let check_fields_minimal_invalid_ExecutionReport (msg_data : mod_executionreport_data) (m_state : model_state)  : bool =
+    false
+;;
+
+let check_fields_minimal_invalid_NewOrderSingle (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
+    false
+;;
+
+let check_validate_minimal_invalid_ExecutionReport (msg_data : mod_executionreport_data) (m_state : model_state)  : bool =
+    false
+;;
+
+let check_validate_minimal_invalid_NewOrderSingle (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
+    false
+;;
+
+let msg_ExecutionReport_minimal_invalid (msg_data : mod_executionreport_data) (m_state : model_state)  : bool =
+    let fields_invalid = check_fields_minimal_invalid_ExecutionReport msg_data m_state
+    in
+    let validates_invalid = check_validate_minimal_invalid_ExecutionReport msg_data m_state
+    in
+    (||) ((&&) fields_invalid (not validates_invalid)) ((&&) validates_invalid (not fields_invalid))
+;;
+
+let msg_NewOrderSingle_minimal_invalid (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
+    let fields_invalid = check_fields_minimal_invalid_NewOrderSingle msg_data m_state
+    in
+    let validates_invalid = check_validate_minimal_invalid_NewOrderSingle msg_data m_state
+    in
+    (||) ((&&) fields_invalid (not validates_invalid)) ((&&) validates_invalid (not fields_invalid))
+;;
+
+let is_message_minimal_invalid (msg : model_msg) (m_state : model_state)  : bool =
+    (match msg with
+        | FIX_Msg_ExecutionReport d -> (msg_ExecutionReport_minimal_invalid d m_state)
+        | FIX_Msg_NewOrderSingle d -> (msg_NewOrderSingle_minimal_invalid d m_state)
+    )
+;;
+

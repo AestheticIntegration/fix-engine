@@ -1,0 +1,36 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@import "../src-model/src-types/actions.iml"]
+open Actions;;
+[@@@import "../src-model/src-types/model_messages.iml"]
+open Model_messages;;
+[@@@import "../src-model/src/msg_process.iml"]
+open Msg_process;;
+[@@@import "../vgs/templates/scenario_type.iml"]
+open Scenario_type;;
+[@@@import "../src-model/src-types/state.iml"]
+open State;;
+
+
+let message_datasets (x : model_msg)  : bool =
+    (match x with
+        | _ -> true
+    )
+    [@@macro]
+;;
+
+let action_datasets (x : fix_action)  : bool =
+    (match x with
+        | FIX_Action_x d -> true
+    )
+    [@@macro]
+;;
+
+let refine_datasets (e : event) (s : model_state)  : bool =
+    (match e with
+        | Action m -> (action_datasets m)
+        | Message m -> (message_datasets (convert_inner s m))
+    )
+;;
+
+let datasets_extra_basis = [] [@@macro];;
+

@@ -1,0 +1,41 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@import "../src-core/datetime.iml"]
+open Datetime;;
+[@@@import "../src-model/src-types/model_messages.iml"]
+open Model_messages;;
+[@@@import "../src-model/src/msg_process.iml"]
+open Msg_process;;
+[@@@import "../vgs/templates/scenario_type.iml"]
+open Scenario_type;;
+[@@@import "../src-model/src-types/state.iml"]
+open State;;
+
+
+let message_refine_ExecutionReport_dtCheck (msg_data : mod_executionreport_data)  =
+    true
+    [@@macro]
+;;
+
+let message_refine_NewOrderSingle_dtCheck (msg_data : mod_newordersingle_data)  =
+    (&&) (let x = msg_data.mod_f_NewOrderSingle_TransactTime
+    in
+    is_valid_utctimestamp_milli x
+    ) true
+    [@@macro]
+;;
+
+let refine_messages_dtCheck (msg : model_msg)  =
+    (match msg with
+        | FIX_Msg_ExecutionReport m_data -> (message_refine_ExecutionReport_dtCheck m_data)
+        | FIX_Msg_NewOrderSingle m_data -> (message_refine_NewOrderSingle_dtCheck m_data)
+        | _ -> true
+    )
+;;
+
+let refine_datetime (e : event) (s : model_state)  : bool =
+    (match e with
+        | Action act -> true
+        | Message msg -> (refine_messages_dtCheck (convert_inner s msg))
+    )
+;;
+

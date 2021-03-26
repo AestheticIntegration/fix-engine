@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@import "../../src-model/src-types/model_messages.iml"]
 open Model_messages;;
 [@@@import "scenario_type.iml"]
@@ -11,7 +11,8 @@ type t =
 
 let is_incoming (m)  =
     (match m with
-        | FIX_Msg_NewOrderSingle _ -> true
+        | FIX_Msg_Def_Opt_ExecutionReport _ -> true
+        | FIX_Msg_Def_Opt_NewOrderSingle _ -> true
         | _ -> false
     )
 ;;
@@ -25,10 +26,9 @@ let data (x : t)  =
 
 let concrete (x : t) (c : event)  =
     (match (x,c) with
-        | (Template_'any,Action _) -> true
-        | (Template_'any,Message m) -> (is_incoming m)
         | _ -> false
     )
+    [@@macro] [@@macro]
 ;;
 
 let to_string_hum (x : t)  =
@@ -37,3 +37,4 @@ let to_string_hum (x : t)  =
     )
     [@@macro]
 ;;
+

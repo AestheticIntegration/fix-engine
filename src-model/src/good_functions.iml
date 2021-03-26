@@ -1,7 +1,13 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 
 
 let good_string (x)  =
-    (&&) ((<>) x "Field Symbol of Message NewOrderSingle is missing.") ((&&) ((<>) x "Field OrdType of Message NewOrderSingle is missing.") ((&&) ((<>) x "Field TransactTime of Message NewOrderSingle is missing.") ((&&) ((<>) x "Field Side of Message NewOrderSingle is missing.") ((<>) x "Field ClOrdID of Message NewOrderSingle is missing."))))
+    (&&) ((<>) x "Field Symbol of Message NewOrderSingle is missing.") ((&&) ((<>) x "Field OrdType of Message NewOrderSingle is missing.") ((&&) ((<>) x "Field TransactTime of Message NewOrderSingle is missing.") ((&&) ((<>) x "Field Side of Message NewOrderSingle is missing.") ((&&) ((<>) x "Field ClOrdID of Message NewOrderSingle is missing.") ((&&) ((<>) x "Field Symbol of Message ExecutionReport is missing.") ((&&) ((<>) x "Field OrdStatus of Message ExecutionReport is missing.") ((&&) ((<>) x "Field CumQty of Message ExecutionReport is missing.") ((&&) ((<>) x "Field LeavesQty of Message ExecutionReport is missing.") ((&&) ((<>) x "Field Side of Message ExecutionReport is missing.") ((&&) ((<>) x "Field AvgPx of Message ExecutionReport is missing.") ((&&) ((<>) x "Field ExecType of Message ExecutionReport is missing.") ((&&) ((<>) x "Field ExecID of Message ExecutionReport is missing.") ((&&) ((<>) x "Field OrderID of Message ExecutionReport is missing.") ((<>) x "Field ClOrdID of Message ExecutionReport is missing."))))))))))))))
     [@@macro]
 ;;
+
+let exclude_string_list ()  =
+    [("None");("Test");("Field Symbol of Message NewOrderSingle is missing.");("Field OrdType of Message NewOrderSingle is missing.");("Field TransactTime of Message NewOrderSingle is missing.");("Field Side of Message NewOrderSingle is missing.");("Field ClOrdID of Message NewOrderSingle is missing.");("Field Symbol of Message ExecutionReport is missing.");("Field OrdStatus of Message ExecutionReport is missing.");("Field CumQty of Message ExecutionReport is missing.");("Field LeavesQty of Message ExecutionReport is missing.");("Field Side of Message ExecutionReport is missing.");("Field AvgPx of Message ExecutionReport is missing.");("Field ExecType of Message ExecutionReport is missing.");("Field ExecID of Message ExecutionReport is missing.");("Field OrderID of Message ExecutionReport is missing.");("Field ClOrdID of Message ExecutionReport is missing.")]
+    [@@macro]
+;;
+

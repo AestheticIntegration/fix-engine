@@ -1,29 +1,44 @@
-(* Imandra Inc. copyright 2020 *)
-[@@@import "../../src-model/src/act_checks.iml"]
-open Act_checks;;
+(* Imandra Inc. copyright 2021 *)
 [@@@import "../../src-model/src-types/model_messages.iml"]
 open Model_messages;;
-[@@@import "../../src-model/src/msg_process.iml"]
-open Msg_process;;
+[@@@import "../../src-core/numeric.iml"]
+open Numeric;;
 [@@@import "scenario_type.iml"]
 open Scenario_type;;
 [@@@import "../../src-model/src-types/state.iml"]
 open State;;
 [@@@import "template.iml"]
 open Template;;
+[@@@import "../../src-model/src/venue.iml"]
+open Venue;;
 
+
+let mod_state_with_event (e) (s)  =
+    (match e with
+        | Action a -> { s with
+            incoming_action = Some a;
+            incoming_msg = FIX_TL_None
+        }
+        | Message m -> { s with
+            incoming_msg = FIX_TL_Normal m;
+            incoming_action = None
+        }
+    )
+    [@@macro]
+;;
 
 let is_event_valid (e : event) (s : model_state)  : bool =
-    (match e with
-        | Message m -> (is_message_valid m s)
-        | Action a -> (is_action_valid a s)
-    )
+    let e = mod_state_with_event e s
+    in
+    is_valid e
+    [@@macro] [@@macro]
 ;;
 
 type region_expander = {
-    field_projections : string list;
-    field_printers : (event -> string option)
-     list;
+    field_projections : string list list;
+    field_printers : (event -> (model_state -> string option)
+    )
+     list list;
     valid_fn : string option;
     expand_when : string option
 }[@@program]
@@ -35,23 +50,12 @@ type scenario = {
     description : string option;
     template : t list;
     region_expander : region_expander list;
-    template_attributes : (string*string option) list;
-    events_attributes : (string*string option) list list
+    template_attributes : (string*[`Str of string | `Bool of bool | `Int of int | `Float of fix_float] list) list;
+    events_attributes : (string*[`Str of string | `Bool of bool | `Int of int | `Float of fix_float] list) list list
 }[@@program]
 ;;
 
 let scenarios = [] [@@program];;
-
-let mod_state_with_event (e) (s)  =
-    (match e with
-        | Action a -> { s with
-            incoming_action = Some a
-        }
-        | Message m -> { s with
-            incoming_msg = FIX_TL_Normal m
-        }
-    )
-;;
 
 let field_projection_to_type (x)  =
     (match x with
@@ -59,3 +63,11 @@ let field_projection_to_type (x)  =
     )
     [@@macro]
 ;;
+
+let field_projection_to_name (x)  =
+    (match x with
+        | _ -> ""
+    )
+    [@@macro]
+;;
+

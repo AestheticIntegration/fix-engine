@@ -1,17 +1,11 @@
-(** Time defaults for a particular FIX implementation *)
-(***
-
-    Imandra Inc.
-    Copyright (c) 2014 - 2019
-
-    time_defaults_pp.iml
-    
-*)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@import "../src-core-pp/encode_datetime.iml"]
 open Encode_datetime;;
 
-let encode_UTCTimestamp = encode_UTCTimestamp_milli;;
 
-let encode_UTCTimeOnly = encode_UTCTimeOnly_milli;;
+let encode_UTCTimestamp = encode_UTCTimestamp_milli ;;
+
+let encode_UTCTimeOnly = encode_UTCTimeOnly_milli ;;
+
 [@@@logic]

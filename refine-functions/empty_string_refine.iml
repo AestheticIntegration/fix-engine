@@ -1,0 +1,46 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@import "../src-model/src-types/model_messages.iml"]
+open Model_messages;;
+[@@@import "../src-model/src/msg_process.iml"]
+open Msg_process;;
+[@@@import "../vgs/templates/scenario_type.iml"]
+open Scenario_type;;
+[@@@import "../src-model/src-types/state.iml"]
+open State;;
+
+
+let non_empty_string_check (x)  =
+    (<>) x ""
+    [@@macro]
+;;
+
+let non_empty_string_check_opt (x)  =
+    (<>) x (Some "")
+    [@@macro]
+;;
+
+let message_refine_ExecutionReport_empString (msg_data : mod_executionreport_data)  =
+    (&&) (non_empty_string_check_opt msg_data.mod_f_ExecutionReport_Text) ((&&) (non_empty_string_check msg_data.mod_f_ExecutionReport_Instrument_Symbol) ((&&) (non_empty_string_check msg_data.mod_f_ExecutionReport_OrderID) ((&&) (non_empty_string_check msg_data.mod_f_ExecutionReport_ClOrdID) ((&&) (non_empty_string_check msg_data.mod_f_ExecutionReport_ExecID) true))))
+    [@@macro]
+;;
+
+let message_refine_NewOrderSingle_empString (msg_data : mod_newordersingle_data)  =
+    (&&) (non_empty_string_check msg_data.mod_f_NewOrderSingle_Instrument_Symbol) ((&&) (non_empty_string_check msg_data.mod_f_NewOrderSingle_ClOrdID) true)
+    [@@macro]
+;;
+
+let refine_messages_empString (msg : model_msg)  =
+    (match msg with
+        | FIX_Msg_ExecutionReport m_data -> (message_refine_ExecutionReport_empString m_data)
+        | FIX_Msg_NewOrderSingle m_data -> (message_refine_NewOrderSingle_empString m_data)
+        | _ -> true
+    )
+;;
+
+let refine_empty_strings (e : event) (s : model_state)  : bool =
+    (match e with
+        | Action act -> true
+        | Message msg -> (refine_messages_empString (convert_inner s msg))
+    )
+;;
+

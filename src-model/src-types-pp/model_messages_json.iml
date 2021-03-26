@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@import "../../src-core-pp/base_types_json.iml"]
 open Base_types_json;;
@@ -12,33 +12,53 @@ open Model_enums_json;;
 open Model_messages;;
 [@@@import "model_tags_json.iml"]
 open Model_tags_json;;
+[@@@require "yojson"]
+open Yojson.Basic;;
 
 
-let mod_executionreport_to_json (x)  =
-    assoc_filter_nulls (("ClOrdID",string_to_json x.mod_f_ExecutionReport_ClOrdID) :: (("OrderID",string_to_json x.mod_f_ExecutionReport_OrderID) :: (("ExecID",string_to_json x.mod_f_ExecutionReport_ExecID) :: (("ExecType",mod_exectype_to_json x.mod_f_ExecutionReport_ExecType) :: (("AvgPx",float_6_to_json x.mod_f_ExecutionReport_AvgPx) :: (("Side",mod_side_to_json x.mod_f_ExecutionReport_Side) :: (("LeavesQty",float_6_to_json x.mod_f_ExecutionReport_LeavesQty) :: (("CumQty",float_6_to_json x.mod_f_ExecutionReport_CumQty) :: (("OrdStatus",mod_ordstatus_to_json x.mod_f_ExecutionReport_OrdStatus) :: (("Instrument.Symbol",string_to_json x.mod_f_ExecutionReport_Instrument_Symbol) :: (("Text",(match x.mod_f_ExecutionReport_Text with
+let mod_executionreport_opt_def_to_json (x)  : json =
+    assoc_filter_nulls ([(("ClOrdID",string_to_json x.mod_def_opt_f_ExecutionReport_ClOrdID));(("OrderID",string_to_json x.mod_def_opt_f_ExecutionReport_OrderID));(("ExecID",string_to_json x.mod_def_opt_f_ExecutionReport_ExecID));(("ExecType",mod_exectype_to_json x.mod_def_opt_f_ExecutionReport_ExecType));(("AvgPx",float_6_to_json x.mod_def_opt_f_ExecutionReport_AvgPx));(("Side",mod_side_to_json x.mod_def_opt_f_ExecutionReport_Side));(("LeavesQty",float_6_to_json x.mod_def_opt_f_ExecutionReport_LeavesQty));(("CumQty",float_6_to_json x.mod_def_opt_f_ExecutionReport_CumQty));(("OrdStatus",mod_ordstatus_to_json x.mod_def_opt_f_ExecutionReport_OrdStatus));(("Instrument.Symbol",string_to_json x.mod_def_opt_f_ExecutionReport_Instrument_Symbol));(("Text",(match x.mod_def_opt_f_ExecutionReport_Text with
         | None -> `Null
         | Some x -> (string_to_json x)
     )
-    ) :: [])))))))))))
+    ))])
 ;;
 
-let mod_newordersingle_to_json (x)  =
-    assoc_filter_nulls (("ClOrdID",string_to_json x.mod_f_NewOrderSingle_ClOrdID) :: (("Side",mod_side_to_json x.mod_f_NewOrderSingle_Side) :: (("TransactTime",utctimestamp_milli_to_json x.mod_f_NewOrderSingle_TransactTime) :: (("OrdType",mod_ordtype_to_json x.mod_f_NewOrderSingle_OrdType) :: (("Instrument.Symbol",string_to_json x.mod_f_NewOrderSingle_Instrument_Symbol) :: [])))))
-    [@@macro]
+let mod_executionreport_to_json (x)  : json =
+    assoc_filter_nulls ([(("ClOrdID",string_to_json x.mod_f_ExecutionReport_ClOrdID));(("OrderID",string_to_json x.mod_f_ExecutionReport_OrderID));(("ExecID",string_to_json x.mod_f_ExecutionReport_ExecID));(("ExecType",mod_exectype_to_json x.mod_f_ExecutionReport_ExecType));(("AvgPx",float_6_to_json x.mod_f_ExecutionReport_AvgPx));(("Side",mod_side_to_json x.mod_f_ExecutionReport_Side));(("LeavesQty",float_6_to_json x.mod_f_ExecutionReport_LeavesQty));(("CumQty",float_6_to_json x.mod_f_ExecutionReport_CumQty));(("OrdStatus",mod_ordstatus_to_json x.mod_f_ExecutionReport_OrdStatus));(("Instrument.Symbol",string_to_json x.mod_f_ExecutionReport_Instrument_Symbol));(("Text",(match x.mod_f_ExecutionReport_Text with
+        | None -> `Null
+        | Some x -> (string_to_json x)
+    )
+    ))])
 ;;
 
-let json_of_model_msg (x)  =
+let mod_newordersingle_opt_def_to_json (x)  : json =
+    assoc_filter_nulls ([(("ClOrdID",string_to_json x.mod_def_opt_f_NewOrderSingle_ClOrdID));(("Side",mod_side_to_json x.mod_def_opt_f_NewOrderSingle_Side));(("TransactTime",utctimestamp_milli_to_json x.mod_def_opt_f_NewOrderSingle_TransactTime));(("OrdType",mod_ordtype_to_json x.mod_def_opt_f_NewOrderSingle_OrdType));(("Instrument.Symbol",string_to_json x.mod_def_opt_f_NewOrderSingle_Instrument_Symbol))])
+;;
+
+let mod_newordersingle_to_json (x)  : json =
+    assoc_filter_nulls ([(("ClOrdID",string_to_json x.mod_f_NewOrderSingle_ClOrdID));(("Side",mod_side_to_json x.mod_f_NewOrderSingle_Side));(("TransactTime",utctimestamp_milli_to_json x.mod_f_NewOrderSingle_TransactTime));(("OrdType",mod_ordtype_to_json x.mod_f_NewOrderSingle_OrdType));(("Instrument.Symbol",string_to_json x.mod_f_NewOrderSingle_Instrument_Symbol))])
+;;
+
+let json_of_model_msg (x)  : json =
     (match x with
-        | FIX_Msg_ExecutionReport x -> (`Assoc (("tag",`String "8") :: (("data",mod_executionreport_to_json x) :: [])))
-        | FIX_Msg_NewOrderSingle x -> (`Assoc (("tag",`String "D") :: (("data",mod_newordersingle_to_json x) :: [])))
+        | FIX_Msg_ExecutionReport x -> (`Assoc ([(("tag",`String "8"));(("data",mod_executionreport_to_json x))]))
+        | FIX_Msg_NewOrderSingle x -> (`Assoc ([(("tag",`String "D"));(("data",mod_newordersingle_to_json x))]))
     )
 ;;
 
-let json_of_top_level_msg (x)  =
+let json_of_model_msg_opt_def (x)  : json =
     (match x with
-        | FIX_TL_Normal x -> (`Assoc (("top_level_msg",`String "FIX_TL_Normal") :: (("data",json_of_model_msg x) :: [])))
-        | FIX_TL_Req_Field_Missing x -> (`Assoc (("top_level_msg",`String "FIX_TL_Req_Field_Missing") :: (("data",json_of_req_field_missing x) :: [])))
-        | FIX_TL_PossibleResend x -> (`Assoc (("top_level_msg",`String "FIX_TL_PossibleResend") :: (("data",json_of_model_msg x) :: [])))
+        | FIX_Msg_Def_Opt_ExecutionReport x -> (`Assoc ([(("tag",`String "8"));(("data",mod_executionreport_opt_def_to_json x))]))
+        | FIX_Msg_Def_Opt_NewOrderSingle x -> (`Assoc ([(("tag",`String "D"));(("data",mod_newordersingle_opt_def_to_json x))]))
+    )
+;;
+
+let json_of_top_level_msg (x)  : json =
+    (match x with
+        | FIX_TL_Normal x -> (`Assoc ([(("top_level_msg",`String "FIX_TL_Normal"));(("data",json_of_model_msg_opt_def x))]))
+        | FIX_TL_Req_Field_Missing x -> (`Assoc ([(("top_level_msg",`String "FIX_TL_Req_Field_Missing"));(("data",json_of_req_field_missing x))]))
+        | FIX_TL_PossibleResend x -> (`Assoc ([(("top_level_msg",`String "FIX_TL_PossibleResend"));(("data",json_of_model_msg_opt_def x))]))
         | FIX_TL_None -> `Null
     )
 ;;

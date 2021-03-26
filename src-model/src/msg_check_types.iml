@@ -1,40 +1,59 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
+[@@@import "../../src-core/datetime.iml"]
+open Datetime;;
+[@@@import "../../src-core/numeric.iml"]
+open Numeric;;
+[@@@import "../../src-core-time-defaults/time_defaults.iml"]
+open Time_defaults;;
 
 
-type field_state = {
-    is_invalid : bool;
-    field_text : string
+type reject_info_defrej = {
+    mod_builtin_rejectInfo_text : string;
+    mod_builtin_rejectInfo_field : string option
 }
 ;;
 
-let fields_are_good = {
-    is_invalid = false;
-    field_text = ""
+type field_state_defrej = {
+    field_invalid_defrej : bool;
+    field_reject_info_defrej : reject_info_defrej
+}
+;;
+
+let fields_good_defrej = {
+    field_invalid_defrej = false;
+    field_reject_info_defrej = {
+        mod_builtin_rejectInfo_text = "0";
+        mod_builtin_rejectInfo_field = None
+    }
 } [@@macro];;
 
-let field_invalid (text : string)  =
+let is_fields_invalid_defrej (rej_info : reject_info_defrej)  =
     {
-        is_invalid = true;
-        field_text = text
+        field_invalid_defrej = true;
+        field_reject_info_defrej = rej_info
     }
     [@@macro]
 ;;
 
-type validate_reject = {
-    validate_invalid : bool;
-    validate_text : string
+type validate_reject_defrej = {
+    validate_invalid_defrej : bool;
+    validate_reject_info_defrej : reject_info_defrej
 }
 ;;
 
-let no_invalid_validates = {
-    validate_invalid = false;
-    validate_text = ""
+let no_invalid_validates_defrej = {
+    validate_invalid_defrej = false;
+    validate_reject_info_defrej = {
+        mod_builtin_rejectInfo_text = "0";
+        mod_builtin_rejectInfo_field = None
+    }
 } [@@macro];;
 
-let make_cond (cond_result : bool) (text : string)  =
+let make_cond_defrej (cond_result : bool) (rej_info : reject_info_defrej)  =
     {
-        validate_invalid = not cond_result;
-        validate_text = text
+        validate_invalid_defrej = not cond_result;
+        validate_reject_info_defrej = rej_info
     }
     [@@macro]
 ;;
+

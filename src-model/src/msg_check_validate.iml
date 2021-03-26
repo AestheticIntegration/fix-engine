@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
 [@@@import "msg_check_types.iml"]
@@ -8,11 +8,12 @@ open State;;
 
 
 let check_validate_ExecutionReport (msg_data : mod_executionreport_data) (m_state : model_state)  =
-    no_invalid_validates
+    no_invalid_validates_defrej
     [@@macro]
 ;;
 
 let check_validate_NewOrderSingle (msg_data : mod_newordersingle_data) (m_state : model_state)  =
-    no_invalid_validates
+    no_invalid_validates_defrej
     [@@macro]
 ;;
+

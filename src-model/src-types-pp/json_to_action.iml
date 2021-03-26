@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@import "../src-types/actions.iml"]
 open Actions;;
@@ -6,14 +6,17 @@ open Actions;;
 open Decoders_yojson.Basic.Decode;;
 [@@@require "decoders-yojson"]
 open Decoders_yojson.Basic.Decode.Infix;;
+[@@@import "json_to_records.iml"]
+open Json_to_records;;
 
 
 let fix_action_decoder  : fix_action decoder =
     (field "tag" string) >>= (fun x -> (match x with
+        | "x" -> ((field "data" mod_action_x_decoder) >>= (fun y -> succeed (FIX_Action_x y)
+        ))
         | d -> (fail ("Unknown Action ("^d^") in JSON decoding."))
     )
     )
-    [@@macro]
 ;;
 
 [@@@logic]

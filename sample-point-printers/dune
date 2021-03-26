@@ -1,0 +1,7 @@
+(library
+  (name sample_point_printers)
+  (public_name fix-engine.sample_point_printers)
+  (wrapped false)
+  (flags (:standard -open Imandra_interactive -open Imandra_prelude -warn-error -A+8+39 -alert -deprecated -w -33-58))
+  (libraries imandra-base.prelude imandra-base.interactive conversions core core_pp protocol_exts_pp venue_types)
+)

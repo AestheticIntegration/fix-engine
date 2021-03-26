@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@import "../src-types/state.iml"]
 open State;;
@@ -6,7 +6,6 @@ open State;;
 
 let json_of_fix_internals (x : internal_states_types)  =
     `Assoc []
-    [@@macro]
 ;;
 
 [@@@logic]

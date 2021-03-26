@@ -1,28 +1,30 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
+[@@@import "../src-types/actions.iml"]
+open Actions;;
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
 
 
 let isAction (str : string)  =
     (match str with
+        | "Actions.FIX_Action_x" -> true
         | _ -> false
     )
-    [@@macro]
 ;;
 
 let isActionData (str : string)  =
     (match str with
+        | "Model_records.m_action_fix_x" -> true
         | _ -> false
     )
-    [@@macro]
 ;;
 
 let isActionField (str : string)  =
     (match str with
+        | "Model_records.mod_f_x_x" -> true
         | _ -> false
     )
-    [@@macro]
 ;;
 
 let isModelFieldTag (str : string)  =
@@ -94,83 +96,32 @@ let isInternal (str : string)  =
     (match str with
         | _ -> false
     )
-    [@@macro]
 ;;
 
 let isInternalField (str : string)  =
     (match str with
         | _ -> false
     )
-    [@@macro]
 ;;
 
 let isAssignableField (str : string)  =
     (match str with
         | _ -> false
     )
-    [@@macro]
 ;;
 
 let isEnum (str : string)  =
     (match str with
-        | "Model_app_enums.model_fix_side" -> true
-        | "Model_app_enums.model_fix_exectype" -> true
-        | "Model_app_enums.model_fix_ordstatus" -> true
         | "Model_app_enums.model_fix_ordtype" -> true
+        | "Model_app_enums.model_fix_ordstatus" -> true
+        | "Model_app_enums.model_fix_exectype" -> true
+        | "Model_app_enums.model_fix_side" -> true
         | _ -> false
     )
 ;;
 
 let isEnumCase (str : string)  =
     (match str with
-        | "Model_app_enums.MOD_FIX_Side_Buy" -> true
-        | "Model_app_enums.MOD_FIX_Side_Sell" -> true
-        | "Model_app_enums.MOD_FIX_Side_BuyMinus" -> true
-        | "Model_app_enums.MOD_FIX_Side_SellPlus" -> true
-        | "Model_app_enums.MOD_FIX_Side_SellShort" -> true
-        | "Model_app_enums.MOD_FIX_Side_SellShortExempt" -> true
-        | "Model_app_enums.MOD_FIX_Side_Undisclosed" -> true
-        | "Model_app_enums.MOD_FIX_Side_Cross" -> true
-        | "Model_app_enums.MOD_FIX_Side_CrossShort" -> true
-        | "Model_app_enums.MOD_FIX_Side_CrossShortExempt" -> true
-        | "Model_app_enums.MOD_FIX_Side_AsDefined" -> true
-        | "Model_app_enums.MOD_FIX_Side_Opposite" -> true
-        | "Model_app_enums.MOD_FIX_Side_Subscribe" -> true
-        | "Model_app_enums.MOD_FIX_Side_Redeem" -> true
-        | "Model_app_enums.MOD_FIX_Side_Lend" -> true
-        | "Model_app_enums.MOD_FIX_Side_Borrow" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_New" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_DoneForDay" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Canceled" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Replaced" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_PendingCancel" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Stopped" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Rejected" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Suspended" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_PendingNew" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Calculated" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Expired" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Restated" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_PendingReplace" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_Trade" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_TradeCorrect" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_TradeCancel" -> true
-        | "Model_app_enums.MOD_FIX_ExecType_OrderStatus" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_New" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_PartiallyFilled" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Filled" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_DoneForDay" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Canceled" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_PendingCancel" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Stopped" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Rejected" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Suspended" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_PendingNew" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Calculated" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Expired" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_AcceptedForBidding" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_PendingReplace" -> true
-        | "Model_app_enums.MOD_FIX_OrdStatus_Replaced" -> true
         | "Model_app_enums.MOD_FIX_OrdType_Market" -> true
         | "Model_app_enums.MOD_FIX_OrdType_Limit" -> true
         | "Model_app_enums.MOD_FIX_OrdType_Stop" -> true
@@ -188,6 +139,54 @@ let isEnumCase (str : string)  =
         | "Model_app_enums.MOD_FIX_OrdType_PreviousFundValuationPoint" -> true
         | "Model_app_enums.MOD_FIX_OrdType_NextFundValuationPoint" -> true
         | "Model_app_enums.MOD_FIX_OrdType_Pegged" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_New" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_PartiallyFilled" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Filled" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_DoneForDay" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Canceled" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_PendingCancel" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Stopped" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Rejected" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Suspended" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_PendingNew" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Calculated" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Expired" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_AcceptedForBidding" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_PendingReplace" -> true
+        | "Model_app_enums.MOD_FIX_OrdStatus_Replaced" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_New" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_DoneForDay" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Canceled" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Replaced" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_PendingCancel" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Stopped" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Rejected" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Suspended" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_PendingNew" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Calculated" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Expired" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Restated" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_PendingReplace" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_Trade" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_TradeCorrect" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_TradeCancel" -> true
+        | "Model_app_enums.MOD_FIX_ExecType_OrderStatus" -> true
+        | "Model_app_enums.MOD_FIX_Side_Buy" -> true
+        | "Model_app_enums.MOD_FIX_Side_Sell" -> true
+        | "Model_app_enums.MOD_FIX_Side_BuyMinus" -> true
+        | "Model_app_enums.MOD_FIX_Side_SellPlus" -> true
+        | "Model_app_enums.MOD_FIX_Side_SellShort" -> true
+        | "Model_app_enums.MOD_FIX_Side_SellShortExempt" -> true
+        | "Model_app_enums.MOD_FIX_Side_Undisclosed" -> true
+        | "Model_app_enums.MOD_FIX_Side_Cross" -> true
+        | "Model_app_enums.MOD_FIX_Side_CrossShort" -> true
+        | "Model_app_enums.MOD_FIX_Side_CrossShortExempt" -> true
+        | "Model_app_enums.MOD_FIX_Side_AsDefined" -> true
+        | "Model_app_enums.MOD_FIX_Side_Opposite" -> true
+        | "Model_app_enums.MOD_FIX_Side_Subscribe" -> true
+        | "Model_app_enums.MOD_FIX_Side_Redeem" -> true
+        | "Model_app_enums.MOD_FIX_Side_Lend" -> true
+        | "Model_app_enums.MOD_FIX_Side_Borrow" -> true
         | _ -> false
     )
 ;;
@@ -196,25 +195,26 @@ let isRepeatingGroup (str : string)  =
     (match str with
         | _ -> false
     )
-    [@@macro]
 ;;
 
 let name_of_action (x)  =
-    ""
-    [@@macro]
+    (match x with
+        | FIX_Action_x _ -> "Action:x"
+        | _ -> ""
+    )
 ;;
 
 let name_of_model_msg (x)  =
     (match x with
-        | FIX_Msg_ExecutionReport _ -> "ExecutionReport"
-        | FIX_Msg_NewOrderSingle _ -> "NewOrderSingle"
+        | FIX_Msg_Def_Opt_ExecutionReport _ -> "ExecutionReport"
+        | FIX_Msg_Def_Opt_NewOrderSingle _ -> "NewOrderSingle"
     )
 ;;
 
 let fix_code_of_model_msg (m)  =
     (match m with
-        | FIX_Msg_ExecutionReport _ -> "8"
-        | FIX_Msg_NewOrderSingle _ -> "D"
+        | FIX_Msg_Def_Opt_ExecutionReport _ -> "8"
+        | FIX_Msg_Def_Opt_NewOrderSingle _ -> "D"
     )
 ;;
 
@@ -232,6 +232,21 @@ let name_of_msg (x)  =
         | FIX_TL_Req_Field_Missing _ -> "Msg:Field_missing"
         | FIX_TL_PossibleResend _ -> "Msg:Possible_resend"
         | FIX_TL_None -> "Msg:None"
+    )
+;;
+
+let is_msgfield_optional (x) (y)  =
+    (match x with
+        | "ExecutionReport" -> ((match y with
+            | "Text" -> true
+            | _ -> false
+        )
+        )
+        | "NewOrderSingle" -> ((match y with
+            | _ -> false
+        )
+        )
+        | _ -> false
     )
 ;;
 

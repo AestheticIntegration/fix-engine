@@ -1,9 +1,10 @@
-(* Imandra Inc. copyright 2019 *)
-[@@@import "../src-protocol-exts/full_app_enums.iml"]
-[@@@import "../src-core-pp/parser_utils.iml"]
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
+[@@@import "../src-protocol-exts/full_app_enums.iml"]
 open Full_app_enums;;
+[@@@import "../src-core-pp/parser_utils.iml"]
 open Parser_utils.Parser;;
+
 
 let encode_week (d)  =
     (match d with
@@ -13,6 +14,13 @@ let encode_week (d)  =
         | FIX_week_w3 -> "w3"
         | FIX_week_w4 -> "w4"
         | FIX_week_w5 -> "w5"
+    )
+;;
+
+let encode_NoSides (d)  =
+    (match d with
+        | FIX_NoSides_OneSide -> "1"
+        | FIX_NoSides_BothSides -> "2"
     )
 ;;
 
@@ -536,7 +544,7 @@ let encode_ContAmtType (d)  =
     )
 ;;
 
-let enncode_inner_CorporateAction (d)  =
+let encode_inner_CorporateAction (d)  =
     (match d with
         | FIX_CorporateAction_ExDividend -> "A"
         | FIX_CorporateAction_ExDistribution -> "B"
@@ -547,7 +555,7 @@ let enncode_inner_CorporateAction (d)  =
 ;;
 
 let encode_CorporateAction (d)  =
-    list_to_split (List.map enncode_inner_CorporateAction d) ' '
+    list_to_split (List.map encode_inner_CorporateAction d) ' '
 ;;
 
 let encode_CoveredOrUncovered (d)  =
@@ -599,7 +607,7 @@ let encode_CxlRejReason (d)  =
 let encode_CxlRejResponseTo (d)  =
     (match d with
         | FIX_CxlRejResponseTo_OrderCancelRequest -> "1"
-        | FIX_CxlRejResponseTo_OrderCancel -> "2"
+        | FIX_CxlRejResponseTo_OrderCancelReplaceRequest -> "2"
     )
 ;;
 
@@ -754,7 +762,7 @@ let encode_ExchangeForPhysical (d)  =
     )
 ;;
 
-let enncode_inner_ExecInst (d)  =
+let encode_inner_ExecInst (d)  =
     (match d with
         | FIX_ExecInst_NotHeld -> "1"
         | FIX_ExecInst_Work -> "2"
@@ -800,7 +808,7 @@ let enncode_inner_ExecInst (d)  =
 ;;
 
 let encode_ExecInst (d)  =
-    list_to_split (List.map enncode_inner_ExecInst d) ' '
+    list_to_split (List.map encode_inner_ExecInst d) ' '
 ;;
 
 let encode_ExecPriceType (d)  =
@@ -869,7 +877,7 @@ let encode_ExpirationCycle (d)  =
     )
 ;;
 
-let enncode_inner_FinancialStatus (d)  =
+let encode_inner_FinancialStatus (d)  =
     (match d with
         | FIX_FinancialStatus_Bankrupt -> "1"
         | FIX_FinancialStatus_PendingDelisting -> "2"
@@ -877,7 +885,7 @@ let enncode_inner_FinancialStatus (d)  =
 ;;
 
 let encode_FinancialStatus (d)  =
-    list_to_split (List.map enncode_inner_FinancialStatus d) ' '
+    list_to_split (List.map encode_inner_FinancialStatus d) ' '
 ;;
 
 let encode_ForexReq (d)  =
@@ -1336,13 +1344,6 @@ let encode_NetworkStatusResponseType (d)  =
     )
 ;;
 
-let encode_NoSides (d)  =
-    (match d with
-        | FIX_NoSides_OneSide -> "1"
-        | FIX_NoSides_BothSides -> "2"
-    )
-;;
-
 let encode_NotifyBrokerOfCredit (d)  =
     (match d with
         | FIX_NotifyBrokerOfCredit_DetailsShouldBeCommunicated -> "Y"
@@ -1357,7 +1358,7 @@ let encode_OddLot (d)  =
     )
 ;;
 
-let enncode_inner_OpenCloseSettlFlag (d)  =
+let encode_inner_OpenCloseSettlFlag (d)  =
     (match d with
         | FIX_OpenCloseSettlFlag_DailyOpen -> "0"
         | FIX_OpenCloseSettlFlag_SessionOpen -> "1"
@@ -1369,7 +1370,7 @@ let enncode_inner_OpenCloseSettlFlag (d)  =
 ;;
 
 let encode_OpenCloseSettlFlag (d)  =
-    list_to_split (List.map enncode_inner_OpenCloseSettlFlag d) ' '
+    list_to_split (List.map encode_inner_OpenCloseSettlFlag d) ' '
 ;;
 
 let encode_OrdRejReason (d)  =
@@ -1446,7 +1447,7 @@ let encode_OrderCapacity (d)  =
     )
 ;;
 
-let enncode_inner_OrderRestrictions (d)  =
+let encode_inner_OrderRestrictions (d)  =
     (match d with
         | FIX_OrderRestrictions_ProgramTrade -> "1"
         | FIX_OrderRestrictions_IndexArbitrage -> "2"
@@ -1462,7 +1463,7 @@ let enncode_inner_OrderRestrictions (d)  =
 ;;
 
 let encode_OrderRestrictions (d)  =
-    list_to_split (List.map enncode_inner_OrderRestrictions d) ' '
+    list_to_split (List.map encode_inner_OrderRestrictions d) ' '
 ;;
 
 let encode_OwnerType (d)  =
@@ -1884,7 +1885,7 @@ let encode_QuoteCancelType (d)  =
     )
 ;;
 
-let enncode_inner_QuoteCondition (d)  =
+let encode_inner_QuoteCondition (d)  =
     (match d with
         | FIX_QuoteCondition_Open -> "A"
         | FIX_QuoteCondition_Closed -> "B"
@@ -1899,7 +1900,7 @@ let enncode_inner_QuoteCondition (d)  =
 ;;
 
 let encode_QuoteCondition (d)  =
-    list_to_split (List.map enncode_inner_QuoteCondition d) ' '
+    list_to_split (List.map encode_inner_QuoteCondition d) ' '
 ;;
 
 let encode_QuotePriceType (d)  =
@@ -2083,7 +2084,7 @@ let encode_RoutingType (d)  =
     )
 ;;
 
-let enncode_inner_Scope (d)  =
+let encode_inner_Scope (d)  =
     (match d with
         | FIX_Scope_LocalMarket -> "1"
         | FIX_Scope_National -> "2"
@@ -2092,7 +2093,7 @@ let enncode_inner_Scope (d)  =
 ;;
 
 let encode_Scope (d)  =
-    list_to_split (List.map enncode_inner_Scope d) ' '
+    list_to_split (List.map encode_inner_Scope d) ' '
 ;;
 
 let encode_SecurityIDSource (d)  =
@@ -2625,7 +2626,7 @@ let encode_TradeAllocIndicator (d)  =
     )
 ;;
 
-let enncode_inner_TradeCondition (d)  =
+let encode_inner_TradeCondition (d)  =
     (match d with
         | FIX_TradeCondition_Cash -> "A"
         | FIX_TradeCondition_AveragePriceTrade -> "B"
@@ -2648,7 +2649,7 @@ let enncode_inner_TradeCondition (d)  =
 ;;
 
 let encode_TradeCondition (d)  =
-    list_to_split (List.map enncode_inner_TradeCondition d) ' '
+    list_to_split (List.map encode_inner_TradeCondition d) ' '
 ;;
 
 let encode_TradeReportRejectReason (d)  =
@@ -2855,4 +2856,5 @@ let encode_Exchange (d)  =
         | FIX_Exchange_SHSC -> "SHSC"
     )
 ;;
+
 [@@@logic]

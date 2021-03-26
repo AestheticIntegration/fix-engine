@@ -3,6 +3,7 @@ module type SIG = sig
 
   val ( let* ) : 'a t -> ('a -> 'b t) -> 'b t
   val ( >>= ) : 'a t -> ('a -> 'b t) -> 'b t
+  val catch : (unit -> 'a t) -> (exn -> 'a t) -> 'a t
   val return : 'a -> 'a t
 
 end
@@ -31,6 +32,7 @@ module Identity : SIG with type 'a t = 'a = struct
 
   let (>>=) m f = f m
   let (let*) = (>>=)
+  let catch f h = try f () with exn -> h exn
   let return x : 'a t = x
 end
 
@@ -104,13 +106,12 @@ module Make(IO:IO) = struct
       }
 
     let read_int file =
-      try
+      catch ( fun () ->
         open_in file >>= fun chn ->
         input_line chn >>= fun num ->
         close_in chn >>= fun () ->
         return (int_of_string num |> Z.of_int)
-      with _exn ->
-        return 0
+      ) ( fun _exn -> return 0)
 
     let read_seqns dir =
       read_int Filename.(concat dir "seqin" ) >>= fun seqin ->
@@ -150,6 +151,11 @@ module Make(IO:IO) = struct
 
     type message = (string * string) list
 
+    let get_time_string () =
+      Time_defaults_current_time.get_current_utctimestamp ()
+      |> Time_defaults_pp.encode_UTCTimestamp
+
+
     let encode ~split msg =
       let split = Caml.String.make 1i split in
       msg
@@ -165,6 +171,7 @@ module Make(IO:IO) = struct
     let logfix msg =
       match !logfile with None -> return () | Some filename ->
       let log = encode ~split:'|' msg ^ "\n"in
+      let log = "[" ^ get_time_string () ^ "]: " ^ log in 
       open_append filename >>= fun fch ->
       write_str fch log >>= fun () ->
       close_out fch
@@ -221,7 +228,9 @@ module Make(IO:IO) = struct
           let model_message = Type_converter.convert_full_to_model_fix data in
           let model_state = State_utils.set_incoming model_state model_message in
           begin match model_message with
-            | FIX_TL_Normal msg -> msg_pub msg ~sending:false
+            | FIX_TL_Normal msg -> 
+            let msg = Msg_process.convert_inner model_state msg in
+            msg_pub msg ~sending:false
             | _ ->
               (* println "[Model error] Incoming message conversion failure"; *)
               return ()

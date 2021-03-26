@@ -1,7 +1,7 @@
 (library
- (name conversions)
- (public_name fix-engine.conversions)
- (wrapped false)
- (flags
-  (:standard -open Imandra_prelude -warn-error -A+8+39 -alert -deprecated -w -33-58))
- (libraries imandra-base.prelude protocol_exts venue_types))
+  (name conversions)
+  (public_name fix-engine.conversions)
+  (wrapped false)
+  (flags (:standard -open Imandra_interactive -open Imandra_prelude -warn-error -A+8+39 -alert -deprecated -w -33-58))
+  (libraries imandra-base.prelude imandra-base.interactive protocol_exts venue_types)
+)

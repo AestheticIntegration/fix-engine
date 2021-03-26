@@ -1,8 +1,10 @@
-(* Imandra Inc. copyright 2019 *)
-[@@@import "../src-protocol-exts/full_app_enums.iml"]
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
+[@@@import "../src-protocol-exts/full_app_enums.iml"]
 open Full_app_enums;;
+[@@@require "yojson"]
 open Yojson.Basic;;
+
 
 let week_to_string (d)  =
     (match d with
@@ -12,6 +14,13 @@ let week_to_string (d)  =
         | FIX_week_w3 -> "w3"
         | FIX_week_w4 -> "w4"
         | FIX_week_w5 -> "w5"
+    )
+;;
+
+let nosides_to_string (d)  =
+    (match d with
+        | FIX_NoSides_OneSide -> "OneSide"
+        | FIX_NoSides_BothSides -> "BothSides"
     )
 ;;
 
@@ -594,7 +603,7 @@ let cxlrejreason_to_string (d)  =
 let cxlrejresponseto_to_string (d)  =
     (match d with
         | FIX_CxlRejResponseTo_OrderCancelRequest -> "OrderCancelRequest"
-        | FIX_CxlRejResponseTo_OrderCancel -> "OrderCancel"
+        | FIX_CxlRejResponseTo_OrderCancelReplaceRequest -> "OrderCancelReplaceRequest"
     )
 ;;
 
@@ -1320,13 +1329,6 @@ let networkstatusresponsetype_to_string (d)  =
     (match d with
         | FIX_NetworkStatusResponseType_Full -> "Full"
         | FIX_NetworkStatusResponseType_IncrementalUpdate -> "IncrementalUpdate"
-    )
-;;
-
-let nosides_to_string (d)  =
-    (match d with
-        | FIX_NoSides_OneSide -> "OneSide"
-        | FIX_NoSides_BothSides -> "BothSides"
     )
 ;;
 
@@ -2827,6 +2829,10 @@ let week_to_json (d)  : json =
     `String (week_to_string d)
 ;;
 
+let nosides_to_json (d)  : json =
+    `String (nosides_to_string d)
+;;
+
 let accounttype_to_json (d)  : json =
     `String (accounttype_to_string d)
 ;;
@@ -3334,10 +3340,6 @@ let networkstatusresponsetype_to_json (d)  : json =
     `String (networkstatusresponsetype_to_string d)
 ;;
 
-let nosides_to_json (d)  : json =
-    `String (nosides_to_string d)
-;;
-
 let notifybrokerofcredit_to_json (d)  : json =
     `String (notifybrokerofcredit_to_string d)
 ;;
@@ -3811,6 +3813,13 @@ let week_opt_to_json (d)  : json =
     (match d with
         | None -> (`Null)
         | Some d -> (week_to_json d)
+    )
+;;
+
+let nosides_opt_to_json (d)  : json =
+    (match d with
+        | None -> (`Null)
+        | Some d -> (nosides_to_json d)
     )
 ;;
 
@@ -4696,13 +4705,6 @@ let networkstatusresponsetype_opt_to_json (d)  : json =
     )
 ;;
 
-let nosides_opt_to_json (d)  : json =
-    (match d with
-        | None -> (`Null)
-        | Some d -> (nosides_to_json d)
-    )
-;;
-
 let notifybrokerofcredit_opt_to_json (d)  : json =
     (match d with
         | None -> (`Null)
@@ -5514,4 +5516,5 @@ let exchange_opt_to_json (d)  : json =
         | Some d -> (exchange_to_json d)
     )
 ;;
+
 [@@@logic]

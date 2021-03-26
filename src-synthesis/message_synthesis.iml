@@ -1,0 +1,17 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@program]
+[@@@import "../src-model/src-types/model_messages.iml"]
+open Model_messages;;
+
+
+let message_synthesis_funcs = [(fun x -> (match x with
+    | FIX_Msg_ExecutionReport _ -> true
+    | _ -> false
+)
+);(fun x -> (match x with
+    | FIX_Msg_NewOrderSingle _ -> true
+    | _ -> false
+)
+)] ;;
+
+[@@@logic]

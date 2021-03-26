@@ -1,0 +1,468 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@program]
+[@@@import "../src-core-pp/base_types_json.iml"]
+open Base_types_json;;
+[@@@import "../src-core-pp/datetime_json.iml"]
+open Datetime_json;;
+[@@@require "decoders-yojson"]
+open Decoders_yojson.Basic.Decode;;
+[@@@require "decoders-yojson"]
+open Decoders_yojson.Basic.Decode.Infix;;
+[@@@import "full_app_enums_decoder.iml"]
+open Full_app_enums_decoder;;
+[@@@import "../src-protocol-exts/full_app_messages.iml"]
+open Full_app_messages;;
+[@@@import "full_app_records_decoder.iml"]
+open Full_app_records_decoder;;
+
+
+let full_message_executionreport_decoder  : full_fix_executionreport_data decoder =
+    (field "MiscFeesGrp" full_rg_miscfeesgrp_decoder) >>= (fun f_ExecutionReport_MiscFeesGrp -> (maybe (field "CopyMsgIndicator" bool_decoder)) >>= (fun f_ExecutionReport_CopyMsgIndicator -> (field "InstrmtLegExecGrp" full_rg_instrmtlegexecgrp_decoder) >>= (fun f_ExecutionReport_InstrmtLegExecGrp -> (field "ContAmtGrp" full_rg_contamtgrp_decoder) >>= (fun f_ExecutionReport_ContAmtGrp -> (maybe (field "LastLiquidityInd" full_enum_lastliquidityind_decoder)) >>= (fun f_ExecutionReport_LastLiquidityInd -> (maybe (field "PriceImprovement" float_6_decoder)) >>= (fun f_ExecutionReport_PriceImprovement -> (maybe (field "PriorityIndicator" full_enum_priorityindicator_decoder)) >>= (fun f_ExecutionReport_PriorityIndicator -> (maybe (field "ExecPriceAdjustment" float_decoder)) >>= (fun f_ExecutionReport_ExecPriceAdjustment -> (maybe (field "ExecPriceType" full_enum_execpricetype_decoder)) >>= (fun f_ExecutionReport_ExecPriceType -> (maybe (field "ExecValuationPoint" utctimestamp_milli_decoder)) >>= (fun f_ExecutionReport_ExecValuationPoint -> (maybe (field "TransBkdTime" utctimestamp_milli_decoder)) >>= (fun f_ExecutionReport_TransBkdTime -> (maybe (field "Designation" string_decoder)) >>= (fun f_ExecutionReport_Designation -> (maybe (field "RegistID" string_decoder)) >>= (fun f_ExecutionReport_RegistID -> (maybe (field "MoneyLaunderingStatus" full_enum_moneylaunderingstatus_decoder)) >>= (fun f_ExecutionReport_MoneyLaunderingStatus -> (maybe (field "CancellationRights" full_enum_cancellationrights_decoder)) >>= (fun f_ExecutionReport_CancellationRights -> (maybe (field "MultiLegReportingType" full_enum_multilegreportingtype_decoder)) >>= (fun f_ExecutionReport_MultiLegReportingType -> (maybe (field "LastForwardPoints2" float_6_decoder)) >>= (fun f_ExecutionReport_LastForwardPoints2 -> (maybe (field "OrderQty2" float_6_decoder)) >>= (fun f_ExecutionReport_OrderQty2 -> (maybe (field "SettlDate2" localmktdate_decoder)) >>= (fun f_ExecutionReport_SettlDate2 -> (maybe (field "EncodedText" string_decoder)) >>= (fun f_ExecutionReport_EncodedText -> (maybe (field "EncodedTextLen" int_decoder)) >>= (fun f_ExecutionReport_EncodedTextLen -> (maybe (field "Text" string_decoder)) >>= (fun f_ExecutionReport_Text -> (maybe (field "BookingType" full_enum_bookingtype_decoder)) >>= (fun f_ExecutionReport_BookingType -> (maybe (field "MaxShow" float_6_decoder)) >>= (fun f_ExecutionReport_MaxShow -> (maybe (field "PositionEffect" full_enum_positioneffect_decoder)) >>= (fun f_ExecutionReport_PositionEffect -> (maybe (field "MaxFloor" float_6_decoder)) >>= (fun f_ExecutionReport_MaxFloor -> (maybe (field "MinQty" float_6_decoder)) >>= (fun f_ExecutionReport_MinQty -> (maybe (field "HandlInst" full_enum_handlinst_decoder)) >>= (fun f_ExecutionReport_HandlInst -> (maybe (field "SettlCurrFxRateCalc" full_enum_settlcurrfxratecalc_decoder)) >>= (fun f_ExecutionReport_SettlCurrFxRateCalc -> (maybe (field "SettlCurrFxRate" float_decoder)) >>= (fun f_ExecutionReport_SettlCurrFxRate -> (maybe (field "SettlCurrency" full_enum_currency_decoder)) >>= (fun f_ExecutionReport_SettlCurrency -> (maybe (field "SettlCurrAmt" float_6_decoder)) >>= (fun f_ExecutionReport_SettlCurrAmt -> (maybe (field "NetMoney" float_6_decoder)) >>= (fun f_ExecutionReport_NetMoney -> (maybe (field "TotalTakedown" float_6_decoder)) >>= (fun f_ExecutionReport_TotalTakedown -> (maybe (field "Concession" float_6_decoder)) >>= (fun f_ExecutionReport_Concession -> (maybe (field "BasisFeaturePrice" float_6_decoder)) >>= (fun f_ExecutionReport_BasisFeaturePrice -> (maybe (field "BasisFeatureDate" localmktdate_decoder)) >>= (fun f_ExecutionReport_BasisFeatureDate -> (maybe (field "TradedFlatSwitch" full_enum_tradedflatswitch_decoder)) >>= (fun f_ExecutionReport_TradedFlatSwitch -> (maybe (field "EndCash" float_6_decoder)) >>= (fun f_ExecutionReport_EndCash -> (maybe (field "StartCash" float_6_decoder)) >>= (fun f_ExecutionReport_StartCash -> (maybe (field "EndAccruedInterestAmt" float_6_decoder)) >>= (fun f_ExecutionReport_EndAccruedInterestAmt -> (maybe (field "InterestAtMaturity" float_6_decoder)) >>= (fun f_ExecutionReport_InterestAtMaturity -> (maybe (field "AccruedInterestAmt" float_6_decoder)) >>= (fun f_ExecutionReport_AccruedInterestAmt -> (maybe (field "AccruedInterestRate" float_6_decoder)) >>= (fun f_ExecutionReport_AccruedInterestRate -> (maybe (field "ExDate" localmktdate_decoder)) >>= (fun f_ExecutionReport_ExDate -> (maybe (field "NumDaysInterest" int_decoder)) >>= (fun f_ExecutionReport_NumDaysInterest -> (maybe (field "GrossTradeAmt" float_6_decoder)) >>= (fun f_ExecutionReport_GrossTradeAmt -> (field "YieldData" full_record_yielddata_decoder) >>= (fun f_ExecutionReport_YieldData -> (field "SpreadOrBenchmarkCurveData" full_record_spreadorbenchmarkcurvedata_decoder) >>= (fun f_ExecutionReport_SpreadOrBenchmarkCurveData -> (field "CommissionData" full_record_commissiondata_decoder) >>= (fun f_ExecutionReport_CommissionData -> (maybe (field "ReportToExch" full_enum_reporttoexch_decoder)) >>= (fun f_ExecutionReport_ReportToExch -> (maybe (field "TransactTime" utctimestamp_milli_decoder)) >>= (fun f_ExecutionReport_TransactTime -> (maybe (field "TradeDate" localmktdate_decoder)) >>= (fun f_ExecutionReport_TradeDate -> (maybe (field "GTBookingInst" full_enum_gtbookinginst_decoder)) >>= (fun f_ExecutionReport_GTBookingInst -> (maybe (field "DayAvgPx" float_6_decoder)) >>= (fun f_ExecutionReport_DayAvgPx -> (maybe (field "DayCumQty" float_6_decoder)) >>= (fun f_ExecutionReport_DayCumQty -> (maybe (field "DayOrderQty" float_6_decoder)) >>= (fun f_ExecutionReport_DayOrderQty -> (maybe (field "AvgPx" float_6_decoder)) >>= (fun f_ExecutionReport_AvgPx -> (maybe (field "CumQty" float_6_decoder)) >>= (fun f_ExecutionReport_CumQty -> (maybe (field "LeavesQty" float_6_decoder)) >>= (fun f_ExecutionReport_LeavesQty -> (maybe (field "LastCapacity" full_enum_lastcapacity_decoder)) >>= (fun f_ExecutionReport_LastCapacity -> (maybe (field "TimeBracket" string_decoder)) >>= (fun f_ExecutionReport_TimeBracket -> (maybe (field "TradingSessionSubID" string_decoder)) >>= (fun f_ExecutionReport_TradingSessionSubID -> (maybe (field "TradingSessionID" string_decoder)) >>= (fun f_ExecutionReport_TradingSessionID -> (maybe (field "LastMkt" full_enum_exchange_decoder)) >>= (fun f_ExecutionReport_LastMkt -> (maybe (field "LastForwardPoints" float_6_decoder)) >>= (fun f_ExecutionReport_LastForwardPoints -> (maybe (field "LastSpotRate" float_6_decoder)) >>= (fun f_ExecutionReport_LastSpotRate -> (maybe (field "LastParPx" float_6_decoder)) >>= (fun f_ExecutionReport_LastParPx -> (maybe (field "UnderlyingLastPx" float_6_decoder)) >>= (fun f_ExecutionReport_UnderlyingLastPx -> (maybe (field "LastPx" float_6_decoder)) >>= (fun f_ExecutionReport_LastPx -> (maybe (field "UnderlyingLastQty" float_6_decoder)) >>= (fun f_ExecutionReport_UnderlyingLastQty -> (maybe (field "LastQty" float_6_decoder)) >>= (fun f_ExecutionReport_LastQty -> (maybe (field "CustOrderCapacity" full_enum_custordercapacity_decoder)) >>= (fun f_ExecutionReport_CustOrderCapacity -> (maybe (field "OrderRestrictions" full_enum_orderrestrictions_decoder)) >>= (fun f_ExecutionReport_OrderRestrictions -> (maybe (field "OrderCapacity" full_enum_ordercapacity_decoder)) >>= (fun f_ExecutionReport_OrderCapacity -> (maybe (field "ExecInst" full_enum_execinst_decoder)) >>= (fun f_ExecutionReport_ExecInst -> (maybe (field "ExpireTime" utctimestamp_milli_decoder)) >>= (fun f_ExecutionReport_ExpireTime -> (maybe (field "ExpireDate" localmktdate_decoder)) >>= (fun f_ExecutionReport_ExpireDate -> (maybe (field "EffectiveTime" utctimestamp_milli_decoder)) >>= (fun f_ExecutionReport_EffectiveTime -> (maybe (field "TimeInForce" full_enum_timeinforce_decoder)) >>= (fun f_ExecutionReport_TimeInForce -> (maybe (field "SolicitedFlag" full_enum_solicitedflag_decoder)) >>= (fun f_ExecutionReport_SolicitedFlag -> (maybe (field "ComplianceID" string_decoder)) >>= (fun f_ExecutionReport_ComplianceID -> (maybe (field "Currency" full_enum_currency_decoder)) >>= (fun f_ExecutionReport_Currency -> (maybe (field "TargetStrategyPerformance" float_decoder)) >>= (fun f_ExecutionReport_TargetStrategyPerformance -> (maybe (field "ParticipationRate" float_6_decoder)) >>= (fun f_ExecutionReport_ParticipationRate -> (maybe (field "TargetStrategyParameters" string_decoder)) >>= (fun f_ExecutionReport_TargetStrategyParameters -> (maybe (field "TargetStrategy" full_enum_targetstrategy_decoder)) >>= (fun f_ExecutionReport_TargetStrategy -> (maybe (field "DiscretionPrice" float_6_decoder)) >>= (fun f_ExecutionReport_DiscretionPrice -> (maybe (field "PeggedPrice" float_6_decoder)) >>= (fun f_ExecutionReport_PeggedPrice -> (field "DiscretionInstructions" full_record_discretioninstructions_decoder) >>= (fun f_ExecutionReport_DiscretionInstructions -> (field "PegInstructions" full_record_peginstructions_decoder) >>= (fun f_ExecutionReport_PegInstructions -> (maybe (field "StopPx" float_6_decoder)) >>= (fun f_ExecutionReport_StopPx -> (maybe (field "Price" float_6_decoder)) >>= (fun f_ExecutionReport_Price -> (maybe (field "PriceType" full_enum_pricetype_decoder)) >>= (fun f_ExecutionReport_PriceType -> (maybe (field "OrdType" full_enum_ordtype_decoder)) >>= (fun f_ExecutionReport_OrdType -> (field "OrderQtyData" full_record_orderqtydata_decoder) >>= (fun f_ExecutionReport_OrderQtyData -> (maybe (field "QtyType" full_enum_qtytype_decoder)) >>= (fun f_ExecutionReport_QtyType -> (field "Stipulations" full_rg_stipulations_decoder) >>= (fun f_ExecutionReport_Stipulations -> (maybe (field "Side" full_enum_side_decoder)) >>= (fun f_ExecutionReport_Side -> (field "UndInstrmtGrp" full_rg_undinstrmtgrp_decoder) >>= (fun f_ExecutionReport_UndInstrmtGrp -> (field "FinancingDetails" full_record_financingdetails_decoder) >>= (fun f_ExecutionReport_FinancingDetails -> (field "Instrument" full_record_instrument_decoder) >>= (fun f_ExecutionReport_Instrument -> (maybe (field "ClearingFeeIndicator" full_enum_clearingfeeindicator_decoder)) >>= (fun f_ExecutionReport_ClearingFeeIndicator -> (maybe (field "CashMargin" full_enum_cashmargin_decoder)) >>= (fun f_ExecutionReport_CashMargin -> (maybe (field "SettlDate" localmktdate_decoder)) >>= (fun f_ExecutionReport_SettlDate -> (maybe (field "SettlType" full_enum_settltype_decoder)) >>= (fun f_ExecutionReport_SettlType -> (maybe (field "PreallocMethod" full_enum_preallocmethod_decoder)) >>= (fun f_ExecutionReport_PreallocMethod -> (maybe (field "BookingUnit" full_enum_bookingunit_decoder)) >>= (fun f_ExecutionReport_BookingUnit -> (maybe (field "DayBookingInst" full_enum_daybookinginst_decoder)) >>= (fun f_ExecutionReport_DayBookingInst -> (maybe (field "AccountType" full_enum_accounttype_decoder)) >>= (fun f_ExecutionReport_AccountType -> (maybe (field "AcctIDSource" full_enum_acctidsource_decoder)) >>= (fun f_ExecutionReport_AcctIDSource -> (maybe (field "Account" string_decoder)) >>= (fun f_ExecutionReport_Account -> (maybe (field "ExecRestatementReason" full_enum_execrestatementreason_decoder)) >>= (fun f_ExecutionReport_ExecRestatementReason -> (maybe (field "OrdRejReason" full_enum_ordrejreason_decoder)) >>= (fun f_ExecutionReport_OrdRejReason -> (maybe (field "WorkingIndicator" full_enum_workingindicator_decoder)) >>= (fun f_ExecutionReport_WorkingIndicator -> (maybe (field "OrdStatus" full_enum_ordstatus_decoder)) >>= (fun f_ExecutionReport_OrdStatus -> (maybe (field "ExecType" full_enum_exectype_decoder)) >>= (fun f_ExecutionReport_ExecType -> (maybe (field "ExecRefID" string_decoder)) >>= (fun f_ExecutionReport_ExecRefID -> (maybe (field "ExecID" string_decoder)) >>= (fun f_ExecutionReport_ExecID -> (maybe (field "CrossType" full_enum_crosstype_decoder)) >>= (fun f_ExecutionReport_CrossType -> (maybe (field "OrigCrossID" string_decoder)) >>= (fun f_ExecutionReport_OrigCrossID -> (maybe (field "CrossID" string_decoder)) >>= (fun f_ExecutionReport_CrossID -> (maybe (field "ListID" string_decoder)) >>= (fun f_ExecutionReport_ListID -> (field "ContraGrp" full_rg_contragrp_decoder) >>= (fun f_ExecutionReport_ContraGrp -> (maybe (field "TradeOriginationDate" localmktdate_decoder)) >>= (fun f_ExecutionReport_TradeOriginationDate -> (field "Parties" full_rg_parties_decoder) >>= (fun f_ExecutionReport_Parties -> (maybe (field "LastRptRequested" bool_decoder)) >>= (fun f_ExecutionReport_LastRptRequested -> (maybe (field "TotNumReports" int_decoder)) >>= (fun f_ExecutionReport_TotNumReports -> (maybe (field "MassStatusReqID" string_decoder)) >>= (fun f_ExecutionReport_MassStatusReqID -> (maybe (field "OrdStatusReqID" string_decoder)) >>= (fun f_ExecutionReport_OrdStatusReqID -> (maybe (field "QuoteRespID" string_decoder)) >>= (fun f_ExecutionReport_QuoteRespID -> (maybe (field "ClOrdLinkID" string_decoder)) >>= (fun f_ExecutionReport_ClOrdLinkID -> (maybe (field "OrigClOrdID" string_decoder)) >>= (fun f_ExecutionReport_OrigClOrdID -> (maybe (field "ClOrdID" string_decoder)) >>= (fun f_ExecutionReport_ClOrdID -> (maybe (field "SecondaryExecID" string_decoder)) >>= (fun f_ExecutionReport_SecondaryExecID -> (maybe (field "SecondaryClOrdID" string_decoder)) >>= (fun f_ExecutionReport_SecondaryClOrdID -> (maybe (field "SecondaryOrderID" string_decoder)) >>= (fun f_ExecutionReport_SecondaryOrderID -> (maybe (field "OrderID" string_decoder)) >>= (fun f_ExecutionReport_OrderID -> succeed {
+        f_ExecutionReport_OrderID = f_ExecutionReport_OrderID;
+        f_ExecutionReport_SecondaryOrderID = f_ExecutionReport_SecondaryOrderID;
+        f_ExecutionReport_SecondaryClOrdID = f_ExecutionReport_SecondaryClOrdID;
+        f_ExecutionReport_SecondaryExecID = f_ExecutionReport_SecondaryExecID;
+        f_ExecutionReport_ClOrdID = f_ExecutionReport_ClOrdID;
+        f_ExecutionReport_OrigClOrdID = f_ExecutionReport_OrigClOrdID;
+        f_ExecutionReport_ClOrdLinkID = f_ExecutionReport_ClOrdLinkID;
+        f_ExecutionReport_QuoteRespID = f_ExecutionReport_QuoteRespID;
+        f_ExecutionReport_OrdStatusReqID = f_ExecutionReport_OrdStatusReqID;
+        f_ExecutionReport_MassStatusReqID = f_ExecutionReport_MassStatusReqID;
+        f_ExecutionReport_TotNumReports = f_ExecutionReport_TotNumReports;
+        f_ExecutionReport_LastRptRequested = f_ExecutionReport_LastRptRequested;
+        f_ExecutionReport_Parties = f_ExecutionReport_Parties;
+        f_ExecutionReport_TradeOriginationDate = f_ExecutionReport_TradeOriginationDate;
+        f_ExecutionReport_ContraGrp = f_ExecutionReport_ContraGrp;
+        f_ExecutionReport_ListID = f_ExecutionReport_ListID;
+        f_ExecutionReport_CrossID = f_ExecutionReport_CrossID;
+        f_ExecutionReport_OrigCrossID = f_ExecutionReport_OrigCrossID;
+        f_ExecutionReport_CrossType = f_ExecutionReport_CrossType;
+        f_ExecutionReport_ExecID = f_ExecutionReport_ExecID;
+        f_ExecutionReport_ExecRefID = f_ExecutionReport_ExecRefID;
+        f_ExecutionReport_ExecType = f_ExecutionReport_ExecType;
+        f_ExecutionReport_OrdStatus = f_ExecutionReport_OrdStatus;
+        f_ExecutionReport_WorkingIndicator = f_ExecutionReport_WorkingIndicator;
+        f_ExecutionReport_OrdRejReason = f_ExecutionReport_OrdRejReason;
+        f_ExecutionReport_ExecRestatementReason = f_ExecutionReport_ExecRestatementReason;
+        f_ExecutionReport_Account = f_ExecutionReport_Account;
+        f_ExecutionReport_AcctIDSource = f_ExecutionReport_AcctIDSource;
+        f_ExecutionReport_AccountType = f_ExecutionReport_AccountType;
+        f_ExecutionReport_DayBookingInst = f_ExecutionReport_DayBookingInst;
+        f_ExecutionReport_BookingUnit = f_ExecutionReport_BookingUnit;
+        f_ExecutionReport_PreallocMethod = f_ExecutionReport_PreallocMethod;
+        f_ExecutionReport_SettlType = f_ExecutionReport_SettlType;
+        f_ExecutionReport_SettlDate = f_ExecutionReport_SettlDate;
+        f_ExecutionReport_CashMargin = f_ExecutionReport_CashMargin;
+        f_ExecutionReport_ClearingFeeIndicator = f_ExecutionReport_ClearingFeeIndicator;
+        f_ExecutionReport_Instrument = f_ExecutionReport_Instrument;
+        f_ExecutionReport_FinancingDetails = f_ExecutionReport_FinancingDetails;
+        f_ExecutionReport_UndInstrmtGrp = f_ExecutionReport_UndInstrmtGrp;
+        f_ExecutionReport_Side = f_ExecutionReport_Side;
+        f_ExecutionReport_Stipulations = f_ExecutionReport_Stipulations;
+        f_ExecutionReport_QtyType = f_ExecutionReport_QtyType;
+        f_ExecutionReport_OrderQtyData = f_ExecutionReport_OrderQtyData;
+        f_ExecutionReport_OrdType = f_ExecutionReport_OrdType;
+        f_ExecutionReport_PriceType = f_ExecutionReport_PriceType;
+        f_ExecutionReport_Price = f_ExecutionReport_Price;
+        f_ExecutionReport_StopPx = f_ExecutionReport_StopPx;
+        f_ExecutionReport_PegInstructions = f_ExecutionReport_PegInstructions;
+        f_ExecutionReport_DiscretionInstructions = f_ExecutionReport_DiscretionInstructions;
+        f_ExecutionReport_PeggedPrice = f_ExecutionReport_PeggedPrice;
+        f_ExecutionReport_DiscretionPrice = f_ExecutionReport_DiscretionPrice;
+        f_ExecutionReport_TargetStrategy = f_ExecutionReport_TargetStrategy;
+        f_ExecutionReport_TargetStrategyParameters = f_ExecutionReport_TargetStrategyParameters;
+        f_ExecutionReport_ParticipationRate = f_ExecutionReport_ParticipationRate;
+        f_ExecutionReport_TargetStrategyPerformance = f_ExecutionReport_TargetStrategyPerformance;
+        f_ExecutionReport_Currency = f_ExecutionReport_Currency;
+        f_ExecutionReport_ComplianceID = f_ExecutionReport_ComplianceID;
+        f_ExecutionReport_SolicitedFlag = f_ExecutionReport_SolicitedFlag;
+        f_ExecutionReport_TimeInForce = f_ExecutionReport_TimeInForce;
+        f_ExecutionReport_EffectiveTime = f_ExecutionReport_EffectiveTime;
+        f_ExecutionReport_ExpireDate = f_ExecutionReport_ExpireDate;
+        f_ExecutionReport_ExpireTime = f_ExecutionReport_ExpireTime;
+        f_ExecutionReport_ExecInst = f_ExecutionReport_ExecInst;
+        f_ExecutionReport_OrderCapacity = f_ExecutionReport_OrderCapacity;
+        f_ExecutionReport_OrderRestrictions = f_ExecutionReport_OrderRestrictions;
+        f_ExecutionReport_CustOrderCapacity = f_ExecutionReport_CustOrderCapacity;
+        f_ExecutionReport_LastQty = f_ExecutionReport_LastQty;
+        f_ExecutionReport_UnderlyingLastQty = f_ExecutionReport_UnderlyingLastQty;
+        f_ExecutionReport_LastPx = f_ExecutionReport_LastPx;
+        f_ExecutionReport_UnderlyingLastPx = f_ExecutionReport_UnderlyingLastPx;
+        f_ExecutionReport_LastParPx = f_ExecutionReport_LastParPx;
+        f_ExecutionReport_LastSpotRate = f_ExecutionReport_LastSpotRate;
+        f_ExecutionReport_LastForwardPoints = f_ExecutionReport_LastForwardPoints;
+        f_ExecutionReport_LastMkt = f_ExecutionReport_LastMkt;
+        f_ExecutionReport_TradingSessionID = f_ExecutionReport_TradingSessionID;
+        f_ExecutionReport_TradingSessionSubID = f_ExecutionReport_TradingSessionSubID;
+        f_ExecutionReport_TimeBracket = f_ExecutionReport_TimeBracket;
+        f_ExecutionReport_LastCapacity = f_ExecutionReport_LastCapacity;
+        f_ExecutionReport_LeavesQty = f_ExecutionReport_LeavesQty;
+        f_ExecutionReport_CumQty = f_ExecutionReport_CumQty;
+        f_ExecutionReport_AvgPx = f_ExecutionReport_AvgPx;
+        f_ExecutionReport_DayOrderQty = f_ExecutionReport_DayOrderQty;
+        f_ExecutionReport_DayCumQty = f_ExecutionReport_DayCumQty;
+        f_ExecutionReport_DayAvgPx = f_ExecutionReport_DayAvgPx;
+        f_ExecutionReport_GTBookingInst = f_ExecutionReport_GTBookingInst;
+        f_ExecutionReport_TradeDate = f_ExecutionReport_TradeDate;
+        f_ExecutionReport_TransactTime = f_ExecutionReport_TransactTime;
+        f_ExecutionReport_ReportToExch = f_ExecutionReport_ReportToExch;
+        f_ExecutionReport_CommissionData = f_ExecutionReport_CommissionData;
+        f_ExecutionReport_SpreadOrBenchmarkCurveData = f_ExecutionReport_SpreadOrBenchmarkCurveData;
+        f_ExecutionReport_YieldData = f_ExecutionReport_YieldData;
+        f_ExecutionReport_GrossTradeAmt = f_ExecutionReport_GrossTradeAmt;
+        f_ExecutionReport_NumDaysInterest = f_ExecutionReport_NumDaysInterest;
+        f_ExecutionReport_ExDate = f_ExecutionReport_ExDate;
+        f_ExecutionReport_AccruedInterestRate = f_ExecutionReport_AccruedInterestRate;
+        f_ExecutionReport_AccruedInterestAmt = f_ExecutionReport_AccruedInterestAmt;
+        f_ExecutionReport_InterestAtMaturity = f_ExecutionReport_InterestAtMaturity;
+        f_ExecutionReport_EndAccruedInterestAmt = f_ExecutionReport_EndAccruedInterestAmt;
+        f_ExecutionReport_StartCash = f_ExecutionReport_StartCash;
+        f_ExecutionReport_EndCash = f_ExecutionReport_EndCash;
+        f_ExecutionReport_TradedFlatSwitch = f_ExecutionReport_TradedFlatSwitch;
+        f_ExecutionReport_BasisFeatureDate = f_ExecutionReport_BasisFeatureDate;
+        f_ExecutionReport_BasisFeaturePrice = f_ExecutionReport_BasisFeaturePrice;
+        f_ExecutionReport_Concession = f_ExecutionReport_Concession;
+        f_ExecutionReport_TotalTakedown = f_ExecutionReport_TotalTakedown;
+        f_ExecutionReport_NetMoney = f_ExecutionReport_NetMoney;
+        f_ExecutionReport_SettlCurrAmt = f_ExecutionReport_SettlCurrAmt;
+        f_ExecutionReport_SettlCurrency = f_ExecutionReport_SettlCurrency;
+        f_ExecutionReport_SettlCurrFxRate = f_ExecutionReport_SettlCurrFxRate;
+        f_ExecutionReport_SettlCurrFxRateCalc = f_ExecutionReport_SettlCurrFxRateCalc;
+        f_ExecutionReport_HandlInst = f_ExecutionReport_HandlInst;
+        f_ExecutionReport_MinQty = f_ExecutionReport_MinQty;
+        f_ExecutionReport_MaxFloor = f_ExecutionReport_MaxFloor;
+        f_ExecutionReport_PositionEffect = f_ExecutionReport_PositionEffect;
+        f_ExecutionReport_MaxShow = f_ExecutionReport_MaxShow;
+        f_ExecutionReport_BookingType = f_ExecutionReport_BookingType;
+        f_ExecutionReport_Text = f_ExecutionReport_Text;
+        f_ExecutionReport_EncodedTextLen = f_ExecutionReport_EncodedTextLen;
+        f_ExecutionReport_EncodedText = f_ExecutionReport_EncodedText;
+        f_ExecutionReport_SettlDate2 = f_ExecutionReport_SettlDate2;
+        f_ExecutionReport_OrderQty2 = f_ExecutionReport_OrderQty2;
+        f_ExecutionReport_LastForwardPoints2 = f_ExecutionReport_LastForwardPoints2;
+        f_ExecutionReport_MultiLegReportingType = f_ExecutionReport_MultiLegReportingType;
+        f_ExecutionReport_CancellationRights = f_ExecutionReport_CancellationRights;
+        f_ExecutionReport_MoneyLaunderingStatus = f_ExecutionReport_MoneyLaunderingStatus;
+        f_ExecutionReport_RegistID = f_ExecutionReport_RegistID;
+        f_ExecutionReport_Designation = f_ExecutionReport_Designation;
+        f_ExecutionReport_TransBkdTime = f_ExecutionReport_TransBkdTime;
+        f_ExecutionReport_ExecValuationPoint = f_ExecutionReport_ExecValuationPoint;
+        f_ExecutionReport_ExecPriceType = f_ExecutionReport_ExecPriceType;
+        f_ExecutionReport_ExecPriceAdjustment = f_ExecutionReport_ExecPriceAdjustment;
+        f_ExecutionReport_PriorityIndicator = f_ExecutionReport_PriorityIndicator;
+        f_ExecutionReport_PriceImprovement = f_ExecutionReport_PriceImprovement;
+        f_ExecutionReport_LastLiquidityInd = f_ExecutionReport_LastLiquidityInd;
+        f_ExecutionReport_ContAmtGrp = f_ExecutionReport_ContAmtGrp;
+        f_ExecutionReport_InstrmtLegExecGrp = f_ExecutionReport_InstrmtLegExecGrp;
+        f_ExecutionReport_CopyMsgIndicator = f_ExecutionReport_CopyMsgIndicator;
+        f_ExecutionReport_MiscFeesGrp = f_ExecutionReport_MiscFeesGrp
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let full_message_newordersingle_decoder  : full_fix_newordersingle_data decoder =
+    (maybe (field "Designation" string_decoder)) >>= (fun f_NewOrderSingle_Designation -> (maybe (field "RegistID" string_decoder)) >>= (fun f_NewOrderSingle_RegistID -> (maybe (field "MoneyLaunderingStatus" full_enum_moneylaunderingstatus_decoder)) >>= (fun f_NewOrderSingle_MoneyLaunderingStatus -> (maybe (field "CancellationRights" full_enum_cancellationrights_decoder)) >>= (fun f_NewOrderSingle_CancellationRights -> (maybe (field "ParticipationRate" float_6_decoder)) >>= (fun f_NewOrderSingle_ParticipationRate -> (maybe (field "TargetStrategyParameters" string_decoder)) >>= (fun f_NewOrderSingle_TargetStrategyParameters -> (maybe (field "TargetStrategy" full_enum_targetstrategy_decoder)) >>= (fun f_NewOrderSingle_TargetStrategy -> (field "DiscretionInstructions" full_record_discretioninstructions_decoder) >>= (fun f_NewOrderSingle_DiscretionInstructions -> (field "PegInstructions" full_record_peginstructions_decoder) >>= (fun f_NewOrderSingle_PegInstructions -> (maybe (field "MaxShow" float_6_decoder)) >>= (fun f_NewOrderSingle_MaxShow -> (maybe (field "CoveredOrUncovered" full_enum_coveredoruncovered_decoder)) >>= (fun f_NewOrderSingle_CoveredOrUncovered -> (maybe (field "PositionEffect" full_enum_positioneffect_decoder)) >>= (fun f_NewOrderSingle_PositionEffect -> (maybe (field "Price2" float_6_decoder)) >>= (fun f_NewOrderSingle_Price2 -> (maybe (field "OrderQty2" float_6_decoder)) >>= (fun f_NewOrderSingle_OrderQty2 -> (maybe (field "SettlDate2" localmktdate_decoder)) >>= (fun f_NewOrderSingle_SettlDate2 -> (maybe (field "EncodedText" string_decoder)) >>= (fun f_NewOrderSingle_EncodedText -> (maybe (field "EncodedTextLen" int_decoder)) >>= (fun f_NewOrderSingle_EncodedTextLen -> (maybe (field "Text" string_decoder)) >>= (fun f_NewOrderSingle_Text -> (maybe (field "BookingType" full_enum_bookingtype_decoder)) >>= (fun f_NewOrderSingle_BookingType -> (maybe (field "SettlCurrency" full_enum_currency_decoder)) >>= (fun f_NewOrderSingle_SettlCurrency -> (maybe (field "ForexReq" full_enum_forexreq_decoder)) >>= (fun f_NewOrderSingle_ForexReq -> (maybe (field "CustOrderCapacity" full_enum_custordercapacity_decoder)) >>= (fun f_NewOrderSingle_CustOrderCapacity -> (maybe (field "OrderRestrictions" full_enum_orderrestrictions_decoder)) >>= (fun f_NewOrderSingle_OrderRestrictions -> (maybe (field "OrderCapacity" full_enum_ordercapacity_decoder)) >>= (fun f_NewOrderSingle_OrderCapacity -> (field "CommissionData" full_record_commissiondata_decoder) >>= (fun f_NewOrderSingle_CommissionData -> (maybe (field "GTBookingInst" full_enum_gtbookinginst_decoder)) >>= (fun f_NewOrderSingle_GTBookingInst -> (maybe (field "ExpireTime" utctimestamp_milli_decoder)) >>= (fun f_NewOrderSingle_ExpireTime -> (maybe (field "ExpireDate" localmktdate_decoder)) >>= (fun f_NewOrderSingle_ExpireDate -> (maybe (field "EffectiveTime" utctimestamp_milli_decoder)) >>= (fun f_NewOrderSingle_EffectiveTime -> (maybe (field "TimeInForce" full_enum_timeinforce_decoder)) >>= (fun f_NewOrderSingle_TimeInForce -> (maybe (field "QuoteID" string_decoder)) >>= (fun f_NewOrderSingle_QuoteID -> (maybe (field "IOIID" string_decoder)) >>= (fun f_NewOrderSingle_IOIID -> (maybe (field "SolicitedFlag" full_enum_solicitedflag_decoder)) >>= (fun f_NewOrderSingle_SolicitedFlag -> (maybe (field "ComplianceID" string_decoder)) >>= (fun f_NewOrderSingle_ComplianceID -> (maybe (field "Currency" full_enum_currency_decoder)) >>= (fun f_NewOrderSingle_Currency -> (field "YieldData" full_record_yielddata_decoder) >>= (fun f_NewOrderSingle_YieldData -> (field "SpreadOrBenchmarkCurveData" full_record_spreadorbenchmarkcurvedata_decoder) >>= (fun f_NewOrderSingle_SpreadOrBenchmarkCurveData -> (maybe (field "StopPx" float_6_decoder)) >>= (fun f_NewOrderSingle_StopPx -> (maybe (field "Price" float_6_decoder)) >>= (fun f_NewOrderSingle_Price -> (maybe (field "PriceType" full_enum_pricetype_decoder)) >>= (fun f_NewOrderSingle_PriceType -> (maybe (field "OrdType" full_enum_ordtype_decoder)) >>= (fun f_NewOrderSingle_OrdType -> (field "OrderQtyData" full_record_orderqtydata_decoder) >>= (fun f_NewOrderSingle_OrderQtyData -> (maybe (field "QtyType" full_enum_qtytype_decoder)) >>= (fun f_NewOrderSingle_QtyType -> (field "Stipulations" full_rg_stipulations_decoder) >>= (fun f_NewOrderSingle_Stipulations -> (maybe (field "TransactTime" utctimestamp_milli_decoder)) >>= (fun f_NewOrderSingle_TransactTime -> (maybe (field "LocateReqd" full_enum_locatereqd_decoder)) >>= (fun f_NewOrderSingle_LocateReqd -> (maybe (field "Side" full_enum_side_decoder)) >>= (fun f_NewOrderSingle_Side -> (maybe (field "PrevClosePx" float_6_decoder)) >>= (fun f_NewOrderSingle_PrevClosePx -> (field "UndInstrmtGrp" full_rg_undinstrmtgrp_decoder) >>= (fun f_NewOrderSingle_UndInstrmtGrp -> (field "FinancingDetails" full_record_financingdetails_decoder) >>= (fun f_NewOrderSingle_FinancingDetails -> (field "Instrument" full_record_instrument_decoder) >>= (fun f_NewOrderSingle_Instrument -> (maybe (field "ProcessCode" full_enum_processcode_decoder)) >>= (fun f_NewOrderSingle_ProcessCode -> (field "TrdgSesGrp" full_rg_trdgsesgrp_decoder) >>= (fun f_NewOrderSingle_TrdgSesGrp -> (maybe (field "ExDestination" full_enum_exchange_decoder)) >>= (fun f_NewOrderSingle_ExDestination -> (maybe (field "MaxFloor" float_6_decoder)) >>= (fun f_NewOrderSingle_MaxFloor -> (maybe (field "MinQty" float_6_decoder)) >>= (fun f_NewOrderSingle_MinQty -> (maybe (field "ExecInst" full_enum_execinst_decoder)) >>= (fun f_NewOrderSingle_ExecInst -> (maybe (field "HandlInst" full_enum_handlinst_decoder)) >>= (fun f_NewOrderSingle_HandlInst -> (maybe (field "ClearingFeeIndicator" full_enum_clearingfeeindicator_decoder)) >>= (fun f_NewOrderSingle_ClearingFeeIndicator -> (maybe (field "CashMargin" full_enum_cashmargin_decoder)) >>= (fun f_NewOrderSingle_CashMargin -> (maybe (field "SettlDate" localmktdate_decoder)) >>= (fun f_NewOrderSingle_SettlDate -> (maybe (field "SettlType" full_enum_settltype_decoder)) >>= (fun f_NewOrderSingle_SettlType -> (field "PreAllocGrp" full_rg_preallocgrp_decoder) >>= (fun f_NewOrderSingle_PreAllocGrp -> (maybe (field "AllocID" string_decoder)) >>= (fun f_NewOrderSingle_AllocID -> (maybe (field "PreallocMethod" full_enum_preallocmethod_decoder)) >>= (fun f_NewOrderSingle_PreallocMethod -> (maybe (field "BookingUnit" full_enum_bookingunit_decoder)) >>= (fun f_NewOrderSingle_BookingUnit -> (maybe (field "DayBookingInst" full_enum_daybookinginst_decoder)) >>= (fun f_NewOrderSingle_DayBookingInst -> (maybe (field "AccountType" full_enum_accounttype_decoder)) >>= (fun f_NewOrderSingle_AccountType -> (maybe (field "AcctIDSource" full_enum_acctidsource_decoder)) >>= (fun f_NewOrderSingle_AcctIDSource -> (maybe (field "Account" string_decoder)) >>= (fun f_NewOrderSingle_Account -> (maybe (field "TradeDate" localmktdate_decoder)) >>= (fun f_NewOrderSingle_TradeDate -> (maybe (field "TradeOriginationDate" localmktdate_decoder)) >>= (fun f_NewOrderSingle_TradeOriginationDate -> (field "Parties" full_rg_parties_decoder) >>= (fun f_NewOrderSingle_Parties -> (maybe (field "ClOrdLinkID" string_decoder)) >>= (fun f_NewOrderSingle_ClOrdLinkID -> (maybe (field "SecondaryClOrdID" string_decoder)) >>= (fun f_NewOrderSingle_SecondaryClOrdID -> (maybe (field "ClOrdID" string_decoder)) >>= (fun f_NewOrderSingle_ClOrdID -> succeed {
+        f_NewOrderSingle_ClOrdID = f_NewOrderSingle_ClOrdID;
+        f_NewOrderSingle_SecondaryClOrdID = f_NewOrderSingle_SecondaryClOrdID;
+        f_NewOrderSingle_ClOrdLinkID = f_NewOrderSingle_ClOrdLinkID;
+        f_NewOrderSingle_Parties = f_NewOrderSingle_Parties;
+        f_NewOrderSingle_TradeOriginationDate = f_NewOrderSingle_TradeOriginationDate;
+        f_NewOrderSingle_TradeDate = f_NewOrderSingle_TradeDate;
+        f_NewOrderSingle_Account = f_NewOrderSingle_Account;
+        f_NewOrderSingle_AcctIDSource = f_NewOrderSingle_AcctIDSource;
+        f_NewOrderSingle_AccountType = f_NewOrderSingle_AccountType;
+        f_NewOrderSingle_DayBookingInst = f_NewOrderSingle_DayBookingInst;
+        f_NewOrderSingle_BookingUnit = f_NewOrderSingle_BookingUnit;
+        f_NewOrderSingle_PreallocMethod = f_NewOrderSingle_PreallocMethod;
+        f_NewOrderSingle_AllocID = f_NewOrderSingle_AllocID;
+        f_NewOrderSingle_PreAllocGrp = f_NewOrderSingle_PreAllocGrp;
+        f_NewOrderSingle_SettlType = f_NewOrderSingle_SettlType;
+        f_NewOrderSingle_SettlDate = f_NewOrderSingle_SettlDate;
+        f_NewOrderSingle_CashMargin = f_NewOrderSingle_CashMargin;
+        f_NewOrderSingle_ClearingFeeIndicator = f_NewOrderSingle_ClearingFeeIndicator;
+        f_NewOrderSingle_HandlInst = f_NewOrderSingle_HandlInst;
+        f_NewOrderSingle_ExecInst = f_NewOrderSingle_ExecInst;
+        f_NewOrderSingle_MinQty = f_NewOrderSingle_MinQty;
+        f_NewOrderSingle_MaxFloor = f_NewOrderSingle_MaxFloor;
+        f_NewOrderSingle_ExDestination = f_NewOrderSingle_ExDestination;
+        f_NewOrderSingle_TrdgSesGrp = f_NewOrderSingle_TrdgSesGrp;
+        f_NewOrderSingle_ProcessCode = f_NewOrderSingle_ProcessCode;
+        f_NewOrderSingle_Instrument = f_NewOrderSingle_Instrument;
+        f_NewOrderSingle_FinancingDetails = f_NewOrderSingle_FinancingDetails;
+        f_NewOrderSingle_UndInstrmtGrp = f_NewOrderSingle_UndInstrmtGrp;
+        f_NewOrderSingle_PrevClosePx = f_NewOrderSingle_PrevClosePx;
+        f_NewOrderSingle_Side = f_NewOrderSingle_Side;
+        f_NewOrderSingle_LocateReqd = f_NewOrderSingle_LocateReqd;
+        f_NewOrderSingle_TransactTime = f_NewOrderSingle_TransactTime;
+        f_NewOrderSingle_Stipulations = f_NewOrderSingle_Stipulations;
+        f_NewOrderSingle_QtyType = f_NewOrderSingle_QtyType;
+        f_NewOrderSingle_OrderQtyData = f_NewOrderSingle_OrderQtyData;
+        f_NewOrderSingle_OrdType = f_NewOrderSingle_OrdType;
+        f_NewOrderSingle_PriceType = f_NewOrderSingle_PriceType;
+        f_NewOrderSingle_Price = f_NewOrderSingle_Price;
+        f_NewOrderSingle_StopPx = f_NewOrderSingle_StopPx;
+        f_NewOrderSingle_SpreadOrBenchmarkCurveData = f_NewOrderSingle_SpreadOrBenchmarkCurveData;
+        f_NewOrderSingle_YieldData = f_NewOrderSingle_YieldData;
+        f_NewOrderSingle_Currency = f_NewOrderSingle_Currency;
+        f_NewOrderSingle_ComplianceID = f_NewOrderSingle_ComplianceID;
+        f_NewOrderSingle_SolicitedFlag = f_NewOrderSingle_SolicitedFlag;
+        f_NewOrderSingle_IOIID = f_NewOrderSingle_IOIID;
+        f_NewOrderSingle_QuoteID = f_NewOrderSingle_QuoteID;
+        f_NewOrderSingle_TimeInForce = f_NewOrderSingle_TimeInForce;
+        f_NewOrderSingle_EffectiveTime = f_NewOrderSingle_EffectiveTime;
+        f_NewOrderSingle_ExpireDate = f_NewOrderSingle_ExpireDate;
+        f_NewOrderSingle_ExpireTime = f_NewOrderSingle_ExpireTime;
+        f_NewOrderSingle_GTBookingInst = f_NewOrderSingle_GTBookingInst;
+        f_NewOrderSingle_CommissionData = f_NewOrderSingle_CommissionData;
+        f_NewOrderSingle_OrderCapacity = f_NewOrderSingle_OrderCapacity;
+        f_NewOrderSingle_OrderRestrictions = f_NewOrderSingle_OrderRestrictions;
+        f_NewOrderSingle_CustOrderCapacity = f_NewOrderSingle_CustOrderCapacity;
+        f_NewOrderSingle_ForexReq = f_NewOrderSingle_ForexReq;
+        f_NewOrderSingle_SettlCurrency = f_NewOrderSingle_SettlCurrency;
+        f_NewOrderSingle_BookingType = f_NewOrderSingle_BookingType;
+        f_NewOrderSingle_Text = f_NewOrderSingle_Text;
+        f_NewOrderSingle_EncodedTextLen = f_NewOrderSingle_EncodedTextLen;
+        f_NewOrderSingle_EncodedText = f_NewOrderSingle_EncodedText;
+        f_NewOrderSingle_SettlDate2 = f_NewOrderSingle_SettlDate2;
+        f_NewOrderSingle_OrderQty2 = f_NewOrderSingle_OrderQty2;
+        f_NewOrderSingle_Price2 = f_NewOrderSingle_Price2;
+        f_NewOrderSingle_PositionEffect = f_NewOrderSingle_PositionEffect;
+        f_NewOrderSingle_CoveredOrUncovered = f_NewOrderSingle_CoveredOrUncovered;
+        f_NewOrderSingle_MaxShow = f_NewOrderSingle_MaxShow;
+        f_NewOrderSingle_PegInstructions = f_NewOrderSingle_PegInstructions;
+        f_NewOrderSingle_DiscretionInstructions = f_NewOrderSingle_DiscretionInstructions;
+        f_NewOrderSingle_TargetStrategy = f_NewOrderSingle_TargetStrategy;
+        f_NewOrderSingle_TargetStrategyParameters = f_NewOrderSingle_TargetStrategyParameters;
+        f_NewOrderSingle_ParticipationRate = f_NewOrderSingle_ParticipationRate;
+        f_NewOrderSingle_CancellationRights = f_NewOrderSingle_CancellationRights;
+        f_NewOrderSingle_MoneyLaunderingStatus = f_NewOrderSingle_MoneyLaunderingStatus;
+        f_NewOrderSingle_RegistID = f_NewOrderSingle_RegistID;
+        f_NewOrderSingle_Designation = f_NewOrderSingle_Designation
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+;;
+
+let full_app_msg_to_json  : full_app_msg_data decoder =
+    string >>= (fun x -> (match x with
+        | "ExecutionReport" -> (full_message_executionreport_decoder >>= (fun y -> succeed (FIX_Full_Msg_ExecutionReport y)
+        ))
+        | "NewOrderSingle" -> (full_message_newordersingle_decoder >>= (fun y -> succeed (FIX_Full_Msg_NewOrderSingle y)
+        ))
+        | d -> (fail ("Unknown Message ("^d^") in JSON decoding."))
+    )
+    )
+;;
+
+[@@@logic]

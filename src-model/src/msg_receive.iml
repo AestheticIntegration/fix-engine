@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@import "../src-types/model_app_enums.iml"]
 open Model_app_enums;;
 [@@@import "../src-types/model_messages.iml"]
@@ -11,13 +11,13 @@ open State;;
 
 let receive_message_NewOrderSingle (m_state : model_state) (msg_data : mod_newordersingle_data)  =
     let msg_data_inner = {
-        mod_f_ExecutionReport_AvgPx = float_Create_6 0;
+        mod_f_ExecutionReport_AvgPx = float_Create_6 (0);
         mod_f_ExecutionReport_ClOrdID = msg_data.mod_f_NewOrderSingle_ClOrdID;
-        mod_f_ExecutionReport_CumQty = float_Create_6 0;
+        mod_f_ExecutionReport_CumQty = float_Create_6 (0);
         mod_f_ExecutionReport_ExecID = "Test";
         mod_f_ExecutionReport_ExecType = MOD_FIX_ExecType_Calculated;
         mod_f_ExecutionReport_Instrument_Symbol = msg_data.mod_f_NewOrderSingle_Instrument_Symbol;
-        mod_f_ExecutionReport_LeavesQty = float_Create_6 0;
+        mod_f_ExecutionReport_LeavesQty = float_Create_6 (0);
         mod_f_ExecutionReport_OrdStatus = MOD_FIX_OrdStatus_New;
         mod_f_ExecutionReport_OrderID = msg_data.mod_f_NewOrderSingle_ClOrdID;
         mod_f_ExecutionReport_Side = msg_data.mod_f_NewOrderSingle_Side;
@@ -29,3 +29,9 @@ let receive_message_NewOrderSingle (m_state : model_state) (msg_data : mod_newor
     m_state
     [@@macro]
 ;;
+
+let receive_message_ExecutionReport (m_state : model_state) (msg_data : mod_executionreport_data)  =
+    m_state
+    [@@macro]
+;;
+

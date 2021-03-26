@@ -1,0 +1,144 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@program]
+[@@@import "../src-protocol-exts-pp/encode_app_enums.iml"]
+open Encode_app_enums;;
+[@@@import "../src-core-pp/encode_base_types.iml"]
+open Encode_base_types;;
+[@@@import "../src-core-pp/encode_datetime.iml"]
+open Encode_datetime;;
+[@@@import "../src-model/src-conversions/enum_converter.iml"]
+open Enum_converter;;
+[@@@import "itiviti_printers.iml"]
+open Itiviti_printers;;
+[@@@import "../src-model/src-types/model_messages.iml"]
+open Model_messages;;
+
+
+let message_print (a)  =
+    (match a with
+        | FIX_Msg_ExecutionReport x -> let a = []
+        in
+        let a = (match x.mod_f_ExecutionReport_Text with
+            | None -> ({
+                name = "Text";
+                value = NoValue
+            } :: a)
+            | Some x -> (({
+                name = "Text";
+                value = Value ((^) "\"" ((^) x "\""))
+            }) :: a)
+        )
+        in
+        let a = let x = x.mod_f_ExecutionReport_Instrument_Symbol
+        in
+        ({
+            name = "Instrument.Symbol";
+            value = Value ((^) "\"" ((^) x "\""))
+        }) :: a
+        in
+        let a = let x = x.mod_f_ExecutionReport_OrdStatus
+        in
+        ({
+            name = "OrdStatus";
+            value = Value ((^) "\"" ((^) (encode_OrdStatus (convert__model_to_full_OrdStatus x)) "\""))
+        }) :: a
+        in
+        let a = let x = x.mod_f_ExecutionReport_CumQty
+        in
+        ({
+            name = "CumQty";
+            value = Value (encode_float_6 x)
+        }) :: a
+        in
+        let a = let x = x.mod_f_ExecutionReport_LeavesQty
+        in
+        ({
+            name = "LeavesQty";
+            value = Value (encode_float_6 x)
+        }) :: a
+        in
+        let a = let x = x.mod_f_ExecutionReport_Side
+        in
+        ({
+            name = "Side";
+            value = Value ((^) "\"" ((^) (encode_Side (convert__model_to_full_Side x)) "\""))
+        }) :: a
+        in
+        let a = let x = x.mod_f_ExecutionReport_AvgPx
+        in
+        ({
+            name = "AvgPx";
+            value = Value (encode_float_6 x)
+        }) :: a
+        in
+        let a = let x = x.mod_f_ExecutionReport_ExecType
+        in
+        ({
+            name = "ExecType";
+            value = Value ((^) "\"" ((^) (encode_ExecType (convert__model_to_full_ExecType x)) "\""))
+        }) :: a
+        in
+        let a = let x = x.mod_f_ExecutionReport_ExecID
+        in
+        ({
+            name = "ExecID";
+            value = Value ((^) "\"" ((^) x "\""))
+        }) :: a
+        in
+        let a = let x = x.mod_f_ExecutionReport_OrderID
+        in
+        ({
+            name = "OrderID";
+            value = Value ((^) "\"" ((^) x "\""))
+        }) :: a
+        in
+        let a = let x = x.mod_f_ExecutionReport_ClOrdID
+        in
+        ({
+            name = "ClOrdID";
+            value = Value ((^) "\"" ((^) x "\""))
+        }) :: a
+        in
+        a
+        | FIX_Msg_NewOrderSingle x -> let a = []
+        in
+        let a = let x = x.mod_f_NewOrderSingle_Instrument_Symbol
+        in
+        ({
+            name = "Instrument.Symbol";
+            value = Value ((^) "\"" ((^) x "\""))
+        }) :: a
+        in
+        let a = let x = x.mod_f_NewOrderSingle_OrdType
+        in
+        ({
+            name = "OrdType";
+            value = Value ((^) "\"" ((^) (encode_OrdType (convert__model_to_full_OrdType x)) "\""))
+        }) :: a
+        in
+        let a = let x = x.mod_f_NewOrderSingle_TransactTime
+        in
+        ({
+            name = "TransactTime";
+            value = Value ((^) "\"" ((^) (encode_UTCTimestamp_milli x) "\""))
+        }) :: a
+        in
+        let a = let x = x.mod_f_NewOrderSingle_Side
+        in
+        ({
+            name = "Side";
+            value = Value ((^) "\"" ((^) (encode_Side (convert__model_to_full_Side x)) "\""))
+        }) :: a
+        in
+        let a = let x = x.mod_f_NewOrderSingle_ClOrdID
+        in
+        ({
+            name = "ClOrdID";
+            value = Value ((^) "\"" ((^) x "\""))
+        }) :: a
+        in
+        a
+    )
+;;
+
+[@@@logic]

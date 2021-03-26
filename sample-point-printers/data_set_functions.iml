@@ -1,0 +1,15 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@program]
+
+
+type data_set_info = {
+    dataset_id : string;
+    msg_id : string;
+    fields_names : string list;
+    values_printers : string list list
+}
+;;
+
+let data_set_info = [] ;;
+
+[@@@logic]

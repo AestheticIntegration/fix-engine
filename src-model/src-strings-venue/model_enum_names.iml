@@ -1,26 +1,54 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@import "../src-types/model_app_enums.iml"]
 open Model_app_enums;;
 
 
-let mod_side_to_string (d)  =
+let mod_bool_to_string (x)  =
+    (if x then
+        "Y"
+    else
+        "N")
+;;
+
+let mod_ordtype_to_string (d)  =
     (match d with
-        | MOD_FIX_Side_Buy -> "Buy"
-        | MOD_FIX_Side_Sell -> "Sell"
-        | MOD_FIX_Side_BuyMinus -> "BuyMinus"
-        | MOD_FIX_Side_SellPlus -> "SellPlus"
-        | MOD_FIX_Side_SellShort -> "SellShort"
-        | MOD_FIX_Side_SellShortExempt -> "SellShortExempt"
-        | MOD_FIX_Side_Undisclosed -> "Undisclosed"
-        | MOD_FIX_Side_Cross -> "Cross"
-        | MOD_FIX_Side_CrossShort -> "CrossShort"
-        | MOD_FIX_Side_CrossShortExempt -> "CrossShortExempt"
-        | MOD_FIX_Side_AsDefined -> "AsDefined"
-        | MOD_FIX_Side_Opposite -> "Opposite"
-        | MOD_FIX_Side_Subscribe -> "Subscribe"
-        | MOD_FIX_Side_Redeem -> "Redeem"
-        | MOD_FIX_Side_Lend -> "Lend"
-        | MOD_FIX_Side_Borrow -> "Borrow"
+        | MOD_FIX_OrdType_Market -> "Market"
+        | MOD_FIX_OrdType_Limit -> "Limit"
+        | MOD_FIX_OrdType_Stop -> "Stop"
+        | MOD_FIX_OrdType_StopLimit -> "StopLimit"
+        | MOD_FIX_OrdType_WithOrWithout -> "WithOrWithout"
+        | MOD_FIX_OrdType_LimitOrBetter -> "LimitOrBetter"
+        | MOD_FIX_OrdType_LimitWithOrWithout -> "LimitWithOrWithout"
+        | MOD_FIX_OrdType_OnBasis -> "OnBasis"
+        | MOD_FIX_OrdType_PreviouslyQuoted -> "PreviouslyQuoted"
+        | MOD_FIX_OrdType_PreviouslyIndicated -> "PreviouslyIndicated"
+        | MOD_FIX_OrdType_ForexSwap -> "ForexSwap"
+        | MOD_FIX_OrdType_Funari -> "Funari"
+        | MOD_FIX_OrdType_MarketIfTouched -> "MarketIfTouched"
+        | MOD_FIX_OrdType_MarketWithLeftOverAsLimit -> "MarketWithLeftOverAsLimit"
+        | MOD_FIX_OrdType_PreviousFundValuationPoint -> "PreviousFundValuationPoint"
+        | MOD_FIX_OrdType_NextFundValuationPoint -> "NextFundValuationPoint"
+        | MOD_FIX_OrdType_Pegged -> "Pegged"
+    )
+;;
+
+let mod_ordstatus_to_string (d)  =
+    (match d with
+        | MOD_FIX_OrdStatus_New -> "New"
+        | MOD_FIX_OrdStatus_PartiallyFilled -> "PartiallyFilled"
+        | MOD_FIX_OrdStatus_Filled -> "Filled"
+        | MOD_FIX_OrdStatus_DoneForDay -> "DoneForDay"
+        | MOD_FIX_OrdStatus_Canceled -> "Canceled"
+        | MOD_FIX_OrdStatus_PendingCancel -> "PendingCancel"
+        | MOD_FIX_OrdStatus_Stopped -> "Stopped"
+        | MOD_FIX_OrdStatus_Rejected -> "Rejected"
+        | MOD_FIX_OrdStatus_Suspended -> "Suspended"
+        | MOD_FIX_OrdStatus_PendingNew -> "PendingNew"
+        | MOD_FIX_OrdStatus_Calculated -> "Calculated"
+        | MOD_FIX_OrdStatus_Expired -> "Expired"
+        | MOD_FIX_OrdStatus_AcceptedForBidding -> "AcceptedForBidding"
+        | MOD_FIX_OrdStatus_PendingReplace -> "PendingReplace"
+        | MOD_FIX_OrdStatus_Replaced -> "Replaced"
     )
 ;;
 
@@ -46,66 +74,67 @@ let mod_exectype_to_string (d)  =
     )
 ;;
 
-let mod_ordstatus_to_string (d)  =
+let mod_side_to_string (d)  =
     (match d with
-        | MOD_FIX_OrdStatus_New -> "New"
-        | MOD_FIX_OrdStatus_PartiallyFilled -> "PartiallyFilled"
-        | MOD_FIX_OrdStatus_Filled -> "Filled"
-        | MOD_FIX_OrdStatus_DoneForDay -> "DoneForDay"
-        | MOD_FIX_OrdStatus_Canceled -> "Canceled"
-        | MOD_FIX_OrdStatus_PendingCancel -> "PendingCancel"
-        | MOD_FIX_OrdStatus_Stopped -> "Stopped"
-        | MOD_FIX_OrdStatus_Rejected -> "Rejected"
-        | MOD_FIX_OrdStatus_Suspended -> "Suspended"
-        | MOD_FIX_OrdStatus_PendingNew -> "PendingNew"
-        | MOD_FIX_OrdStatus_Calculated -> "Calculated"
-        | MOD_FIX_OrdStatus_Expired -> "Expired"
-        | MOD_FIX_OrdStatus_AcceptedForBidding -> "AcceptedForBidding"
-        | MOD_FIX_OrdStatus_PendingReplace -> "PendingReplace"
-        | MOD_FIX_OrdStatus_Replaced -> "Replaced"
+        | MOD_FIX_Side_Buy -> "Buy"
+        | MOD_FIX_Side_Sell -> "Sell"
+        | MOD_FIX_Side_BuyMinus -> "BuyMinus"
+        | MOD_FIX_Side_SellPlus -> "SellPlus"
+        | MOD_FIX_Side_SellShort -> "SellShort"
+        | MOD_FIX_Side_SellShortExempt -> "SellShortExempt"
+        | MOD_FIX_Side_Undisclosed -> "Undisclosed"
+        | MOD_FIX_Side_Cross -> "Cross"
+        | MOD_FIX_Side_CrossShort -> "CrossShort"
+        | MOD_FIX_Side_CrossShortExempt -> "CrossShortExempt"
+        | MOD_FIX_Side_AsDefined -> "AsDefined"
+        | MOD_FIX_Side_Opposite -> "Opposite"
+        | MOD_FIX_Side_Subscribe -> "Subscribe"
+        | MOD_FIX_Side_Redeem -> "Redeem"
+        | MOD_FIX_Side_Lend -> "Lend"
+        | MOD_FIX_Side_Borrow -> "Borrow"
     )
 ;;
 
-let mod_ordtype_to_string (d)  =
+let string_to_mod_ordtype_opt (d)  =
     (match d with
-        | MOD_FIX_OrdType_Market -> "Market"
-        | MOD_FIX_OrdType_Limit -> "Limit"
-        | MOD_FIX_OrdType_Stop -> "Stop"
-        | MOD_FIX_OrdType_StopLimit -> "StopLimit"
-        | MOD_FIX_OrdType_WithOrWithout -> "WithOrWithout"
-        | MOD_FIX_OrdType_LimitOrBetter -> "LimitOrBetter"
-        | MOD_FIX_OrdType_LimitWithOrWithout -> "LimitWithOrWithout"
-        | MOD_FIX_OrdType_OnBasis -> "OnBasis"
-        | MOD_FIX_OrdType_PreviouslyQuoted -> "PreviouslyQuoted"
-        | MOD_FIX_OrdType_PreviouslyIndicated -> "PreviouslyIndicated"
-        | MOD_FIX_OrdType_ForexSwap -> "ForexSwap"
-        | MOD_FIX_OrdType_Funari -> "Funari"
-        | MOD_FIX_OrdType_MarketIfTouched -> "MarketIfTouched"
-        | MOD_FIX_OrdType_MarketWithLeftOverAsLimit -> "MarketWithLeftOverAsLimit"
-        | MOD_FIX_OrdType_PreviousFundValuationPoint -> "PreviousFundValuationPoint"
-        | MOD_FIX_OrdType_NextFundValuationPoint -> "NextFundValuationPoint"
-        | MOD_FIX_OrdType_Pegged -> "Pegged"
+        | "Market" -> (Some (MOD_FIX_OrdType_Market))
+        | "Limit" -> (Some (MOD_FIX_OrdType_Limit))
+        | "Stop" -> (Some (MOD_FIX_OrdType_Stop))
+        | "StopLimit" -> (Some (MOD_FIX_OrdType_StopLimit))
+        | "WithOrWithout" -> (Some (MOD_FIX_OrdType_WithOrWithout))
+        | "LimitOrBetter" -> (Some (MOD_FIX_OrdType_LimitOrBetter))
+        | "LimitWithOrWithout" -> (Some (MOD_FIX_OrdType_LimitWithOrWithout))
+        | "OnBasis" -> (Some (MOD_FIX_OrdType_OnBasis))
+        | "PreviouslyQuoted" -> (Some (MOD_FIX_OrdType_PreviouslyQuoted))
+        | "PreviouslyIndicated" -> (Some (MOD_FIX_OrdType_PreviouslyIndicated))
+        | "ForexSwap" -> (Some (MOD_FIX_OrdType_ForexSwap))
+        | "Funari" -> (Some (MOD_FIX_OrdType_Funari))
+        | "MarketIfTouched" -> (Some (MOD_FIX_OrdType_MarketIfTouched))
+        | "MarketWithLeftOverAsLimit" -> (Some (MOD_FIX_OrdType_MarketWithLeftOverAsLimit))
+        | "PreviousFundValuationPoint" -> (Some (MOD_FIX_OrdType_PreviousFundValuationPoint))
+        | "NextFundValuationPoint" -> (Some (MOD_FIX_OrdType_NextFundValuationPoint))
+        | "Pegged" -> (Some (MOD_FIX_OrdType_Pegged))
+        | _ -> (None)
     )
 ;;
 
-let string_to_mod_side_opt (d)  =
+let string_to_mod_ordstatus_opt (d)  =
     (match d with
-        | "Buy" -> (Some (MOD_FIX_Side_Buy))
-        | "Sell" -> (Some (MOD_FIX_Side_Sell))
-        | "BuyMinus" -> (Some (MOD_FIX_Side_BuyMinus))
-        | "SellPlus" -> (Some (MOD_FIX_Side_SellPlus))
-        | "SellShort" -> (Some (MOD_FIX_Side_SellShort))
-        | "SellShortExempt" -> (Some (MOD_FIX_Side_SellShortExempt))
-        | "Undisclosed" -> (Some (MOD_FIX_Side_Undisclosed))
-        | "Cross" -> (Some (MOD_FIX_Side_Cross))
-        | "CrossShort" -> (Some (MOD_FIX_Side_CrossShort))
-        | "CrossShortExempt" -> (Some (MOD_FIX_Side_CrossShortExempt))
-        | "AsDefined" -> (Some (MOD_FIX_Side_AsDefined))
-        | "Opposite" -> (Some (MOD_FIX_Side_Opposite))
-        | "Subscribe" -> (Some (MOD_FIX_Side_Subscribe))
-        | "Redeem" -> (Some (MOD_FIX_Side_Redeem))
-        | "Lend" -> (Some (MOD_FIX_Side_Lend))
-        | "Borrow" -> (Some (MOD_FIX_Side_Borrow))
+        | "New" -> (Some (MOD_FIX_OrdStatus_New))
+        | "PartiallyFilled" -> (Some (MOD_FIX_OrdStatus_PartiallyFilled))
+        | "Filled" -> (Some (MOD_FIX_OrdStatus_Filled))
+        | "DoneForDay" -> (Some (MOD_FIX_OrdStatus_DoneForDay))
+        | "Canceled" -> (Some (MOD_FIX_OrdStatus_Canceled))
+        | "PendingCancel" -> (Some (MOD_FIX_OrdStatus_PendingCancel))
+        | "Stopped" -> (Some (MOD_FIX_OrdStatus_Stopped))
+        | "Rejected" -> (Some (MOD_FIX_OrdStatus_Rejected))
+        | "Suspended" -> (Some (MOD_FIX_OrdStatus_Suspended))
+        | "PendingNew" -> (Some (MOD_FIX_OrdStatus_PendingNew))
+        | "Calculated" -> (Some (MOD_FIX_OrdStatus_Calculated))
+        | "Expired" -> (Some (MOD_FIX_OrdStatus_Expired))
+        | "AcceptedForBidding" -> (Some (MOD_FIX_OrdStatus_AcceptedForBidding))
+        | "PendingReplace" -> (Some (MOD_FIX_OrdStatus_PendingReplace))
+        | "Replaced" -> (Some (MOD_FIX_OrdStatus_Replaced))
         | _ -> (None)
     )
 ;;
@@ -133,46 +162,25 @@ let string_to_mod_exectype_opt (d)  =
     )
 ;;
 
-let string_to_mod_ordstatus_opt (d)  =
+let string_to_mod_side_opt (d)  =
     (match d with
-        | "New" -> (Some (MOD_FIX_OrdStatus_New))
-        | "PartiallyFilled" -> (Some (MOD_FIX_OrdStatus_PartiallyFilled))
-        | "Filled" -> (Some (MOD_FIX_OrdStatus_Filled))
-        | "DoneForDay" -> (Some (MOD_FIX_OrdStatus_DoneForDay))
-        | "Canceled" -> (Some (MOD_FIX_OrdStatus_Canceled))
-        | "PendingCancel" -> (Some (MOD_FIX_OrdStatus_PendingCancel))
-        | "Stopped" -> (Some (MOD_FIX_OrdStatus_Stopped))
-        | "Rejected" -> (Some (MOD_FIX_OrdStatus_Rejected))
-        | "Suspended" -> (Some (MOD_FIX_OrdStatus_Suspended))
-        | "PendingNew" -> (Some (MOD_FIX_OrdStatus_PendingNew))
-        | "Calculated" -> (Some (MOD_FIX_OrdStatus_Calculated))
-        | "Expired" -> (Some (MOD_FIX_OrdStatus_Expired))
-        | "AcceptedForBidding" -> (Some (MOD_FIX_OrdStatus_AcceptedForBidding))
-        | "PendingReplace" -> (Some (MOD_FIX_OrdStatus_PendingReplace))
-        | "Replaced" -> (Some (MOD_FIX_OrdStatus_Replaced))
+        | "Buy" -> (Some (MOD_FIX_Side_Buy))
+        | "Sell" -> (Some (MOD_FIX_Side_Sell))
+        | "BuyMinus" -> (Some (MOD_FIX_Side_BuyMinus))
+        | "SellPlus" -> (Some (MOD_FIX_Side_SellPlus))
+        | "SellShort" -> (Some (MOD_FIX_Side_SellShort))
+        | "SellShortExempt" -> (Some (MOD_FIX_Side_SellShortExempt))
+        | "Undisclosed" -> (Some (MOD_FIX_Side_Undisclosed))
+        | "Cross" -> (Some (MOD_FIX_Side_Cross))
+        | "CrossShort" -> (Some (MOD_FIX_Side_CrossShort))
+        | "CrossShortExempt" -> (Some (MOD_FIX_Side_CrossShortExempt))
+        | "AsDefined" -> (Some (MOD_FIX_Side_AsDefined))
+        | "Opposite" -> (Some (MOD_FIX_Side_Opposite))
+        | "Subscribe" -> (Some (MOD_FIX_Side_Subscribe))
+        | "Redeem" -> (Some (MOD_FIX_Side_Redeem))
+        | "Lend" -> (Some (MOD_FIX_Side_Lend))
+        | "Borrow" -> (Some (MOD_FIX_Side_Borrow))
         | _ -> (None)
     )
 ;;
 
-let string_to_mod_ordtype_opt (d)  =
-    (match d with
-        | "Market" -> (Some (MOD_FIX_OrdType_Market))
-        | "Limit" -> (Some (MOD_FIX_OrdType_Limit))
-        | "Stop" -> (Some (MOD_FIX_OrdType_Stop))
-        | "StopLimit" -> (Some (MOD_FIX_OrdType_StopLimit))
-        | "WithOrWithout" -> (Some (MOD_FIX_OrdType_WithOrWithout))
-        | "LimitOrBetter" -> (Some (MOD_FIX_OrdType_LimitOrBetter))
-        | "LimitWithOrWithout" -> (Some (MOD_FIX_OrdType_LimitWithOrWithout))
-        | "OnBasis" -> (Some (MOD_FIX_OrdType_OnBasis))
-        | "PreviouslyQuoted" -> (Some (MOD_FIX_OrdType_PreviouslyQuoted))
-        | "PreviouslyIndicated" -> (Some (MOD_FIX_OrdType_PreviouslyIndicated))
-        | "ForexSwap" -> (Some (MOD_FIX_OrdType_ForexSwap))
-        | "Funari" -> (Some (MOD_FIX_OrdType_Funari))
-        | "MarketIfTouched" -> (Some (MOD_FIX_OrdType_MarketIfTouched))
-        | "MarketWithLeftOverAsLimit" -> (Some (MOD_FIX_OrdType_MarketWithLeftOverAsLimit))
-        | "PreviousFundValuationPoint" -> (Some (MOD_FIX_OrdType_PreviousFundValuationPoint))
-        | "NextFundValuationPoint" -> (Some (MOD_FIX_OrdType_NextFundValuationPoint))
-        | "Pegged" -> (Some (MOD_FIX_OrdType_Pegged))
-        | _ -> (None)
-    )
-;;

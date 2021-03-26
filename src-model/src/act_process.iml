@@ -1,8 +1,26 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@import "act_checks.iml"]
 open Act_checks;;
 [@@@import "../src-types/actions.iml"]
 open Actions;;
+[@@@import "../src-types/model_records.iml"]
+open Model_records;;
 [@@@import "../src-types/state.iml"]
 open State;;
+
+
+let receive_action_x (m_state : model_state) (action_data : m_action_fix_x)  =
+    m_state
+    [@@macro]
+;;
+
+let receive_action (m_state : model_state) (action : fix_action)  =
+    (if (is_action_valid action m_state) then
+        ((match action with
+            | FIX_Action_x d -> (receive_action_x m_state d)
+        )
+        )
+    else
+        m_state)
+;;
 

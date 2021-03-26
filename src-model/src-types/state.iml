@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@import "actions.iml"]
 open Actions;;
 [@@@import "model_messages.iml"]
@@ -51,3 +51,4 @@ let get_internal_states_types (m_state : model_state)  : internal_states_types =
     []
     [@@macro]
 ;;
+

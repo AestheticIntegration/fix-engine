@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@import "enum_converter.iml"]
 open Enum_converter;;
@@ -13,8 +13,103 @@ open Model_tags;;
 
 
 let convert__full_to_model_ExecutionReport (msg : full_fix_executionreport_data)  =
-    FIX_TL_None
-    [@@macro]
+    let c_mod_f_ExecutionReport_Text = msg.f_ExecutionReport_Text
+    in
+    (match msg.f_ExecutionReport_Instrument.f_Instrument_Symbol with
+        | None -> (FIX_TL_Req_Field_Missing {
+            field_missing_data_msg = M_Msg_ExecutionReport_Tag;
+            field_missing_data_field = M_Field_Symbol_Tag
+        })
+        | Some m_f_Instrument_Symbol -> let c_mod_f_ExecutionReport_Instrument_Symbol = m_f_Instrument_Symbol
+        in
+        (match msg.f_ExecutionReport_OrdStatus with
+            | None -> (FIX_TL_Req_Field_Missing {
+                field_missing_data_msg = M_Msg_ExecutionReport_Tag;
+                field_missing_data_field = M_Field_OrdStatus_Tag
+            })
+            | Some m_f_ExecutionReport_OrdStatus -> let c_mod_f_ExecutionReport_OrdStatus = convert__full_to_model_OrdStatus m_f_ExecutionReport_OrdStatus
+            in
+            (match msg.f_ExecutionReport_CumQty with
+                | None -> (FIX_TL_Req_Field_Missing {
+                    field_missing_data_msg = M_Msg_ExecutionReport_Tag;
+                    field_missing_data_field = M_Field_CumQty_Tag
+                })
+                | Some m_f_ExecutionReport_CumQty -> let c_mod_f_ExecutionReport_CumQty = m_f_ExecutionReport_CumQty
+                in
+                (match msg.f_ExecutionReport_LeavesQty with
+                    | None -> (FIX_TL_Req_Field_Missing {
+                        field_missing_data_msg = M_Msg_ExecutionReport_Tag;
+                        field_missing_data_field = M_Field_LeavesQty_Tag
+                    })
+                    | Some m_f_ExecutionReport_LeavesQty -> let c_mod_f_ExecutionReport_LeavesQty = m_f_ExecutionReport_LeavesQty
+                    in
+                    (match msg.f_ExecutionReport_Side with
+                        | None -> (FIX_TL_Req_Field_Missing {
+                            field_missing_data_msg = M_Msg_ExecutionReport_Tag;
+                            field_missing_data_field = M_Field_Side_Tag
+                        })
+                        | Some m_f_ExecutionReport_Side -> let c_mod_f_ExecutionReport_Side = convert__full_to_model_Side m_f_ExecutionReport_Side
+                        in
+                        (match msg.f_ExecutionReport_AvgPx with
+                            | None -> (FIX_TL_Req_Field_Missing {
+                                field_missing_data_msg = M_Msg_ExecutionReport_Tag;
+                                field_missing_data_field = M_Field_AvgPx_Tag
+                            })
+                            | Some m_f_ExecutionReport_AvgPx -> let c_mod_f_ExecutionReport_AvgPx = m_f_ExecutionReport_AvgPx
+                            in
+                            (match msg.f_ExecutionReport_ExecType with
+                                | None -> (FIX_TL_Req_Field_Missing {
+                                    field_missing_data_msg = M_Msg_ExecutionReport_Tag;
+                                    field_missing_data_field = M_Field_ExecType_Tag
+                                })
+                                | Some m_f_ExecutionReport_ExecType -> let c_mod_f_ExecutionReport_ExecType = convert__full_to_model_ExecType m_f_ExecutionReport_ExecType
+                                in
+                                (match msg.f_ExecutionReport_ExecID with
+                                    | None -> (FIX_TL_Req_Field_Missing {
+                                        field_missing_data_msg = M_Msg_ExecutionReport_Tag;
+                                        field_missing_data_field = M_Field_ExecID_Tag
+                                    })
+                                    | Some m_f_ExecutionReport_ExecID -> let c_mod_f_ExecutionReport_ExecID = m_f_ExecutionReport_ExecID
+                                    in
+                                    (match msg.f_ExecutionReport_OrderID with
+                                        | None -> (FIX_TL_Req_Field_Missing {
+                                            field_missing_data_msg = M_Msg_ExecutionReport_Tag;
+                                            field_missing_data_field = M_Field_OrderID_Tag
+                                        })
+                                        | Some m_f_ExecutionReport_OrderID -> let c_mod_f_ExecutionReport_OrderID = m_f_ExecutionReport_OrderID
+                                        in
+                                        (match msg.f_ExecutionReport_ClOrdID with
+                                            | None -> (FIX_TL_Req_Field_Missing {
+                                                field_missing_data_msg = M_Msg_ExecutionReport_Tag;
+                                                field_missing_data_field = M_Field_ClOrdID_Tag
+                                            })
+                                            | Some m_f_ExecutionReport_ClOrdID -> let c_mod_f_ExecutionReport_ClOrdID = m_f_ExecutionReport_ClOrdID
+                                            in
+                                            let fix_msg_data = {
+                                                mod_def_opt_f_ExecutionReport_ClOrdID = c_mod_f_ExecutionReport_ClOrdID;
+                                                mod_def_opt_f_ExecutionReport_OrderID = c_mod_f_ExecutionReport_OrderID;
+                                                mod_def_opt_f_ExecutionReport_ExecID = c_mod_f_ExecutionReport_ExecID;
+                                                mod_def_opt_f_ExecutionReport_ExecType = c_mod_f_ExecutionReport_ExecType;
+                                                mod_def_opt_f_ExecutionReport_AvgPx = c_mod_f_ExecutionReport_AvgPx;
+                                                mod_def_opt_f_ExecutionReport_Side = c_mod_f_ExecutionReport_Side;
+                                                mod_def_opt_f_ExecutionReport_LeavesQty = c_mod_f_ExecutionReport_LeavesQty;
+                                                mod_def_opt_f_ExecutionReport_CumQty = c_mod_f_ExecutionReport_CumQty;
+                                                mod_def_opt_f_ExecutionReport_OrdStatus = c_mod_f_ExecutionReport_OrdStatus;
+                                                mod_def_opt_f_ExecutionReport_Instrument_Symbol = c_mod_f_ExecutionReport_Instrument_Symbol;
+                                                mod_def_opt_f_ExecutionReport_Text = c_mod_f_ExecutionReport_Text
+                                            }
+                                            in
+                                            FIX_TL_Normal (FIX_Msg_Def_Opt_ExecutionReport fix_msg_data)
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
 ;;
 
 let convert__full_to_model_NewOrderSingle (msg : full_fix_newordersingle_data)  =
@@ -30,7 +125,7 @@ let convert__full_to_model_NewOrderSingle (msg : full_fix_newordersingle_data)  
                 field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
                 field_missing_data_field = M_Field_OrdType_Tag
             })
-            | Some m_f_NewOrderSingle_OrdType -> let c_mod_f_NewOrderSingle_OrdType = m_f_NewOrderSingle_OrdType
+            | Some m_f_NewOrderSingle_OrdType -> let c_mod_f_NewOrderSingle_OrdType = convert__full_to_model_OrdType m_f_NewOrderSingle_OrdType
             in
             (match msg.f_NewOrderSingle_TransactTime with
                 | None -> (FIX_TL_Req_Field_Missing {
@@ -44,7 +139,7 @@ let convert__full_to_model_NewOrderSingle (msg : full_fix_newordersingle_data)  
                         field_missing_data_msg = M_Msg_NewOrderSingle_Tag;
                         field_missing_data_field = M_Field_Side_Tag
                     })
-                    | Some m_f_NewOrderSingle_Side -> let c_mod_f_NewOrderSingle_Side = m_f_NewOrderSingle_Side
+                    | Some m_f_NewOrderSingle_Side -> let c_mod_f_NewOrderSingle_Side = convert__full_to_model_Side m_f_NewOrderSingle_Side
                     in
                     (match msg.f_NewOrderSingle_ClOrdID with
                         | None -> (FIX_TL_Req_Field_Missing {
@@ -54,14 +149,14 @@ let convert__full_to_model_NewOrderSingle (msg : full_fix_newordersingle_data)  
                         | Some m_f_NewOrderSingle_ClOrdID -> let c_mod_f_NewOrderSingle_ClOrdID = m_f_NewOrderSingle_ClOrdID
                         in
                         let fix_msg_data = {
-                            mod_f_NewOrderSingle_ClOrdID = c_mod_f_NewOrderSingle_ClOrdID;
-                            mod_f_NewOrderSingle_Side = convert__full_to_model_Side c_mod_f_NewOrderSingle_Side;
-                            mod_f_NewOrderSingle_TransactTime = c_mod_f_NewOrderSingle_TransactTime;
-                            mod_f_NewOrderSingle_OrdType = convert__full_to_model_OrdType c_mod_f_NewOrderSingle_OrdType;
-                            mod_f_NewOrderSingle_Instrument_Symbol = c_mod_f_NewOrderSingle_Instrument_Symbol
+                            mod_def_opt_f_NewOrderSingle_ClOrdID = c_mod_f_NewOrderSingle_ClOrdID;
+                            mod_def_opt_f_NewOrderSingle_Side = c_mod_f_NewOrderSingle_Side;
+                            mod_def_opt_f_NewOrderSingle_TransactTime = c_mod_f_NewOrderSingle_TransactTime;
+                            mod_def_opt_f_NewOrderSingle_OrdType = c_mod_f_NewOrderSingle_OrdType;
+                            mod_def_opt_f_NewOrderSingle_Instrument_Symbol = c_mod_f_NewOrderSingle_Instrument_Symbol
                         }
                         in
-                        FIX_TL_Normal (FIX_Msg_NewOrderSingle fix_msg_data)
+                        FIX_TL_Normal (FIX_Msg_Def_Opt_NewOrderSingle fix_msg_data)
                     )
                 )
             )
@@ -69,7 +164,7 @@ let convert__full_to_model_NewOrderSingle (msg : full_fix_newordersingle_data)  
     )
 ;;
 
-let convert_full_to_model_fix (msg : full_app_msg_data) =
+let convert_full_to_model_fix (msg : full_app_msg_data)  =
     (match msg with
         | FIX_Full_Msg_ExecutionReport msg_data -> (convert__full_to_model_ExecutionReport msg_data)
         | FIX_Full_Msg_NewOrderSingle msg_data -> (convert__full_to_model_NewOrderSingle msg_data)
@@ -312,7 +407,6 @@ let convert__model_to_full_ExecutionReport (msg : mod_executionreport_data)  =
         f_ExecutionReport_CopyMsgIndicator = None;
         f_ExecutionReport_MiscFeesGrp = []
     }
-    [@@macro]
 ;;
 
 let convert__model_to_full_NewOrderSingle (msg : mod_newordersingle_data)  =
@@ -489,7 +583,6 @@ let convert__model_to_full_NewOrderSingle (msg : mod_newordersingle_data)  =
         f_NewOrderSingle_RegistID = None;
         f_NewOrderSingle_Designation = None
     }
-    [@@macro]
 ;;
 
 let convert_model_to_full_fix (msg : model_msg)  =

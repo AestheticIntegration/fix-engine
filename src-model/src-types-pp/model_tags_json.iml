@@ -1,31 +1,39 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
 [@@@import "../src-types/model_tags.iml"]
 open Model_tags;;
+[@@@require "yojson"]
+open Yojson.Basic;;
 
 
-let json_of_model_msg_tag (msg : m_msg_tag)  =
+let json_of_model_msg_tag (msg : m_msg_tag)  : json =
     (match msg with
         | M_Msg_ExecutionReport_Tag -> (`String "8")
         | M_Msg_NewOrderSingle_Tag -> (`String "D")
     )
 ;;
 
-let json_of_model_field_tag (x : m_field_tag)  =
+let json_of_model_field_tag (x : m_field_tag)  : json =
     (match x with
+        | M_Field_ExecID_Tag -> (`String "17")
+        | M_Field_OrderID_Tag -> (`String "37")
+        | M_Field_CumQty_Tag -> (`String "14")
+        | M_Field_ExecType_Tag -> (`String "150")
+        | M_Field_ClOrdID_Tag -> (`String "11")
+        | M_Field_AvgPx_Tag -> (`String "6")
+        | M_Field_Side_Tag -> (`String "54")
+        | M_Field_LeavesQty_Tag -> (`String "151")
+        | M_Field_OrdType_Tag -> (`String "40")
+        | M_Field_OrdStatus_Tag -> (`String "39")
         | M_Field_Symbol_Tag -> (`String "55")
         | M_Field_TransactTime_Tag -> (`String "60")
-        | M_Field_Side_Tag -> (`String "54")
-        | M_Field_ClOrdID_Tag -> (`String "11")
-        | M_Field_OrdType_Tag -> (`String "40")
     )
 ;;
 
-let json_of_req_field_missing (x : field_missing_data)  =
-    `Assoc (("m_msg_tag",json_of_model_msg_tag x.field_missing_data_msg) :: (("m_field_tag",json_of_model_field_tag x.field_missing_data_field) :: []))
-    [@@macro]
+let json_of_req_field_missing (x : field_missing_data)  : json =
+    `Assoc ([(("m_msg_tag",json_of_model_msg_tag x.field_missing_data_msg));(("m_field_tag",json_of_model_field_tag x.field_missing_data_field))])
 ;;
 
 [@@@logic]

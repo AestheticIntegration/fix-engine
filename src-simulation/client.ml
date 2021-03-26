@@ -199,15 +199,15 @@ module Client = struct
         match SQ.try_take state.sq with
         | Some msg ->
 
-          let () = save_state_seqns state in
-
           let msg = Parse_full_messages.parse_top_level_msg msg in
           let () = update_times msg in
 
           let engine_state = { state.engine_state with incoming_fix_msg = Some msg } in
           let (model_state, engine_state) = engine_handle (state.model_state, engine_state) in
-
           let state = { state with model_state; engine_state } in
+
+          let () = save_state_seqns state in
+
           loop state ~tick:0.0 ()
         | None ->
           (try Thread.delay 0.001 with Unix.Unix_error (Unix.EINTR,_,_)->());
@@ -215,6 +215,7 @@ module Client = struct
             (* nothing to process, just do a timeupdate *)
             let (model_state, engine_state) = engine_handle (state.model_state, state.engine_state) in
             let state = { state with model_state; engine_state } in
+            let () = save_state_seqns state in
             loop state ~tick:0.0 ()
           ) else
             loop state ~tick:(tick +. 0.002) ()
@@ -265,13 +266,13 @@ let () =
     Arg.(value & opt int 9880 & info ["fix-port"] ~docv:"FIXPORT" ~doc)
   in
   let compid = let doc = "FIX Client ID" in
-    Arg.(value & opt string "IMANDRA" & info ["compid"] ~docv:"COMPID" ~doc)
+    Arg.(value & opt string "CLIENT" & info ["compid"] ~docv:"COMPID" ~doc)
   in
   let hostid = let doc = "Host ID (will be sent as SenderLocationID<142>)" in
     Arg.(value & opt string "LOGIN" & info ["hostid"] ~docv:"HOSTID" ~doc)
   in
   let targetid = let doc = "FIX Target ID" in
-    Arg.(value & opt string "TARGET" & info ["targetid"] ~docv:"TARGETID" ~doc)
+    Arg.(value & opt string "IMANDRA" & info ["targetid"] ~docv:"TARGETID" ~doc)
   in
   let zmqpub =
     let doc = "ZMQ PUB socket adress" in

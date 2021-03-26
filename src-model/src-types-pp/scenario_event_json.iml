@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@import "model_actions_json.iml"]
 open Model_actions_json;;
@@ -6,12 +6,14 @@ open Model_actions_json;;
 open Model_messages_json;;
 [@@@import "../../vgs/templates/scenario_type.iml"]
 open Scenario_type;;
+[@@@require "yojson"]
+open Yojson.Basic;;
 
 
-let json_of_scenario_event (x)  =
+let json_of_scenario_event (x)  : json =
     (match x with
-        | Action x -> (`Assoc (("action",json_of_fix_action x) :: []))
-        | Message x -> (`Assoc (("message",json_of_model_msg x) :: []))
+        | Action x -> (`Assoc ([(("action",json_of_fix_action x))]))
+        | Message x -> (`Assoc ([(("message",json_of_model_msg_opt_def x))]))
     )
 ;;
 

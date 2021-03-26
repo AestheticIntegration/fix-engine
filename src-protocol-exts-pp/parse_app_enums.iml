@@ -1,9 +1,10 @@
-(* Imandra Inc. copyright 2019 *)
-[@@@import "../src-protocol-exts/full_app_enums.iml"]
-[@@@import "../src-core-pp/parser_utils.iml"]
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
+[@@@import "../src-protocol-exts/full_app_enums.iml"]
 open Full_app_enums;;
+[@@@import "../src-core-pp/parser_utils.iml"]
 open Parser_utils.Parser;;
+
 
 let parse_week (str)  =
     (match str with
@@ -13,6 +14,14 @@ let parse_week (str)  =
         | "w3" -> (Some (FIX_week_w3))
         | "w4" -> (Some (FIX_week_w4))
         | "w5" -> (Some (FIX_week_w5))
+        | _ -> (None)
+    )
+;;
+
+let parse_NoSides (str)  =
+    (match str with
+        | "1" -> (Some (FIX_NoSides_OneSide))
+        | "2" -> (Some (FIX_NoSides_BothSides))
         | _ -> (None)
     )
 ;;
@@ -611,7 +620,8 @@ let rec parse_CorporateAction_filter (f)  =
 ;;
 
 let parse_CorporateAction (str)  =
-    let x = split_to_list str ' ' in
+    let x = split_to_list str ' '
+    in
     Some (parse_CorporateAction_filter x)
 ;;
 
@@ -669,7 +679,7 @@ let parse_CxlRejReason (str)  =
 let parse_CxlRejResponseTo (str)  =
     (match str with
         | "1" -> (Some (FIX_CxlRejResponseTo_OrderCancelRequest))
-        | "2" -> (Some (FIX_CxlRejResponseTo_OrderCancel))
+        | "2" -> (Some (FIX_CxlRejResponseTo_OrderCancelReplaceRequest))
         | _ -> (None)
     )
 ;;
@@ -900,7 +910,8 @@ let rec parse_ExecInst_filter (f)  =
 ;;
 
 let parse_ExecInst (str)  =
-    let x = split_to_list str ' ' in
+    let x = split_to_list str ' '
+    in
     Some (parse_ExecInst_filter x)
 ;;
 
@@ -995,7 +1006,8 @@ let rec parse_FinancialStatus_filter (f)  =
 ;;
 
 let parse_FinancialStatus (str)  =
-    let x = split_to_list str ' ' in
+    let x = split_to_list str ' '
+    in
     Some (parse_FinancialStatus_filter x)
 ;;
 
@@ -1499,14 +1511,6 @@ let parse_NetworkStatusResponseType (str)  =
     )
 ;;
 
-let parse_NoSides (str)  =
-    (match str with
-        | "1" -> (Some (FIX_NoSides_OneSide))
-        | "2" -> (Some (FIX_NoSides_BothSides))
-        | _ -> (None)
-    )
-;;
-
 let parse_NotifyBrokerOfCredit (str)  =
     (match str with
         | "Y" -> (Some (FIX_NotifyBrokerOfCredit_DetailsShouldBeCommunicated))
@@ -1547,7 +1551,8 @@ let rec parse_OpenCloseSettlFlag_filter (f)  =
 ;;
 
 let parse_OpenCloseSettlFlag (str)  =
-    let x = split_to_list str ' ' in
+    let x = split_to_list str ' '
+    in
     Some (parse_OpenCloseSettlFlag_filter x)
 ;;
 
@@ -1657,7 +1662,8 @@ let rec parse_OrderRestrictions_filter (f)  =
 ;;
 
 let parse_OrderRestrictions (str)  =
-    let x = split_to_list str ' ' in
+    let x = split_to_list str ' '
+    in
     Some (parse_OrderRestrictions_filter x)
 ;;
 
@@ -2142,7 +2148,8 @@ let rec parse_QuoteCondition_filter (f)  =
 ;;
 
 let parse_QuoteCondition (str)  =
-    let x = split_to_list str ' ' in
+    let x = split_to_list str ' '
+    in
     Some (parse_QuoteCondition_filter x)
 ;;
 
@@ -2364,7 +2371,8 @@ let rec parse_Scope_filter (f)  =
 ;;
 
 let parse_Scope (str)  =
-    let x = split_to_list str ' ' in
+    let x = split_to_list str ' '
+    in
     Some (parse_Scope_filter x)
 ;;
 
@@ -2969,7 +2977,8 @@ let rec parse_TradeCondition_filter (f)  =
 ;;
 
 let parse_TradeCondition (str)  =
-    let x = split_to_list str ' ' in
+    let x = split_to_list str ' '
+    in
     Some (parse_TradeCondition_filter x)
 ;;
 
@@ -3195,4 +3204,5 @@ let parse_Exchange (str)  =
         | _ -> (None)
     )
 ;;
+
 [@@@logic]

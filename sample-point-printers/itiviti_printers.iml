@@ -1,0 +1,43 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@program]
+
+
+let enum_join (f) (l) (sep) (open_bracket) (close_bracket)  =
+    (match l with
+        | [] -> ((^) open_bracket close_bracket)
+        | [h] -> ((^) open_bracket ((^) (f h) close_bracket))
+        | h :: t -> ((^) (List.fold_left (fun acc el -> (^) acc ((^) sep (f el))
+        ) ((^) open_bracket (f h)) t) close_bracket)
+    )
+;;
+
+type field = {
+    name : string;
+    value : field_value
+} and 
+field_value =
+    | NoValue 
+    | Value of string
+    | Record of {
+    	ty_name : string;
+    	fields : field list
+    }
+    | Set of field_value list
+    | Map of (field_value*field_value) list
+    | List of field_value list
+    | RepeatingGroup of {
+    	rgname : string;
+    	num_in_group_field : string;
+    	message_template : string option;
+    	elements : field list list
+    }
+;;
+
+let field (x : (string*string))  =
+    {
+        name = fst x;
+        value = Value (snd x)
+    }
+;;
+
+[@@@logic]

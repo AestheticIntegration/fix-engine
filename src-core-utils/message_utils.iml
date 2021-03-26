@@ -1,14 +1,8 @@
-(** Time defaults for a particular FIX implementation *)
-(***
-
-    Imandra Inc.
-    Copyright (c) 2014 - 2019
-
-    message_utils.iml
-    
-*)
+(* Imandra Inc. copyright 2021 *)
+[@@@program]
 [@@@import "../src-model/src-types/model_messages.iml"]
 open Model_messages;;
+
 
 let get_resend_message (msg)  =
     (match msg with
@@ -17,8 +11,11 @@ let get_resend_message (msg)  =
     )
 ;;
 
-let get_normal_message (msg) = 
+let get_normal_message (msg)  =
     (match msg with
-    | FIX_TL_Normal m -> Some m
-    | _ -> None)
+        | FIX_TL_Normal m -> (Some m)
+        | m -> None
+    )
 ;;
+
+[@@@logic]

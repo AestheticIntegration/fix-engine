@@ -1,18 +1,11 @@
-(** Time defaults for a particular FIX implementation *)
-(***
-
-    Imandra Inc.
-    Copyright (c) 2014 - 2019
-
-    time_defaults_current_time.iml
-    
-*)
-[@@@import "../src-core-utils-pp/current_time.iml"]
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
+[@@@import "../src-core-utils-pp/current_time.iml"]
 open Current_time;;
 
-let get_current_utctimestamp = get_current_utctimestamp_milli;;
 
-let get_current_utctimeonly = get_current_utctimeonly_milli;;
+let get_current_utctimestamp = get_current_utctimestamp_milli ;;
+
+let get_current_utctimeonly = get_current_utctimeonly_milli ;;
 
 [@@@logic]

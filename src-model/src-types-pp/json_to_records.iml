@@ -1,5 +1,22 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
+[@@@import "../../src-core-pp/base_types_json.iml"]
+open Base_types_json;;
+[@@@import "../../src-core-pp/datetime_json.iml"]
+open Datetime_json;;
+[@@@require "decoders-yojson"]
+open Decoders_yojson.Basic.Decode;;
+[@@@require "decoders-yojson"]
+open Decoders_yojson.Basic.Decode.Infix;;
+[@@@import "../src-types/model_records.iml"]
+open Model_records;;
 
+
+let mod_action_x_decoder  : m_action_fix_x decoder =
+    (field "x" int_decoder) >>= (fun mod_f_x_x -> succeed {
+        mod_f_x_x = mod_f_x_x
+    }
+    )
+;;
 
 [@@@logic]

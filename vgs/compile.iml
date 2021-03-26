@@ -1,0 +1,14 @@
+(* Imandra Inc. copyright 2021 *)
+
+
+let () = System.with_path "fix-engine/vgs/templates/" (fun () -> System.mod_use "scenario.iml");;
+
+let () = System.Mode.program () ;;
+
+let () = System.with_path "fix-engine/src-model/src-string-factory/" (fun () -> System.mod_use "string_assoc.iml");;
+let () = System.with_path "fix-engine/src-model/src-types-pp/" (fun () -> System.mod_use "model_state_json.iml");;
+let () = System.with_path "fix-engine/src-model/src-types-pp/" (fun () -> System.mod_use "scenario_event_json.iml");;
+let () = System.with_path "fix-engine/vgs/templates_pp/" (fun () -> System.mod_use "step.iml");;
+let () = System.with_path "fix-engine/src-model/src-types-pp/" (fun () -> System.mod_use "json_to_model_state.iml");;
+let () = System.Mode.logic () ;;
+

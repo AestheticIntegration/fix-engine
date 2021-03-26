@@ -1,21 +1,19 @@
-(** Time defaults for a particular FIX implementation *)
-(***
-
-    Imandra Inc.
-    Copyright (c) 2014 - 2019
-
-    time_defaults_json.iml
-    
-*)
-[@@@import "../src-core-pp/datetime_json.iml"]
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
+[@@@import "../src-core-pp/datetime_json.iml"]
 open Datetime_json;;
 
-let utctimestamp_to_json = utctimestamp_milli_to_json;;
 
-let utctimestamp_opt_to_json = utctimestamp_milli_opt_to_json;;
+let utctimestamp_to_json = utctimestamp_milli_to_json ;;
 
-let utctimeonly_to_json = utctimeonly_milli_to_json;;
+let utctimestamp_opt_to_json = utctimestamp_milli_opt_to_json ;;
 
-let utctimeonly_opt_to_json = utctimeonly_milli_opt_to_json;;
+let utctimestamp_decoder = utctimestamp_milli_decoder ;;
+
+let utctimeonly_to_json = utctimeonly_milli_to_json ;;
+
+let utctimeonly_opt_to_json = utctimeonly_milli_opt_to_json ;;
+
+let utctimeonly_decoder = utctimeonly_milli_decoder ;;
+
 [@@@logic]

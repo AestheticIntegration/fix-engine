@@ -1,0 +1,11 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@program]
+
+
+let resource_name = "simple" ;;
+
+let repeating_group_info = [] ;;
+
+let repeating_group_count_functions = [] ;;
+
+[@@@logic]

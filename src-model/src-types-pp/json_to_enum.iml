@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@require "decoders-yojson"]
 open Decoders_yojson.Basic.Decode;;
@@ -10,22 +10,12 @@ open Model_app_enums;;
 open Model_enum_names;;
 
 
-let mod_enum_side_decoder  : model_fix_side decoder =
-    string >>= (fun x -> (match string_to_mod_side_opt x with
-        | None -> (fail "Unknown enum (Side) encoding.")
+let mod_enum_ordtype_decoder  : model_fix_ordtype decoder =
+    string >>= (fun x -> (match string_to_mod_ordtype_opt x with
+        | None -> (fail "Unknown enum (OrdType) encoding.")
         | Some y -> (succeed y)
     )
     )
-    [@@macro]
-;;
-
-let mod_enum_exectype_decoder  : model_fix_exectype decoder =
-    string >>= (fun x -> (match string_to_mod_exectype_opt x with
-        | None -> (fail "Unknown enum (ExecType) encoding.")
-        | Some y -> (succeed y)
-    )
-    )
-    [@@macro]
 ;;
 
 let mod_enum_ordstatus_decoder  : model_fix_ordstatus decoder =
@@ -34,16 +24,22 @@ let mod_enum_ordstatus_decoder  : model_fix_ordstatus decoder =
         | Some y -> (succeed y)
     )
     )
-    [@@macro]
 ;;
 
-let mod_enum_ordtype_decoder  : model_fix_ordtype decoder =
-    string >>= (fun x -> (match string_to_mod_ordtype_opt x with
-        | None -> (fail "Unknown enum (OrdType) encoding.")
+let mod_enum_exectype_decoder  : model_fix_exectype decoder =
+    string >>= (fun x -> (match string_to_mod_exectype_opt x with
+        | None -> (fail "Unknown enum (ExecType) encoding.")
         | Some y -> (succeed y)
     )
     )
-    [@@macro]
+;;
+
+let mod_enum_side_decoder  : model_fix_side decoder =
+    string >>= (fun x -> (match string_to_mod_side_opt x with
+        | None -> (fail "Unknown enum (Side) encoding.")
+        | Some y -> (succeed y)
+    )
+    )
 ;;
 
 [@@@logic]

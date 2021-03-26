@@ -1,13 +1,20 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@import "../src-types/actions.iml"]
 open Actions;;
+[@@@import "../src-types/model_records.iml"]
+open Model_records;;
 [@@@import "../src-types/state.iml"]
 open State;;
 
 
+let is_valid_action_x (action_data : m_action_fix_x) (m_state : model_state)  =
+    true
+;;
+
 let is_action_valid (action : fix_action) (m_state : model_state)  =
     (match action with
-        | _ -> true
+        | FIX_Action_x d -> (is_valid_action_x d m_state)
     )
     [@@macro]
 ;;
+

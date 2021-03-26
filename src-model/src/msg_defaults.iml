@@ -1,16 +1,3 @@
-(* Imandra Inc. copyright 2020 *)
-[@@@import "../src-types/model_messages.iml"]
-open Model_messages;;
-[@@@import "../src-types/state.iml"]
-open State;;
+(* Imandra Inc. copyright 2021 *)
 
 
-let assign_defaults_ExecutionReport (msg_data : mod_executionreport_data) (m_state : model_state)  =
-    msg_data
-    [@@macro]
-;;
-
-let assign_defaults_NewOrderSingle (msg_data : mod_newordersingle_data) (m_state : model_state)  =
-    msg_data
-    [@@macro]
-;;

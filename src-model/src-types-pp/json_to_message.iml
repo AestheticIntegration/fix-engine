@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@import "../../src-core-pp/base_types_json.iml"]
 open Base_types_json;;
@@ -41,7 +41,33 @@ let mod_message_executionreport_decoder  : mod_executionreport_data decoder =
     )
     )
     )
-    [@@macro]
+;;
+
+let mod_message_executionreport_opt_def_decoder  : mod_executionreport_defopt_data decoder =
+    (maybe (field "Text" string_decoder)) >>= (fun mod_def_opt_f_ExecutionReport_Text -> (field "Instrument.Symbol" string_decoder) >>= (fun mod_def_opt_f_ExecutionReport_Instrument_Symbol -> (field "OrdStatus" mod_enum_ordstatus_decoder) >>= (fun mod_def_opt_f_ExecutionReport_OrdStatus -> (field "CumQty" float_6_decoder) >>= (fun mod_def_opt_f_ExecutionReport_CumQty -> (field "LeavesQty" float_6_decoder) >>= (fun mod_def_opt_f_ExecutionReport_LeavesQty -> (field "Side" mod_enum_side_decoder) >>= (fun mod_def_opt_f_ExecutionReport_Side -> (field "AvgPx" float_6_decoder) >>= (fun mod_def_opt_f_ExecutionReport_AvgPx -> (field "ExecType" mod_enum_exectype_decoder) >>= (fun mod_def_opt_f_ExecutionReport_ExecType -> (field "ExecID" string_decoder) >>= (fun mod_def_opt_f_ExecutionReport_ExecID -> (field "OrderID" string_decoder) >>= (fun mod_def_opt_f_ExecutionReport_OrderID -> (field "ClOrdID" string_decoder) >>= (fun mod_def_opt_f_ExecutionReport_ClOrdID -> succeed {
+        mod_def_opt_f_ExecutionReport_ClOrdID = mod_def_opt_f_ExecutionReport_ClOrdID;
+        mod_def_opt_f_ExecutionReport_OrderID = mod_def_opt_f_ExecutionReport_OrderID;
+        mod_def_opt_f_ExecutionReport_ExecID = mod_def_opt_f_ExecutionReport_ExecID;
+        mod_def_opt_f_ExecutionReport_ExecType = mod_def_opt_f_ExecutionReport_ExecType;
+        mod_def_opt_f_ExecutionReport_AvgPx = mod_def_opt_f_ExecutionReport_AvgPx;
+        mod_def_opt_f_ExecutionReport_Side = mod_def_opt_f_ExecutionReport_Side;
+        mod_def_opt_f_ExecutionReport_LeavesQty = mod_def_opt_f_ExecutionReport_LeavesQty;
+        mod_def_opt_f_ExecutionReport_CumQty = mod_def_opt_f_ExecutionReport_CumQty;
+        mod_def_opt_f_ExecutionReport_OrdStatus = mod_def_opt_f_ExecutionReport_OrdStatus;
+        mod_def_opt_f_ExecutionReport_Instrument_Symbol = mod_def_opt_f_ExecutionReport_Instrument_Symbol;
+        mod_def_opt_f_ExecutionReport_Text = mod_def_opt_f_ExecutionReport_Text
+    }
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
 ;;
 
 let mod_message_newordersingle_decoder  : mod_newordersingle_data decoder =
@@ -57,7 +83,21 @@ let mod_message_newordersingle_decoder  : mod_newordersingle_data decoder =
     )
     )
     )
-    [@@macro]
+;;
+
+let mod_message_newordersingle_opt_def_decoder  : mod_newordersingle_defopt_data decoder =
+    (field "Instrument.Symbol" string_decoder) >>= (fun mod_def_opt_f_NewOrderSingle_Instrument_Symbol -> (field "OrdType" mod_enum_ordtype_decoder) >>= (fun mod_def_opt_f_NewOrderSingle_OrdType -> (field "TransactTime" utctimestamp_milli_decoder) >>= (fun mod_def_opt_f_NewOrderSingle_TransactTime -> (field "Side" mod_enum_side_decoder) >>= (fun mod_def_opt_f_NewOrderSingle_Side -> (field "ClOrdID" string_decoder) >>= (fun mod_def_opt_f_NewOrderSingle_ClOrdID -> succeed {
+        mod_def_opt_f_NewOrderSingle_ClOrdID = mod_def_opt_f_NewOrderSingle_ClOrdID;
+        mod_def_opt_f_NewOrderSingle_Side = mod_def_opt_f_NewOrderSingle_Side;
+        mod_def_opt_f_NewOrderSingle_TransactTime = mod_def_opt_f_NewOrderSingle_TransactTime;
+        mod_def_opt_f_NewOrderSingle_OrdType = mod_def_opt_f_NewOrderSingle_OrdType;
+        mod_def_opt_f_NewOrderSingle_Instrument_Symbol = mod_def_opt_f_NewOrderSingle_Instrument_Symbol
+    }
+    )
+    )
+    )
+    )
+    )
 ;;
 
 let model_message_decoder  : model_msg decoder =
@@ -69,21 +109,30 @@ let model_message_decoder  : model_msg decoder =
         | d -> (fail ("Unknown Message ("^d^") in JSON decoding."))
     )
     )
-    [@@macro]
+;;
+
+let model_message_decoder_opt_def  : model_msg_opt_def decoder =
+    (field "tag" string) >>= (fun x -> (match x with
+        | "8" -> ((field "data" mod_message_executionreport_opt_def_decoder) >>= (fun y -> succeed (FIX_Msg_Def_Opt_ExecutionReport y)
+        ))
+        | "D" -> ((field "data" mod_message_newordersingle_opt_def_decoder) >>= (fun y -> succeed (FIX_Msg_Def_Opt_NewOrderSingle y)
+        ))
+        | d -> (fail ("Unknown Message ("^d^") in JSON decoding."))
+    )
+    )
 ;;
 
 let top_level_message_decoder  : model_top_level_msg decoder =
     (field "top_level_msg" string) >>= (fun f -> (match f with
-        | "FIX_TL_Normal" -> ((field "data" model_message_decoder) >>= (fun x -> succeed (FIX_TL_Normal x)
+        | "FIX_TL_Normal" -> ((field "data" model_message_decoder_opt_def) >>= (fun x -> succeed (FIX_TL_Normal x)
         ))
         | "FIX_TL_Req_Field_Missing" -> ((field "data" field_missing_data_decoder) >>= (fun x -> succeed (FIX_TL_Req_Field_Missing x)
         ))
-        | "FIX_TL_PossibleResend" -> ((field "data" model_message_decoder) >>= (fun x -> succeed (FIX_TL_PossibleResend x)
+        | "FIX_TL_PossibleResend" -> ((field "data" model_message_decoder_opt_def) >>= (fun x -> succeed (FIX_TL_PossibleResend x)
         ))
         | _ -> (succeed FIX_TL_None)
     )
     )
-    [@@macro]
 ;;
 
 [@@@logic]

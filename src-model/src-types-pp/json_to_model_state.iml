@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@require "decoders-yojson"]
 open Decoders_yojson.Basic.Decode;;
@@ -15,18 +15,17 @@ open State;;
 
 
 let outgoing_decoder  =
-    (field "outgoing_msg_counter" int) >>= (fun c -> (field "outgoing_msg_msg" model_message_decoder) >>= (fun m -> succeed {
-        outgoing_msg_counter = Z.of_int c;
+    (field "outgoing_msg_counter" string) >>= (fun c -> (field "outgoing_msg_msg" model_message_decoder) >>= (fun m -> succeed {
+        outgoing_msg_counter = Z.of_string c;
         outgoing_msg_msg = m
     }
     )
     )
-    [@@macro]
 ;;
 
 let state_info_decoder  =
-    (field "state_event_counter" int) >>= (fun c -> (maybe (field "state_event_reject_text" string)) >>= (fun m -> succeed {
-        state_event_counter = Z.of_int c;
+    (field "state_event_counter" string) >>= (fun c -> (maybe (field "state_event_reject_text" string)) >>= (fun m -> succeed {
+        state_event_counter = Z.of_string c;
         state_event_reject_text = (match m with
             | None -> None
             | Some x -> (Some x)
@@ -34,18 +33,17 @@ let state_info_decoder  =
     }
     )
     )
-    [@@macro]
 ;;
 
 let model_state_decoder  : model_state decoder =
-    (field "incoming_action" (nullable fix_action_decoder)) >>= (fun incoming_action -> (field "event_counter" int) >>= (fun event_counter -> (field "incoming_msg" (nullable top_level_message_decoder)) >>= (fun incoming_msg -> (field "outgoing_msgs" (list outgoing_decoder)) >>= (fun outgoing_msgs -> (field "event_info" (list state_info_decoder)) >>= (fun event_info -> succeed {
+    (field "incoming_action" (nullable fix_action_decoder)) >>= (fun incoming_action -> (field "event_counter" string) >>= (fun event_counter -> (field "incoming_msg" (nullable top_level_message_decoder)) >>= (fun incoming_msg -> (field "outgoing_msgs" (list outgoing_decoder)) >>= (fun outgoing_msgs -> (field "event_info" (list state_info_decoder)) >>= (fun event_info -> succeed {
         incoming_action = incoming_action;
         incoming_msg = (match incoming_msg with
             | None -> FIX_TL_None
             | Some x -> x
         );
         outgoing_msgs = outgoing_msgs;
-        event_counter = Z.of_int event_counter;
+        event_counter = Z.of_string event_counter;
         event_info = event_info
     }
     )
@@ -53,7 +51,6 @@ let model_state_decoder  : model_state decoder =
     )
     )
     )
-    [@@macro]
 ;;
 
 [@@@logic]

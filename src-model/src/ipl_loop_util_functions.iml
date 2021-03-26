@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 
 
 type ('a) loop_result = {
@@ -49,3 +49,4 @@ let rec loop_enum (f) (from) (acc)  =
             (loop_enum f t new_acc))
     )
 ;;
+

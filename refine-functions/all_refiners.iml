@@ -1,0 +1,22 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@import "datasets_refine.iml"]
+open Datasets_refine;;
+[@@@import "datetime_refine.iml"]
+open Datetime_refine;;
+[@@@import "empty_string_refine.iml"]
+open Empty_string_refine;;
+[@@@import "../vgs/templates/scenario_type.iml"]
+open Scenario_type;;
+[@@@import "../src-model/src-types/state.iml"]
+open State;;
+
+
+let all_refiners (e : event) (s : model_state)  : bool =
+    (&&) ((&&) ((&&) true (refine_empty_strings e s)) (refine_datetime e s)) (refine_datasets e s)
+    [@@macro]
+;;
+
+let all_refiners_fn = "All_refiners.all_refiners" [@@macro];;
+
+let refiners_extra_basis = (@) ([("Empty_string_refine.refine_empty_strings");("Datetime_refine.refine_datetime")]) datasets_extra_basis [@@macro];;
+

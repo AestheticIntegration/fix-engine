@@ -1,0 +1,8 @@
+(* Imandra Inc. copyright 2021 *)
+
+
+let ambiguous_default_names ()  =
+    []
+    [@@macro]
+;;
+

@@ -1,7 +1,7 @@
 (library
- (name simulation_utils_gen)
- (public_name fix-engine.fix_simulation_utils_gen)
- (wrapped false)
- (flags
-  (:standard -open Imandra_prelude -open Unix -warn-error -A+8+39 -alert -deprecated -w -33-58))
- (libraries venue_types))
+  (name simulation_utils_gen)
+  (public_name fix-engine.simulation_utils_gen)
+  (wrapped false)
+  (flags (:standard -open Imandra_interactive -open Imandra_prelude -warn-error -A+8+39 -alert -deprecated -w -33-58))
+  (libraries imandra-base.prelude imandra-base.interactive venue_types)
+)

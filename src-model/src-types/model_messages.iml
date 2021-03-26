@@ -1,4 +1,4 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@import "../../src-core/datetime.iml"]
 open Datetime;;
 [@@@import "model_app_enums.iml"]
@@ -10,6 +10,30 @@ open Numeric;;
 [@@@import "../../src-core-time-defaults/time_defaults.iml"]
 open Time_defaults;;
 
+
+type mod_executionreport_defopt_data = {
+(** Required for executions against electronically submitted orders which were assigned an ID by the institution or intermediary. Not required for orders manually entered by the broker or fund manager (for CIV orders).*)
+    mod_def_opt_f_ExecutionReport_ClOrdID : string;
+(** OrderID is required to be unique for each chain of orders.*)
+    mod_def_opt_f_ExecutionReport_OrderID : string;
+(** Unique identifier of execution message as assigned by sell-side (broker, exchange, ECN) (will be 0 (zero) forExecType=I (Order Status)).*)
+    mod_def_opt_f_ExecutionReport_ExecID : string;
+(** Describes the purpose of the execution report.*)
+    mod_def_opt_f_ExecutionReport_ExecType : model_fix_exectype;
+    mod_def_opt_f_ExecutionReport_AvgPx : fix_float_6;
+    mod_def_opt_f_ExecutionReport_Side : model_fix_side;
+(** Quantity open for further execution. If the OrdStatus is Canceled, DoneForTheDay, Expired, Calculated, or Rejected (in which case the order is no longer active) then LeavesQty could be 0, otherwise LeavesQty = OrderQty - CumQty.*)
+    mod_def_opt_f_ExecutionReport_LeavesQty : fix_float_6;
+(** Currently executed quantity for chain of orders.*)
+    mod_def_opt_f_ExecutionReport_CumQty : fix_float_6;
+(** Describes the current state of a CHAIN of orders, same scope as OrderQty, CumQty, LeavesQty, and AvgPx*)
+    mod_def_opt_f_ExecutionReport_OrdStatus : model_fix_ordstatus;
+(** Common, "human understood" representation of the security. SecurityID value can be specified if no symbol exists (e.g. non-exchange traded Collective Investment Vehicles)
+ Use "[N/A]" for products which do not have a symbol.*)
+    mod_def_opt_f_ExecutionReport_Instrument_Symbol : string;
+    mod_def_opt_f_ExecutionReport_Text : string option
+}
+;;
 
 type mod_executionreport_data = {
 (** Required for executions against electronically submitted orders which were assigned an ID by the institution or intermediary. Not required for orders manually entered by the broker or fund manager (for CIV orders).*)
@@ -35,6 +59,19 @@ type mod_executionreport_data = {
 }
 ;;
 
+type mod_newordersingle_defopt_data = {
+(** Unique identifier of the order as assigned by institution or by the intermediary (CIV term, not a hub/service bureau) with closest association with the investor.*)
+    mod_def_opt_f_NewOrderSingle_ClOrdID : string;
+    mod_def_opt_f_NewOrderSingle_Side : model_fix_side;
+(** Time this order request was initiated/released by the trader, trading system, or intermediary.*)
+    mod_def_opt_f_NewOrderSingle_TransactTime : fix_utctimestamp_milli;
+    mod_def_opt_f_NewOrderSingle_OrdType : model_fix_ordtype;
+(** Common, "human understood" representation of the security. SecurityID value can be specified if no symbol exists (e.g. non-exchange traded Collective Investment Vehicles)
+ Use "[N/A]" for products which do not have a symbol.*)
+    mod_def_opt_f_NewOrderSingle_Instrument_Symbol : string
+}
+;;
+
 type mod_newordersingle_data = {
 (** Unique identifier of the order as assigned by institution or by the intermediary (CIV term, not a hub/service bureau) with closest association with the investor.*)
     mod_f_NewOrderSingle_ClOrdID : string;
@@ -53,6 +90,18 @@ type model_msg =
     | FIX_Msg_NewOrderSingle of mod_newordersingle_data
 ;;
 
+type model_msg_opt_def =
+    | FIX_Msg_Def_Opt_ExecutionReport of mod_executionreport_defopt_data
+    | FIX_Msg_Def_Opt_NewOrderSingle of mod_newordersingle_defopt_data
+;;
+
+let is_msg_opt_def_inbound (msg : model_msg_opt_def)  =
+    (match msg with
+        | FIX_Msg_Def_Opt_ExecutionReport _ -> false
+        | FIX_Msg_Def_Opt_NewOrderSingle _ -> true
+    )
+;;
+
 let is_msg_inbound (msg : model_msg)  =
     (match msg with
         | FIX_Msg_ExecutionReport _ -> false
@@ -67,8 +116,9 @@ type field_missing_data = {
 ;;
 
 type model_top_level_msg =
-    | FIX_TL_Normal of model_msg
+    | FIX_TL_Normal of model_msg_opt_def
     | FIX_TL_Req_Field_Missing of field_missing_data
-    | FIX_TL_PossibleResend of model_msg
+    | FIX_TL_PossibleResend of model_msg_opt_def
     | FIX_TL_None 
 ;;
+

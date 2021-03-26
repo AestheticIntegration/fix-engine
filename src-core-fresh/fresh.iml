@@ -1,37 +1,64 @@
-(** fresh helper functions. *)
-(***
-    Imandra Inc.
-    Copyright (c) 2014 - 2020
-    fresh.iml
-*)
-[@@@import "../src-core-time-defaults-pp/time_defaults_current_time.iml"];;
-[@@@import "../src-core-utils-pp/current_time.iml"];;
-[@@@import "../src-core/numeric.iml"];;
-[@@@import "../src-core-time-defaults/time_defaults.iml"];;
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
+[@@@import "../src-core/numeric.iml"]
+open Numeric;;
+[@@@import "../src-core-time-defaults-pp/time_defaults_current_time.iml"]
+open Time_defaults_current_time;;
 
-let count_string = ref 0;; 
+
+let fresh_strings_db : ('a, 'a) Hashtbl.t = Hashtbl.create 32i ;;
+let count_string = ref 0;;
+let fresh_ints_db : ('a, 'a) Hashtbl.t = Hashtbl.create 32i ;;
 let count_int = ref 0;;
-let count_float = ref (Numeric.Float_6 0);;
+let fresh_floats_db : ('a, 'a) Hashtbl.t = Hashtbl.create 32i ;;
+let count_float = ref (float_Create_6 0);;
+let fresh_now_db : ('a, 'a) Hashtbl.t = Hashtbl.create 32i ;;
+let count_now = ref (get_current_utctimestamp ());;
 
-let incr_string () = 
-   count_string := !count_string + 1;
-   Z.to_string !count_string
+
+let incr_string seed =
+  match Hashtbl.find fresh_strings_db seed with
+  | s -> s
+  | exception Not_found ->
+  	let prev = !count_string in
+  	count_string := prev + 1;
+	let s = Z.to_string !count_string in
+	Hashtbl.add fresh_strings_db seed s;
+	s
 ;;
 
-let incr_int () = 
-  count_int := !count_int + 1;
-  !count_int
+let incr_int seed =
+  match Hashtbl.find fresh_ints_db seed with
+  | i -> i
+  | exception Not_found ->
+  	let prev = !count_int in
+  	count_int := prev + 1;
+	let i = !count_int in
+	Hashtbl.add fresh_ints_db seed i;
+	i
 ;;
 
-let incr_float () = 
-  count_float := Numeric.float_Add_6_6 !count_float (Numeric.Float_6 1);
-  !count_float;;
-
-let now_UTCTimestamp () = 
-  Time_defaults_current_time.get_current_utctimestamp ()
-  [@@opaque] [@@logic]
+let incr_float seed =
+  match Hashtbl.find fresh_floats_db seed with
+  | f -> f
+  | exception Not_found ->
+  	let prev = !count_float in
+  	count_float := float_Add_6_6 !count_float (float_Create_6 1);
+	let f = !count_float in
+	Hashtbl.add fresh_floats_db seed f;
+	f
 ;;
+
+let incr_UTCTimestamp seed =
+  match Hashtbl.find fresh_now_db seed with
+  | n -> n
+  | exception Not_found ->
+  	let prev = !count_now in
+  	count_now := get_current_utctimestamp ();
+	let n = !count_now in
+	Hashtbl.add fresh_now_db seed n;
+	n
+;;
+
 
 [@@@logic]
-

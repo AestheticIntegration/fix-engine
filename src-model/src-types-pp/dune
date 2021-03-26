@@ -1,8 +1,7 @@
 (library
- (name types_pp)
- (public_name fix-engine.types_pp)
- (wrapped false)
- (flags
-  (:standard -open Imandra_prelude -warn-error -A+8+39 -alert -deprecated -w -33-58))
- (libraries imandra-base.prelude decoders-yojson core_pp protocol_exts_pp
-   string_factory templates venue_strings_venue venue_types))
+  (name types_pp)
+  (public_name fix-engine.types_pp)
+  (wrapped false)
+  (flags (:standard -open Imandra_interactive -open Imandra_prelude -warn-error -A+8+39 -alert -deprecated -w -33-58))
+  (libraries imandra-base.prelude imandra-base.interactive decoders-yojson core_pp protocol_exts_pp string_factory templates venue_strings_venue venue_types yojson)
+)

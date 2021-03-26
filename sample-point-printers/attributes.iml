@@ -1,0 +1,102 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@program]
+[@@@import "../src-core/numeric.iml"]
+open Numeric;;
+
+
+type attribute_arg_type = [`Str of string | `Bool of bool | `Int of int | `Float of fix_float]
+;;
+
+let function_attributes_iml_names ()  =
+    let action_map = Map.const (Map.const false)
+    in
+    action_map
+;;
+
+let function_attributes_ipl_names ()  =
+    let action_map = Map.const (Map.const false)
+    in
+    action_map
+;;
+
+let action_attributes_iml_names ()  =
+    let action_map = Map.const (Map.const false,Map.const (Map.const false))
+    in
+    let fields_map = Map.const (Map.const false)
+    in
+    let fields_map = fields_map
+    in
+    let attributes_set = Set.of_list []
+    in
+    let action_map = Map.add "Actions.FIX_Action_x" (attributes_set,fields_map) action_map
+    in
+    action_map
+;;
+
+let action_attributes_ipl_names ()  =
+    let action_map = Map.const (Map.const false,Map.const (Map.const false))
+    in
+    let fields_map = Map.const (Map.const false)
+    in
+    let fields_map = fields_map
+    in
+    let attributes_set = Set.of_list []
+    in
+    let action_map = Map.add "x" (attributes_set,fields_map) action_map
+    in
+    action_map
+;;
+
+let internal_attributes_iml_names ()  =
+    let internal_map = Map.const (Map.const false,Map.const (Map.const false))
+    in
+    internal_map
+;;
+
+let internal_attributes_ipl_names ()  =
+    let internal_map = Map.const (Map.const false,Map.const (Map.const false))
+    in
+    internal_map
+;;
+
+let global_attributes ()  =
+    []
+;;
+
+let msg_field_attributes_iml_names ()  =
+    let message_map = Map.const (Map.const (Map.const false))
+    in
+    let fields_map = Map.const (Map.const false)
+    in
+    let fields_map = fields_map
+    in
+    let message_map = Map.add "Model_messages.mod_newordersingle_data" fields_map message_map
+    in
+    let fields_map = Map.const (Map.const false)
+    in
+    let fields_map = fields_map
+    in
+    let message_map = Map.add "Model_messages.mod_executionreport_data" fields_map message_map
+    in
+    message_map
+;;
+
+let msg_field_attributes_ipl_names ()  =
+    let message_map = Map.const (Map.const (Map.const false))
+    in
+    let fields_map = Map.const (Map.const false)
+    in
+    let fields_map = fields_map
+    in
+    let message_map = Map.add "NewOrderSingle" fields_map message_map
+    in
+    let fields_map = Map.const (Map.const false)
+    in
+    let fields_map = fields_map
+    in
+    let message_map = Map.add "ExecutionReport" fields_map message_map
+    in
+    message_map
+;;
+
+[@@@logic]

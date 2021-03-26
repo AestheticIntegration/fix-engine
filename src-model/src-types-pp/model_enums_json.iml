@@ -1,54 +1,52 @@
-(* Imandra Inc. copyright 2020 *)
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
 [@@@import "../src-strings-venue/model_enum_names.iml"]
 open Model_enum_names;;
+[@@@require "yojson"]
+open Yojson.Basic;;
 
 
-let mod_side_to_json (d)  =
-    `String (mod_side_to_string d)
-    [@@macro]
-;;
-
-let mod_exectype_to_json (d)  =
-    `String (mod_exectype_to_string d)
-    [@@macro]
-;;
-
-let mod_ordstatus_to_json (d)  =
-    `String (mod_ordstatus_to_string d)
-    [@@macro]
-;;
-
-let mod_ordtype_to_json (d)  =
+let mod_ordtype_to_json (d)  : json =
     `String (mod_ordtype_to_string d)
-    [@@macro]
 ;;
 
-let mod_side_opt_to_json (d)  =
+let mod_ordstatus_to_json (d)  : json =
+    `String (mod_ordstatus_to_string d)
+;;
+
+let mod_exectype_to_json (d)  : json =
+    `String (mod_exectype_to_string d)
+;;
+
+let mod_side_to_json (d)  : json =
+    `String (mod_side_to_string d)
+;;
+
+let mod_ordtype_opt_to_json (d)  : json =
     (match d with
         | None -> (`Null)
-        | Some d -> (mod_side_to_json d)
+        | Some d -> (mod_ordtype_to_json d)
     )
 ;;
 
-let mod_exectype_opt_to_json (d)  =
-    (match d with
-        | None -> (`Null)
-        | Some d -> (mod_exectype_to_json d)
-    )
-;;
-
-let mod_ordstatus_opt_to_json (d)  =
+let mod_ordstatus_opt_to_json (d)  : json =
     (match d with
         | None -> (`Null)
         | Some d -> (mod_ordstatus_to_json d)
     )
 ;;
 
-let mod_ordtype_opt_to_json (d)  =
+let mod_exectype_opt_to_json (d)  : json =
     (match d with
         | None -> (`Null)
-        | Some d -> (mod_ordtype_to_json d)
+        | Some d -> (mod_exectype_to_json d)
+    )
+;;
+
+let mod_side_opt_to_json (d)  : json =
+    (match d with
+        | None -> (`Null)
+        | Some d -> (mod_side_to_json d)
     )
 ;;
 
