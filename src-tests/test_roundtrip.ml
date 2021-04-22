@@ -11,7 +11,7 @@ let () =
   function
   | Ok rt ->
     if rt = orig
-    then failwith "Roundtrip successful"
+    then print_endline "Roundtrip successful"
     else failwith "Roundtrip failed"
   | Error r ->
     failwith (D.pp_error Format.std_formatter r; failwith "decoding of full message failed")

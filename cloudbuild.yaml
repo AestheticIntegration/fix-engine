@@ -5,4 +5,11 @@ steps:
   args:
     - '-c'
     - |
-      docker build .
+      docker build -t fix-engine-build . --target fix-engine-build
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'run-tests'
+  entrypoint: '/bin/bash'
+  args:
+    - '-c'
+    - |
+      docker run --entrypoint /bin/bash fix-engine-build ./run_test.sh
