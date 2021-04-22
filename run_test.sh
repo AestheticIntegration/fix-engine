@@ -12,7 +12,6 @@ run_test () {
 }
 
 trap "exit" INT TERM
-trap "kill 0" EXIT
 
 echo "(dirs :standard \ *-vg)" > dune
 
