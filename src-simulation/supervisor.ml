@@ -1,5 +1,7 @@
 let ( >>= ) = Lwt.( >>= )
 
+let script_file = ref ""
+
 let log_fix_message pre msg =
   let log = Fix_io.encode ~split:'|' msg in
   Lwt_io.printlf "[%s]: %s" pre log
@@ -32,20 +34,25 @@ type state =
   ; model : Model.t
   ; sessn : Session_manager.t
   }
-
+(* react here to the fixmessage coming in *)
 let rec loop t =
   Lwt.pick
     [ ( Lwt_mvar.take t.engine_box
       >>= function
+      (* this is the engine producing a message *)
       | Engine.FIXMessage (Full_messages.ValidMsg msg) ->
           engine_to_fixio t.fixio msg
+      (* this is the ending sending an actual fix message *)
       | Engine.Internal msg ->
           Model.send_fix t.model msg
+      (* don't need to react to this *)
       | Engine.State state ->
           save_state_seqns t.sessn state
       | _ ->
           Lwt.return_unit )
+    (* this is an incoming fix message  - i.e. from client connected *)
     ; (Lwt_mvar.take t.fixio_box >>= fun msg -> fixio_to_engine t.engine msg)
+    (* this is a model transition - *)
     ; ( Lwt_mvar.take t.model_box
       >>= function
       | Model.FIXMessage msg ->
@@ -118,5 +125,11 @@ let server_thread =
   print_endline "Started server on localhost:9880 ..." ;
   fst (Lwt.wait ())
 
+let usage_msg = "-s <file>"
+
+let anon_func a =
+  failwith @@ "don't know what to do with arg input "^a
+
 let () =
+  Arg.parse [("-o", Arg.Set_string script_file, "Set script file name")] anon_func usage_msg;
   Lwt_main.run @@ server_thread
