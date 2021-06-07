@@ -6,6 +6,7 @@ open Scenario_type;;
 
 
 type t = 
+    | Template_NewOrderSingle 
     | Template_'any 
 ;;
 
@@ -18,22 +19,23 @@ let is_incoming (m)  =
 
 let data (x : t)  =
     (match x with
+        | Template_NewOrderSingle -> "Model_messages.mod_newordersingle_defopt_data"
         | Template_'any -> "'any"
     )
-    [@@macro]
 ;;
 
 let concrete (x : t) (c : event)  =
     (match (x,c) with
+        | (Template_NewOrderSingle,Message FIX_Msg_Def_Opt_NewOrderSingle _) -> true
         | _ -> false
     )
-    [@@macro] [@@macro]
+    [@@macro]
 ;;
 
 let to_string_hum (x : t)  =
     (match x with
+        | Template_NewOrderSingle -> "NewOrderSingle"
         | Template_'any -> "Any event"
     )
-    [@@macro]
 ;;
 

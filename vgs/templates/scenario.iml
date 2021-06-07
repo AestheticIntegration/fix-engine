@@ -34,6 +34,9 @@ let is_event_valid (e : event) (s : model_state)  : bool =
     [@@macro] [@@macro]
 ;;
 
+module Scenario_s1 = struct
+end
+
 type region_expander = {
     field_projections : string list list;
     field_printers : (event -> (model_state -> string option)
@@ -55,7 +58,20 @@ type scenario = {
 }[@@program]
 ;;
 
-let scenarios = [] [@@program];;
+let scenarios = [({
+    id = "s1";
+    name = None;
+    description = None;
+    template = [(Template_NewOrderSingle)];
+    region_expander = [({
+        field_projections = [];
+        field_printers = [];
+        valid_fn = None;
+        expand_when = None
+    })];
+    template_attributes = [];
+    events_attributes = [([])]
+})] [@@program];;
 
 let field_projection_to_type (x)  =
     (match x with

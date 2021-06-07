@@ -10,7 +10,12 @@
     "ignores" : [ ]
   } ],
   "receives" : [ ],
-  "templates" : [ ],
+  "templates" : [ {
+    "id" : "s1",
+    "name" : null,
+    "description" : null,
+    "events" : [ "NewOrderSingle" ]
+  } ],
   "verificationGoals" : [ ],
   "decompositionGoals" : [ ],
   "_import" : {
