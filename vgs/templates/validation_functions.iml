@@ -3,17 +3,7 @@
 
 
 let validation_functions  =
-    [(("Msg_check_fields.check_field_mod_f_NewOrderSingle_ClOrdID","Field ClOrdID of Message NewOrderSingle violates the constraint: \" it != (Some \"N/A\")\""));
-    (("Msg_check_fields.check_field_mod_f_NewOrderSingle_OrdType","Field OrdType of Message NewOrderSingle violates the constraint: \" it in [ OrdType.Limit, OrdType.Market, StopSpread ]\""));
-    (("Msg_check_fields.check_field_mod_f_NewOrderSingle_SpreadProportion","Field SpreadProportion of Message NewOrderSingle violates the constraint: \" case(it){None:true}{Some x: x>0.0 &&  x<=1.0}\""));
-    (("Msg_check_fields.check_field_mod_f_NewOrderSingle_Parties","Field Parties of Message NewOrderSingle violates the constraint: \" it.PartyIndex > 0 && it.PartyIndex < 100\""));
-    (("Msg_check_fields.check_field_mod_f_NewOrderSingle_Parties","Field Parties of Message NewOrderSingle violates the constraint: \" it.PartyID != \"N/A\"\""));
-    (("Msg_check_validate.validate_NewOrderSingle_0","Message NewOrderSingle violates the constraint \"\n    (this.OrdType == OrdType.Market <==> !present(this.Price)) &&\n         (this.OrdType == OrdType.Limit ==> present(this.Price)) &&\n         (this.OrdType == OrdType.StopSpread ==> present(this.Price))\""));
-    (("Msg_check_validate.validate_NewOrderSingle_1","Message NewOrderSingle violates the constraint \"\n    this.OrdType == StopSpread <==>\n            present(this.SpreadProportion)\""));
-    (("Msg_check_validate.validate_NewOrderSingle_2","Message NewOrderSingle violates the constraint \"\n    this.OrdType != OrdType.Market ==>\n                (case this.Price\n                    {Some price: price > 0.0}\n                    {None: false}\n                 )\""));
-    (("Msg_check_validate.validate_NewOrderSingle_3","Message NewOrderSingle violates the constraint \"\n    case(this.Parties.PtysSubGrp.PartySubID)\n            {None:true}\n            {Some x : this.Parties.PartyID != x}\""));
-    (("Act_checks.is_valid_action_fill","\n    state.OrdStatus != OrdStatus.PendingNew and \n    this.fill_qty > 0.0 and \n    this.fill_qty <= state.LeavesQty and \n    this.fill_price > 0.0 and \n    if ( state.Side == Side.Buy )\n        then ( this.fill_price >= state.bestAsk )\n        else ( this.fill_price <= state.bestBid ) and \n    (state.OrdType != OrdType.Market) ==>\n        ( case state.Price\n              { Some p:\n                    if ( state.Side == Side.Buy ) then\n                        ( this.fill_price <= p )\n                    else ( this.fill_price >= p )\n              }\n              { None: true }\n        )"));
-    (("Act_checks.is_valid_action_bookState","\n    this.bestAsk > this.bestBid &&\n        this.bestBid > 0.0 &&\n        this.bestAsk > 0.0"))]
+    [(("Msg_check_fields.check_field_mod_f_NewOrderSingle_Price","Field Price of Message NewOrderSingle violates the constraint: \" it > 0.0\""))]
 ;;
 
 let exclude_functions  =

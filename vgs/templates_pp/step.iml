@@ -14,7 +14,7 @@ open Model_messages_json;;
 open State;;
 
 
-type step_message =
+type step_message = 
     | Action of fix_action
     | Incoming of model_msg
     | Outgoing of outgoing_msg_record list
@@ -29,7 +29,8 @@ type step = {
 let json_of_step_message (x : step_message)  =
     (match x with
         | Incoming d -> (`Assoc (("type",`String "Incoming") :: (("message",json_of_model_msg d) :: [])))
-        | Outgoing d -> (`Assoc (("type",`String "Outgoing") :: (("messages",`List (List.map (fun x -> json_of_model_msg x.outgoing_msg_msg
+        | Outgoing d -> (`Assoc (("type",`String "Outgoing") :: (("messages",`List (List.map (fun x -> 
+        json_of_model_msg x.outgoing_msg_msg
         ) d)) :: [])))
         | Action d -> (`Assoc (("type",`String "Action") :: (("action",json_of_fix_action d) :: [])))
     )
@@ -37,12 +38,10 @@ let json_of_step_message (x : step_message)  =
 
 let json_of_step (x : step)  =
     `Assoc (("internals",json_of_fix_internals x.internals) :: (("message",json_of_step_message x.message) :: []))
-    [@@macro]
 ;;
 
 let json_of_steps (x : step list)  =
     `List (List.map json_of_step x)
-    [@@macro]
 ;;
 
 [@@@logic]

@@ -4,12 +4,8 @@
 open Base_types_json;;
 [@@@import "../src-core-pp/datetime_json.iml"]
 open Datetime_json;;
-[@@@import "full_app_enums_json.iml"]
-open Full_app_enums_json;;
 [@@@import "../src-protocol-exts/full_app_messages.iml"]
 open Full_app_messages;;
-[@@@import "full_app_records_json.iml"]
-open Full_app_records_json;;
 [@@@import "json_generator_utils.iml"]
 open Json_generator_utils;;
 [@@@require "yojson"]
@@ -17,27 +13,12 @@ open Yojson.Basic;;
 
 
 let newordersingle_to_json (x)  : json =
-    assoc_filter_nulls ([(("OrderQtyData",orderqtydata_to_json x.f_NewOrderSingle_OrderQtyData));(("ClOrdID",string_opt_to_json x.f_NewOrderSingle_ClOrdID));(("Account",string_opt_to_json x.f_NewOrderSingle_Account));(("ExecInst",execinst_opt_to_json x.f_NewOrderSingle_ExecInst));(("Side",side_opt_to_json x.f_NewOrderSingle_Side));(("TransactTime",utctimestamp_milli_opt_to_json x.f_NewOrderSingle_TransactTime));(("OrdType",ordtype_opt_to_json x.f_NewOrderSingle_OrdType));(("Price",float_2_opt_to_json x.f_NewOrderSingle_Price));(("SpreadProportion",float_opt_to_json x.f_NewOrderSingle_SpreadProportion));(("Parties",rg_for_json parties_to_json x.f_NewOrderSingle_Parties))])
-;;
-
-let executionreport_to_json (x)  : json =
-    assoc_filter_nulls ([(("OrderQtyData",orderqtydata_to_json x.f_ExecutionReport_OrderQtyData));
-    (("OrderID",string_opt_to_json x.f_ExecutionReport_OrderID));
-    (("ExecID",string_opt_to_json x.f_ExecutionReport_ExecID));
-    (("ExecType",exectype_opt_to_json x.f_ExecutionReport_ExecType));
-    (("OrdStatus",ordstatus_opt_to_json x.f_ExecutionReport_OrdStatus));
-    (("Side",side_opt_to_json x.f_ExecutionReport_Side));
-    (("ExecInst",execinst_opt_to_json x.f_ExecutionReport_ExecInst));
-    (("LeavesQty",float_6_opt_to_json x.f_ExecutionReport_LeavesQty));
-    (("CumQty",float_6_opt_to_json x.f_ExecutionReport_CumQty));
-    (("Text",string_opt_to_json x.f_ExecutionReport_Text));
-    (("Parties",rg_for_json parties_to_json x.f_ExecutionReport_Parties))])
+    assoc_filter_nulls ([(("Price",float_6_opt_to_json x.f_NewOrderSingle_Price))])
 ;;
 
 let full_app_msg_to_json (x)  : json =
     (match x with
         | FIX_Full_Msg_NewOrderSingle x -> (`Assoc ([(("NewOrderSingle",newordersingle_to_json x))]))
-        | FIX_Full_Msg_ExecutionReport x -> (`Assoc ([(("ExecutionReport",executionreport_to_json x))]))
     )
 ;;
 

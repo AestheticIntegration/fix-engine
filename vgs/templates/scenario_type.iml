@@ -5,7 +5,7 @@ open Actions;;
 open Model_messages;;
 
 
-type event =
+type event = 
     | Action of fix_action
     | Message of model_msg_opt_def
 ;;

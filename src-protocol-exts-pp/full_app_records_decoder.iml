@@ -1,59 +1,5 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@program]
-[@@@import "../src-core-pp/base_types_json.iml"]
-open Base_types_json;;
-[@@@import "../src-core-pp/datetime_json.iml"]
-open Datetime_json;;
-[@@@require "decoders-yojson"]
-open Decoders_yojson.Basic.Decode;;
-[@@@require "decoders-yojson"]
-open Decoders_yojson.Basic.Decode.Infix;;
-[@@@import "../src-protocol-exts/full_app_records.iml"]
-open Full_app_records;;
 
-
-let full_record_orderqtydata_decoder  : fix_orderqtydata decoder =
-    (maybe (field "OrderQty" float_6_decoder)) >>= (fun f_OrderQtyData_OrderQty -> 
-    succeed {
-        f_OrderQtyData_OrderQty = f_OrderQtyData_OrderQty
-    }
-    )
-;;
-
-let full_rg_inner_PtysSubGrp_decoder  : fix_rg_inner_ptyssubgrp decoder =
-    (maybe (field "PartySubID" string_decoder)) >>= (fun f_PtysSubGrp_PartySubID -> 
-    (maybe (field "NoPartySubIDs" int_decoder)) >>= (fun f_PtysSubGrp_NoPartySubIDs -> 
-    succeed {
-        f_PtysSubGrp_NoPartySubIDs = f_PtysSubGrp_NoPartySubIDs;
-        f_PtysSubGrp_PartySubID = f_PtysSubGrp_PartySubID
-    }
-    )
-    )
-;;
-
-let full_rg_ptyssubgrp_decoder  : fix_rg_ptyssubgrp decoder =
-    list full_rg_inner_PtysSubGrp_decoder
-;;
-
-let full_rg_inner_Parties_decoder  : fix_rg_inner_parties decoder =
-    (maybe (field "PartyIndex" int_decoder)) >>= (fun f_Parties_PartyIndex -> 
-    (field "PtysSubGrp" full_rg_ptyssubgrp_decoder) >>= (fun f_Parties_PtysSubGrp -> 
-    (maybe (field "PartyID" string_decoder)) >>= (fun f_Parties_PartyID -> 
-    (maybe (field "NoPartyIDs" int_decoder)) >>= (fun f_Parties_NoPartyIDs -> 
-    succeed {
-        f_Parties_NoPartyIDs = f_Parties_NoPartyIDs;
-        f_Parties_PartyID = f_Parties_PartyID;
-        f_Parties_PtysSubGrp = f_Parties_PtysSubGrp;
-        f_Parties_PartyIndex = f_Parties_PartyIndex
-    }
-    )
-    )
-    )
-    )
-;;
-
-let full_rg_parties_decoder  : fix_rg_parties decoder =
-    list full_rg_inner_Parties_decoder
-;;
 
 [@@@logic]

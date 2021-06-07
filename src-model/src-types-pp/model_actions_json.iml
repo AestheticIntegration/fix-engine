@@ -1,17 +1,12 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@program]
-[@@@import "../src-types/actions.iml"]
-open Actions;;
-[@@@import "model_records_json.iml"]
-open Model_records_json;;
 [@@@require "yojson"]
 open Yojson.Basic;;
 
 
 let json_of_fix_action (x)  : json =
     (match x with
-        | FIX_Action_fill x -> (`Assoc (("tag",`String "fill") :: (("data",mod_act_fill_to_json x) :: [])))
-        | FIX_Action_bookState x -> (`Assoc (("tag",`String "bookState") :: (("data",mod_act_bookstate_to_json x) :: [])))
+        | _ -> `Null
     )
 ;;
 

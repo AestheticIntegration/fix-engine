@@ -11,30 +11,13 @@ open Full_app_tags;;
 let full_app_string_to_msg_tag (tag)  =
     (match tag with
         | "NewOrderSingle" -> (Some Full_Msg_NewOrderSingle_Tag)
-        | "ExecutionReport" -> (Some Full_Msg_ExecutionReport_Tag)
         | _ -> (None)
     )
 ;;
 
 let full_app_string_to_field_tag (tag)  =
     (match tag with
-        | "ClOrdID" -> (Some Full_Field_ClOrdID_Tag)
-        | "Parties" -> (Some Full_Field_Parties_Tag)
-        | "Account" -> (Some Full_Field_Account_Tag)
-        | "ExecInst" -> (Some Full_Field_ExecInst_Tag)
-        | "Side" -> (Some Full_Field_Side_Tag)
-        | "TransactTime" -> (Some Full_Field_TransactTime_Tag)
-        | "OrderQtyData" -> (Some Full_Field_OrderQtyData_Tag)
-        | "OrdType" -> (Some Full_Field_OrdType_Tag)
         | "Price" -> (Some Full_Field_Price_Tag)
-        | "SpreadProportion" -> (Some Full_Field_SpreadProportion_Tag)
-        | "OrderID" -> (Some Full_Field_OrderID_Tag)
-        | "ExecID" -> (Some Full_Field_ExecID_Tag)
-        | "ExecType" -> (Some Full_Field_ExecType_Tag)
-        | "OrdStatus" -> (Some Full_Field_OrdStatus_Tag)
-        | "LeavesQty" -> (Some Full_Field_LeavesQty_Tag)
-        | "CumQty" -> (Some Full_Field_CumQty_Tag)
-        | "Text" -> (Some Full_Field_Text_Tag)
         | _ -> (None)
     )
 ;;

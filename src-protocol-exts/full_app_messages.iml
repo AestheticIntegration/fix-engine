@@ -1,88 +1,32 @@
 (* Imandra Inc. copyright 2021 *)
-[@@@import "../src-core/datetime.iml"]
-open Datetime;;
-[@@@import "full_app_enums.iml"]
-open Full_app_enums;;
-[@@@import "full_app_records.iml"]
-open Full_app_records;;
 [@@@import "full_app_tags.iml"]
 open Full_app_tags;;
 [@@@import "../src-core/numeric.iml"]
 open Numeric;;
-[@@@import "../src-core-time-defaults/time_defaults.iml"]
-open Time_defaults;;
 
 
 (** The new order message type is used by institutions wishing to electronically submit securities and forex orders to a broker for execution.*)
 type full_fix_newordersingle_data = {
-(** Unique identifier of the order as assigned by institution or by the intermediary (CIV term, not a hub/service bureau) with closest association with the investor.*)
-    f_NewOrderSingle_ClOrdID : string option;
-(** Insert here the set of "Parties" (firm identification) fields defined in "Common Components of Application Messages"*)
-    f_NewOrderSingle_Parties : fix_rg_parties;
-    f_NewOrderSingle_Account : string option;
-(** Can contain multiple instructions, space delimited. If OrdType=P, exactly one of the following values (ExecInst = L, R, M, P, O, T, W, a, d) must be specified.*)
-    f_NewOrderSingle_ExecInst : fix_execinst list option;
-    f_NewOrderSingle_Side : fix_side option;
-(** Time this order request was initiated/released by the trader, trading system, or intermediary.*)
-    f_NewOrderSingle_TransactTime : fix_utctimestamp_milli option;
-(** Insert here the set of "OrderQtyData" fields defined in "Common Components of Application Messages"*)
-    f_NewOrderSingle_OrderQtyData : fix_orderqtydata;
-    f_NewOrderSingle_OrdType : fix_ordtype option;
 (** Required for limit OrdTypes. For F/X orders, should be the "all-in" rate (spot rate adjusted for forward points). Can be used to specify a limit price for a pegged order, previously indicated, etc.*)
-    f_NewOrderSingle_Price : fix_float_2 option;
-    f_NewOrderSingle_SpreadProportion : fix_float option
+    f_NewOrderSingle_Price : fix_float_6 option
 }
 ;;
 
-(** The execution report message is used to:
- 1. Confirm the receipt of an order
- 2. Confirm changes to an existing order (i.e. accept cancel and replace requests)
- 3. Relay order status information
- 4. Relay fill information on working orders
- 5. Relay fill information on tradeable or restricted tradeable quotes
- 6. Reject orders
- 7. Report post-trade fees calculations associated with a trade*)
-type full_fix_executionreport_data = {
-(** OrderID is required to be unique for each chain of orders.*)
-    f_ExecutionReport_OrderID : string option;
-(** Insert here the set of "Parties" (firm identification) fields defined in "Common Components of Application Messages"*)
-    f_ExecutionReport_Parties : fix_rg_parties;
-(** Unique identifier of execution message as assigned by sell-side (broker, exchange, ECN) (will be 0 (zero) forExecType=I (Order Status)).*)
-    f_ExecutionReport_ExecID : string option;
-(** Describes the purpose of the execution report.*)
-    f_ExecutionReport_ExecType : fix_exectype option;
-(** Describes the current state of a CHAIN of orders, same scope as OrderQty, CumQty, LeavesQty, and AvgPx*)
-    f_ExecutionReport_OrdStatus : fix_ordstatus option;
-    f_ExecutionReport_Side : fix_side option;
-(** Insert here the set of "OrderQtyData" fields defined in "Common Components of Application Messages"
- **Note: OrderQty field is required for Single Instrument Orders unless rejecting or acknowledging an order for a CashOrderQty or PercentOrder.*)
-    f_ExecutionReport_OrderQtyData : fix_orderqtydata;
-(** Can contain multiple instructions, space delimited.*)
-    f_ExecutionReport_ExecInst : fix_execinst list option;
-(** Quantity open for further execution. If the OrdStatus is Canceled, DoneForTheDay, Expired, Calculated, or Rejected (in which case the order is no longer active) then LeavesQty could be 0, otherwise LeavesQty = OrderQty - CumQty.*)
-    f_ExecutionReport_LeavesQty : fix_float_6 option;
-(** Currently executed quantity for chain of orders.*)
-    f_ExecutionReport_CumQty : fix_float_6 option;
-    f_ExecutionReport_Text : string option
-}
-;;
-
-type full_app_msg_data =
+type full_app_msg_data = 
     | FIX_Full_Msg_NewOrderSingle of full_fix_newordersingle_data
-    | FIX_Full_Msg_ExecutionReport of full_fix_executionreport_data
 ;;
 
 let get_full_app_msg_tag (msg : full_app_msg_data)  =
     (match msg with
         | FIX_Full_Msg_NewOrderSingle _ -> Full_Msg_NewOrderSingle_Tag
-        | FIX_Full_Msg_ExecutionReport _ -> Full_Msg_ExecutionReport_Tag
     )
+    [@@macro]
 ;;
 
 let is_full_message_inbound (msg : full_app_msg_data)  =
     (match msg with
         | FIX_Full_Msg_NewOrderSingle _ -> true
-        | FIX_Full_Msg_ExecutionReport _ -> false
     )
+    [@@macro]
 ;;
 

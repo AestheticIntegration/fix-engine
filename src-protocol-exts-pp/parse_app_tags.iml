@@ -7,28 +7,13 @@ open Full_app_tags;;
 let parse_app_msg_tag (tag)  =
     (match tag with
         | "D" -> (Some (Full_Msg_NewOrderSingle_Tag))
-        | "8" -> (Some (Full_Msg_ExecutionReport_Tag))
         | _ -> (None)
     )
 ;;
 
 let parse_app_field_tag (tag)  =
     (match tag with
-        | "11" -> (Some (Full_Field_ClOrdID_Tag))
-        | "1" -> (Some (Full_Field_Account_Tag))
-        | "18" -> (Some (Full_Field_ExecInst_Tag))
-        | "54" -> (Some (Full_Field_Side_Tag))
-        | "60" -> (Some (Full_Field_TransactTime_Tag))
-        | "40" -> (Some (Full_Field_OrdType_Tag))
         | "44" -> (Some (Full_Field_Price_Tag))
-        | "10001" -> (Some (Full_Field_SpreadProportion_Tag))
-        | "37" -> (Some (Full_Field_OrderID_Tag))
-        | "17" -> (Some (Full_Field_ExecID_Tag))
-        | "150" -> (Some (Full_Field_ExecType_Tag))
-        | "39" -> (Some (Full_Field_OrdStatus_Tag))
-        | "151" -> (Some (Full_Field_LeavesQty_Tag))
-        | "14" -> (Some (Full_Field_CumQty_Tag))
-        | "58" -> (Some (Full_Field_Text_Tag))
         | _ -> (None)
     )
 ;;

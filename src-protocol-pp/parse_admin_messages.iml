@@ -2,8 +2,8 @@
 (***
 
     Imandra Inc.
-    Copyright (c) 2014 - 2021
-
+    Copyright (c) 2014 - 2019
+    
     parse_admin_messages.ml
 
 *)
@@ -31,15 +31,15 @@ let parse_msg_heartbeat_data msg = (
     opt msg "112" parse_string  @@ fun msg hb_test_req_id ->
     ParseSuccess { hb_test_req_id
     } , msg
-    ) |> check_unknown_tags
+    ) |> check_unknown_tags 
 ;;
 
 let parse_msg_types msg _ = (
     req msg "372" parse_full_msg_tag @@ fun msg mtps_ref_msg_type ->
     req msg "385" parse_MsgDirection @@ fun msg mtps_direction    ->
-    ParseSuccess
-    { mtps_ref_msg_type
-    ; mtps_direction
+    ParseSuccess 
+    { mtps_ref_msg_type 
+    ; mtps_direction    
     } , msg )
 ;;
 
@@ -55,34 +55,34 @@ let parse_msg_logon_data msg = (
     opt msg "383" parse_int               @@ fun msg ln_max_message_size          ->
     opt msg "464" parse_bool              @@ fun msg ln_test_message_indicator    ->
     opt msg "553" parse_string            @@ fun msg ln_username                  ->
-    opt msg "554" parse_string            @@ fun msg ln_password                  ->
+    opt msg "554" parse_string            @@ fun msg ln_password                  -> 
     let ln_heartbeat_interval = (seconds_to_duration ln_heartbeat_interval) in
-    ParseSuccess
-    { ln_encrypt_method
-    ; ln_heartbeat_interval
-    ; ln_raw_data_length
-    ; ln_raw_data
-    ; ln_reset_seq_num_flag
-    ; ln_next_expected_msg_seq_num
-    ; ln_max_message_size
-    ; ln_test_message_indicator
-    ; ln_username
-    ; ln_password
+    ParseSuccess 
+    { ln_encrypt_method             
+    ; ln_heartbeat_interval    
+    ; ln_raw_data_length            
+    ; ln_raw_data                   
+    ; ln_reset_seq_num_flag         
+    ; ln_next_expected_msg_seq_num  
+    ; ln_max_message_size           
+    ; ln_test_message_indicator     
+    ; ln_username                   
+    ; ln_password                   
     ; ln_msg_types
     } , msg
-    ) |> check_unknown_tags
+    ) |> check_unknown_tags 
 ;;
 
 
-let parse_msg_logoff_data msg = (
+let parse_msg_logoff_data msg = ( 
     check_duplicate_tags msg   @@ fun () ->
-    opt msg "58"  parse_string @@ fun msg lo_text             ->
-    opt msg "355" parse_int    @@ fun msg lo_encoded_text_len ->
-    opt msg "354" parse_string @@ fun msg lo_encoded_text     ->
-    ParseSuccess
+    opt msg "58"  parse_string @@ fun msg lo_text             -> 
+    opt msg "355" parse_int    @@ fun msg lo_encoded_text_len -> 
+    opt msg "354" parse_string @@ fun msg lo_encoded_text     -> 
+    ParseSuccess 
     { lo_text
-    ; lo_encoded_text_len
-    ; lo_encoded_text
+    ; lo_encoded_text_len 
+    ; lo_encoded_text    
     } , msg
     ) |> check_unknown_tags
 ;;
@@ -90,91 +90,91 @@ let parse_msg_logoff_data msg = (
 
 let parse_msg_resend_request_data msg = (
     check_duplicate_tags msg  @@ fun () ->
-    req msg "7"  parse_int    @@ fun msg rr_begin_seq_num ->
-    req msg "16" parse_int    @@ fun msg rr_end_seq_num   ->
-    ParseSuccess
-    { rr_begin_seq_num
-    ; rr_end_seq_num
-    } , msg
+    req msg "7"  parse_int    @@ fun msg rr_begin_seq_num -> 
+    req msg "16" parse_int    @@ fun msg rr_end_seq_num   -> 
+    ParseSuccess 
+    { rr_begin_seq_num  
+    ; rr_end_seq_num    
+    } , msg 
     ) |> check_unknown_tags
 ;;
 
 
-let parse_msg_reject_data msg = (
+let parse_msg_reject_data msg = ( 
     check_duplicate_tags msg                   @@ fun () ->
-    req msg "45"  parse_int                    @@ fun msg sr_ref_seq_num           ->
-    opt msg "371" parse_full_field_tag         @@ fun msg sr_ref_tag_id            ->
-    opt msg "372" parse_full_msg_tag           @@ fun msg sr_ref_msg_type          ->
+    req msg "45"  parse_int                    @@ fun msg sr_ref_seq_num           -> 
+    opt msg "371" parse_full_field_tag         @@ fun msg sr_ref_tag_id            -> 
+    opt msg "372" parse_full_msg_tag           @@ fun msg sr_ref_msg_type          -> 
     opt msg "373" parse_session_reject_reason  @@ fun msg sr_session_reject_reason ->
-    opt msg "58"  parse_string                 @@ fun msg sr_text                  ->
-    opt msg "354" parse_int                    @@ fun msg sr_encoded_text_len      ->
-    opt msg "355" parse_string                 @@ fun msg sr_encoded_text          ->
+    opt msg "58"  parse_string                 @@ fun msg sr_text                  -> 
+    opt msg "354" parse_int                    @@ fun msg sr_encoded_text_len      -> 
+    opt msg "355" parse_string                 @@ fun msg sr_encoded_text          -> 
     ParseSuccess
-    { sr_ref_seq_num
-    ; sr_ref_tag_id
-    ; sr_ref_msg_type
-    ; sr_session_reject_reason
-    ; sr_text
-    ; sr_encoded_text_len
-    ; sr_encoded_text
+    { sr_ref_seq_num           
+    ; sr_ref_tag_id            
+    ; sr_ref_msg_type          
+    ; sr_session_reject_reason 
+    ; sr_text                  
+    ; sr_encoded_text_len      
+    ; sr_encoded_text          
     } , msg
-    ) |> check_unknown_tags
+    ) |> check_unknown_tags    
 ;;
 
 
 let parse_msg_sequence_reset_data msg = (
     check_duplicate_tags msg        @@ fun () ->
     req msg "36"  parse_int         @@ fun msg seqr_new_seq_no    ->
-    opt msg "123" parse_GapFillFlag @@ fun msg seqr_gap_fill_flag ->
+    opt msg "123" parse_GapFillFlag @@ fun msg seqr_gap_fill_flag -> 
     ParseSuccess
-    { seqr_new_seq_no
-    ; seqr_gap_fill_flag
-    } , msg
-    ) |> check_unknown_tags
+    { seqr_new_seq_no     
+    ; seqr_gap_fill_flag  
+    } , msg 
+    ) |> check_unknown_tags    
 ;;
 
 
 let parse_msg_test_request_data msg = (
     check_duplicate_tags msg   @@ fun () ->
-    req msg "112" parse_string @@ fun msg test_req_id ->
+    req msg "112" parse_string @@ fun msg test_req_id -> 
     ParseSuccess
-    { test_req_id
+    { test_req_id 
     } , msg
-    ) |> check_unknown_tags
+    ) |> check_unknown_tags    
 ;;
 
 
 let parse_msg_business_reject_data msg = (
     check_duplicate_tags msg                       @@ fun () ->
-    req msg "45"  parse_int                        @@ fun msg br_ref_seq_num            ->
-    req msg "372" parse_full_msg_tag               @@ fun msg br_ref_msg_type           ->
-    opt msg "379" parse_full_field_tag             @@ fun msg br_ref_field_id           ->
-    req msg "380" parse_business_reject_reason     @@ fun msg br_business_reject_reason ->
-    opt msg "58"  parse_string                     @@ fun msg br_text                   ->
-    opt msg "354" parse_int                        @@ fun msg br_encoded_text_len       ->
-    opt msg "354" parse_string                     @@ fun msg br_encoded_text           ->
+    req msg "45"  parse_int                        @@ fun msg br_ref_seq_num            -> 
+    req msg "372" parse_full_msg_tag               @@ fun msg br_ref_msg_type           -> 
+    opt msg "379" parse_full_field_tag             @@ fun msg br_ref_field_id           -> 
+    req msg "380" parse_business_reject_reason     @@ fun msg br_business_reject_reason -> 
+    opt msg "58"  parse_string                     @@ fun msg br_text                   -> 
+    opt msg "354" parse_int                        @@ fun msg br_encoded_text_len       -> 
+    opt msg "354" parse_string                     @@ fun msg br_encoded_text           -> 
     ParseSuccess
-    { br_ref_seq_num
-    ; br_ref_msg_type
-    ; br_ref_field_id
-    ; br_business_reject_reason
-    ; br_text
-    ; br_encoded_text_len
-    ; br_encoded_text
+    { br_ref_seq_num           
+    ; br_ref_msg_type          
+    ; br_ref_field_id          
+    ; br_business_reject_reason 
+    ; br_text                  
+    ; br_encoded_text_len      
+    ; br_encoded_text          
     } , msg
-    ) |> check_unknown_tags
+    ) |> check_unknown_tags    
 ;;
 
 
-let parse_admin_msg_data msg_tag msg =
+let parse_admin_msg_data msg_tag msg = 
     match msg_tag with
-    | Full_Msg_Heartbeat_Tag        -> parse_msg_heartbeat_data       msg >>= fun x -> ParseSuccess ( Full_Msg_Heartbeat       x )
-    | Full_Msg_TestRequest_Tag     -> parse_msg_test_request_data    msg >>= fun x -> ParseSuccess ( Full_Msg_Test_Request    x )
-    | Full_Msg_ResendRequest_Tag   -> parse_msg_resend_request_data  msg >>= fun x -> ParseSuccess ( Full_Msg_Resend_Request  x )
-    | Full_Msg_Reject_Tag           -> parse_msg_reject_data          msg >>= fun x -> ParseSuccess ( Full_Msg_Reject          x )
-    | Full_Msg_SequenceReset_Tag   -> parse_msg_sequence_reset_data  msg >>= fun x -> ParseSuccess ( Full_Msg_Sequence_Reset  x )
-    | Full_Msg_Logout_Tag           -> parse_msg_logoff_data          msg >>= fun x -> ParseSuccess ( Full_Msg_Logoff          x )
-    | Full_Msg_Logon_Tag            -> parse_msg_logon_data           msg >>= fun x -> ParseSuccess ( Full_Msg_Logon           x )
-    | Full_Msg_BusinessMessageReject_Tag  -> parse_msg_business_reject_data msg >>= fun x -> ParseSuccess ( Full_Msg_Business_Reject x )
+    | Full_Msg_Heartbeat_Tag        -> parse_msg_heartbeat_data       msg >>= fun x -> ParseSuccess ( Full_Msg_Heartbeat       x )    
+    | Full_Msg_Test_Request_Tag     -> parse_msg_test_request_data    msg >>= fun x -> ParseSuccess ( Full_Msg_Test_Request    x )  
+    | Full_Msg_Resend_Request_Tag   -> parse_msg_resend_request_data  msg >>= fun x -> ParseSuccess ( Full_Msg_Resend_Request  x )
+    | Full_Msg_Reject_Tag           -> parse_msg_reject_data          msg >>= fun x -> ParseSuccess ( Full_Msg_Reject          x )       
+    | Full_Msg_Sequence_Reset_Tag   -> parse_msg_sequence_reset_data  msg >>= fun x -> ParseSuccess ( Full_Msg_Sequence_Reset  x )
+    | Full_Msg_Logoff_Tag           -> parse_msg_logoff_data          msg >>= fun x -> ParseSuccess ( Full_Msg_Logoff          x )        
+    | Full_Msg_Logon_Tag            -> parse_msg_logon_data           msg >>= fun x -> ParseSuccess ( Full_Msg_Logon           x )       
+    | Full_Msg_Business_Reject_Tag  -> parse_msg_business_reject_data msg >>= fun x -> ParseSuccess ( Full_Msg_Business_Reject x )
 ;;
 [@@@logic]

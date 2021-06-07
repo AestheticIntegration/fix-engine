@@ -7,49 +7,18 @@ open Full_app_tags;;
 let encode_app_msg_tag (d)  =
     (match d with
         | Full_Msg_NewOrderSingle_Tag -> "D"
-        | Full_Msg_ExecutionReport_Tag -> "8"
     )
 ;;
 
 let encode_app_field_tag (d)  =
     (match d with
-        | Full_Field_ClOrdID_Tag -> ("11")
-        | Full_Field_Parties_Tag -> ("")
-        | Full_Field_Account_Tag -> ("1")
-        | Full_Field_ExecInst_Tag -> ("18")
-        | Full_Field_Side_Tag -> ("54")
-        | Full_Field_TransactTime_Tag -> ("60")
-        | Full_Field_OrderQtyData_Tag -> ("")
-        | Full_Field_OrdType_Tag -> ("40")
         | Full_Field_Price_Tag -> ("44")
-        | Full_Field_SpreadProportion_Tag -> ("10001")
-        | Full_Field_OrderID_Tag -> ("37")
-        | Full_Field_ExecID_Tag -> ("17")
-        | Full_Field_ExecType_Tag -> ("150")
-        | Full_Field_OrdStatus_Tag -> ("39")
-        | Full_Field_LeavesQty_Tag -> ("151")
-        | Full_Field_CumQty_Tag -> ("14")
-        | Full_Field_Text_Tag -> ("58")
     )
 ;;
 
 let get_field_tag_name (d)  =
     (match d with
-        | "11" -> ("ClOrdID")
-        | "1" -> ("Account")
-        | "18" -> ("ExecInst")
-        | "54" -> ("Side")
-        | "60" -> ("TransactTime")
-        | "40" -> ("OrdType")
         | "44" -> ("Price")
-        | "10001" -> ("SpreadProportion")
-        | "37" -> ("OrderID")
-        | "17" -> ("ExecID")
-        | "150" -> ("ExecType")
-        | "39" -> ("OrdStatus")
-        | "151" -> ("LeavesQty")
-        | "14" -> ("CumQty")
-        | "58" -> ("Text")
         | _ -> ""
     )
 ;;

@@ -1,6 +1,4 @@
 (* Imandra Inc. copyright 2021 *)
-[@@@import "../src-helper-functions/ambiguous_default_funcs.iml"]
-open Ambiguous_default_funcs;;
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
 [@@@import "msg_check_fields.iml"]
@@ -9,8 +7,6 @@ open Msg_check_fields;;
 open Msg_check_types;;
 [@@@import "msg_check_validate.iml"]
 open Msg_check_validate;;
-[@@@import "msg_defaults.iml"]
-open Msg_defaults;;
 [@@@import "msg_receive.iml"]
 open Msg_receive;;
 [@@@import "msg_reject.iml"]
@@ -20,86 +16,10 @@ open State;;
 
 
 let inner_convert_NewOrderSingle (m_state : model_state) (msg_data : mod_newordersingle_defopt_data)  : mod_newordersingle_data =
-    let local_internal_fresh_state' = m_state.f_internal_fresh_state'
-    in
-    let local_internal_state = m_state.f_internal_state
-    in
-    let c_mod_f_NewOrderSingle_Parties = msg_data.mod_def_opt_f_NewOrderSingle_Parties
-    in
-    let c_mod_f_NewOrderSingle_Account = msg_data.mod_def_opt_f_NewOrderSingle_Account
-    in
     let c_mod_f_NewOrderSingle_Price = msg_data.mod_def_opt_f_NewOrderSingle_Price
     in
-    let c_mod_f_NewOrderSingle_SpreadProportion = msg_data.mod_def_opt_f_NewOrderSingle_SpreadProportion
-    in
-    let c_mod_f_NewOrderSingle_OrderQtyData_OrderQty = msg_data.mod_def_opt_f_NewOrderSingle_OrderQtyData_OrderQty
-    in
-    let c_mod_f_NewOrderSingle_OrdType = msg_data.mod_def_opt_f_NewOrderSingle_OrdType
-    in
-    let c_mod_f_NewOrderSingle_TransactTime = msg_data.mod_def_opt_f_NewOrderSingle_TransactTime
-    in
-    let c_mod_f_NewOrderSingle_Side = msg_data.mod_def_opt_f_NewOrderSingle_Side
-    in
-    let c_mod_f_NewOrderSingle_ClOrdID = msg_data.mod_def_opt_f_NewOrderSingle_ClOrdID
-    in
-    let c_mod_f_NewOrderSingle_ExecInst = let y = model_func_default_ExecInst_NewOrderSingle ()
-    in
-    amb_func_execinst_set y msg_data.mod_def_opt_f_NewOrderSingle_ExecInst
-    in
     {
-        mod_f_NewOrderSingle_ClOrdID = c_mod_f_NewOrderSingle_ClOrdID;
-        mod_f_NewOrderSingle_Side = c_mod_f_NewOrderSingle_Side;
-        mod_f_NewOrderSingle_TransactTime = c_mod_f_NewOrderSingle_TransactTime;
-        mod_f_NewOrderSingle_OrdType = c_mod_f_NewOrderSingle_OrdType;
-        mod_f_NewOrderSingle_OrderQtyData_OrderQty = c_mod_f_NewOrderSingle_OrderQtyData_OrderQty;
-        mod_f_NewOrderSingle_SpreadProportion = c_mod_f_NewOrderSingle_SpreadProportion;
-        mod_f_NewOrderSingle_Price = c_mod_f_NewOrderSingle_Price;
-        mod_f_NewOrderSingle_Account = c_mod_f_NewOrderSingle_Account;
-        mod_f_NewOrderSingle_ExecInst = c_mod_f_NewOrderSingle_ExecInst;
-        mod_f_NewOrderSingle_Parties = c_mod_f_NewOrderSingle_Parties
-    }
-    [@@macro]
-;;
-
-let inner_convert_ExecutionReport (m_state : model_state) (msg_data : mod_executionreport_defopt_data)  : mod_executionreport_data =
-    let local_internal_fresh_state' = m_state.f_internal_fresh_state'
-    in
-    let local_internal_state = m_state.f_internal_state
-    in
-    let c_mod_f_ExecutionReport_ExecInst = msg_data.mod_def_opt_f_ExecutionReport_ExecInst
-    in
-    let c_mod_f_ExecutionReport_Parties = msg_data.mod_def_opt_f_ExecutionReport_Parties
-    in
-    let c_mod_f_ExecutionReport_Text = msg_data.mod_def_opt_f_ExecutionReport_Text
-    in
-    let c_mod_f_ExecutionReport_CumQty = msg_data.mod_def_opt_f_ExecutionReport_CumQty
-    in
-    let c_mod_f_ExecutionReport_LeavesQty = msg_data.mod_def_opt_f_ExecutionReport_LeavesQty
-    in
-    let c_mod_f_ExecutionReport_OrderQtyData_OrderQty = msg_data.mod_def_opt_f_ExecutionReport_OrderQtyData_OrderQty
-    in
-    let c_mod_f_ExecutionReport_Side = msg_data.mod_def_opt_f_ExecutionReport_Side
-    in
-    let c_mod_f_ExecutionReport_OrdStatus = msg_data.mod_def_opt_f_ExecutionReport_OrdStatus
-    in
-    let c_mod_f_ExecutionReport_ExecType = msg_data.mod_def_opt_f_ExecutionReport_ExecType
-    in
-    let c_mod_f_ExecutionReport_ExecID = msg_data.mod_def_opt_f_ExecutionReport_ExecID
-    in
-    let c_mod_f_ExecutionReport_OrderID = msg_data.mod_def_opt_f_ExecutionReport_OrderID
-    in
-    {
-        mod_f_ExecutionReport_OrderID = c_mod_f_ExecutionReport_OrderID;
-        mod_f_ExecutionReport_ExecID = c_mod_f_ExecutionReport_ExecID;
-        mod_f_ExecutionReport_ExecType = c_mod_f_ExecutionReport_ExecType;
-        mod_f_ExecutionReport_OrdStatus = c_mod_f_ExecutionReport_OrdStatus;
-        mod_f_ExecutionReport_Side = c_mod_f_ExecutionReport_Side;
-        mod_f_ExecutionReport_OrderQtyData_OrderQty = c_mod_f_ExecutionReport_OrderQtyData_OrderQty;
-        mod_f_ExecutionReport_LeavesQty = c_mod_f_ExecutionReport_LeavesQty;
-        mod_f_ExecutionReport_CumQty = c_mod_f_ExecutionReport_CumQty;
-        mod_f_ExecutionReport_Text = c_mod_f_ExecutionReport_Text;
-        mod_f_ExecutionReport_Parties = c_mod_f_ExecutionReport_Parties;
-        mod_f_ExecutionReport_ExecInst = c_mod_f_ExecutionReport_ExecInst
+        mod_f_NewOrderSingle_Price = c_mod_f_NewOrderSingle_Price
     }
     [@@macro]
 ;;
@@ -107,8 +27,8 @@ let inner_convert_ExecutionReport (m_state : model_state) (msg_data : mod_execut
 let convert_inner (m_state : model_state) (msg : model_msg_opt_def)  : model_msg =
     (match msg with
         | FIX_Msg_Def_Opt_NewOrderSingle msg_data -> (FIX_Msg_NewOrderSingle (inner_convert_NewOrderSingle m_state msg_data))
-        | FIX_Msg_Def_Opt_ExecutionReport msg_data -> (FIX_Msg_ExecutionReport (inner_convert_ExecutionReport m_state msg_data))
     )
+    [@@macro]
 ;;
 
 let process_NewOrderSingle (m_state : model_state) (msg_data : mod_newordersingle_data)  =
@@ -136,31 +56,6 @@ let process_NewOrderSingle (m_state : model_state) (msg_data : mod_newordersingl
         )
 ;;
 
-let process_ExecutionReport (m_state : model_state) (msg_data : mod_executionreport_data)  =
-    let field_check = check_fields_ExecutionReport msg_data m_state
-    in
-    (if field_check.field_invalid_defrej then
-        { (reject_ExecutionReport_invalidfield m_state msg_data field_check.field_reject_info_defrej) with
-            event_info = {
-                state_event_counter = m_state.event_counter;
-                state_event_reject_text = Some field_check.field_reject_info_defrej.mod_builtin_rejectInfo_text
-            } :: m_state.event_info
-        }
-    else
-        let custom_reject = check_validate_ExecutionReport msg_data m_state
-        in
-        (if custom_reject.validate_invalid_defrej then
-            { (reject_ExecutionReport_invalid m_state msg_data custom_reject.validate_reject_info_defrej) with
-                event_info = {
-                    state_event_counter = m_state.event_counter;
-                    state_event_reject_text = Some custom_reject.validate_reject_info_defrej.mod_builtin_rejectInfo_text
-                } :: m_state.event_info
-            }
-        else
-            (receive_message_ExecutionReport m_state msg_data))
-        )
-;;
-
 let process_msg (m_state : model_state) (msg : model_top_level_msg)  =
     (match msg with
         | FIX_TL_Req_Field_Missing d -> (reject_field_missing m_state d)
@@ -169,9 +64,6 @@ let process_msg (m_state : model_state) (msg : model_top_level_msg)  =
             | FIX_Msg_Def_Opt_NewOrderSingle m_data -> let m_data = inner_convert_NewOrderSingle m_state m_data
             in
             process_NewOrderSingle m_state m_data
-            | FIX_Msg_Def_Opt_ExecutionReport m_data -> let m_data = inner_convert_ExecutionReport m_state m_data
-            in
-            process_ExecutionReport m_state m_data
             | _ -> m_state
         )
         )
@@ -189,19 +81,9 @@ let msg_NewOrderSingle_valid (msg_data : mod_newordersingle_data) (m_state : mod
     [@@macro]
 ;;
 
-let msg_ExecutionReport_valid (msg_data : mod_executionreport_data) (m_state : model_state)  =
-    let fields_result = check_fields_ExecutionReport msg_data m_state
-    in
-    let validate_result = check_validate_ExecutionReport msg_data m_state
-    in
-    (&&) (not fields_result.field_invalid_defrej) (not validate_result.validate_invalid_defrej)
-    [@@macro]
-;;
-
 let is_message_valid (msg : model_msg) (m_state : model_state)  =
     (match msg with
         | FIX_Msg_NewOrderSingle d -> (msg_NewOrderSingle_valid d m_state)
-        | FIX_Msg_ExecutionReport d -> (msg_ExecutionReport_valid d m_state)
         | _ -> true
     )
 ;;

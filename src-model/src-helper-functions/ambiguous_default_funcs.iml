@@ -1,17 +1,8 @@
 (* Imandra Inc. copyright 2021 *)
-[@@@import "../src-types/model_app_enums.iml"]
-open Model_app_enums;;
 
-
-let amb_func_execinst_set (y : model_fix_execinst Set.t) (x : model_fix_execinst Set.t option)  : model_fix_execinst Set.t =
-    (match x with
-        | None -> y
-        | Some d -> d
-    )
-;;
 
 let ambiguous_default_names ()  =
-    [("Ambiguous_default_funcs.amb_func_execinst_set")]
+    []
     [@@macro]
 ;;
 

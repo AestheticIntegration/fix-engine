@@ -1,17 +1,11 @@
-(** Time defaults for a particular FIX implementation *)
-(***
-
-    Imandra Inc.
-    Copyright (c) 2014 - 2021
-
-    time_defaults_parser.iml
-    
-*)
-[@@@import "../src-core-pp/parse_datetime.iml"]
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
+[@@@import "../src-core-pp/parse_datetime.iml"]
 open Parse_datetime;;
 
-let parse_UTCTimestamp = parse_UTCTimestamp_milli;;
 
-let parse_UTCTimeOnly = parse_UTCTimeOnly_milli;;
+let parse_UTCTimestamp = parse_UTCTimestamp_milli ;;
+
+let parse_UTCTimeOnly = parse_UTCTimeOnly_milli ;;
+
 [@@@logic]

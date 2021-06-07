@@ -8,84 +8,15 @@ open Datetime_json;;
 open Decoders_yojson.Basic.Decode;;
 [@@@require "decoders-yojson"]
 open Decoders_yojson.Basic.Decode.Infix;;
-[@@@import "full_app_enums_decoder.iml"]
-open Full_app_enums_decoder;;
 [@@@import "../src-protocol-exts/full_app_messages.iml"]
 open Full_app_messages;;
-[@@@import "full_app_records_decoder.iml"]
-open Full_app_records_decoder;;
 
 
 let full_message_newordersingle_decoder  : full_fix_newordersingle_data decoder =
-    (maybe (field "SpreadProportion" float_decoder)) >>= (fun f_NewOrderSingle_SpreadProportion -> 
-    (maybe (field "Price" float_2_decoder)) >>= (fun f_NewOrderSingle_Price -> 
-    (maybe (field "OrdType" full_enum_ordtype_decoder)) >>= (fun f_NewOrderSingle_OrdType -> 
-    (field "OrderQtyData" full_record_orderqtydata_decoder) >>= (fun f_NewOrderSingle_OrderQtyData -> 
-    (maybe (field "TransactTime" utctimestamp_milli_decoder)) >>= (fun f_NewOrderSingle_TransactTime -> 
-    (maybe (field "Side" full_enum_side_decoder)) >>= (fun f_NewOrderSingle_Side -> 
-    (maybe (field "ExecInst" full_enum_execinst_decoder)) >>= (fun f_NewOrderSingle_ExecInst -> 
-    (maybe (field "Account" string_decoder)) >>= (fun f_NewOrderSingle_Account -> 
-    (field "Parties" full_rg_parties_decoder) >>= (fun f_NewOrderSingle_Parties -> 
-    (maybe (field "ClOrdID" string_decoder)) >>= (fun f_NewOrderSingle_ClOrdID -> 
+    (maybe (field "Price" float_6_decoder)) >>= (fun f_NewOrderSingle_Price -> 
     succeed {
-        f_NewOrderSingle_ClOrdID = f_NewOrderSingle_ClOrdID;
-        f_NewOrderSingle_Parties = f_NewOrderSingle_Parties;
-        f_NewOrderSingle_Account = f_NewOrderSingle_Account;
-        f_NewOrderSingle_ExecInst = f_NewOrderSingle_ExecInst;
-        f_NewOrderSingle_Side = f_NewOrderSingle_Side;
-        f_NewOrderSingle_TransactTime = f_NewOrderSingle_TransactTime;
-        f_NewOrderSingle_OrderQtyData = f_NewOrderSingle_OrderQtyData;
-        f_NewOrderSingle_OrdType = f_NewOrderSingle_OrdType;
-        f_NewOrderSingle_Price = f_NewOrderSingle_Price;
-        f_NewOrderSingle_SpreadProportion = f_NewOrderSingle_SpreadProportion
+        f_NewOrderSingle_Price = f_NewOrderSingle_Price
     }
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-;;
-
-let full_message_executionreport_decoder  : full_fix_executionreport_data decoder =
-    (maybe (field "Text" string_decoder)) >>= (fun f_ExecutionReport_Text -> 
-    (maybe (field "CumQty" float_6_decoder)) >>= (fun f_ExecutionReport_CumQty -> 
-    (maybe (field "LeavesQty" float_6_decoder)) >>= (fun f_ExecutionReport_LeavesQty -> 
-    (maybe (field "ExecInst" full_enum_execinst_decoder)) >>= (fun f_ExecutionReport_ExecInst -> 
-    (field "OrderQtyData" full_record_orderqtydata_decoder) >>= (fun f_ExecutionReport_OrderQtyData -> 
-    (maybe (field "Side" full_enum_side_decoder)) >>= (fun f_ExecutionReport_Side -> 
-    (maybe (field "OrdStatus" full_enum_ordstatus_decoder)) >>= (fun f_ExecutionReport_OrdStatus -> 
-    (maybe (field "ExecType" full_enum_exectype_decoder)) >>= (fun f_ExecutionReport_ExecType -> 
-    (maybe (field "ExecID" string_decoder)) >>= (fun f_ExecutionReport_ExecID -> 
-    (field "Parties" full_rg_parties_decoder) >>= (fun f_ExecutionReport_Parties -> 
-    (maybe (field "OrderID" string_decoder)) >>= (fun f_ExecutionReport_OrderID -> 
-    succeed {
-        f_ExecutionReport_OrderID = f_ExecutionReport_OrderID;
-        f_ExecutionReport_Parties = f_ExecutionReport_Parties;
-        f_ExecutionReport_ExecID = f_ExecutionReport_ExecID;
-        f_ExecutionReport_ExecType = f_ExecutionReport_ExecType;
-        f_ExecutionReport_OrdStatus = f_ExecutionReport_OrdStatus;
-        f_ExecutionReport_Side = f_ExecutionReport_Side;
-        f_ExecutionReport_OrderQtyData = f_ExecutionReport_OrderQtyData;
-        f_ExecutionReport_ExecInst = f_ExecutionReport_ExecInst;
-        f_ExecutionReport_LeavesQty = f_ExecutionReport_LeavesQty;
-        f_ExecutionReport_CumQty = f_ExecutionReport_CumQty;
-        f_ExecutionReport_Text = f_ExecutionReport_Text
-    }
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
     )
 ;;
 
@@ -94,9 +25,6 @@ let full_app_msg_of_json  : full_app_msg_data decoder =
     (match x with
         | "NewOrderSingle" -> (full_message_newordersingle_decoder >>= (fun y -> 
         succeed (FIX_Full_Msg_NewOrderSingle y)
-        ))
-        | "ExecutionReport" -> (full_message_executionreport_decoder >>= (fun y -> 
-        succeed (FIX_Full_Msg_ExecutionReport y)
         ))
         | d -> (fail ("Unknown Message ("^d^") in JSON decoding."))
     )

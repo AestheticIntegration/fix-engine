@@ -4,12 +4,6 @@
 open Full_app_messages;;
 [@@@import "../src-protocol-exts/full_app_tags.iml"]
 open Full_app_tags;;
-[@@@import "../src-core/numeric.iml"]
-open Numeric;;
-[@@@import "parse_app_enums.iml"]
-open Parse_app_enums;;
-[@@@import "parse_app_records.iml"]
-open Parse_app_records;;
 [@@@import "../src-core-pp/parse_base_types.iml"]
 open Parse_base_types;;
 [@@@import "../src-core-pp/parse_datetime.iml"]
@@ -19,83 +13,11 @@ open Parser_utils.Parser;;
 
 
 let parse_NewOrderSingle (msg)  =
-    (repeating msg "453" parse_Parties (fun msg f_NewOrderSingle_Parties -> 
-    check_duplicate_tags msg (fun () -> 
-    block msg parse_OrderQtyData (fun msg f_NewOrderSingle_OrderQtyData -> 
-    opt msg "11" parse_string (fun msg f_NewOrderSingle_ClOrdID -> 
-    opt msg "1" parse_string (fun msg f_NewOrderSingle_Account -> 
-    opt msg "18" parse_ExecInst (fun msg f_NewOrderSingle_ExecInst -> 
-    opt msg "54" parse_Side (fun msg f_NewOrderSingle_Side -> 
-    opt msg "60" parse_UTCTimestamp_milli (fun msg f_NewOrderSingle_TransactTime -> 
-    opt msg "40" parse_OrdType (fun msg f_NewOrderSingle_OrdType -> 
-    opt msg "44" (fun x -> 
-    (match parse_float x with
-        | None -> None
-        | Some d -> (Some (float_Convert_6_2 d))
-    )
-    ) (fun msg f_NewOrderSingle_Price -> 
-    opt msg "10001" parse_float (fun msg f_NewOrderSingle_SpreadProportion -> 
+    (check_duplicate_tags msg (fun () -> 
+    opt msg "44" parse_float (fun msg f_NewOrderSingle_Price -> 
     (ParseSuccess {
-        f_NewOrderSingle_Parties = f_NewOrderSingle_Parties;
-        f_NewOrderSingle_OrderQtyData = f_NewOrderSingle_OrderQtyData;
-        f_NewOrderSingle_ClOrdID = f_NewOrderSingle_ClOrdID;
-        f_NewOrderSingle_Account = f_NewOrderSingle_Account;
-        f_NewOrderSingle_ExecInst = f_NewOrderSingle_ExecInst;
-        f_NewOrderSingle_Side = f_NewOrderSingle_Side;
-        f_NewOrderSingle_TransactTime = f_NewOrderSingle_TransactTime;
-        f_NewOrderSingle_OrdType = f_NewOrderSingle_OrdType;
-        f_NewOrderSingle_Price = f_NewOrderSingle_Price;
-        f_NewOrderSingle_SpreadProportion = f_NewOrderSingle_SpreadProportion
+        f_NewOrderSingle_Price = f_NewOrderSingle_Price
     },msg)
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )) |> check_unknown_tags
-;;
-
-let parse_ExecutionReport (msg)  =
-    (repeating msg "453" parse_Parties (fun msg f_ExecutionReport_Parties -> 
-    check_duplicate_tags msg (fun () -> 
-    block msg parse_OrderQtyData (fun msg f_ExecutionReport_OrderQtyData -> 
-    opt msg "37" parse_string (fun msg f_ExecutionReport_OrderID -> 
-    opt msg "17" parse_string (fun msg f_ExecutionReport_ExecID -> 
-    opt msg "150" parse_ExecType (fun msg f_ExecutionReport_ExecType -> 
-    opt msg "39" parse_OrdStatus (fun msg f_ExecutionReport_OrdStatus -> 
-    opt msg "54" parse_Side (fun msg f_ExecutionReport_Side -> 
-    opt msg "18" parse_ExecInst (fun msg f_ExecutionReport_ExecInst -> 
-    opt msg "151" parse_float (fun msg f_ExecutionReport_LeavesQty -> 
-    opt msg "14" parse_float (fun msg f_ExecutionReport_CumQty -> 
-    opt msg "58" parse_string (fun msg f_ExecutionReport_Text -> 
-    (ParseSuccess {
-        f_ExecutionReport_Parties = f_ExecutionReport_Parties;
-        f_ExecutionReport_OrderQtyData = f_ExecutionReport_OrderQtyData;
-        f_ExecutionReport_OrderID = f_ExecutionReport_OrderID;
-        f_ExecutionReport_ExecID = f_ExecutionReport_ExecID;
-        f_ExecutionReport_ExecType = f_ExecutionReport_ExecType;
-        f_ExecutionReport_OrdStatus = f_ExecutionReport_OrdStatus;
-        f_ExecutionReport_Side = f_ExecutionReport_Side;
-        f_ExecutionReport_ExecInst = f_ExecutionReport_ExecInst;
-        f_ExecutionReport_LeavesQty = f_ExecutionReport_LeavesQty;
-        f_ExecutionReport_CumQty = f_ExecutionReport_CumQty;
-        f_ExecutionReport_Text = f_ExecutionReport_Text
-    },msg)
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
     )
     )) |> check_unknown_tags
 ;;
@@ -104,9 +26,6 @@ let parse_app_msg_data (msg_tag) (msg)  =
     (match msg_tag with
         | Full_Msg_NewOrderSingle_Tag -> ((>>=) (parse_NewOrderSingle msg) (fun f -> 
         ParseSuccess (FIX_Full_Msg_NewOrderSingle f)
-        ))
-        | Full_Msg_ExecutionReport_Tag -> ((>>=) (parse_ExecutionReport msg) (fun f -> 
-        ParseSuccess (FIX_Full_Msg_ExecutionReport f)
         ))
     )
 ;;

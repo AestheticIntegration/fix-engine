@@ -1,8 +1,6 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@import "act_checks.iml"]
 open Act_checks;;
-[@@@import "act_process.iml"]
-open Act_process;;
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
 [@@@import "msg_minimal_invalid.iml"]
@@ -14,23 +12,14 @@ open State;;
 
 
 let one_step (m_state : model_state)  =
-    (match m_state.incoming_action with
-        | Some act -> let s' = receive_action m_state act
+    (match m_state.incoming_msg with
+        | FIX_TL_None -> m_state
+        | msg -> let s' = process_msg m_state msg
         in
         { s' with
-            incoming_action = None;
+            incoming_msg = FIX_TL_None;
             event_counter = (+) m_state.event_counter 1
         }
-        | None -> ((match m_state.incoming_msg with
-            | FIX_TL_None -> m_state
-            | msg -> let s' = process_msg m_state msg
-            in
-            { s' with
-                incoming_msg = FIX_TL_None;
-                event_counter = (+) m_state.event_counter 1
-            }
-        )
-        )
     )
 ;;
 

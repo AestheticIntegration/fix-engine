@@ -3,26 +3,8 @@
 
 
 let basis ()  =
-    [("Msg_check_fields.check_field_mod_f_NewOrderSingle_ClOrdID");
+    [("Msg_check_fields.check_field_mod_f_NewOrderSingle_Price");
     ("Msg_minimal_invalid.check_fields_minimal_invalid_NewOrderSingle_0");
-    ("Msg_check_fields.check_field_mod_f_NewOrderSingle_OrdType");
-    ("Msg_minimal_invalid.check_fields_minimal_invalid_NewOrderSingle_3");
-    ("Msg_check_fields.check_field_mod_f_NewOrderSingle_SpreadProportion");
-    ("Msg_minimal_invalid.check_fields_minimal_invalid_NewOrderSingle_5");
-    ("Msg_check_fields.check_field_mod_f_NewOrderSingle_Parties");
-    ("Msg_minimal_invalid.check_fields_minimal_invalid_NewOrderSingle_9");
-    ("Msg_check_validate.validate_NewOrderSingle_0");
-    ("Msg_minimal_invalid.check_validate_minimal_invalid_NewOrderSingle_0");
-    ("Msg_check_validate.validate_NewOrderSingle_1");
-    ("Msg_minimal_invalid.check_validate_minimal_invalid_NewOrderSingle_1");
-    ("Msg_check_validate.validate_NewOrderSingle_2");
-    ("Msg_minimal_invalid.check_validate_minimal_invalid_NewOrderSingle_2");
-    ("Msg_check_validate.validate_NewOrderSingle_3");
-    ("Msg_minimal_invalid.check_validate_minimal_invalid_NewOrderSingle_3");
-    ("Act_checks.is_valid_action_fill");
-    ("Act_checks.is_valid_action_bookState");
-    ("Model_repeating_groups.rg_count_ptyssubgrp");
-    ("Model_repeating_groups.rg_count_parties");
     ("Time_defaults.make_utctimestamp");
     ("Datetime.make_utctimestamp_milli");
     ("Datetime.make_utctimestamp_micro");
@@ -144,8 +126,7 @@ let basis ()  =
     ("Datetime.duration_Equal");
     ("Datetime.duration_GreaterThanEqual");
     ("Datetime.duration_LessThanEqual");
-    ("abs");
-    ("Ambiguous_default_funcs.amb_func_execinst_set")]
+    ("abs")]
 ;;
 
 let numerics ()  =
@@ -768,7 +749,7 @@ let numerics ()  =
 ;;
 
 let user ()  =
-    [("Ipl_functions.model_func_fresh_string'")]
+    []
 ;;
 
 [@@@logic]

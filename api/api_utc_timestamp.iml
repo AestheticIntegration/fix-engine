@@ -1,0 +1,45 @@
+(* Imandra Inc. copyright 2021 *)
+
+
+
+
+open Time_defaults
+
+type t = fix_utctimestamp
+
+let make
+    ?(year = 0)
+    ?(month = 0)
+    ?(day = 0)
+    ?(hour = 0)
+    ?(minute = 0)
+    ?(second = 0)
+    ?millisecond
+    () : t =
+  Time_defaults.make_utctimestamp
+    year
+    month
+    day
+    hour
+    minute
+    second
+    millisecond
+
+
+let ( = ) = utctimestamp_Equal
+
+let ( > ) = utctimestamp_GreaterThan
+
+let ( >= ) = utctimestamp_GreaterThanEqual
+
+let ( < ) = utctimestamp_LessThan
+
+let ( <= ) = utctimestamp_LessThanEqual
+
+let compare x y = if x < y then -1 else if x = y then 0 else 1
+
+let to_string = Time_defaults_pp.encode_UTCTimestamp [@@program]
+
+let pp fmt x = Format.fprintf fmt "%s" (to_string x) [@@program]
+
+

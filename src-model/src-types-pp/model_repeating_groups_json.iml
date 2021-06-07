@@ -1,41 +1,5 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@program]
-[@@@import "../../src-core-pp/base_types_json.iml"]
-open Base_types_json;;
-[@@@import "../../src-core-pp/datetime_json.iml"]
-open Datetime_json;;
-[@@@import "../../src-protocol-exts-pp/json_generator_utils.iml"]
-open Json_generator_utils;;
-[@@@import "../src-types/model_repeating_groups.iml"]
-open Model_repeating_groups;;
-[@@@require "yojson"]
-open Yojson.Basic;;
 
-
-let model_PtysSubGrp_rg_to_json (x)  : json =
-    (match x with
-        | None -> `Null
-        | Some x -> (assoc_filter_nulls ([(("PartySubID",(match x.mod_f_PtysSubGrp_PartySubID with
-            | None -> `Null
-            | Some x -> (string_to_json x)
-        )
-        ))]))
-    )
-;;
-
-let mod_ptyssubgrp_to_json (d)  =
-    assoc_filter_nulls ([(("4",model_PtysSubGrp_rg_to_json d.rg_PtysSubGrp_element_4));(("3",model_PtysSubGrp_rg_to_json d.rg_PtysSubGrp_element_3));(("2",model_PtysSubGrp_rg_to_json d.rg_PtysSubGrp_element_2));(("1",model_PtysSubGrp_rg_to_json d.rg_PtysSubGrp_element_1));(("0",model_PtysSubGrp_rg_to_json d.rg_PtysSubGrp_element_0))])
-;;
-
-let model_Parties_rg_to_json (x)  : json =
-    (match x with
-        | None -> `Null
-        | Some x -> (assoc_filter_nulls ([(("PartyID",string_to_json x.mod_f_Parties_PartyID));(("PartyIndex",int_to_json x.mod_f_Parties_PartyIndex));(("PtysSubGrp",mod_ptyssubgrp_to_json x.mod_f_Parties_PtysSubGrp))]))
-    )
-;;
-
-let mod_parties_to_json (d)  =
-    assoc_filter_nulls ([(("4",model_Parties_rg_to_json d.rg_Parties_element_4));(("3",model_Parties_rg_to_json d.rg_Parties_element_3));(("2",model_Parties_rg_to_json d.rg_Parties_element_2));(("1",model_Parties_rg_to_json d.rg_Parties_element_1));(("0",model_Parties_rg_to_json d.rg_Parties_element_0))])
-;;
 
 [@@@logic]

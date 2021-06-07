@@ -9,29 +9,12 @@ open Yojson.Basic;;
 let full_app_msg_tag_to_string (tag)  =
     (match tag with
         | Full_Msg_NewOrderSingle_Tag -> "NewOrderSingle"
-        | Full_Msg_ExecutionReport_Tag -> "ExecutionReport"
     )
 ;;
 
 let full_app_field_tag_to_string (tag)  =
     (match tag with
-        | Full_Field_ClOrdID_Tag -> "ClOrdID"
-        | Full_Field_Parties_Tag -> "Parties"
-        | Full_Field_Account_Tag -> "Account"
-        | Full_Field_ExecInst_Tag -> "ExecInst"
-        | Full_Field_Side_Tag -> "Side"
-        | Full_Field_TransactTime_Tag -> "TransactTime"
-        | Full_Field_OrderQtyData_Tag -> "OrderQtyData"
-        | Full_Field_OrdType_Tag -> "OrdType"
         | Full_Field_Price_Tag -> "Price"
-        | Full_Field_SpreadProportion_Tag -> "SpreadProportion"
-        | Full_Field_OrderID_Tag -> "OrderID"
-        | Full_Field_ExecID_Tag -> "ExecID"
-        | Full_Field_ExecType_Tag -> "ExecType"
-        | Full_Field_OrdStatus_Tag -> "OrdStatus"
-        | Full_Field_LeavesQty_Tag -> "LeavesQty"
-        | Full_Field_CumQty_Tag -> "CumQty"
-        | Full_Field_Text_Tag -> "Text"
     )
 ;;
 

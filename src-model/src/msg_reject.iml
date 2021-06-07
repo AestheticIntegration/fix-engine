@@ -1,237 +1,33 @@
 (* Imandra Inc. copyright 2021 *)
-[@@@import "ipl_functions.iml"]
-open Ipl_functions;;
-[@@@import "../src-types/model_app_enums.iml"]
-open Model_app_enums;;
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
-[@@@import "../src-types/model_repeating_groups.iml"]
-open Model_repeating_groups;;
-[@@@import "../src-types/model_tags.iml"]
-open Model_tags;;
 [@@@import "msg_check_types.iml"]
 open Msg_check_types;;
 [@@@import "../src-types/state.iml"]
 open State;;
 
 
-let reject_NewOrderSingle_missingfield (m_state : model_state) (rej_info : reject_info_defrej)  =
-    let local_internal_fresh_state' = m_state.f_internal_fresh_state'
-    in
-    let local_internal_state = m_state.f_internal_state
-    in
-    let local_internal_state = { local_internal_state with
-        mod_f_internal_state_ExecType = MOD_FIX_ExecType_Rejected;
-        mod_f_internal_state_OrdStatus = MOD_FIX_OrdStatus_Rejected
-    }
-    in
-    let local_internal_fresh_state' = { local_internal_fresh_state' with
-        mod_f_internal_fresh_state'_seed_string = model_func_fresh_string' local_internal_fresh_state'.mod_f_internal_fresh_state'_seed_string
-    }
-    in
-    let local_3fresh = local_internal_fresh_state'.mod_f_internal_fresh_state'_seed_string
-    in
-    let msg_data_inner = {
-        mod_f_ExecutionReport_CumQty = local_internal_state.mod_f_internal_state_CumQty;
-        mod_f_ExecutionReport_ExecID = local_3fresh;
-        mod_f_ExecutionReport_ExecInst = local_internal_state.mod_f_internal_state_ExecInst;
-        mod_f_ExecutionReport_ExecType = local_internal_state.mod_f_internal_state_ExecType;
-        mod_f_ExecutionReport_LeavesQty = local_internal_state.mod_f_internal_state_LeavesQty;
-        mod_f_ExecutionReport_OrdStatus = local_internal_state.mod_f_internal_state_OrdStatus;
-        mod_f_ExecutionReport_OrderID = local_internal_state.mod_f_internal_state_OrderID;
-        mod_f_ExecutionReport_OrderQtyData_OrderQty = local_internal_state.mod_f_internal_state_OrderQtyData_OrderQty;
-        mod_f_ExecutionReport_Parties = local_internal_state.mod_f_internal_state_Parties;
-        mod_f_ExecutionReport_Side = local_internal_state.mod_f_internal_state_Side;
-        mod_f_ExecutionReport_Text = Some rej_info.mod_builtin_rejectInfo_text
-    }
-    in
-    let m_state = send_msg (FIX_Msg_ExecutionReport msg_data_inner) m_state
-    in
-    { m_state with
-        f_internal_state = local_internal_state;
-        f_internal_fresh_state' = local_internal_fresh_state'
-    }
-    [@@macro]
-;;
-
 let reject_NewOrderSingle_invalidfield (m_state : model_state) (msg_data : mod_newordersingle_data) (rej_info : reject_info_defrej)  =
-    let local_internal_fresh_state' = m_state.f_internal_fresh_state'
-    in
-    let local_internal_state = m_state.f_internal_state
-    in
-    let local_internal_state = { local_internal_state with
-        mod_f_internal_state_ExecType = MOD_FIX_ExecType_Rejected;
-        mod_f_internal_state_OrdStatus = MOD_FIX_OrdStatus_Rejected
-    }
-    in
-    let local_internal_fresh_state' = { local_internal_fresh_state' with
-        mod_f_internal_fresh_state'_seed_string = model_func_fresh_string' local_internal_fresh_state'.mod_f_internal_fresh_state'_seed_string
-    }
-    in
-    let local_4fresh = local_internal_fresh_state'.mod_f_internal_fresh_state'_seed_string
-    in
-    let msg_data_inner = {
-        mod_f_ExecutionReport_CumQty = local_internal_state.mod_f_internal_state_CumQty;
-        mod_f_ExecutionReport_ExecID = local_4fresh;
-        mod_f_ExecutionReport_ExecInst = local_internal_state.mod_f_internal_state_ExecInst;
-        mod_f_ExecutionReport_ExecType = local_internal_state.mod_f_internal_state_ExecType;
-        mod_f_ExecutionReport_LeavesQty = local_internal_state.mod_f_internal_state_LeavesQty;
-        mod_f_ExecutionReport_OrdStatus = local_internal_state.mod_f_internal_state_OrdStatus;
-        mod_f_ExecutionReport_OrderID = local_internal_state.mod_f_internal_state_OrderID;
-        mod_f_ExecutionReport_OrderQtyData_OrderQty = local_internal_state.mod_f_internal_state_OrderQtyData_OrderQty;
-        mod_f_ExecutionReport_Parties = local_internal_state.mod_f_internal_state_Parties;
-        mod_f_ExecutionReport_Side = local_internal_state.mod_f_internal_state_Side;
-        mod_f_ExecutionReport_Text = Some rej_info.mod_builtin_rejectInfo_text
-    }
-    in
-    let m_state = send_msg (FIX_Msg_ExecutionReport msg_data_inner) m_state
-    in
-    { m_state with
-        f_internal_state = local_internal_state;
-        f_internal_fresh_state' = local_internal_fresh_state'
-    }
-    [@@macro]
-;;
-
-let reject_NewOrderSingle_invalid (m_state : model_state) (msg_data : mod_newordersingle_data) (rej_info : reject_info_defrej)  =
-    let local_internal_fresh_state' = m_state.f_internal_fresh_state'
-    in
-    let local_internal_state = m_state.f_internal_state
-    in
-    let local_internal_state = { local_internal_state with
-        mod_f_internal_state_ExecType = MOD_FIX_ExecType_Rejected;
-        mod_f_internal_state_OrdStatus = MOD_FIX_OrdStatus_Rejected
-    }
-    in
-    let local_internal_fresh_state' = { local_internal_fresh_state' with
-        mod_f_internal_fresh_state'_seed_string = model_func_fresh_string' local_internal_fresh_state'.mod_f_internal_fresh_state'_seed_string
-    }
-    in
-    let local_4fresh = local_internal_fresh_state'.mod_f_internal_fresh_state'_seed_string
-    in
-    let msg_data_inner = {
-        mod_f_ExecutionReport_CumQty = local_internal_state.mod_f_internal_state_CumQty;
-        mod_f_ExecutionReport_ExecID = local_4fresh;
-        mod_f_ExecutionReport_ExecInst = local_internal_state.mod_f_internal_state_ExecInst;
-        mod_f_ExecutionReport_ExecType = local_internal_state.mod_f_internal_state_ExecType;
-        mod_f_ExecutionReport_LeavesQty = local_internal_state.mod_f_internal_state_LeavesQty;
-        mod_f_ExecutionReport_OrdStatus = local_internal_state.mod_f_internal_state_OrdStatus;
-        mod_f_ExecutionReport_OrderID = local_internal_state.mod_f_internal_state_OrderID;
-        mod_f_ExecutionReport_OrderQtyData_OrderQty = local_internal_state.mod_f_internal_state_OrderQtyData_OrderQty;
-        mod_f_ExecutionReport_Parties = local_internal_state.mod_f_internal_state_Parties;
-        mod_f_ExecutionReport_Side = local_internal_state.mod_f_internal_state_Side;
-        mod_f_ExecutionReport_Text = Some rej_info.mod_builtin_rejectInfo_text
-    }
-    in
-    let m_state = send_msg (FIX_Msg_ExecutionReport msg_data_inner) m_state
-    in
-    { m_state with
-        f_internal_state = local_internal_state;
-        f_internal_fresh_state' = local_internal_fresh_state'
-    }
-    [@@macro]
-;;
-
-let reject_ExecutionReport_invalidfield (m_state : model_state) (msg_data : mod_executionreport_data) (rej_info : reject_info_defrej)  =
     m_state
     [@@macro]
 ;;
 
-let reject_ExecutionReport_invalid (m_state : model_state) (msg_data : mod_executionreport_data) (rej_info : reject_info_defrej)  =
+let reject_NewOrderSingle_invalid (m_state : model_state) (msg_data : mod_newordersingle_data) (rej_info : reject_info_defrej)  =
     m_state
     [@@macro]
 ;;
 
 let reject_field_missing (m_state : model_state) (missing_info : field_missing_or_invalid_data)  =
     (match (missing_info.field_missing_of_invalid_data_msg,missing_info.field_missing_or_invalid_data_field,missing_info.repeating_group_origin) with
-        | (M_Msg_NewOrderSingle_Tag,M_Field_Side_Tag,None) -> { (reject_NewOrderSingle_missingfield m_state {
-            mod_builtin_rejectInfo_text = "Field Side in Message NewOrderSingle is missing.";
-            mod_builtin_rejectInfo_field = Some "Side"
-        }) with
-            event_info = {
-                state_event_counter = m_state.event_counter;
-                state_event_reject_text = Some "Field Side in Message NewOrderSingle is missing."
-            } :: m_state.event_info
-        }
-        | (M_Msg_NewOrderSingle_Tag,M_Field_TransactTime_Tag,None) -> { (reject_NewOrderSingle_missingfield m_state {
-            mod_builtin_rejectInfo_text = "Field TransactTime in Message NewOrderSingle is missing.";
-            mod_builtin_rejectInfo_field = Some "TransactTime"
-        }) with
-            event_info = {
-                state_event_counter = m_state.event_counter;
-                state_event_reject_text = Some "Field TransactTime in Message NewOrderSingle is missing."
-            } :: m_state.event_info
-        }
-        | (M_Msg_NewOrderSingle_Tag,M_Field_OrdType_Tag,None) -> { (reject_NewOrderSingle_missingfield m_state {
-            mod_builtin_rejectInfo_text = "Field OrdType in Message NewOrderSingle is missing.";
-            mod_builtin_rejectInfo_field = Some "OrdType"
-        }) with
-            event_info = {
-                state_event_counter = m_state.event_counter;
-                state_event_reject_text = Some "Field OrdType in Message NewOrderSingle is missing."
-            } :: m_state.event_info
-        }
-        | (M_Msg_NewOrderSingle_Tag,M_Field_OrderQty_Tag,None) -> { (reject_NewOrderSingle_missingfield m_state {
-            mod_builtin_rejectInfo_text = "Field OrderQty in Message NewOrderSingle is missing.";
-            mod_builtin_rejectInfo_field = Some "OrderQty"
-        }) with
-            event_info = {
-                state_event_counter = m_state.event_counter;
-                state_event_reject_text = Some "Field OrderQty in Message NewOrderSingle is missing."
-            } :: m_state.event_info
-        }
-        | (M_Msg_NewOrderSingle_Tag,M_Field_PartyID_Tag,Some MOD_FIX_Repeating_Group_Parties) -> { (reject_NewOrderSingle_missingfield m_state {
-            mod_builtin_rejectInfo_text = "Field PartyID in Message NewOrderSingle, within repeating group Parties, is missing.";
-            mod_builtin_rejectInfo_field = Some "PartyID"
-        }) with
-            event_info = {
-                state_event_counter = m_state.event_counter;
-                state_event_reject_text = Some "Field PartyID in Message NewOrderSingle, within repeating group Parties, is missing."
-            } :: m_state.event_info
-        }
-        | (M_Msg_NewOrderSingle_Tag,M_Field_PartyIndex_Tag,Some MOD_FIX_Repeating_Group_Parties) -> { (reject_NewOrderSingle_missingfield m_state {
-            mod_builtin_rejectInfo_text = "Field PartyIndex in Message NewOrderSingle, within repeating group Parties, is missing.";
-            mod_builtin_rejectInfo_field = Some "PartyIndex"
-        }) with
-            event_info = {
-                state_event_counter = m_state.event_counter;
-                state_event_reject_text = Some "Field PartyIndex in Message NewOrderSingle, within repeating group Parties, is missing."
-            } :: m_state.event_info
-        }
         | (_,_,_) -> m_state
     )
+    [@@macro]
 ;;
 
 let reject_field_enum_invalid (m_state : model_state) (missing_info : field_missing_or_invalid_data)  =
     (match (missing_info.field_missing_of_invalid_data_msg,missing_info.field_missing_or_invalid_data_field,missing_info.repeating_group_origin) with
-        | (M_Msg_NewOrderSingle_Tag,M_Field_Side_Tag,None) -> { (reject_NewOrderSingle_missingfield m_state {
-            mod_builtin_rejectInfo_text = "Field Side in Message NewOrderSingle has an unrecognised tag value.";
-            mod_builtin_rejectInfo_field = Some "Side"
-        }) with
-            event_info = {
-                state_event_counter = m_state.event_counter;
-                state_event_reject_text = Some "Field Side in Message NewOrderSingle has an unrecognised tag value."
-            } :: m_state.event_info
-        }
-        | (M_Msg_NewOrderSingle_Tag,M_Field_OrdType_Tag,None) -> { (reject_NewOrderSingle_missingfield m_state {
-            mod_builtin_rejectInfo_text = "Field OrdType in Message NewOrderSingle has an unrecognised tag value.";
-            mod_builtin_rejectInfo_field = Some "OrdType"
-        }) with
-            event_info = {
-                state_event_counter = m_state.event_counter;
-                state_event_reject_text = Some "Field OrdType in Message NewOrderSingle has an unrecognised tag value."
-            } :: m_state.event_info
-        }
-        | (M_Msg_NewOrderSingle_Tag,M_Field_ExecInst_Tag,None) -> { (reject_NewOrderSingle_missingfield m_state {
-            mod_builtin_rejectInfo_text = "Field ExecInst in Message NewOrderSingle has an unrecognised tag value.";
-            mod_builtin_rejectInfo_field = Some "ExecInst"
-        }) with
-            event_info = {
-                state_event_counter = m_state.event_counter;
-                state_event_reject_text = Some "Field ExecInst in Message NewOrderSingle has an unrecognised tag value."
-            } :: m_state.event_info
-        }
         | (_,_,_) -> m_state
     )
+    [@@macro]
 ;;
 

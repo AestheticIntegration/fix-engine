@@ -1,0 +1,98 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@import "../src-model/src-types-pp/json_to_message.iml"]
+open Json_to_message;;
+[@@@import "../src-model/src-types/model_messages.iml"]
+open Model_messages;;
+[@@@import "../src-model/src-types-pp/model_messages_json.iml"]
+open Model_messages_json;;
+[@@@import "../src-model/src-types/model_tags.iml"]
+open Model_tags;;
+[@@@require "yojson"]
+open Yojson.Basic.Util;;
+
+
+let pp_msg_of_to_json to_json fmt x =
+    let open Format in
+    let f x = fprintf fmt x in
+    f "@[" ;
+    let () =
+      match to_json x with
+      | `Assoc kvs ->
+          pp_print_list
+            ~pp_sep:(fun fmt () -> fprintf fmt ",@ ")
+            (fun fmt (k, v) -> fprintf fmt "%s:%s" k (to_string v))
+            fmt
+            kvs
+      | v ->
+          f "%s" (to_string v)
+    in
+    f "@]"
+    [@@program]
+
+module New_order_single = struct
+  type t = mod_newordersingle_data
+  ;;
+  let price (t)  =
+      t.mod_f_NewOrderSingle_Price
+      [@@macro]
+  ;;
+  let make ~price ()  : t =
+      {
+          mod_f_NewOrderSingle_Price = price
+      }
+      [@@ocamlformat "break-fun-decl=wrap"] [@@macro]
+  ;;
+  let pp (f) (x)  =
+      pp_msg_of_to_json mod_newordersingle_to_json f x
+      [@@program] [@@macro]
+  ;;
+  let to_json = mod_newordersingle_to_json [@@program];;
+  let of_json = mod_message_newordersingle_decoder [@@program];;
+end
+
+module Msg_type = struct
+  type t = m_msg_tag =
+      | M_Msg_NewOrderSingle_Tag 
+  ;;
+  let to_string (x)  =
+      (match x with
+          | M_Msg_NewOrderSingle_Tag -> "NewOrderSingle"
+      )
+      [@@program] [@@macro]
+  ;;
+  let new_order_single = M_Msg_NewOrderSingle_Tag [@@macro];;
+end
+
+type t = model_msg =
+    | FIX_Msg_NewOrderSingle of New_order_single.t
+;;
+
+let new_order_single (x)  =
+    FIX_Msg_NewOrderSingle x
+    [@@macro]
+;;
+
+let pp (fmt) (m)  =
+    let f x = Format.fprintf fmt x
+    in
+    f "@[";
+    let () = (match m with
+        | FIX_Msg_NewOrderSingle d -> f "NewOrderSingle@ ";
+        New_order_single.pp fmt d
+    )
+    in
+    f "@]"
+    [@@program] [@@macro]
+;;
+
+let msg_type_of_t (x)  =
+    (match x with
+        | FIX_Msg_NewOrderSingle _ -> Msg_type.new_order_single
+    )
+    [@@macro]
+;;
+
+let to_json = json_of_model_msg [@@program];;
+
+let of_json = model_message_decoder [@@program];;
+

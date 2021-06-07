@@ -1,16 +1,9 @@
-(** Current Time functions *)
-(***
-
-    Imandra Inc.
-    Copyright (c) 2014 - 2021
-
-   fiv_verion.ml
-    
-*)
-
-[@@@import "../src-core/datetime.iml"]
+(* Imandra Inc. copyright 2021 *)
 [@@@program]
-open Datetime
+[@@@import "../src-core/datetime.iml"]
+open Datetime;;
+
+
 
 let get_current_utctimestamp_milli ?offset:(offset=0) () : fix_utctimestamp_milli =    
   let open Datetime in
@@ -56,4 +49,5 @@ let get_current_localmktdate () : fix_localmktdate =
   convert_utctimestamp_milli_localmktdate
     (get_current_utctimestamp_milli ())
 ;;
+
 [@@@logic]

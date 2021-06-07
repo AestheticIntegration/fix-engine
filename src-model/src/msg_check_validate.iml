@@ -1,123 +1,13 @@
 (* Imandra Inc. copyright 2021 *)
-[@@@import "../../src-core/datetime.iml"]
-open Datetime;;
-[@@@import "ipl_rg_functions.iml"]
-open Ipl_rg_functions;;
-[@@@import "../src-types/model_app_enums.iml"]
-open Model_app_enums;;
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
-[@@@import "../src-types/model_repeating_groups.iml"]
-open Model_repeating_groups;;
 [@@@import "msg_check_types.iml"]
 open Msg_check_types;;
-[@@@import "../../src-core/numeric.iml"]
-open Numeric;;
 [@@@import "../src-types/state.iml"]
 open State;;
-[@@@import "../../src-core-time-defaults/time_defaults.iml"]
-open Time_defaults;;
 
-
-let validate_NewOrderSingle_0 (msg_data : mod_newordersingle_data) (m_state : model_state)  =
-    let local_internal_fresh_state' = m_state.f_internal_fresh_state'
-    in
-    let local_internal_state = m_state.f_internal_state
-    in
-    make_cond_defrej ((&&) ((&&) ((<==>) ((=) msg_data.mod_f_NewOrderSingle_OrdType MOD_FIX_OrdType_Market) (not ((match msg_data.mod_f_NewOrderSingle_Price with
-        | Some _ -> true
-        | None -> false
-    )
-    ))) ((==>) ((=) msg_data.mod_f_NewOrderSingle_OrdType MOD_FIX_OrdType_Limit) ((match msg_data.mod_f_NewOrderSingle_Price with
-        | Some _ -> true
-        | None -> false
-    )
-    ))) ((==>) ((=) msg_data.mod_f_NewOrderSingle_OrdType MOD_FIX_OrdType_StopSpread) ((match msg_data.mod_f_NewOrderSingle_Price with
-        | Some _ -> true
-        | None -> false
-    )
-    ))) {
-        mod_builtin_rejectInfo_text = "Message NewOrderSingle violates the constraint \"\n    (this.OrdType == OrdType.Market <==> !present(this.Price)) &&\n         (this.OrdType == OrdType.Limit ==> present(this.Price)) &&\n         (this.OrdType == OrdType.StopSpread ==> present(this.Price))\"";
-        mod_builtin_rejectInfo_field = None
-    }
-;;
-
-let validate_NewOrderSingle_1 (msg_data : mod_newordersingle_data) (m_state : model_state)  =
-    let local_internal_fresh_state' = m_state.f_internal_fresh_state'
-    in
-    let local_internal_state = m_state.f_internal_state
-    in
-    make_cond_defrej ((<==>) ((=) msg_data.mod_f_NewOrderSingle_OrdType MOD_FIX_OrdType_StopSpread) ((match msg_data.mod_f_NewOrderSingle_SpreadProportion with
-        | Some _ -> true
-        | None -> false
-    )
-    )) {
-        mod_builtin_rejectInfo_text = "Message NewOrderSingle violates the constraint \"\n    this.OrdType == StopSpread <==>\n            present(this.SpreadProportion)\"";
-        mod_builtin_rejectInfo_field = None
-    }
-;;
-
-let validate_NewOrderSingle_2 (msg_data : mod_newordersingle_data) (m_state : model_state)  =
-    let local_internal_fresh_state' = m_state.f_internal_fresh_state'
-    in
-    let local_internal_state = m_state.f_internal_state
-    in
-    make_cond_defrej ((==>) ((<>) msg_data.mod_f_NewOrderSingle_OrdType MOD_FIX_OrdType_Market) ((match msg_data.mod_f_NewOrderSingle_Price with
-        | Some cap_price -> (float_GreaterThan_2_6 cap_price (float_Create_6 (0)))
-        | None -> false
-    )
-    )) {
-        mod_builtin_rejectInfo_text = "Message NewOrderSingle violates the constraint \"\n    this.OrdType != OrdType.Market ==>\n                (case this.Price\n                    {Some price: price > 0.0}\n                    {None: false}\n                 )\"";
-        mod_builtin_rejectInfo_field = None
-    }
-;;
-
-let validate_NewOrderSingle_3 (msg_data : mod_newordersingle_data) (m_state : model_state)  =
-    let local_internal_fresh_state' = m_state.f_internal_fresh_state'
-    in
-    let local_internal_state = m_state.f_internal_state
-    in
-    make_cond_defrej (rg_forall_fun_Parties msg_data.mod_f_NewOrderSingle_Parties (fun lambda_e_Parties -> 
-    rg_forall_fun_PtysSubGrp lambda_e_Parties.mod_f_Parties_PtysSubGrp (fun lambda_e_PtysSubGrp -> 
-    (match lambda_e_PtysSubGrp.mod_f_PtysSubGrp_PartySubID with
-        | Some cap_x -> ((<>) lambda_e_Parties.mod_f_Parties_PartyID cap_x)
-        | None -> true
-    )
-    ) true
-    ) true) {
-        mod_builtin_rejectInfo_text = "Message NewOrderSingle violates the constraint \"\n    case(this.Parties.PtysSubGrp.PartySubID)\n            {None:true}\n            {Some x : this.Parties.PartyID != x}\"";
-        mod_builtin_rejectInfo_field = None
-    }
-;;
 
 let check_validate_NewOrderSingle (msg_data : mod_newordersingle_data) (m_state : model_state)  =
-    let cust_rest3 = validate_NewOrderSingle_3 msg_data m_state
-    in
-    (if cust_rest3.validate_invalid_defrej then
-        cust_rest3
-    else
-        let cust_rest2 = validate_NewOrderSingle_2 msg_data m_state
-        in
-        (if cust_rest2.validate_invalid_defrej then
-            cust_rest2
-        else
-            let cust_rest1 = validate_NewOrderSingle_1 msg_data m_state
-            in
-            (if cust_rest1.validate_invalid_defrej then
-                cust_rest1
-            else
-                let cust_rest0 = validate_NewOrderSingle_0 msg_data m_state
-                in
-                (if cust_rest0.validate_invalid_defrej then
-                    cust_rest0
-                else
-                    no_invalid_validates_defrej)
-                )
-            )
-        )
-;;
-
-let check_validate_ExecutionReport (msg_data : mod_executionreport_data) (m_state : model_state)  =
     no_invalid_validates_defrej
     [@@macro]
 ;;

@@ -8,159 +8,25 @@ open Datetime_json;;
 open Decoders_yojson.Basic.Decode;;
 [@@@require "decoders-yojson"]
 open Decoders_yojson.Basic.Decode.Infix;;
-[@@@import "json_to_enum.iml"]
-open Json_to_enum;;
 [@@@import "json_to_model_tag.iml"]
 open Json_to_model_tag;;
-[@@@import "json_to_repeating_group.iml"]
-open Json_to_repeating_group;;
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
 
 
 let mod_message_newordersingle_decoder  : mod_newordersingle_data decoder =
-    (field "Parties" mod_rg_parties_decoder) >>= (fun mod_f_NewOrderSingle_Parties -> 
-    (field "ExecInst" mod_enum_execinst_decoder) >>= (fun mod_f_NewOrderSingle_ExecInst -> 
-    (maybe (field "Account" string_decoder)) >>= (fun mod_f_NewOrderSingle_Account -> 
-    (maybe (field "Price" float_2_decoder)) >>= (fun mod_f_NewOrderSingle_Price -> 
-    (maybe (field "SpreadProportion" float_decoder)) >>= (fun mod_f_NewOrderSingle_SpreadProportion -> 
-    (field "OrderQtyData.OrderQty" float_6_decoder) >>= (fun mod_f_NewOrderSingle_OrderQtyData_OrderQty -> 
-    (field "OrdType" mod_enum_ordtype_decoder) >>= (fun mod_f_NewOrderSingle_OrdType -> 
-    (field "TransactTime" utctimestamp_milli_decoder) >>= (fun mod_f_NewOrderSingle_TransactTime -> 
-    (field "Side" mod_enum_side_decoder) >>= (fun mod_f_NewOrderSingle_Side -> 
-    (maybe (field "ClOrdID" string_decoder)) >>= (fun mod_f_NewOrderSingle_ClOrdID -> 
+    (field "Price" float_6_decoder) >>= (fun mod_f_NewOrderSingle_Price -> 
     succeed {
-        mod_f_NewOrderSingle_ClOrdID = mod_f_NewOrderSingle_ClOrdID;
-        mod_f_NewOrderSingle_Side = mod_f_NewOrderSingle_Side;
-        mod_f_NewOrderSingle_TransactTime = mod_f_NewOrderSingle_TransactTime;
-        mod_f_NewOrderSingle_OrdType = mod_f_NewOrderSingle_OrdType;
-        mod_f_NewOrderSingle_OrderQtyData_OrderQty = mod_f_NewOrderSingle_OrderQtyData_OrderQty;
-        mod_f_NewOrderSingle_SpreadProportion = mod_f_NewOrderSingle_SpreadProportion;
-        mod_f_NewOrderSingle_Price = mod_f_NewOrderSingle_Price;
-        mod_f_NewOrderSingle_Account = mod_f_NewOrderSingle_Account;
-        mod_f_NewOrderSingle_ExecInst = mod_f_NewOrderSingle_ExecInst;
-        mod_f_NewOrderSingle_Parties = mod_f_NewOrderSingle_Parties
+        mod_f_NewOrderSingle_Price = mod_f_NewOrderSingle_Price
     }
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
     )
 ;;
 
 let mod_message_newordersingle_opt_def_decoder  : mod_newordersingle_defopt_data decoder =
-    (field "Parties" mod_rg_parties_decoder) >>= (fun mod_def_opt_f_NewOrderSingle_Parties -> 
-    (maybe (field "ExecInst" mod_enum_execinst_decoder)) >>= (fun mod_def_opt_f_NewOrderSingle_ExecInst -> 
-    (maybe (field "Account" string_decoder)) >>= (fun mod_def_opt_f_NewOrderSingle_Account -> 
-    (maybe (field "Price" float_2_decoder)) >>= (fun mod_def_opt_f_NewOrderSingle_Price -> 
-    (maybe (field "SpreadProportion" float_decoder)) >>= (fun mod_def_opt_f_NewOrderSingle_SpreadProportion -> 
-    (field "OrderQtyData.OrderQty" float_6_decoder) >>= (fun mod_def_opt_f_NewOrderSingle_OrderQtyData_OrderQty -> 
-    (field "OrdType" mod_enum_ordtype_decoder) >>= (fun mod_def_opt_f_NewOrderSingle_OrdType -> 
-    (field "TransactTime" utctimestamp_milli_decoder) >>= (fun mod_def_opt_f_NewOrderSingle_TransactTime -> 
-    (field "Side" mod_enum_side_decoder) >>= (fun mod_def_opt_f_NewOrderSingle_Side -> 
-    (maybe (field "ClOrdID" string_decoder)) >>= (fun mod_def_opt_f_NewOrderSingle_ClOrdID -> 
+    (field "Price" float_6_decoder) >>= (fun mod_def_opt_f_NewOrderSingle_Price -> 
     succeed {
-        mod_def_opt_f_NewOrderSingle_ClOrdID = mod_def_opt_f_NewOrderSingle_ClOrdID;
-        mod_def_opt_f_NewOrderSingle_Side = mod_def_opt_f_NewOrderSingle_Side;
-        mod_def_opt_f_NewOrderSingle_TransactTime = mod_def_opt_f_NewOrderSingle_TransactTime;
-        mod_def_opt_f_NewOrderSingle_OrdType = mod_def_opt_f_NewOrderSingle_OrdType;
-        mod_def_opt_f_NewOrderSingle_OrderQtyData_OrderQty = mod_def_opt_f_NewOrderSingle_OrderQtyData_OrderQty;
-        mod_def_opt_f_NewOrderSingle_SpreadProportion = mod_def_opt_f_NewOrderSingle_SpreadProportion;
-        mod_def_opt_f_NewOrderSingle_Price = mod_def_opt_f_NewOrderSingle_Price;
-        mod_def_opt_f_NewOrderSingle_Account = mod_def_opt_f_NewOrderSingle_Account;
-        mod_def_opt_f_NewOrderSingle_ExecInst = mod_def_opt_f_NewOrderSingle_ExecInst;
-        mod_def_opt_f_NewOrderSingle_Parties = mod_def_opt_f_NewOrderSingle_Parties
+        mod_def_opt_f_NewOrderSingle_Price = mod_def_opt_f_NewOrderSingle_Price
     }
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-;;
-
-let mod_message_executionreport_decoder  : mod_executionreport_data decoder =
-    (field "ExecInst" mod_enum_execinst_decoder) >>= (fun mod_f_ExecutionReport_ExecInst -> 
-    (field "Parties" mod_rg_parties_decoder) >>= (fun mod_f_ExecutionReport_Parties -> 
-    (maybe (field "Text" string_decoder)) >>= (fun mod_f_ExecutionReport_Text -> 
-    (field "CumQty" float_6_decoder) >>= (fun mod_f_ExecutionReport_CumQty -> 
-    (field "LeavesQty" float_6_decoder) >>= (fun mod_f_ExecutionReport_LeavesQty -> 
-    (field "OrderQtyData.OrderQty" float_6_decoder) >>= (fun mod_f_ExecutionReport_OrderQtyData_OrderQty -> 
-    (field "Side" mod_enum_side_decoder) >>= (fun mod_f_ExecutionReport_Side -> 
-    (field "OrdStatus" mod_enum_ordstatus_decoder) >>= (fun mod_f_ExecutionReport_OrdStatus -> 
-    (field "ExecType" mod_enum_exectype_decoder) >>= (fun mod_f_ExecutionReport_ExecType -> 
-    (field "ExecID" string_decoder) >>= (fun mod_f_ExecutionReport_ExecID -> 
-    (field "OrderID" string_decoder) >>= (fun mod_f_ExecutionReport_OrderID -> 
-    succeed {
-        mod_f_ExecutionReport_OrderID = mod_f_ExecutionReport_OrderID;
-        mod_f_ExecutionReport_ExecID = mod_f_ExecutionReport_ExecID;
-        mod_f_ExecutionReport_ExecType = mod_f_ExecutionReport_ExecType;
-        mod_f_ExecutionReport_OrdStatus = mod_f_ExecutionReport_OrdStatus;
-        mod_f_ExecutionReport_Side = mod_f_ExecutionReport_Side;
-        mod_f_ExecutionReport_OrderQtyData_OrderQty = mod_f_ExecutionReport_OrderQtyData_OrderQty;
-        mod_f_ExecutionReport_LeavesQty = mod_f_ExecutionReport_LeavesQty;
-        mod_f_ExecutionReport_CumQty = mod_f_ExecutionReport_CumQty;
-        mod_f_ExecutionReport_Text = mod_f_ExecutionReport_Text;
-        mod_f_ExecutionReport_Parties = mod_f_ExecutionReport_Parties;
-        mod_f_ExecutionReport_ExecInst = mod_f_ExecutionReport_ExecInst
-    }
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-;;
-
-let mod_message_executionreport_opt_def_decoder  : mod_executionreport_defopt_data decoder =
-    (field "ExecInst" mod_enum_execinst_decoder) >>= (fun mod_def_opt_f_ExecutionReport_ExecInst -> 
-    (field "Parties" mod_rg_parties_decoder) >>= (fun mod_def_opt_f_ExecutionReport_Parties -> 
-    (maybe (field "Text" string_decoder)) >>= (fun mod_def_opt_f_ExecutionReport_Text -> 
-    (field "CumQty" float_6_decoder) >>= (fun mod_def_opt_f_ExecutionReport_CumQty -> 
-    (field "LeavesQty" float_6_decoder) >>= (fun mod_def_opt_f_ExecutionReport_LeavesQty -> 
-    (field "OrderQtyData.OrderQty" float_6_decoder) >>= (fun mod_def_opt_f_ExecutionReport_OrderQtyData_OrderQty -> 
-    (field "Side" mod_enum_side_decoder) >>= (fun mod_def_opt_f_ExecutionReport_Side -> 
-    (field "OrdStatus" mod_enum_ordstatus_decoder) >>= (fun mod_def_opt_f_ExecutionReport_OrdStatus -> 
-    (field "ExecType" mod_enum_exectype_decoder) >>= (fun mod_def_opt_f_ExecutionReport_ExecType -> 
-    (field "ExecID" string_decoder) >>= (fun mod_def_opt_f_ExecutionReport_ExecID -> 
-    (field "OrderID" string_decoder) >>= (fun mod_def_opt_f_ExecutionReport_OrderID -> 
-    succeed {
-        mod_def_opt_f_ExecutionReport_OrderID = mod_def_opt_f_ExecutionReport_OrderID;
-        mod_def_opt_f_ExecutionReport_ExecID = mod_def_opt_f_ExecutionReport_ExecID;
-        mod_def_opt_f_ExecutionReport_ExecType = mod_def_opt_f_ExecutionReport_ExecType;
-        mod_def_opt_f_ExecutionReport_OrdStatus = mod_def_opt_f_ExecutionReport_OrdStatus;
-        mod_def_opt_f_ExecutionReport_Side = mod_def_opt_f_ExecutionReport_Side;
-        mod_def_opt_f_ExecutionReport_OrderQtyData_OrderQty = mod_def_opt_f_ExecutionReport_OrderQtyData_OrderQty;
-        mod_def_opt_f_ExecutionReport_LeavesQty = mod_def_opt_f_ExecutionReport_LeavesQty;
-        mod_def_opt_f_ExecutionReport_CumQty = mod_def_opt_f_ExecutionReport_CumQty;
-        mod_def_opt_f_ExecutionReport_Text = mod_def_opt_f_ExecutionReport_Text;
-        mod_def_opt_f_ExecutionReport_Parties = mod_def_opt_f_ExecutionReport_Parties;
-        mod_def_opt_f_ExecutionReport_ExecInst = mod_def_opt_f_ExecutionReport_ExecInst
-    }
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
-    )
     )
 ;;
 
@@ -169,9 +35,6 @@ let model_message_decoder  : model_msg decoder =
     (match x with
         | "D" -> ((field "data" mod_message_newordersingle_decoder) >>= (fun y -> 
         succeed (FIX_Msg_NewOrderSingle y)
-        ))
-        | "8" -> ((field "data" mod_message_executionreport_decoder) >>= (fun y -> 
-        succeed (FIX_Msg_ExecutionReport y)
         ))
         | d -> (fail ("Unknown Message ("^d^") in JSON decoding."))
     )
@@ -183,9 +46,6 @@ let model_message_decoder_opt_def  : model_msg_opt_def decoder =
     (match x with
         | "D" -> ((field "data" mod_message_newordersingle_opt_def_decoder) >>= (fun y -> 
         succeed (FIX_Msg_Def_Opt_NewOrderSingle y)
-        ))
-        | "8" -> ((field "data" mod_message_executionreport_opt_def_decoder) >>= (fun y -> 
-        succeed (FIX_Msg_Def_Opt_ExecutionReport y)
         ))
         | d -> (fail ("Unknown Message ("^d^") in JSON decoding."))
     )

@@ -1,0 +1,169 @@
+(* Imandra Inc. copyright 2021 *)
+[@@@import "../src-protocol-pp/encode_admin_tags.iml"]
+open Encode_admin_tags;;
+[@@@import "../src-protocol-exts-pp/encode_app_tags.iml"]
+open Encode_app_tags;;
+[@@@import "../src-protocol/full_admin_tags.iml"]
+open Full_admin_tags;;
+[@@@import "../src-protocol-exts/full_app_messages.iml"]
+open Full_app_messages;;
+[@@@import "../src-protocol-exts-pp/full_app_messages_decoder.iml"]
+open Full_app_messages_decoder;;
+[@@@import "../src-protocol-exts-pp/full_app_messages_json.iml"]
+open Full_app_messages_json;;
+[@@@import "../src-protocol-exts/full_app_tags.iml"]
+open Full_app_tags;;
+[@@@import "../src-protocol/full_message_tags.iml"]
+open Full_message_tags;;
+[@@@import "../src-model/src-types/model_tags.iml"]
+open Model_tags;;
+[@@@import "../src-protocol-pp/parse_admin_tags.iml"]
+open Parse_admin_tags;;
+[@@@import "../src-protocol-exts-pp/parse_app_tags.iml"]
+open Parse_app_tags;;
+[@@@import "../src-model/src-conversions/type_converter.iml"]
+open Type_converter;;
+[@@@require "yojson"]
+open Yojson.Basic.Util;;
+
+
+let pp_msg_of_to_json to_json fmt x =
+    let open Format in
+    let f x = fprintf fmt x in
+    f "@[" ;
+    let () =
+      match to_json x with
+      | `Assoc kvs ->
+          pp_print_list
+            ~pp_sep:(fun fmt () -> fprintf fmt ",@ ")
+            (fun fmt (k, v) -> fprintf fmt "%s:%s" k (to_string v))
+            fmt
+            kvs
+      | v ->
+          f "%s" (to_string v)
+    in
+    f "@]"
+    [@@program]
+
+module Tag = struct
+  type t = 
+      | Msg_type 
+      | Admin_tag of full_admin_field_tag
+      | Tag of full_app_field_tag
+  ;;
+  let to_fix (x)  =
+      (match x with
+          | Msg_type -> "35"
+          | Admin_tag t -> (encode_admin_field_tag t)
+          | Tag t -> (encode_app_field_tag t)
+      )
+      [@@program]
+  ;;
+  let of_fix (x)  =
+      (match x with
+          | "35" -> (Some Msg_type)
+          | s -> ((match parse_admin_field_tag s with
+              | None -> let s = parse_app_field_tag s
+              in
+              Option.map (fun t -> 
+              Tag t
+              ) s
+              | Some t -> (Some (Admin_tag t))
+          )
+          )
+      )
+  ;;
+  let msg_type = Msg_type [@@macro];;
+  let deliver_to_comp_id = Admin_tag Full_Msg_DeliverToCompID_Tag		   
+  let msg_seq_num = Admin_tag Full_Msg_MsgSeqNum_Tag		   
+  let on_behalf_of_comp_id = Admin_tag Full_Msg_OnBehalfOfCompID_Tag		   
+  let sender_comp_id = Admin_tag Full_Msg_SenderCompID_Tag		   
+  let sending_time = Admin_tag Full_Msg_SendingTime_Tag		   
+  let target_comp_id = Admin_tag Full_Msg_TargetCompID_Tag
+  let price = Tag Full_Field_Price_Tag [@@macro];;
+end
+
+module New_order_single = struct
+  type t = full_fix_newordersingle_data
+  ;;
+  let price (t)  =
+      t.f_NewOrderSingle_Price
+      [@@macro]
+  ;;
+  let make ?price ()  : t =
+      {
+          f_NewOrderSingle_Price = price
+      }
+      [@@ocamlformat "break-fun-decl=wrap"] [@@macro]
+  ;;
+  let pp (f) (x)  =
+      pp_msg_of_to_json newordersingle_to_json f x
+      [@@program] [@@macro]
+  ;;
+  let to_json = newordersingle_to_json [@@program];;
+  let of_json = full_message_newordersingle_decoder [@@program];;
+  let of_model = convert__model_to_full_NewOrderSingle [@@macro];;
+  let to_model = convert__full_to_model_NewOrderSingle [@@macro];;
+end
+
+module Msg_type = struct
+  type t = full_app_msg_tag =
+      | Full_Msg_NewOrderSingle_Tag 
+  ;;
+  let to_string (x)  =
+      (match x with
+          | Full_Msg_NewOrderSingle_Tag -> "NewOrderSingle"
+      )
+      [@@program] [@@macro]
+  ;;
+  let new_order_single = Full_Msg_NewOrderSingle_Tag [@@macro];;
+  let heartbeat = Full_Admin_Msg_Tag Full_Msg_Heartbeat_Tag
+  let logon = Full_Admin_Msg_Tag Full_Msg_Logon_Tag
+  let logoff = Full_Admin_Msg_Tag Full_Msg_Logoff_Tag
+  let reject = Full_Admin_Msg_Tag Full_Msg_Reject_Tag
+  let business_reject = Full_Admin_Msg_Tag Full_Msg_Business_Reject_Tag
+  let resent_request = Full_Admin_Msg_Tag Full_Msg_Resend_Request_Tag
+  let sequence_reset = Full_Admin_Msg_Tag Full_Msg_Sequence_Reset_Tag
+  let rest_request = Full_Admin_Msg_Tag Full_Msg_Test_Request_Tag
+  let of_model (x)  =
+      (match x with
+          | M_Msg_NewOrderSingle_Tag -> Full_Msg_NewOrderSingle_Tag
+      )
+      [@@macro]
+  ;;
+  let to_model (x)  =
+      (match x with
+          | Full_Msg_NewOrderSingle_Tag -> (Some Full_Msg_NewOrderSingle_Tag)
+          | _ -> None
+      )
+  ;;
+  let of_fix = parse_app_msg_tag [@@program];;
+  let to_fix = encode_app_msg_tag [@@program];;
+end
+
+type t = full_app_msg_data =
+    | FIX_Full_Msg_NewOrderSingle of New_order_single.t
+;;
+
+let new_order_single (x)  =
+    FIX_Full_Msg_NewOrderSingle x
+    [@@macro]
+;;
+
+let pp (fmt) (m)  =
+    let f x = Format.fprintf fmt x
+    in
+    f "@[";
+    let () = (match m with
+        | FIX_Full_Msg_NewOrderSingle d -> f "NewOrderSingle@ ";
+        New_order_single.pp fmt d
+    )
+    in
+    f "@]"
+    [@@program] [@@macro]
+;;
+
+let to_json = full_app_msg_to_json [@@program];;
+
+let of_json = full_app_msg_of_json [@@program];;
+

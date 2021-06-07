@@ -1,14 +1,8 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@import "../../src-core/datetime.iml"]
 open Datetime;;
-[@@@import "ipl_rg_functions.iml"]
-open Ipl_rg_functions;;
-[@@@import "../src-types/model_app_enums.iml"]
-open Model_app_enums;;
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
-[@@@import "../src-types/model_repeating_groups.iml"]
-open Model_repeating_groups;;
 [@@@import "msg_check_types.iml"]
 open Msg_check_types;;
 [@@@import "../../src-core/numeric.iml"]
@@ -19,151 +13,35 @@ open State;;
 open Time_defaults;;
 
 
-let check_field_mod_f_NewOrderSingle_ClOrdID_inner0 (msg_data : mod_newordersingle_data) (local_internal_state : fix_internal_state) (local_internal_fresh_state' : fix_internal_fresh_state')  =
-    (if ((<>) msg_data.mod_f_NewOrderSingle_ClOrdID (Some "N/A")) then
+let check_field_mod_f_NewOrderSingle_Price_inner0 (msg_data : mod_newordersingle_data)  =
+    (if (float_GreaterThan_6_6 msg_data.mod_f_NewOrderSingle_Price (float_Create_6 (0))) then
         fields_good_defrej
     else
         (is_fields_invalid_defrej {
-            mod_builtin_rejectInfo_text = "Field ClOrdID of Message NewOrderSingle violates the constraint: \" it != (Some \"N/A\")\"";
-            mod_builtin_rejectInfo_field = Some "ClOrdID"
+            mod_builtin_rejectInfo_text = "Field Price of Message NewOrderSingle violates the constraint: \" it > 0.0\"";
+            mod_builtin_rejectInfo_field = Some "Price"
         }))
 ;;
 
-let check_field_mod_f_NewOrderSingle_ClOrdID_outer (msg_data : mod_newordersingle_data) (local_internal_state : fix_internal_state) (local_internal_fresh_state' : fix_internal_fresh_state')  =
-    let check_field_mod_f_NewOrderSingle_ClOrdID_inner0_result = check_field_mod_f_NewOrderSingle_ClOrdID_inner0 msg_data local_internal_state local_internal_fresh_state'
+let check_field_mod_f_NewOrderSingle_Price_outer (msg_data : mod_newordersingle_data)  =
+    let check_field_mod_f_NewOrderSingle_Price_inner0_result = check_field_mod_f_NewOrderSingle_Price_inner0 msg_data
     in
-    (if check_field_mod_f_NewOrderSingle_ClOrdID_inner0_result.field_invalid_defrej then
-        check_field_mod_f_NewOrderSingle_ClOrdID_inner0_result
+    (if check_field_mod_f_NewOrderSingle_Price_inner0_result.field_invalid_defrej then
+        check_field_mod_f_NewOrderSingle_Price_inner0_result
     else
         fields_good_defrej)
 ;;
 
-let check_field_mod_f_NewOrderSingle_ClOrdID (msg_data : mod_newordersingle_data) (m_state : model_state)  =
-    check_field_mod_f_NewOrderSingle_ClOrdID_outer msg_data m_state.f_internal_state m_state.f_internal_fresh_state'
-;;
-
-let check_field_mod_f_NewOrderSingle_OrdType_inner0 (msg_data : mod_newordersingle_data) (local_internal_state : fix_internal_state) (local_internal_fresh_state' : fix_internal_fresh_state')  =
-    (if (List.mem msg_data.mod_f_NewOrderSingle_OrdType ([(MOD_FIX_OrdType_Limit);(MOD_FIX_OrdType_Market);(MOD_FIX_OrdType_StopSpread)])) then
-        fields_good_defrej
-    else
-        (is_fields_invalid_defrej {
-            mod_builtin_rejectInfo_text = "Field OrdType of Message NewOrderSingle violates the constraint: \" it in [ OrdType.Limit, OrdType.Market, StopSpread ]\"";
-            mod_builtin_rejectInfo_field = Some "OrdType"
-        }))
-;;
-
-let check_field_mod_f_NewOrderSingle_OrdType_outer (msg_data : mod_newordersingle_data) (local_internal_state : fix_internal_state) (local_internal_fresh_state' : fix_internal_fresh_state')  =
-    let check_field_mod_f_NewOrderSingle_OrdType_inner0_result = check_field_mod_f_NewOrderSingle_OrdType_inner0 msg_data local_internal_state local_internal_fresh_state'
-    in
-    (if check_field_mod_f_NewOrderSingle_OrdType_inner0_result.field_invalid_defrej then
-        check_field_mod_f_NewOrderSingle_OrdType_inner0_result
-    else
-        fields_good_defrej)
-;;
-
-let check_field_mod_f_NewOrderSingle_OrdType (msg_data : mod_newordersingle_data) (m_state : model_state)  =
-    check_field_mod_f_NewOrderSingle_OrdType_outer msg_data m_state.f_internal_state m_state.f_internal_fresh_state'
-;;
-
-let check_field_mod_f_NewOrderSingle_SpreadProportion_inner0 (msg_data : mod_newordersingle_data) (local_internal_state : fix_internal_state) (local_internal_fresh_state' : fix_internal_fresh_state')  =
-    (if ((match msg_data.mod_f_NewOrderSingle_SpreadProportion with
-        | Some cap_x -> ((&&) (float_GreaterThan_6_6 cap_x (float_Create_6 (0))) (float_LessThanEqual_6_6 cap_x (float_Create_6 (1000000))))
-        | None -> true
-    )
-    ) then
-        fields_good_defrej
-    else
-        (is_fields_invalid_defrej {
-            mod_builtin_rejectInfo_text = "Field SpreadProportion of Message NewOrderSingle violates the constraint: \" case(it){None:true}{Some x: x>0.0 &&  x<=1.0}\"";
-            mod_builtin_rejectInfo_field = Some "SpreadProportion"
-        }))
-;;
-
-let check_field_mod_f_NewOrderSingle_SpreadProportion_outer (msg_data : mod_newordersingle_data) (local_internal_state : fix_internal_state) (local_internal_fresh_state' : fix_internal_fresh_state')  =
-    let check_field_mod_f_NewOrderSingle_SpreadProportion_inner0_result = check_field_mod_f_NewOrderSingle_SpreadProportion_inner0 msg_data local_internal_state local_internal_fresh_state'
-    in
-    (if check_field_mod_f_NewOrderSingle_SpreadProportion_inner0_result.field_invalid_defrej then
-        check_field_mod_f_NewOrderSingle_SpreadProportion_inner0_result
-    else
-        fields_good_defrej)
-;;
-
-let check_field_mod_f_NewOrderSingle_SpreadProportion (msg_data : mod_newordersingle_data) (m_state : model_state)  =
-    check_field_mod_f_NewOrderSingle_SpreadProportion_outer msg_data m_state.f_internal_state m_state.f_internal_fresh_state'
-;;
-
-let check_field_mod_f_NewOrderSingle_Parties_inner0 (msg_data : mod_newordersingle_data) (local_internal_state : fix_internal_state) (local_internal_fresh_state' : fix_internal_fresh_state')  =
-    (if (rg_forall_fun_Parties msg_data.mod_f_NewOrderSingle_Parties (fun lambda_e_Parties -> 
-    (&&) ((>) lambda_e_Parties.mod_f_Parties_PartyIndex 0) ((<) lambda_e_Parties.mod_f_Parties_PartyIndex 100)
-    ) true) then
-        fields_good_defrej
-    else
-        (is_fields_invalid_defrej {
-            mod_builtin_rejectInfo_text = "Field Parties of Message NewOrderSingle violates the constraint: \" it.PartyIndex > 0 && it.PartyIndex < 100\"";
-            mod_builtin_rejectInfo_field = Some "Parties"
-        }))
-;;
-
-let check_field_mod_f_NewOrderSingle_Parties_inner1 (msg_data : mod_newordersingle_data) (local_internal_state : fix_internal_state) (local_internal_fresh_state' : fix_internal_fresh_state')  =
-    (if (rg_forall_fun_Parties msg_data.mod_f_NewOrderSingle_Parties (fun lambda_e_Parties -> 
-    (<>) lambda_e_Parties.mod_f_Parties_PartyID "N/A"
-    ) true) then
-        fields_good_defrej
-    else
-        (is_fields_invalid_defrej {
-            mod_builtin_rejectInfo_text = "Field Parties of Message NewOrderSingle violates the constraint: \" it.PartyID != \"N/A\"\"";
-            mod_builtin_rejectInfo_field = Some "Parties"
-        }))
-;;
-
-let check_field_mod_f_NewOrderSingle_Parties_outer (msg_data : mod_newordersingle_data) (local_internal_state : fix_internal_state) (local_internal_fresh_state' : fix_internal_fresh_state')  =
-    let check_field_mod_f_NewOrderSingle_Parties_inner1_result = check_field_mod_f_NewOrderSingle_Parties_inner1 msg_data local_internal_state local_internal_fresh_state'
-    in
-    (if check_field_mod_f_NewOrderSingle_Parties_inner1_result.field_invalid_defrej then
-        check_field_mod_f_NewOrderSingle_Parties_inner1_result
-    else
-        let check_field_mod_f_NewOrderSingle_Parties_inner0_result = check_field_mod_f_NewOrderSingle_Parties_inner0 msg_data local_internal_state local_internal_fresh_state'
-        in
-        (if check_field_mod_f_NewOrderSingle_Parties_inner0_result.field_invalid_defrej then
-            check_field_mod_f_NewOrderSingle_Parties_inner0_result
-        else
-            fields_good_defrej)
-        )
-;;
-
-let check_field_mod_f_NewOrderSingle_Parties (msg_data : mod_newordersingle_data) (m_state : model_state)  =
-    check_field_mod_f_NewOrderSingle_Parties_outer msg_data m_state.f_internal_state m_state.f_internal_fresh_state'
+let check_field_mod_f_NewOrderSingle_Price (msg_data : mod_newordersingle_data) (m_state : model_state)  =
+    check_field_mod_f_NewOrderSingle_Price_outer msg_data
 ;;
 
 let check_fields_NewOrderSingle (msg_data : mod_newordersingle_data) (m_state : model_state)  =
-    let mod_f_NewOrderSingle_Parties_result = check_field_mod_f_NewOrderSingle_Parties msg_data m_state
+    let mod_f_NewOrderSingle_Price_result = check_field_mod_f_NewOrderSingle_Price msg_data m_state
     in
-    (if mod_f_NewOrderSingle_Parties_result.field_invalid_defrej then
-        mod_f_NewOrderSingle_Parties_result
+    (if mod_f_NewOrderSingle_Price_result.field_invalid_defrej then
+        mod_f_NewOrderSingle_Price_result
     else
-        let mod_f_NewOrderSingle_SpreadProportion_result = check_field_mod_f_NewOrderSingle_SpreadProportion msg_data m_state
-        in
-        (if mod_f_NewOrderSingle_SpreadProportion_result.field_invalid_defrej then
-            mod_f_NewOrderSingle_SpreadProportion_result
-        else
-            let mod_f_NewOrderSingle_OrdType_result = check_field_mod_f_NewOrderSingle_OrdType msg_data m_state
-            in
-            (if mod_f_NewOrderSingle_OrdType_result.field_invalid_defrej then
-                mod_f_NewOrderSingle_OrdType_result
-            else
-                let mod_f_NewOrderSingle_ClOrdID_result = check_field_mod_f_NewOrderSingle_ClOrdID msg_data m_state
-                in
-                (if mod_f_NewOrderSingle_ClOrdID_result.field_invalid_defrej then
-                    mod_f_NewOrderSingle_ClOrdID_result
-                else
-                    fields_good_defrej)
-                )
-            )
-        )
-;;
-
-let check_fields_ExecutionReport (msg_data : mod_executionreport_data) (m_state : model_state)  =
-    fields_good_defrej
-    [@@macro]
+        fields_good_defrej)
 ;;
 

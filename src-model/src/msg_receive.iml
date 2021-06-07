@@ -1,105 +1,11 @@
 (* Imandra Inc. copyright 2021 *)
-[@@@import "../../src-core/datetime.iml"]
-open Datetime;;
-[@@@import "ipl_functions.iml"]
-open Ipl_functions;;
-[@@@import "../src-types/model_app_enums.iml"]
-open Model_app_enums;;
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
-[@@@import "../../src-core/numeric.iml"]
-open Numeric;;
 [@@@import "../src-types/state.iml"]
 open State;;
-[@@@import "../../src-core-time-defaults/time_defaults.iml"]
-open Time_defaults;;
 
 
 let receive_message_NewOrderSingle (m_state : model_state) (msg_data : mod_newordersingle_data)  =
-    let local_internal_fresh_state' = m_state.f_internal_fresh_state'
-    in
-    let local_internal_state = m_state.f_internal_state
-    in
-    let local_internal_state = { local_internal_state with
-        mod_f_internal_state_live_order = true;
-        mod_f_internal_state_LeavesQty = msg_data.mod_f_NewOrderSingle_OrderQtyData_OrderQty
-    }
-    in
-    let local_internal_fresh_state' = { local_internal_fresh_state' with
-        mod_f_internal_fresh_state'_seed_string = model_func_fresh_string' local_internal_fresh_state'.mod_f_internal_fresh_state'_seed_string
-    }
-    in
-    let local_1fresh = local_internal_fresh_state'.mod_f_internal_fresh_state'_seed_string
-    in
-    let local_internal_state = { local_internal_state with
-        mod_f_internal_state_OrderID = local_1fresh;
-        mod_f_internal_state_ExecType = MOD_FIX_ExecType_New;
-        mod_f_internal_state_ExecInst = msg_data.mod_f_NewOrderSingle_ExecInst;
-        mod_f_internal_state_OrdType = msg_data.mod_f_NewOrderSingle_OrdType;
-        mod_f_internal_state_OrderQtyData_OrderQty = msg_data.mod_f_NewOrderSingle_OrderQtyData_OrderQty;
-        mod_f_internal_state_Parties = msg_data.mod_f_NewOrderSingle_Parties;
-        mod_f_internal_state_Price = msg_data.mod_f_NewOrderSingle_Price;
-        mod_f_internal_state_Side = msg_data.mod_f_NewOrderSingle_Side;
-        mod_f_internal_state_SpreadProportion = msg_data.mod_f_NewOrderSingle_SpreadProportion
-    }
-    in
-    let (local_internal_state) = (if ((=) msg_data.mod_f_NewOrderSingle_OrdType MOD_FIX_OrdType_StopSpread) then
-        let (local_internal_state) = (match msg_data.mod_f_NewOrderSingle_SpreadProportion with
-            | Some cap_x -> let (local_internal_state) = (if (not (float_Equal_2_6 local_internal_state.mod_f_internal_state_bestAsk (float_Create_6 (0)))) then
-                let (local_internal_state) = (if (float_GreaterThanEqual_6_2 cap_x (float_Div_2_2 (float_Sub_2_2 local_internal_state.mod_f_internal_state_bestAsk local_internal_state.mod_f_internal_state_bestBid) local_internal_state.mod_f_internal_state_bestAsk)) then
-                    let local_internal_state = { local_internal_state with
-                        mod_f_internal_state_OrdStatus = MOD_FIX_OrdStatus_New
-                    }
-                    in
-                    let local_internal_state = { local_internal_state with
-                        mod_f_internal_state_ExecType = MOD_FIX_ExecType_New
-                    }
-                    in
-                    (local_internal_state)
-                else
-                    (local_internal_state))
-                in
-                (local_internal_state)
-            else
-                (local_internal_state))
-            in
-            (local_internal_state)
-            | None -> (local_internal_state)
-        )
-        in
-        (local_internal_state)
-    else
-        (local_internal_state))
-    in
-    let local_internal_fresh_state' = { local_internal_fresh_state' with
-        mod_f_internal_fresh_state'_seed_string = model_func_fresh_string' local_internal_fresh_state'.mod_f_internal_fresh_state'_seed_string
-    }
-    in
-    let local_2fresh = local_internal_fresh_state'.mod_f_internal_fresh_state'_seed_string
-    in
-    let msg_data_inner = {
-        mod_f_ExecutionReport_CumQty = local_internal_state.mod_f_internal_state_CumQty;
-        mod_f_ExecutionReport_ExecID = local_2fresh;
-        mod_f_ExecutionReport_ExecInst = local_internal_state.mod_f_internal_state_ExecInst;
-        mod_f_ExecutionReport_ExecType = local_internal_state.mod_f_internal_state_ExecType;
-        mod_f_ExecutionReport_LeavesQty = local_internal_state.mod_f_internal_state_LeavesQty;
-        mod_f_ExecutionReport_OrdStatus = local_internal_state.mod_f_internal_state_OrdStatus;
-        mod_f_ExecutionReport_OrderID = local_internal_state.mod_f_internal_state_OrderID;
-        mod_f_ExecutionReport_OrderQtyData_OrderQty = local_internal_state.mod_f_internal_state_OrderQtyData_OrderQty;
-        mod_f_ExecutionReport_Parties = local_internal_state.mod_f_internal_state_Parties;
-        mod_f_ExecutionReport_Side = local_internal_state.mod_f_internal_state_Side;
-        mod_f_ExecutionReport_Text = None
-    }
-    in
-    let m_state = send_msg (FIX_Msg_ExecutionReport msg_data_inner) m_state
-    in
-    { m_state with
-        f_internal_state = local_internal_state;
-        f_internal_fresh_state' = local_internal_fresh_state'
-    }
-;;
-
-let receive_message_ExecutionReport (m_state : model_state) (msg_data : mod_executionreport_data)  =
     m_state
     [@@macro]
 ;;

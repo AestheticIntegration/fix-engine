@@ -13,32 +13,17 @@ open Yojson.Basic;;
 let json_of_model_msg_tag (msg : m_msg_tag)  : json =
     (match msg with
         | M_Msg_NewOrderSingle_Tag -> (`String "D")
-        | M_Msg_ExecutionReport_Tag -> (`String "8")
     )
 ;;
 
 let json_of_model_field_tag (x : m_field_tag)  : json =
     (match x with
-        | M_Field_Side_Tag -> (`String "54")
-        | M_Field_TransactTime_Tag -> (`String "60")
-        | M_Field_OrdType_Tag -> (`String "40")
-        | M_Field_OrderQty_Tag -> (`String "38")
-        | M_Field_ExecInst_Tag -> (`String "18")
-        | M_Field_PartyID_Tag -> (`String "448")
-        | M_Field_PartyIndex_Tag -> (`String "10002")
-        | M_Field_OrderID_Tag -> (`String "37")
-        | M_Field_ExecID_Tag -> (`String "17")
-        | M_Field_ExecType_Tag -> (`String "150")
-        | M_Field_OrdStatus_Tag -> (`String "39")
-        | M_Field_LeavesQty_Tag -> (`String "151")
-        | M_Field_CumQty_Tag -> (`String "14")
+        | M_Field_Price_Tag -> (`String "44")
     )
 ;;
 
 let json_of_model_rg (x : repeating_group_defs option)  : json =
     (match x with
-        | Some MOD_FIX_Repeating_Group_PtysSubGrp -> (`String "PtysSubGrp")
-        | Some MOD_FIX_Repeating_Group_Parties -> (`String "Parties")
         | _ -> `Null
     )
 ;;

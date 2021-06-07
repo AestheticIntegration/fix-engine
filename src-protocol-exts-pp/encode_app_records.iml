@@ -1,25 +1,5 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@program]
-[@@@import "../src-core-pp/encode_base_types.iml"]
-open Encode_base_types;;
-[@@@import "../src-core-pp/encode_datetime.iml"]
-open Encode_datetime;;
-[@@@import "encode_utils.iml"]
-open Encode_utils;;
-[@@@import "../src-protocol-exts/full_app_records.iml"]
-open Full_app_records;;
 
-
-let encode_OrderQtyData (msg)  =
-    (@) ([(("38",enc_opt encode_float_6 msg.f_OrderQtyData_OrderQty))]) []
-;;
-
-let encode_PtysSubGrp (msg)  =
-    (@) ([(("523",enc_opt encode_string msg.f_PtysSubGrp_PartySubID))]) []
-;;
-
-let encode_Parties (msg)  =
-    (@) ([(("448",enc_opt encode_string msg.f_Parties_PartyID));(("10002",enc_opt encode_int msg.f_Parties_PartyIndex))]) ((@) (enc_repeat encode_PtysSubGrp "802" msg.f_Parties_PtysSubGrp) [])
-;;
 
 [@@@logic]

@@ -1,52 +1,14 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@import "../src-types/actions.iml"]
 open Actions;;
-[@@@import "../../src-core/datetime.iml"]
-open Datetime;;
-[@@@import "../src-types/model_app_enums.iml"]
-open Model_app_enums;;
-[@@@import "../src-types/model_records.iml"]
-open Model_records;;
-[@@@import "../../src-core/numeric.iml"]
-open Numeric;;
 [@@@import "../src-types/state.iml"]
 open State;;
-[@@@import "../../src-core-time-defaults/time_defaults.iml"]
-open Time_defaults;;
 
-
-let is_valid_action_fill (action_data : m_action_fix_fill) (m_state : model_state)  =
-    let local_internal_fresh_state' = m_state.f_internal_fresh_state'
-    in
-    let local_internal_state = m_state.f_internal_state
-    in
-    (&&) ((==>) ((<>) local_internal_state.mod_f_internal_state_OrdType MOD_FIX_OrdType_Market) ((match local_internal_state.mod_f_internal_state_Price with
-        | Some cap_p -> ((if ((=) local_internal_state.mod_f_internal_state_Side MOD_FIX_Side_Buy) then
-            (float_LessThanEqual_2_2 action_data.mod_f_fill_fill_price cap_p)
-        else
-            (float_GreaterThanEqual_2_2 action_data.mod_f_fill_fill_price cap_p))
-        )
-        | None -> true
-    )
-    )) ((&&) ((if ((=) local_internal_state.mod_f_internal_state_Side MOD_FIX_Side_Buy) then
-        (float_GreaterThanEqual_2_2 action_data.mod_f_fill_fill_price local_internal_state.mod_f_internal_state_bestAsk)
-    else
-        (float_LessThanEqual_2_2 action_data.mod_f_fill_fill_price local_internal_state.mod_f_internal_state_bestBid))
-    ) ((&&) (float_GreaterThan_2_6 action_data.mod_f_fill_fill_price (float_Create_6 (0))) ((&&) (float_LessThanEqual_6_6 action_data.mod_f_fill_fill_qty local_internal_state.mod_f_internal_state_LeavesQty) ((&&) (float_GreaterThan_6_6 action_data.mod_f_fill_fill_qty (float_Create_6 (0))) ((&&) ((<>) local_internal_state.mod_f_internal_state_OrdStatus MOD_FIX_OrdStatus_PendingNew) true)))))
-;;
-
-let is_valid_action_bookState (action_data : m_action_fix_bookstate) (m_state : model_state)  =
-    let local_internal_fresh_state' = m_state.f_internal_fresh_state'
-    in
-    let local_internal_state = m_state.f_internal_state
-    in
-    (&&) ((&&) ((&&) (float_GreaterThan_2_2 action_data.mod_f_bookState_bestAsk action_data.mod_f_bookState_bestBid) (float_GreaterThan_2_6 action_data.mod_f_bookState_bestBid (float_Create_6 (0)))) (float_GreaterThan_2_6 action_data.mod_f_bookState_bestAsk (float_Create_6 (0)))) true
-;;
 
 let is_action_valid (action : fix_action) (m_state : model_state)  =
     (match action with
-        | FIX_Action_fill d -> (is_valid_action_fill d m_state)
-        | FIX_Action_bookState d -> (is_valid_action_bookState d m_state)
+        | _ -> true
     )
+    [@@macro]
 ;;
 

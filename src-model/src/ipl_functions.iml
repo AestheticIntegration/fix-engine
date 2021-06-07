@@ -1,18 +1,3 @@
 (* Imandra Inc. copyright 2021 *)
-[@@@import "../../src-core/datetime.iml"]
-open Datetime;;
-[@@@import "../../src-core-fresh/fresh.iml"]
-open Fresh;;
-[@@@import "../../src-core/numeric.iml"]
-open Numeric;;
-[@@@import "../../src-core-time-defaults/time_defaults.iml"]
-open Time_defaults;;
 
-
-let model_func_fresh_string' (arg_seed : string)  : string =
-    let return_ret_var = "0"
-    in
-    incr_string arg_seed
-    [@@opaque]
-;;
 

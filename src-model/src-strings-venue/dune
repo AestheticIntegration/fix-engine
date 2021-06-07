@@ -3,5 +3,5 @@
   (public_name fix-engine.venue_strings_venue)
   (wrapped false)
   (flags (:standard -open Imandra_prelude -warn-error -A+8+39 -alert -deprecated -w -33-58))
-  (libraries imandra-prelude venue_types)
+  (libraries imandra-prelude )
 )

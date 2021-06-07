@@ -2,45 +2,12 @@
 
 
 let good_string (x)  =
-    (&&) ((<>) x "Field ExecInst in Message ExecutionReport has an unrecognised tag value.") ((&&) ((<>) x "Field ExecInst in Message ExecutionReport is missing.") ((&&) ((<>) x "Field PartyIndex in Message ExecutionReport, within repeating group Parties, is missing.") ((&&) ((<>) x "Field PartyID in Message ExecutionReport, within repeating group Parties, is missing.") ((&&) ((<>) x "Field CumQty in Message ExecutionReport is missing.") ((&&) ((<>) x "Field LeavesQty in Message ExecutionReport is missing.") ((&&) ((<>) x "Field OrderQty in Message ExecutionReport is missing.") ((&&) ((<>) x "Field Side in Message ExecutionReport has an unrecognised tag value.") ((&&) ((<>) x "Field Side in Message ExecutionReport is missing.") ((&&) ((<>) x "Field OrdStatus in Message ExecutionReport has an unrecognised tag value.") ((&&) ((<>) x "Field OrdStatus in Message ExecutionReport is missing.") ((&&) ((<>) x "Field ExecType in Message ExecutionReport has an unrecognised tag value.") ((&&) ((<>) x "Field ExecType in Message ExecutionReport is missing.") ((&&) ((<>) x "Field ExecID in Message ExecutionReport is missing.") ((&&) ((<>) x "Field OrderID in Message ExecutionReport is missing.") ((&&) ((<>) x "Message NewOrderSingle violates the constraint \"\n    case(this.Parties.PtysSubGrp.PartySubID)\n            {None:true}\n            {Some x : this.Parties.PartyID != x}\"") ((&&) ((<>) x "Message NewOrderSingle violates the constraint \"\n    this.OrdType != OrdType.Market ==>\n                (case this.Price\n                    {Some price: price > 0.0}\n                    {None: false}\n                 )\"") ((&&) ((<>) x "Message NewOrderSingle violates the constraint \"\n    this.OrdType == StopSpread <==>\n            present(this.SpreadProportion)\"") ((&&) ((<>) x "Message NewOrderSingle violates the constraint \"\n    (this.OrdType == OrdType.Market <==> !present(this.Price)) &&\n         (this.OrdType == OrdType.Limit ==> present(this.Price)) &&\n         (this.OrdType == OrdType.StopSpread ==> present(this.Price))\"") ((&&) ((<>) x "Field PartyIndex in Message NewOrderSingle, within repeating group Parties, is missing.") ((&&) ((<>) x "Field PartyID in Message NewOrderSingle, within repeating group Parties, is missing.") ((&&) ((<>) x "Field Parties of Message NewOrderSingle violates the constraint: \" it.PartyID != \"N/A\"\"") ((&&) ((<>) x "Field Parties of Message NewOrderSingle violates the constraint: \" it.PartyIndex > 0 && it.PartyIndex < 100\"") ((&&) ((<>) x "Field ExecInst in Message NewOrderSingle has an unrecognised tag value.") ((&&) ((<>) x "Field SpreadProportion of Message NewOrderSingle violates the constraint: \" case(it){None:true}{Some x: x>0.0 &&  x<=1.0}\"") ((&&) ((<>) x "Field OrderQty in Message NewOrderSingle is missing.") ((&&) ((<>) x "Field OrdType in Message NewOrderSingle has an unrecognised tag value.") ((&&) ((<>) x "Field OrdType in Message NewOrderSingle is missing.") ((&&) ((<>) x "Field OrdType of Message NewOrderSingle violates the constraint: \" it in [ OrdType.Limit, OrdType.Market, StopSpread ]\"") ((&&) ((<>) x "Field TransactTime in Message NewOrderSingle is missing.") ((&&) ((<>) x "Field Side in Message NewOrderSingle has an unrecognised tag value.") ((&&) ((<>) x "Field Side in Message NewOrderSingle is missing.") ((<>) x "Field ClOrdID of Message NewOrderSingle violates the constraint: \" it != (Some \"N/A\")\""))))))))))))))))))))))))))))))))
+    (&&) ((<>) x "Field Price in Message NewOrderSingle is missing.") ((<>) x "Field Price of Message NewOrderSingle violates the constraint: \" it > 0.0\"")
     [@@macro]
 ;;
 
 let exclude_string_list ()  =
-    [("N/A");
-    ("Field ExecInst in Message ExecutionReport has an unrecognised tag value.");
-    ("Field ExecInst in Message ExecutionReport is missing.");
-    ("Field PartyIndex in Message ExecutionReport, within repeating group Parties, is missing.");
-    ("Field PartyID in Message ExecutionReport, within repeating group Parties, is missing.");
-    ("Field CumQty in Message ExecutionReport is missing.");
-    ("Field LeavesQty in Message ExecutionReport is missing.");
-    ("Field OrderQty in Message ExecutionReport is missing.");
-    ("Field Side in Message ExecutionReport has an unrecognised tag value.");
-    ("Field Side in Message ExecutionReport is missing.");
-    ("Field OrdStatus in Message ExecutionReport has an unrecognised tag value.");
-    ("Field OrdStatus in Message ExecutionReport is missing.");
-    ("Field ExecType in Message ExecutionReport has an unrecognised tag value.");
-    ("Field ExecType in Message ExecutionReport is missing.");
-    ("Field ExecID in Message ExecutionReport is missing.");
-    ("Field OrderID in Message ExecutionReport is missing.");
-    ("Message NewOrderSingle violates the constraint \"\n    case(this.Parties.PtysSubGrp.PartySubID)\n            {None:true}\n            {Some x : this.Parties.PartyID != x}\"");
-    ("Message NewOrderSingle violates the constraint \"\n    this.OrdType != OrdType.Market ==>\n                (case this.Price\n                    {Some price: price > 0.0}\n                    {None: false}\n                 )\"");
-    ("Message NewOrderSingle violates the constraint \"\n    this.OrdType == StopSpread <==>\n            present(this.SpreadProportion)\"");
-    ("Message NewOrderSingle violates the constraint \"\n    (this.OrdType == OrdType.Market <==> !present(this.Price)) &&\n         (this.OrdType == OrdType.Limit ==> present(this.Price)) &&\n         (this.OrdType == OrdType.StopSpread ==> present(this.Price))\"");
-    ("Field PartyIndex in Message NewOrderSingle, within repeating group Parties, is missing.");
-    ("Field PartyID in Message NewOrderSingle, within repeating group Parties, is missing.");
-    ("Field Parties of Message NewOrderSingle violates the constraint: \" it.PartyID != \"N/A\"\"");
-    ("Field Parties of Message NewOrderSingle violates the constraint: \" it.PartyIndex > 0 && it.PartyIndex < 100\"");
-    ("Field ExecInst in Message NewOrderSingle has an unrecognised tag value.");
-    ("Field SpreadProportion of Message NewOrderSingle violates the constraint: \" case(it){None:true}{Some x: x>0.0 &&  x<=1.0}\"");
-    ("Field OrderQty in Message NewOrderSingle is missing.");
-    ("Field OrdType in Message NewOrderSingle has an unrecognised tag value.");
-    ("Field OrdType in Message NewOrderSingle is missing.");
-    ("Field OrdType of Message NewOrderSingle violates the constraint: \" it in [ OrdType.Limit, OrdType.Market, StopSpread ]\"");
-    ("Field TransactTime in Message NewOrderSingle is missing.");
-    ("Field Side in Message NewOrderSingle has an unrecognised tag value.");
-    ("Field Side in Message NewOrderSingle is missing.");
-    ("Field ClOrdID of Message NewOrderSingle violates the constraint: \" it != (Some \"N/A\")\"")]
+    [("Field Price in Message NewOrderSingle is missing.");("Field Price of Message NewOrderSingle violates the constraint: \" it > 0.0\"")]
     [@@macro]
 ;;
 

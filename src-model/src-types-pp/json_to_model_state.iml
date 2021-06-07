@@ -6,8 +6,6 @@ open Decoders_yojson.Basic.Decode;;
 open Decoders_yojson.Basic.Decode.Infix;;
 [@@@import "json_to_action.iml"]
 open Json_to_action;;
-[@@@import "json_to_internal.iml"]
-open Json_to_internal;;
 [@@@import "json_to_message.iml"]
 open Json_to_message;;
 [@@@import "../src-types/model_messages.iml"]
@@ -42,16 +40,12 @@ let state_info_decoder  =
 ;;
 
 let model_state_decoder  : model_state decoder =
-    (field "fresh_state'" internal_fresh_state'_decoder) >>= (fun f_internal_fresh_state' -> 
-    (field "state" internal_state_decoder) >>= (fun f_internal_state -> 
     (field "incoming_action" (nullable fix_action_decoder)) >>= (fun incoming_action -> 
     (field "event_counter" string) >>= (fun event_counter -> 
     (field "incoming_msg" (nullable top_level_message_decoder)) >>= (fun incoming_msg -> 
     (field "outgoing_msgs" (list outgoing_decoder)) >>= (fun outgoing_msgs -> 
     (field "event_info" (list state_info_decoder)) >>= (fun event_info -> 
     succeed {
-        f_internal_state = f_internal_state;
-        f_internal_fresh_state' = f_internal_fresh_state';
         incoming_action = incoming_action;
         incoming_msg = (match incoming_msg with
             | None -> FIX_TL_None
@@ -61,8 +55,6 @@ let model_state_decoder  : model_state decoder =
         event_counter = Z.of_string event_counter;
         event_info = event_info
     }
-    )
-    )
     )
     )
     )

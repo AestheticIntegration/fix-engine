@@ -1,73 +1,9 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@import "actions.iml"]
 open Actions;;
-[@@@import "../../src-core/datetime.iml"]
-open Datetime;;
-[@@@import "model_app_enums.iml"]
-open Model_app_enums;;
 [@@@import "model_messages.iml"]
 open Model_messages;;
-[@@@import "model_repeating_groups.iml"]
-open Model_repeating_groups;;
-[@@@import "../../src-core/numeric.iml"]
-open Numeric;;
-[@@@import "../../src-core-time-defaults/time_defaults.iml"]
-open Time_defaults;;
 
-
-type fix_internal_state = {
-    mod_f_internal_state_live_order : bool;
-    mod_f_internal_state_AvgPx : fix_float;
-    mod_f_internal_state_bestBid : fix_float_2;
-    mod_f_internal_state_bestAsk : fix_float_2;
-    mod_f_internal_state_Side : model_fix_side;
-    mod_f_internal_state_Price : fix_float_2 option;
-    mod_f_internal_state_OrderQtyData_OrderQty : fix_float_6;
-    mod_f_internal_state_OrdStatus : model_fix_ordstatus;
-    mod_f_internal_state_OrdType : model_fix_ordtype;
-    mod_f_internal_state_LeavesQty : fix_float_6;
-    mod_f_internal_state_CumQty : fix_float_6;
-    mod_f_internal_state_SpreadProportion : fix_float option;
-    mod_f_internal_state_Parties : model_fix_rec_parties;
-    mod_f_internal_state_ExecInst : (model_fix_execinst,bool) Map.t;
-    mod_f_internal_state_OrderID : string;
-    mod_f_internal_state_ExecType : model_fix_exectype
-}
-;;
-
-type fix_internal_fresh_state' = {
-    mod_f_internal_fresh_state'_seed_string : string
-}
-;;
-
-let init_fix_internal_state = {
-    mod_f_internal_state_live_order = false;
-    mod_f_internal_state_AvgPx = float_Create_6 (0);
-    mod_f_internal_state_bestBid = float_Convert_6_2 (float_Create_6 (0));
-    mod_f_internal_state_bestAsk = float_Convert_6_2 (float_Create_6 (0));
-    mod_f_internal_state_Side = MOD_FIX_Side_Buy;
-    mod_f_internal_state_Price = None;
-    mod_f_internal_state_OrderQtyData_OrderQty = float_Create_6 (0);
-    mod_f_internal_state_OrdStatus = MOD_FIX_OrdStatus_PendingNew;
-    mod_f_internal_state_OrdType = MOD_FIX_OrdType_Market;
-    mod_f_internal_state_LeavesQty = float_Create_6 (0);
-    mod_f_internal_state_CumQty = float_Create_6 (0);
-    mod_f_internal_state_SpreadProportion = None;
-    mod_f_internal_state_Parties = {
-        rg_Parties_element_0 = None;
-        rg_Parties_element_1 = None;
-        rg_Parties_element_2 = None;
-        rg_Parties_element_3 = None;
-        rg_Parties_element_4 = None
-    };
-    mod_f_internal_state_ExecInst = Map.const false;
-    mod_f_internal_state_OrderID = "0";
-    mod_f_internal_state_ExecType = MOD_FIX_ExecType_PendingNew
-} [@@macro];;
-
-let init_fix_internal_fresh_state' = {
-    mod_f_internal_fresh_state'_seed_string = "0"
-} [@@macro];;
 
 type state_event_info = {
     state_event_counter : int;
@@ -82,8 +18,6 @@ type outgoing_msg_record = {
 ;;
 
 type model_state = {
-    f_internal_state : fix_internal_state;
-    f_internal_fresh_state' : fix_internal_fresh_state';
     incoming_action : fix_action option;
     outgoing_msgs : outgoing_msg_record list;
     incoming_msg : model_top_level_msg;
@@ -93,8 +27,6 @@ type model_state = {
 ;;
 
 let init_model_state = {
-    f_internal_state = init_fix_internal_state;
-    f_internal_fresh_state' = init_fix_internal_fresh_state';
     incoming_action = None;
     outgoing_msgs = [];
     incoming_msg = FIX_TL_None;
@@ -112,17 +44,11 @@ let send_msg (msg : model_msg) (m_state : model_state)  =
     [@@macro]
 ;;
 
-type internal_states_types = {
-    int_el_state : fix_internal_state;
-    int_el_fresh_state' : fix_internal_fresh_state'
-}
+type internal_states_types = int list
 ;;
 
 let get_internal_states_types (m_state : model_state)  : internal_states_types =
-    {
-        int_el_state = m_state.f_internal_state;
-        int_el_fresh_state' = m_state.f_internal_fresh_state'
-    }
+    []
     [@@macro]
 ;;
 

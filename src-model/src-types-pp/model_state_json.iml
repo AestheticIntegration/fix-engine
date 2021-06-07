@@ -2,8 +2,6 @@
 [@@@program]
 [@@@import "model_actions_json.iml"]
 open Model_actions_json;;
-[@@@import "model_internals_json.iml"]
-open Model_internals_json;;
 [@@@import "model_messages_json.iml"]
 open Model_messages_json;;
 [@@@import "../src-types/state.iml"]
@@ -17,7 +15,7 @@ let model_state_to_json (m_state)  =
     )
     ));(("incoming_msg",json_of_top_level_msg m_state.incoming_msg));(("outgoing_msgs",`List (List.map (fun x -> 
     `Assoc ([(("outgoing_msg_counter",`String (Z.to_string x.outgoing_msg_counter)));(("outgoing_msg_msg",json_of_model_msg x.outgoing_msg_msg))])
-    ) m_state.outgoing_msgs)));(("state",mod_internal_state_to_json m_state.f_internal_state));(("fresh_state'",mod_internal_fresh_state'_to_json m_state.f_internal_fresh_state'));(("event_counter",`String (Z.to_string m_state.event_counter)));(("event_info",`List (List.map (fun x -> 
+    ) m_state.outgoing_msgs)));(("event_counter",`String (Z.to_string m_state.event_counter)));(("event_info",`List (List.map (fun x -> 
     `Assoc ([(("state_event_counter",`String (Z.to_string x.state_event_counter)));(("state_event_reject_text",(match x.state_event_reject_text with
         | None -> `Null
         | Some y -> (`String y)

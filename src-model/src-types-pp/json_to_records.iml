@@ -1,37 +1,5 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@program]
-[@@@import "../../src-core-pp/base_types_json.iml"]
-open Base_types_json;;
-[@@@import "../../src-core-pp/datetime_json.iml"]
-open Datetime_json;;
-[@@@require "decoders-yojson"]
-open Decoders_yojson.Basic.Decode;;
-[@@@require "decoders-yojson"]
-open Decoders_yojson.Basic.Decode.Infix;;
-[@@@import "../src-types/model_records.iml"]
-open Model_records;;
 
-
-let mod_action_bookstate_decoder  : m_action_fix_bookstate decoder =
-    (field "bestAsk" float_2_decoder) >>= (fun mod_f_bookState_bestAsk -> 
-    (field "bestBid" float_2_decoder) >>= (fun mod_f_bookState_bestBid -> 
-    succeed {
-        mod_f_bookState_bestBid = mod_f_bookState_bestBid;
-        mod_f_bookState_bestAsk = mod_f_bookState_bestAsk
-    }
-    )
-    )
-;;
-
-let mod_action_fill_decoder  : m_action_fix_fill decoder =
-    (field "fill_qty" float_6_decoder) >>= (fun mod_f_fill_fill_qty -> 
-    (field "fill_price" float_2_decoder) >>= (fun mod_f_fill_fill_price -> 
-    succeed {
-        mod_f_fill_fill_price = mod_f_fill_fill_price;
-        mod_f_fill_fill_qty = mod_f_fill_fill_qty
-    }
-    )
-    )
-;;
 
 [@@@logic]

@@ -1,52 +1,39 @@
 (* Imandra Inc. copyright 2021 *)
-[@@@import "../../src-model/src-types/actions.iml"]
-open Actions;;
 [@@@import "../../src-model/src-types/model_messages.iml"]
 open Model_messages;;
 [@@@import "scenario_type.iml"]
 open Scenario_type;;
 
 
-type t =
-    | Template_bookState 
-    | Template_NewOrderSingle 
-    | Template_fill 
+type t = 
     | Template_'any 
 ;;
 
 let is_incoming (m)  =
     (match m with
         | FIX_Msg_Def_Opt_NewOrderSingle _ -> true
-        | FIX_Msg_Def_Opt_ExecutionReport _ -> true
         | _ -> false
     )
 ;;
 
 let data (x : t)  =
     (match x with
-        | Template_bookState -> "Model_records.m_action_fix_bookstate"
-        | Template_NewOrderSingle -> "Model_messages.mod_newordersingle_defopt_data"
-        | Template_fill -> "Model_records.m_action_fix_fill"
         | Template_'any -> "'any"
-    )
-;;
-
-let concrete (x : t) (c : event)  =
-    (match (x,c) with
-        | (Template_bookState,Action FIX_Action_bookState _) -> true
-        | (Template_NewOrderSingle,Message FIX_Msg_Def_Opt_NewOrderSingle _) -> true
-        | (Template_fill,Action FIX_Action_fill _) -> true
-        | _ -> false
     )
     [@@macro]
 ;;
 
+let concrete (x : t) (c : event)  =
+    (match (x,c) with
+        | _ -> false
+    )
+    [@@macro] [@@macro]
+;;
+
 let to_string_hum (x : t)  =
     (match x with
-        | Template_bookState -> "bookState"
-        | Template_NewOrderSingle -> "NewOrderSingle"
-        | Template_fill -> "fill"
         | Template_'any -> "Any event"
     )
+    [@@macro]
 ;;
 

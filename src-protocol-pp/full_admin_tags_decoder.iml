@@ -8,106 +8,101 @@ module D = Decoders_yojson.Basic.Decode;;
 
 let full_admin_string_to_msg_tag   =
   function
-  | "Heartbeat" -> Some Full_Msg_Heartbeat_Tag
-  | "Logon" -> Some Full_Msg_Logon_Tag
-  | "Logout" -> Some Full_Msg_Logout_Tag
-  | "Reject" -> Some Full_Msg_Reject_Tag
-  | "BusinessMessageReject" -> Some Full_Msg_BusinessMessageReject_Tag
-  | "ResendRequest" -> Some Full_Msg_ResendRequest_Tag
-  | "SequenceReset" -> Some Full_Msg_SequenceReset_Tag
-  | "TestRequest" -> Some Full_Msg_TestRequest_Tag
+  | "Heartbeat_Tag" -> Some Full_Msg_Heartbeat_Tag
+  | "Logon_Tag" -> Some Full_Msg_Logon_Tag
+  | "Logoff_Tag" -> Some Full_Msg_Logoff_Tag
+  | "Reject_Tag" -> Some Full_Msg_Reject_Tag
+  | "Business_Reject_Tag" -> Some Full_Msg_Business_Reject_Tag 
+  | "Resend_Request_Tag" -> Some Full_Msg_Resend_Request_Tag
+  | "Sequence_Reset_Tag" -> Some Full_Msg_Sequence_Reset_Tag 
+  | "Test_Request_Tag" -> Some Full_Msg_Test_Request_Tag
   | _ -> (None)
 ;;
 
 
-let full_admin_string_to_field_tag =
+let full_admin_string_to_field_tag = 
   function
-  | "BeginSeqNo" -> Some Full_Field_BeginSeqNo_Tag
-  | "BeginString" -> Some Full_Field_BeginString_Tag
-  | "BodyLength" -> Some Full_Field_BodyLength_Tag
-  | "CheckSum" -> Some Full_Field_CheckSum_Tag
-  | "EndSeqNo" -> Some Full_Field_EndSeqNo_Tag
-  | "MsgSeqNum" -> Some Full_Field_MsgSeqNum_Tag
-  | "NewSeqNo" -> Some Full_Field_NewSeqNo_Tag
-  | "PossDupFlag" -> Some Full_Field_PossDupFlag_Tag
-  | "RefSeqNum" -> Some Full_Field_RefSeqNum_Tag
-  | "SenderCompID"-> Some Full_Field_SenderCompID_Tag
-  | "SenderSubID" -> Some Full_Field_SenderSubID_Tag
-  | "SendingTime" -> Some Full_Field_SendingTime_Tag
-  | "TargetCompID" -> Some Full_Field_TargetCompID_Tag
-  | "TargetSubID" -> Some Full_Field_TargetSubID_Tag
-  | "Text" -> Some Full_Field_Text_Tag
-  | "Signature" -> Some Full_Field_Signature_Tag
-  | "SecureDataLen" -> Some Full_Field_SecureDataLen_Tag
-  | "SecureData" -> Some Full_Field_SecureData_Tag
-  | "SignatureLength" -> Some Full_Field_SignatureLength_Tag
-  | "RawDataLength" -> Some Full_Field_RawDataLength_Tag
-  | "RawData" -> Some Full_Field_RawData_Tag
-  | "MsgType" -> Some Full_Field_MsgType_Tag
-  | "PossResend"  -> Some Full_Field_PossResend_Tag
-  | "EncryptMethod" -> Some Full_Field_EncryptMethod_Tag
-  | "HeartBtInt" -> Some Full_Field_HeartBtInt_Tag
-  | "TestReqID" -> Some Full_Field_TestReqID_Tag
-  | "OnBehalfOfLocationID" -> Some Full_Field_OnBehalfOfLocationID_Tag
-  | "OnBehalfOfCompID" -> Some Full_Field_OnBehalfOfCompID_Tag
-  | "OnBehalfOfSubID" -> Some Full_Field_OnBehalfOfSubID_Tag
-  | "OrigSendingTime" -> Some Full_Field_OrigSendingTime_Tag
-  | "GapFillFlag" -> Some Full_Field_GapFillFlag_Tag
-  | "DeliverToCompID" -> Some Full_Field_DeliverToCompID_Tag
-  | "DeliverToSubID" -> Some Full_Field_DeliverToSubID_Tag
-  | "ResetSeqNumFlag" -> Some Full_Field_ResetSeqNumFlag_Tag
-  | "SenderLocationID" ->  Some Full_Field_SenderLocationID_Tag
-  | "TargetLocationID" -> Some Full_Field_TargetLocationID_Tag
-  | "DeliverToLocationID" ->  Some Full_Field_DeliverToLocationID_Tag
-  | "XMLDataLen" -> Some Full_Field_XmlDataLen_Tag
-  | "XMLData" -> Some Full_Field_XmlData_Tag
-  | "MessageEnconding" -> Some Full_Field_MessageEncoding_Tag
-  | "EncodedTextLen" -> Some Full_Field_EncodedTextLen_Tag
-  | "EncodedText" -> Some Full_Field_EncodedText_Tag
-  | "LastMsgSeqNumProcessed" -> Some Full_Field_LastMsgSeqNumProcessed_Tag
-  | "RefTagID" -> Some Full_Field_RefTagID_Tag
-  | "RefMsgType" -> Some Full_Field_RefMsgType_Tag
-  | "SessionRejectReason" -> Some Full_Field_SessionRejectReason_Tag
-  | "BusinessRejectReason" -> Some Full_Field_BusinessRejectReason_Tag
-  | "MaxMessageSize" -> Some Full_Field_MaxMessageSize_Tag
-  | "TestMessageIndicator" -> Some Full_Field_TestMessageIndicator_Tag
-  | "Username" -> Some Full_Field_Username_Tag
-  | "Password" -> Some Full_Field_Password_Tag
-  | "NoHops"   -> Some Full_Field_NoHops_Tag
-  | "NextExpectedMsgSeqNum" -> Some Full_Field_NextExpectedMsgSeqNum_Tag
-  | "OnBehalfOfSendingTime" -> Some Full_Field_OnBehalfOfSendingTime_Tag
-  | "HopCompID" -> Some Full_Field_HopCompID_Tag
-  | "HopSendingTime" -> Some Full_Field_HopSendingTime_Tag
-  | "HopRefID" -> Some Full_Field_HopRefID_Tag
+  | "BeginSeqNo" -> Some Full_Msg_BeginSeqNo_Tag
+  | "BeginString" -> Some Full_Msg_BeginString_Tag
+  | "BodyLength" -> Some Full_Msg_BodyLength_Tag              
+  | "CheckSum" -> Some Full_Msg_CheckSum_Tag                  
+  | "EndSeqNo" -> Some Full_Msg_EndSeqNo_Tag                  
+  | "MsgSeqNum" -> Some Full_Msg_MsgSeqNum_Tag               
+  | "NewSeqNo" -> Some Full_Msg_NewSeqNo_Tag                   
+  | "PossDupFlag" -> Some Full_Msg_PossDupFlag_Tag              
+  | "RefSeqNum" -> Some Full_Msg_RefSeqNum_Tag                
+  | "SenderCompID"-> Some Full_Msg_SenderCompID_Tag             
+  | "SenderSubID" -> Some Full_Msg_SenderSubID_Tag               
+  | "SendingTime" -> Some Full_Msg_SendingTime_Tag              
+  | "TargetCompID" -> Some Full_Msg_TargetCompID_Tag             
+  | "TargetSubID" -> Some Full_Msg_TargetSubID_Tag              
+  | "Text" -> Some Full_Msg_Text_Tag                    
+  | "Signature" -> Some Full_Msg_Signature_Tag                
+  | "SecureDataLen" -> Some Full_Msg_SecureDataLen_Tag            
+  | "SecureData" -> Some Full_Msg_SecureData_Tag              
+  | "SignatureLength" -> Some Full_Msg_SignatureLength_Tag           
+  | "RawDataLength" -> Some Full_Msg_RawDataLength_Tag             
+  | "RawData" -> Some Full_Msg_RawData_Tag                  
+  | "PossResend"  -> Some Full_Msg_PossResend_Tag               
+  | "EncryptMethod" -> Some Full_Msg_EncryptMethod_Tag             
+  | "HeartBtInt" -> Some Full_Msg_HeartBtInt_Tag              
+  | "TestReqID" -> Some Full_Msg_TestReqID_Tag               
+  | "OnBehalfOfLocationID" -> Some Full_Msg_OnBehalfOfLocationID_Tag      
+  | "OnBehalfOfCompID" -> Some Full_Msg_OnBehalfOfCompID_Tag         
+  | "OnBehalfOfSubID" -> Some Full_Msg_OnBehalfOfSubID_Tag         
+  | "OrigSendingTime" -> Some Full_Msg_OrigSendingTime_Tag          
+  | "GapFillFlag" -> Some Full_Msg_GapFillFlag_Tag              
+  | "DeliverToCompID" -> Some Full_Msg_DeliverToCompID_Tag           
+  | "DeliverToSubID" -> Some Full_Msg_DeliverToSubID_Tag           
+  | "ResetSeqNumFlag" -> Some Full_Msg_ResetSeqNumFlag_Tag          
+  | "SenderLocationID" ->  Some Full_Msg_SenderLocationID_Tag          
+  | "TargetLocationID" -> Some Full_Msg_TargetLocationID_Tag         
+  | "DeliverToLocationID" ->  Some Full_Msg_DeliverToLocationID_Tag      
+  | "XMLDataLen" -> Some Full_Msg_XMLDataLen_Tag                
+  | "XMLData" -> Some Full_Msg_XMLData_Tag                 
+  | "MessageEnconding" -> Some Full_Msg_MessageEnconding_Tag         
+  | "EncodedTextLen" -> Some Full_Msg_EncodedTextLen_Tag           
+  | "EncodedText" -> Some Full_Msg_EncodedText_Tag               
+  | "LastMsgSeqNumProcessed" -> Some Full_Msg_LastMsgSeqNumProcessed_Tag   
+  | "RefTagID" -> Some Full_Msg_RefTagID_Tag                 
+  | "RefMsgType" -> Some Full_Msg_RefMsgType_Tag                
+  | "SessionRejectReason" -> Some Full_Msg_SessionRejectReason_Tag       
+  | "BusinessRejectReason" -> Some Full_Msg_BusinessRejectReason_Tag     
+  | "MaxMessageSize" -> Some Full_Msg_MaxMessageSize_Tag           
+  | "TestMessageIndicator" -> Some Full_Msg_TestMessageIndicator_Tag     
+  | "Username" -> Some Full_Msg_Username_Tag                  
+  | "Password" -> Some Full_Msg_Password_Tag               
+  | "NoHops"   -> Some Full_Msg_NoHops_Tag                   
+  | "NextExpectedMsgSeqNum" -> Some Full_Msg_NextExpectedMsgSeqNum_Tag    
   | _ -> None
 ;;
 
 let full_admin_msg_tag_of_json  : full_admin_msg_tag D.decoder =
-  let open D in
-  string >>= fun x ->
+  let open D in 
+  string >>= fun x -> 
   match full_admin_string_to_msg_tag x with
   | None -> fail @@ "Unknown Tag: "^x
-  | Some x -> succeed x
+  | Some x -> succeed x  
 ;;
 
 let full_app_msg_tag_opt_of_json  : full_admin_msg_tag option D.decoder =
-  let open D in
+  let open D in 
   maybe string >>= fun x -> match x with
   | None -> succeed None
   | Some x -> succeed @@ full_admin_string_to_msg_tag x
 ;;
 
 let full_admin_field_tag_of_json  : full_admin_field_tag D.decoder =
-  let open D in
-  string >>= fun x ->
+  let open D in 
+  string >>= fun x -> 
   match full_admin_string_to_field_tag x with
   | None -> fail @@ "Unknown Tag: "^x
   | Some x -> succeed x
 ;;
 
 let full_admim_field_tag_opt_of_json  : full_admin_field_tag option D.decoder =
-  let open D in
-  maybe string >>= fun x ->
+  let open D in 
+  maybe string >>= fun x -> 
   match x with
   | None -> succeed None
   | Some x -> succeed @@ full_admin_string_to_field_tag x

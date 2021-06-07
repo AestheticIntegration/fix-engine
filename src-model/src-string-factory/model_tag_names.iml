@@ -1,7 +1,5 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@program]
-[@@@import "../src-types/model_repeating_groups.iml"]
-open Model_repeating_groups;;
 [@@@import "../src-types/model_tags.iml"]
 open Model_tags;;
 
@@ -9,34 +7,19 @@ open Model_tags;;
 let tag_to_message (x)  =
     (match x with
         | "D" -> (Some M_Msg_NewOrderSingle_Tag)
-        | "8" -> (Some M_Msg_ExecutionReport_Tag)
         | _ -> None
     )
 ;;
 
 let tag_to_rg (x)  =
     (match x with
-        | "PtysSubGrp" -> (Some MOD_FIX_Repeating_Group_PtysSubGrp)
-        | "Parties" -> (Some MOD_FIX_Repeating_Group_Parties)
         | _ -> None
     )
 ;;
 
 let tag_to_field (x)  =
     (match x with
-        | "54" -> (Some M_Field_Side_Tag)
-        | "60" -> (Some M_Field_TransactTime_Tag)
-        | "40" -> (Some M_Field_OrdType_Tag)
-        | "38" -> (Some M_Field_OrderQty_Tag)
-        | "18" -> (Some M_Field_ExecInst_Tag)
-        | "448" -> (Some M_Field_PartyID_Tag)
-        | "10002" -> (Some M_Field_PartyIndex_Tag)
-        | "37" -> (Some M_Field_OrderID_Tag)
-        | "17" -> (Some M_Field_ExecID_Tag)
-        | "150" -> (Some M_Field_ExecType_Tag)
-        | "39" -> (Some M_Field_OrdStatus_Tag)
-        | "151" -> (Some M_Field_LeavesQty_Tag)
-        | "14" -> (Some M_Field_CumQty_Tag)
+        | "44" -> (Some M_Field_Price_Tag)
         | _ -> None
     )
 ;;

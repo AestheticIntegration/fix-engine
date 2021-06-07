@@ -1,24 +1,11 @@
 (* Imandra Inc. copyright 2021 *)
 
 
-type m_field_tag =
-    | M_Field_Side_Tag 
-    | M_Field_TransactTime_Tag 
-    | M_Field_OrdType_Tag 
-    | M_Field_OrderQty_Tag 
-    | M_Field_ExecInst_Tag 
-    | M_Field_PartyID_Tag 
-    | M_Field_PartyIndex_Tag 
-    | M_Field_OrderID_Tag 
-    | M_Field_ExecID_Tag 
-    | M_Field_ExecType_Tag 
-    | M_Field_OrdStatus_Tag 
-    | M_Field_LeavesQty_Tag 
-    | M_Field_CumQty_Tag 
+type m_field_tag = 
+    | M_Field_Price_Tag 
 ;;
 
-type m_msg_tag =
+type m_msg_tag = 
     | M_Msg_NewOrderSingle_Tag 
-    | M_Msg_ExecutionReport_Tag 
 ;;
 

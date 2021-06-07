@@ -2,7 +2,7 @@
 (***
     
     Imandra Inc.
-    Copyright (c) 2014 - 2021
+    Copyright (c) 2014 - 2019
 
     fix_engine.iml
     
@@ -124,6 +124,7 @@ let proc_incoming_int_msg ( x, engine : fix_engine_int_inc_msg * fix_engine_stat
         end
         
     | IncIntMsg_ManualIntervention mi -> begin
+        print_endline @@ "ManualIntervention current seqout" ^ Z.to_string engine.outgoing_seq_num;
         let engine = { engine with incoming_int_msg = None } in
         match mi with 
         | ResetSession -> { engine with outgoing_int_msg = Some OutIntMsg_Reject }

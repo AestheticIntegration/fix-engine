@@ -1,39 +1,5 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@program]
-[@@@import "../src-core-pp/base_types_json.iml"]
-open Base_types_json;;
-[@@@import "../src-core-pp/datetime_json.iml"]
-open Datetime_json;;
-[@@@import "../src-protocol-exts/full_app_records.iml"]
-open Full_app_records;;
-[@@@import "json_generator_utils.iml"]
-open Json_generator_utils;;
-[@@@require "yojson"]
-open Yojson.Basic;;
 
-
-let orderqtydata_to_string (_d)  =
-    ""
-;;
-
-let orderqtydata_to_json (x)  : json =
-    assoc_filter_nulls ([(("OrderQty",float_6_opt_to_json x.f_OrderQtyData_OrderQty))])
-;;
-
-let ptyssubgrp_to_string (_d)  =
-    ""
-;;
-
-let ptyssubgrp_to_json (x)  : json =
-    assoc_filter_nulls ([(("NoPartySubIDs",int_opt_to_json x.f_PtysSubGrp_NoPartySubIDs));(("PartySubID",string_opt_to_json x.f_PtysSubGrp_PartySubID))])
-;;
-
-let parties_to_string (_d)  =
-    ""
-;;
-
-let parties_to_json (x)  : json =
-    assoc_filter_nulls ([(("NoPartyIDs",int_opt_to_json x.f_Parties_NoPartyIDs));(("PartyID",string_opt_to_json x.f_Parties_PartyID));(("PartyIndex",int_opt_to_json x.f_Parties_PartyIndex));(("PtysSubGrp",rg_for_json ptyssubgrp_to_json x.f_Parties_PtysSubGrp))])
-;;
 
 [@@@logic]

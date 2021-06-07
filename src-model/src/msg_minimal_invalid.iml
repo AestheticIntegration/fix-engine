@@ -5,137 +5,23 @@ open Model_messages;;
 open Msg_check_fields;;
 [@@@import "msg_check_types.iml"]
 open Msg_check_types;;
-[@@@import "msg_check_validate.iml"]
-open Msg_check_validate;;
 [@@@import "../src-types/state.iml"]
 open State;;
 
 
 let check_fields_minimal_invalid_NewOrderSingle_0 (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
-    let mod_f_NewOrderSingle_Parties_result = check_field_mod_f_NewOrderSingle_Parties msg_data m_state
+    let mod_f_NewOrderSingle_Price_result = check_field_mod_f_NewOrderSingle_Price msg_data m_state
     in
-    let mod_f_NewOrderSingle_SpreadProportion_result = check_field_mod_f_NewOrderSingle_SpreadProportion msg_data m_state
-    in
-    let mod_f_NewOrderSingle_OrdType_result = check_field_mod_f_NewOrderSingle_OrdType msg_data m_state
-    in
-    let mod_f_NewOrderSingle_ClOrdID_result = check_field_mod_f_NewOrderSingle_ClOrdID msg_data m_state
-    in
-    (&&) ((&&) ((&&) mod_f_NewOrderSingle_ClOrdID_result.field_invalid_defrej (not mod_f_NewOrderSingle_OrdType_result.field_invalid_defrej)) (not mod_f_NewOrderSingle_SpreadProportion_result.field_invalid_defrej)) (not mod_f_NewOrderSingle_Parties_result.field_invalid_defrej)
-;;
-
-let check_fields_minimal_invalid_NewOrderSingle_1 (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
-    let mod_f_NewOrderSingle_Parties_result = check_field_mod_f_NewOrderSingle_Parties msg_data m_state
-    in
-    let mod_f_NewOrderSingle_SpreadProportion_result = check_field_mod_f_NewOrderSingle_SpreadProportion msg_data m_state
-    in
-    let mod_f_NewOrderSingle_OrdType_result = check_field_mod_f_NewOrderSingle_OrdType msg_data m_state
-    in
-    let mod_f_NewOrderSingle_ClOrdID_result = check_field_mod_f_NewOrderSingle_ClOrdID msg_data m_state
-    in
-    (&&) ((&&) ((&&) mod_f_NewOrderSingle_OrdType_result.field_invalid_defrej (not mod_f_NewOrderSingle_ClOrdID_result.field_invalid_defrej)) (not mod_f_NewOrderSingle_SpreadProportion_result.field_invalid_defrej)) (not mod_f_NewOrderSingle_Parties_result.field_invalid_defrej)
-;;
-
-let check_fields_minimal_invalid_NewOrderSingle_2 (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
-    let mod_f_NewOrderSingle_Parties_result = check_field_mod_f_NewOrderSingle_Parties msg_data m_state
-    in
-    let mod_f_NewOrderSingle_SpreadProportion_result = check_field_mod_f_NewOrderSingle_SpreadProportion msg_data m_state
-    in
-    let mod_f_NewOrderSingle_OrdType_result = check_field_mod_f_NewOrderSingle_OrdType msg_data m_state
-    in
-    let mod_f_NewOrderSingle_ClOrdID_result = check_field_mod_f_NewOrderSingle_ClOrdID msg_data m_state
-    in
-    (&&) ((&&) ((&&) mod_f_NewOrderSingle_SpreadProportion_result.field_invalid_defrej (not mod_f_NewOrderSingle_ClOrdID_result.field_invalid_defrej)) (not mod_f_NewOrderSingle_OrdType_result.field_invalid_defrej)) (not mod_f_NewOrderSingle_Parties_result.field_invalid_defrej)
-;;
-
-let check_fields_minimal_invalid_NewOrderSingle_3 (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
-    let mod_f_NewOrderSingle_Parties_result = check_field_mod_f_NewOrderSingle_Parties msg_data m_state
-    in
-    let mod_f_NewOrderSingle_SpreadProportion_result = check_field_mod_f_NewOrderSingle_SpreadProportion msg_data m_state
-    in
-    let mod_f_NewOrderSingle_OrdType_result = check_field_mod_f_NewOrderSingle_OrdType msg_data m_state
-    in
-    let mod_f_NewOrderSingle_ClOrdID_result = check_field_mod_f_NewOrderSingle_ClOrdID msg_data m_state
-    in
-    (&&) ((&&) ((&&) mod_f_NewOrderSingle_Parties_result.field_invalid_defrej (not mod_f_NewOrderSingle_ClOrdID_result.field_invalid_defrej)) (not mod_f_NewOrderSingle_OrdType_result.field_invalid_defrej)) (not mod_f_NewOrderSingle_SpreadProportion_result.field_invalid_defrej)
+    mod_f_NewOrderSingle_Price_result.field_invalid_defrej
 ;;
 
 let check_fields_minimal_invalid_NewOrderSingle (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
-    let mod_f_NewOrderSingle_Parties_result = check_field_mod_f_NewOrderSingle_Parties msg_data m_state
+    let mod_f_NewOrderSingle_Price_result = check_field_mod_f_NewOrderSingle_Price msg_data m_state
     in
-    let mod_f_NewOrderSingle_SpreadProportion_result = check_field_mod_f_NewOrderSingle_SpreadProportion msg_data m_state
-    in
-    let mod_f_NewOrderSingle_OrdType_result = check_field_mod_f_NewOrderSingle_OrdType msg_data m_state
-    in
-    let mod_f_NewOrderSingle_ClOrdID_result = check_field_mod_f_NewOrderSingle_ClOrdID msg_data m_state
-    in
-    (||) ((&&) (check_fields_minimal_invalid_NewOrderSingle_3 msg_data m_state) mod_f_NewOrderSingle_Parties_result.field_invalid_defrej) ((||) ((&&) (check_fields_minimal_invalid_NewOrderSingle_2 msg_data m_state) mod_f_NewOrderSingle_SpreadProportion_result.field_invalid_defrej) ((||) ((&&) (check_fields_minimal_invalid_NewOrderSingle_1 msg_data m_state) mod_f_NewOrderSingle_OrdType_result.field_invalid_defrej) ((&&) (check_fields_minimal_invalid_NewOrderSingle_0 msg_data m_state) mod_f_NewOrderSingle_ClOrdID_result.field_invalid_defrej)))
-;;
-
-let check_fields_minimal_invalid_ExecutionReport (msg_data : mod_executionreport_data) (m_state : model_state)  : bool =
-    false
-;;
-
-let check_validate_minimal_invalid_NewOrderSingle_0 (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
-    let cust_rest3 = validate_NewOrderSingle_3 msg_data m_state
-    in
-    let cust_rest2 = validate_NewOrderSingle_2 msg_data m_state
-    in
-    let cust_rest1 = validate_NewOrderSingle_1 msg_data m_state
-    in
-    let cust_rest0 = validate_NewOrderSingle_0 msg_data m_state
-    in
-    (&&) ((&&) ((&&) cust_rest0.validate_invalid_defrej (not cust_rest1.validate_invalid_defrej)) (not cust_rest2.validate_invalid_defrej)) (not cust_rest3.validate_invalid_defrej)
-;;
-
-let check_validate_minimal_invalid_NewOrderSingle_1 (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
-    let cust_rest3 = validate_NewOrderSingle_3 msg_data m_state
-    in
-    let cust_rest2 = validate_NewOrderSingle_2 msg_data m_state
-    in
-    let cust_rest1 = validate_NewOrderSingle_1 msg_data m_state
-    in
-    let cust_rest0 = validate_NewOrderSingle_0 msg_data m_state
-    in
-    (&&) ((&&) ((&&) cust_rest1.validate_invalid_defrej (not cust_rest0.validate_invalid_defrej)) (not cust_rest2.validate_invalid_defrej)) (not cust_rest3.validate_invalid_defrej)
-;;
-
-let check_validate_minimal_invalid_NewOrderSingle_2 (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
-    let cust_rest3 = validate_NewOrderSingle_3 msg_data m_state
-    in
-    let cust_rest2 = validate_NewOrderSingle_2 msg_data m_state
-    in
-    let cust_rest1 = validate_NewOrderSingle_1 msg_data m_state
-    in
-    let cust_rest0 = validate_NewOrderSingle_0 msg_data m_state
-    in
-    (&&) ((&&) ((&&) cust_rest2.validate_invalid_defrej (not cust_rest0.validate_invalid_defrej)) (not cust_rest1.validate_invalid_defrej)) (not cust_rest3.validate_invalid_defrej)
-;;
-
-let check_validate_minimal_invalid_NewOrderSingle_3 (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
-    let cust_rest3 = validate_NewOrderSingle_3 msg_data m_state
-    in
-    let cust_rest2 = validate_NewOrderSingle_2 msg_data m_state
-    in
-    let cust_rest1 = validate_NewOrderSingle_1 msg_data m_state
-    in
-    let cust_rest0 = validate_NewOrderSingle_0 msg_data m_state
-    in
-    (&&) ((&&) ((&&) cust_rest3.validate_invalid_defrej (not cust_rest0.validate_invalid_defrej)) (not cust_rest1.validate_invalid_defrej)) (not cust_rest2.validate_invalid_defrej)
+    ((&&) (check_fields_minimal_invalid_NewOrderSingle_0 msg_data m_state) mod_f_NewOrderSingle_Price_result.field_invalid_defrej)
 ;;
 
 let check_validate_minimal_invalid_NewOrderSingle (msg_data : mod_newordersingle_data) (m_state : model_state)  : bool =
-    let cust_rest3 = validate_NewOrderSingle_3 msg_data m_state
-    in
-    let cust_rest2 = validate_NewOrderSingle_2 msg_data m_state
-    in
-    let cust_rest1 = validate_NewOrderSingle_1 msg_data m_state
-    in
-    let cust_rest0 = validate_NewOrderSingle_0 msg_data m_state
-    in
-    (||) ((&&) (check_validate_minimal_invalid_NewOrderSingle_3 msg_data m_state) cust_rest3.validate_invalid_defrej) ((||) ((&&) (check_validate_minimal_invalid_NewOrderSingle_2 msg_data m_state) cust_rest2.validate_invalid_defrej) ((||) ((&&) (check_validate_minimal_invalid_NewOrderSingle_1 msg_data m_state) cust_rest1.validate_invalid_defrej) ((&&) (check_validate_minimal_invalid_NewOrderSingle_0 msg_data m_state) cust_rest0.validate_invalid_defrej)))
-;;
-
-let check_validate_minimal_invalid_ExecutionReport (msg_data : mod_executionreport_data) (m_state : model_state)  : bool =
     false
 ;;
 
@@ -147,18 +33,10 @@ let msg_NewOrderSingle_minimal_invalid (msg_data : mod_newordersingle_data) (m_s
     (||) ((&&) fields_invalid (not validates_invalid)) ((&&) validates_invalid (not fields_invalid))
 ;;
 
-let msg_ExecutionReport_minimal_invalid (msg_data : mod_executionreport_data) (m_state : model_state)  : bool =
-    let fields_invalid = check_fields_minimal_invalid_ExecutionReport msg_data m_state
-    in
-    let validates_invalid = check_validate_minimal_invalid_ExecutionReport msg_data m_state
-    in
-    (||) ((&&) fields_invalid (not validates_invalid)) ((&&) validates_invalid (not fields_invalid))
-;;
-
 let is_message_minimal_invalid (msg : model_msg) (m_state : model_state)  : bool =
     (match msg with
         | FIX_Msg_NewOrderSingle d -> (msg_NewOrderSingle_minimal_invalid d m_state)
-        | FIX_Msg_ExecutionReport d -> (msg_ExecutionReport_minimal_invalid d m_state)
     )
+    [@@macro]
 ;;
 

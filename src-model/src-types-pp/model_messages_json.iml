@@ -6,12 +6,8 @@ open Base_types_json;;
 open Datetime_json;;
 [@@@import "../../src-protocol-exts-pp/json_generator_utils.iml"]
 open Json_generator_utils;;
-[@@@import "model_enums_json.iml"]
-open Model_enums_json;;
 [@@@import "../src-types/model_messages.iml"]
 open Model_messages;;
-[@@@import "model_repeating_groups_json.iml"]
-open Model_repeating_groups_json;;
 [@@@import "model_tags_json.iml"]
 open Model_tags_json;;
 [@@@require "yojson"]
@@ -19,102 +15,22 @@ open Yojson.Basic;;
 
 
 let mod_newordersingle_opt_def_to_json (x)  : json =
-    assoc_filter_nulls ([(("ClOrdID",(match x.mod_def_opt_f_NewOrderSingle_ClOrdID with
-        | None -> `Null
-        | Some x -> (string_to_json x)
-    )
-    ));(("Side",mod_side_to_json x.mod_def_opt_f_NewOrderSingle_Side));(("TransactTime",let x = x.mod_def_opt_f_NewOrderSingle_TransactTime
-    in
-    utctimestamp_milli_to_json x
-    ));(("OrdType",mod_ordtype_to_json x.mod_def_opt_f_NewOrderSingle_OrdType));(("OrderQtyData.OrderQty",float_6_to_json x.mod_def_opt_f_NewOrderSingle_OrderQtyData_OrderQty));(("SpreadProportion",(match x.mod_def_opt_f_NewOrderSingle_SpreadProportion with
-        | None -> `Null
-        | Some x -> (float_to_json x)
-    )
-    ));(("Price",(match x.mod_def_opt_f_NewOrderSingle_Price with
-        | None -> `Null
-        | Some x -> (float_2_to_json x)
-    )
-    ));(("Account",(match x.mod_def_opt_f_NewOrderSingle_Account with
-        | None -> `Null
-        | Some x -> (string_to_json x)
-    )
-    ));(("ExecInst",(match x.mod_def_opt_f_NewOrderSingle_ExecInst with
-        | None -> `Null
-        | Some x -> (mod_execinst_to_json x)
-    )
-    ));(("Parties",mod_parties_to_json x.mod_def_opt_f_NewOrderSingle_Parties))])
+    assoc_filter_nulls ([(("Price",float_6_to_json x.mod_def_opt_f_NewOrderSingle_Price))])
 ;;
 
 let mod_newordersingle_to_json (x)  : json =
-    assoc_filter_nulls ([(("ClOrdID",(match x.mod_f_NewOrderSingle_ClOrdID with
-        | None -> `Null
-        | Some x -> (string_to_json x)
-    )
-    ));(("Side",mod_side_to_json x.mod_f_NewOrderSingle_Side));(("TransactTime",let x = x.mod_f_NewOrderSingle_TransactTime
-    in
-    utctimestamp_milli_to_json x
-    ));(("OrdType",mod_ordtype_to_json x.mod_f_NewOrderSingle_OrdType));(("OrderQtyData.OrderQty",float_6_to_json x.mod_f_NewOrderSingle_OrderQtyData_OrderQty));(("SpreadProportion",(match x.mod_f_NewOrderSingle_SpreadProportion with
-        | None -> `Null
-        | Some x -> (float_to_json x)
-    )
-    ));(("Price",(match x.mod_f_NewOrderSingle_Price with
-        | None -> `Null
-        | Some x -> (float_2_to_json x)
-    )
-    ));(("Account",(match x.mod_f_NewOrderSingle_Account with
-        | None -> `Null
-        | Some x -> (string_to_json x)
-    )
-    ));(("ExecInst",mod_execinst_to_json x.mod_f_NewOrderSingle_ExecInst));(("Parties",mod_parties_to_json x.mod_f_NewOrderSingle_Parties))])
-;;
-
-let mod_executionreport_opt_def_to_json (x)  : json =
-    assoc_filter_nulls ([(("OrderID",string_to_json x.mod_def_opt_f_ExecutionReport_OrderID));
-    (("ExecID",string_to_json x.mod_def_opt_f_ExecutionReport_ExecID));
-    (("ExecType",mod_exectype_to_json x.mod_def_opt_f_ExecutionReport_ExecType));
-    (("OrdStatus",mod_ordstatus_to_json x.mod_def_opt_f_ExecutionReport_OrdStatus));
-    (("Side",mod_side_to_json x.mod_def_opt_f_ExecutionReport_Side));
-    (("OrderQtyData.OrderQty",float_6_to_json x.mod_def_opt_f_ExecutionReport_OrderQtyData_OrderQty));
-    (("LeavesQty",float_6_to_json x.mod_def_opt_f_ExecutionReport_LeavesQty));
-    (("CumQty",float_6_to_json x.mod_def_opt_f_ExecutionReport_CumQty));
-    (("Text",(match x.mod_def_opt_f_ExecutionReport_Text with
-        | None -> `Null
-        | Some x -> (string_to_json x)
-    )
-    ));
-    (("Parties",mod_parties_to_json x.mod_def_opt_f_ExecutionReport_Parties));
-    (("ExecInst",mod_execinst_to_json x.mod_def_opt_f_ExecutionReport_ExecInst))])
-;;
-
-let mod_executionreport_to_json (x)  : json =
-    assoc_filter_nulls ([(("OrderID",string_to_json x.mod_f_ExecutionReport_OrderID));
-    (("ExecID",string_to_json x.mod_f_ExecutionReport_ExecID));
-    (("ExecType",mod_exectype_to_json x.mod_f_ExecutionReport_ExecType));
-    (("OrdStatus",mod_ordstatus_to_json x.mod_f_ExecutionReport_OrdStatus));
-    (("Side",mod_side_to_json x.mod_f_ExecutionReport_Side));
-    (("OrderQtyData.OrderQty",float_6_to_json x.mod_f_ExecutionReport_OrderQtyData_OrderQty));
-    (("LeavesQty",float_6_to_json x.mod_f_ExecutionReport_LeavesQty));
-    (("CumQty",float_6_to_json x.mod_f_ExecutionReport_CumQty));
-    (("Text",(match x.mod_f_ExecutionReport_Text with
-        | None -> `Null
-        | Some x -> (string_to_json x)
-    )
-    ));
-    (("Parties",mod_parties_to_json x.mod_f_ExecutionReport_Parties));
-    (("ExecInst",mod_execinst_to_json x.mod_f_ExecutionReport_ExecInst))])
+    assoc_filter_nulls ([(("Price",float_6_to_json x.mod_f_NewOrderSingle_Price))])
 ;;
 
 let json_of_model_msg (x)  : json =
     (match x with
         | FIX_Msg_NewOrderSingle x -> (`Assoc ([(("tag",`String "D"));(("data",mod_newordersingle_to_json x))]))
-        | FIX_Msg_ExecutionReport x -> (`Assoc ([(("tag",`String "8"));(("data",mod_executionreport_to_json x))]))
     )
 ;;
 
 let json_of_model_msg_opt_def (x)  : json =
     (match x with
         | FIX_Msg_Def_Opt_NewOrderSingle x -> (`Assoc ([(("tag",`String "D"));(("data",mod_newordersingle_opt_def_to_json x))]))
-        | FIX_Msg_Def_Opt_ExecutionReport x -> (`Assoc ([(("tag",`String "8"));(("data",mod_executionreport_opt_def_to_json x))]))
     )
 ;;
 

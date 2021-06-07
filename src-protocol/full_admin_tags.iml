@@ -1,8 +1,8 @@
-(***
+(*** 
 
     Imandra Inc.
-    Copyright (c) 2014 - 2021
-
+    Copyright (c) 2014 - 2019
+    
     full_admin_tags.ml
 
 *)
@@ -10,74 +10,71 @@
 (** Message and field tag datatypes for administrative FIX messages.*)
 
 (** Admin message tags *)
-type full_admin_msg_tag =
-  | Full_Msg_BusinessMessageReject_Tag
-  | Full_Msg_Heartbeat_Tag
-  | Full_Msg_Logon_Tag
-  | Full_Msg_Logout_Tag
-  | Full_Msg_Reject_Tag
-  | Full_Msg_ResendRequest_Tag
-  | Full_Msg_SequenceReset_Tag
-  | Full_Msg_TestRequest_Tag
+type full_admin_msg_tag = 
+    | Full_Msg_Heartbeat_Tag
+    | Full_Msg_Logon_Tag
+    | Full_Msg_Logoff_Tag
+    | Full_Msg_Reject_Tag
+    | Full_Msg_Business_Reject_Tag
+    | Full_Msg_Resend_Request_Tag
+    | Full_Msg_Sequence_Reset_Tag
+    | Full_Msg_Test_Request_Tag
 ;;
 
 (** Admin message fields tags *)
 type full_admin_field_tag =
-    | Full_Field_BeginSeqNo_Tag
-    | Full_Field_BeginString_Tag
-    | Full_Field_BodyLength_Tag
-    | Full_Field_CheckSum_Tag
-    | Full_Field_EndSeqNo_Tag
-    | Full_Field_MsgSeqNum_Tag
-    | Full_Field_MsgType_Tag
-    | Full_Field_NewSeqNo_Tag
-    | Full_Field_PossDupFlag_Tag
-    | Full_Field_RefSeqNum_Tag
-    | Full_Field_SenderCompID_Tag
-    | Full_Field_SenderSubID_Tag
-    | Full_Field_SendingTime_Tag
-    | Full_Field_TargetCompID_Tag
-    | Full_Field_TargetSubID_Tag
-    | Full_Field_Text_Tag
-    | Full_Field_Signature_Tag
-    | Full_Field_SecureDataLen_Tag
-    | Full_Field_SecureData_Tag
-    | Full_Field_SignatureLength_Tag
-    | Full_Field_RawDataLength_Tag
-    | Full_Field_RawData_Tag
-    | Full_Field_PossResend_Tag
-    | Full_Field_EncryptMethod_Tag
-    | Full_Field_HeartBtInt_Tag
-    | Full_Field_TestReqID_Tag
-    | Full_Field_OnBehalfOfLocationID_Tag
-    | Full_Field_OnBehalfOfCompID_Tag
-    | Full_Field_OnBehalfOfSubID_Tag
-    | Full_Field_OnBehalfOfSendingTime_Tag
-    | Full_Field_OrigSendingTime_Tag
-    | Full_Field_GapFillFlag_Tag
-    | Full_Field_DeliverToCompID_Tag
-    | Full_Field_DeliverToSubID_Tag
-    | Full_Field_ResetSeqNumFlag_Tag
-    | Full_Field_SenderLocationID_Tag
-    | Full_Field_TargetLocationID_Tag
-    | Full_Field_DeliverToLocationID_Tag
-    | Full_Field_XmlDataLen_Tag
-    | Full_Field_XmlData_Tag
-    | Full_Field_MessageEncoding_Tag
-    | Full_Field_EncodedTextLen_Tag
-    | Full_Field_EncodedText_Tag
-    | Full_Field_LastMsgSeqNumProcessed_Tag
-    | Full_Field_RefTagID_Tag
-    | Full_Field_RefMsgType_Tag
-    | Full_Field_SessionRejectReason_Tag
-    | Full_Field_BusinessRejectReason_Tag
-    | Full_Field_MaxMessageSize_Tag
-    | Full_Field_TestMessageIndicator_Tag
-    | Full_Field_Username_Tag
-    | Full_Field_Password_Tag
-    | Full_Field_NoHops_Tag
-    | Full_Field_NextExpectedMsgSeqNum_Tag
-    | Full_Field_HopCompID_Tag
-    | Full_Field_HopSendingTime_Tag
-    | Full_Field_HopRefID_Tag
+    | Full_Msg_BeginSeqNo_Tag
+    | Full_Msg_BeginString_Tag
+    | Full_Msg_BodyLength_Tag
+    | Full_Msg_CheckSum_Tag
+    | Full_Msg_EndSeqNo_Tag
+    | Full_Msg_MsgSeqNum_Tag                 
+    | Full_Msg_NewSeqNo_Tag
+    | Full_Msg_PossDupFlag_Tag                   
+    | Full_Msg_RefSeqNum_Tag
+    | Full_Msg_SenderCompID_Tag              
+    | Full_Msg_SenderSubID_Tag                  
+    | Full_Msg_SendingTime_Tag                   
+    | Full_Msg_TargetCompID_Tag              
+    | Full_Msg_TargetSubID_Tag                  
+    | Full_Msg_Text_Tag
+    | Full_Msg_Signature_Tag
+    | Full_Msg_SecureDataLen_Tag                
+    | Full_Msg_SecureData_Tag                    
+    | Full_Msg_SignatureLength_Tag
+    | Full_Msg_RawDataLength_Tag
+    | Full_Msg_RawData_Tag
+    | Full_Msg_PossResend_Tag                     
+    | Full_Msg_EncryptMethod_Tag
+    | Full_Msg_HeartBtInt_Tag
+    | Full_Msg_TestReqID_Tag
+    | Full_Msg_OnBehalfOfLocationID_Tag      
+    | Full_Msg_OnBehalfOfCompID_Tag         
+    | Full_Msg_OnBehalfOfSubID_Tag           
+    | Full_Msg_OrigSendingTime_Tag             
+    | Full_Msg_GapFillFlag_Tag
+    | Full_Msg_DeliverToCompID_Tag            
+    | Full_Msg_DeliverToSubID_Tag             
+    | Full_Msg_ResetSeqNumFlag_Tag
+    | Full_Msg_SenderLocationID_Tag            
+    | Full_Msg_TargetLocationID_Tag            
+    | Full_Msg_DeliverToLocationID_Tag        
+    | Full_Msg_XMLDataLen_Tag                  
+    | Full_Msg_XMLData_Tag                      
+    | Full_Msg_MessageEnconding_Tag             
+    | Full_Msg_EncodedTextLen_Tag
+    | Full_Msg_EncodedText_Tag
+    | Full_Msg_LastMsgSeqNumProcessed_Tag    
+    | Full_Msg_RefTagID_Tag  
+    | Full_Msg_RefMsgType_Tag
+    | Full_Msg_SessionRejectReason_Tag
+    | Full_Msg_BusinessRejectReason_Tag
+    | Full_Msg_MaxMessageSize_Tag
+    | Full_Msg_TestMessageIndicator_Tag
+    | Full_Msg_Username_Tag
+    | Full_Msg_Password_Tag
+    | Full_Msg_NoHops_Tag                      
+    | Full_Msg_NextExpectedMsgSeqNum_Tag          
 ;;
+
+

@@ -1,44 +1,4 @@
 (* Imandra Inc. copyright 2021 *)
-[@@@import "../src-core/datetime.iml"]
-open Datetime;;
-[@@@import "../src-core/numeric.iml"]
-open Numeric;;
-[@@@import "../src-core-time-defaults/time_defaults.iml"]
-open Time_defaults;;
 
 
-type fix_orderqtydata = {
-(** One of CashOrderQty, OrderQty, or (for CIV only) OrderPercent is required. Note that unless otherwise specified, only one of CashOrderQty, OrderQty, or OrderPercent should be specified.*)
-    f_OrderQtyData_OrderQty : fix_float_6 option
-}
-;;
-
-type fix_rg_inner_ptyssubgrp = {
-    f_PtysSubGrp_NoPartySubIDs : int option;
-    f_PtysSubGrp_PartySubID : string option
-}
-;;
-
-type fix_rg_ptyssubgrp = fix_rg_inner_ptyssubgrp list
-;;
-
-type fix_rg_inner_parties = {
-(** Repeating group below should contain unique combinations of PartyID, PartyIDSource, and PartyRole*)
-    f_Parties_NoPartyIDs : int option;
-(** Used to identify source of PartyID. Required if PartyIDSource is specified. Required if NoPartyIDs > 0.*)
-    f_Parties_PartyID : string option;
-(** Repeating group of Party sub-identifiers.*)
-    f_Parties_PtysSubGrp : fix_rg_ptyssubgrp;
-    f_Parties_PartyIndex : int option
-}
-;;
-
-type fix_rg_parties = fix_rg_inner_parties list
-;;
-
-type full_fix_app_record_data =
-    | FIX_Record_OrderQtyData of fix_orderqtydata
-    | FIX_Record_PtysSubGrp of fix_rg_ptyssubgrp
-    | FIX_Record_Parties of fix_rg_parties
-;;
 

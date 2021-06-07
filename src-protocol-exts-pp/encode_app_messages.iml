@@ -1,9 +1,5 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@program]
-[@@@import "encode_app_enums.iml"]
-open Encode_app_enums;;
-[@@@import "encode_app_records.iml"]
-open Encode_app_records;;
 [@@@import "../src-core-pp/encode_base_types.iml"]
 open Encode_base_types;;
 [@@@import "../src-core-pp/encode_datetime.iml"]
@@ -15,17 +11,12 @@ open Full_app_messages;;
 
 
 let encode_NewOrderSingle (msg)  =
-    (@) (encode_OrderQtyData msg.f_NewOrderSingle_OrderQtyData) ((@) ([(("11",enc_opt encode_string msg.f_NewOrderSingle_ClOrdID));(("1",enc_opt encode_string msg.f_NewOrderSingle_Account));(("18",enc_split_opt encode_ExecInst msg.f_NewOrderSingle_ExecInst));(("54",enc_opt encode_Side msg.f_NewOrderSingle_Side));(("60",enc_opt encode_UTCTimestamp_milli msg.f_NewOrderSingle_TransactTime));(("40",enc_opt encode_OrdType msg.f_NewOrderSingle_OrdType));(("44",enc_opt encode_float_2 msg.f_NewOrderSingle_Price));(("10001",enc_opt encode_float msg.f_NewOrderSingle_SpreadProportion))]) ((@) (enc_repeat encode_Parties "453" msg.f_NewOrderSingle_Parties) []))
-;;
-
-let encode_ExecutionReport (msg)  =
-    (@) (encode_OrderQtyData msg.f_ExecutionReport_OrderQtyData) ((@) ([(("37",enc_opt encode_string msg.f_ExecutionReport_OrderID));(("17",enc_opt encode_string msg.f_ExecutionReport_ExecID));(("150",enc_opt encode_ExecType msg.f_ExecutionReport_ExecType));(("39",enc_opt encode_OrdStatus msg.f_ExecutionReport_OrdStatus));(("54",enc_opt encode_Side msg.f_ExecutionReport_Side));(("18",enc_split_opt encode_ExecInst msg.f_ExecutionReport_ExecInst));(("151",enc_opt encode_float_6 msg.f_ExecutionReport_LeavesQty));(("14",enc_opt encode_float_6 msg.f_ExecutionReport_CumQty));(("58",enc_opt encode_string msg.f_ExecutionReport_Text))]) ((@) (enc_repeat encode_Parties "453" msg.f_ExecutionReport_Parties) []))
+    (@) ([(("44",enc_opt encode_float_6 msg.f_NewOrderSingle_Price))]) []
 ;;
 
 let encode_app_msg_data (msg)  =
     (match msg with
         | FIX_Full_Msg_NewOrderSingle msg -> (encode_NewOrderSingle msg)
-        | FIX_Full_Msg_ExecutionReport msg -> (encode_ExecutionReport msg)
     )
 ;;
 

@@ -1,17 +1,3 @@
 (* Imandra Inc. copyright 2021 *)
-[@@@import "../../src-core/numeric.iml"]
-open Numeric;;
 
-
-type m_action_fix_bookstate = {
-    mod_f_bookState_bestBid : fix_float_2;
-    mod_f_bookState_bestAsk : fix_float_2
-}
-;;
-
-type m_action_fix_fill = {
-    mod_f_fill_fill_price : fix_float_2;
-    mod_f_fill_fill_qty : fix_float_6
-}
-;;
 

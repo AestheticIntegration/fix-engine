@@ -1,64 +1,11 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@program]
-[@@@import "../../src-core-pp/base_types_json.iml"]
-open Base_types_json;;
-[@@@import "../../src-core/datetime.iml"]
-open Datetime;;
-[@@@import "../../src-core-pp/datetime_json.iml"]
-open Datetime_json;;
-[@@@import "../../src-protocol-exts-pp/json_generator_utils.iml"]
-open Json_generator_utils;;
-[@@@import "../src-types/model_app_enums.iml"]
-open Model_app_enums;;
-[@@@import "model_enums_json.iml"]
-open Model_enums_json;;
-[@@@import "../src-types/model_repeating_groups.iml"]
-open Model_repeating_groups;;
-[@@@import "model_repeating_groups_json.iml"]
-open Model_repeating_groups_json;;
-[@@@import "../../src-core/numeric.iml"]
-open Numeric;;
 [@@@import "../src-types/state.iml"]
 open State;;
-[@@@import "../../src-core-time-defaults/time_defaults.iml"]
-open Time_defaults;;
-[@@@require "yojson"]
-open Yojson.Basic;;
 
-
-let mod_internal_state_to_json (x)  : json =
-    assoc_filter_nulls ([(("state.live_order",bool_to_json x.mod_f_internal_state_live_order));
-    (("state.AvgPx",float_to_json x.mod_f_internal_state_AvgPx));
-    (("state.bestBid",float_2_to_json x.mod_f_internal_state_bestBid));
-    (("state.bestAsk",float_2_to_json x.mod_f_internal_state_bestAsk));
-    (("state.Side",mod_side_to_json x.mod_f_internal_state_Side));
-    (("state.Price",(match x.mod_f_internal_state_Price with
-        | None -> `Null
-        | Some x -> (float_2_to_json x)
-    )
-    ));
-    (("state.OrderQtyData.OrderQty",float_6_to_json x.mod_f_internal_state_OrderQtyData_OrderQty));
-    (("state.OrdStatus",mod_ordstatus_to_json x.mod_f_internal_state_OrdStatus));
-    (("state.OrdType",mod_ordtype_to_json x.mod_f_internal_state_OrdType));
-    (("state.LeavesQty",float_6_to_json x.mod_f_internal_state_LeavesQty));
-    (("state.CumQty",float_6_to_json x.mod_f_internal_state_CumQty));
-    (("state.SpreadProportion",(match x.mod_f_internal_state_SpreadProportion with
-        | None -> `Null
-        | Some x -> (float_to_json x)
-    )
-    ));
-    (("state.Parties",mod_parties_to_json x.mod_f_internal_state_Parties));
-    (("state.ExecInst",mod_execinst_to_json x.mod_f_internal_state_ExecInst));
-    (("state.OrderID",string_to_json x.mod_f_internal_state_OrderID));
-    (("state.ExecType",mod_exectype_to_json x.mod_f_internal_state_ExecType))])
-;;
-
-let mod_internal_fresh_state'_to_json (x)  : json =
-    assoc_filter_nulls ([(("fresh_state'.seed_string",string_to_json x.mod_f_internal_fresh_state'_seed_string))])
-;;
 
 let json_of_fix_internals (x : internal_states_types)  =
-    `Assoc (("fresh_state'",mod_internal_fresh_state'_to_json x.int_el_fresh_state') :: (("state",mod_internal_state_to_json x.int_el_state) :: []))
+    `Assoc []
 ;;
 
 [@@@logic]

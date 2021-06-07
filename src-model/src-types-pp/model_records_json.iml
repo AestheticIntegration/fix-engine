@@ -1,37 +1,5 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@program]
-[@@@import "../../src-core-pp/base_types_json.iml"]
-open Base_types_json;;
-[@@@import "../../src-core-pp/datetime_json.iml"]
-open Datetime_json;;
-[@@@import "../../src-protocol-exts-pp/json_generator_utils.iml"]
-open Json_generator_utils;;
-[@@@import "../src-types/model_records.iml"]
-open Model_records;;
-[@@@require "yojson"]
-open Yojson.Basic;;
 
-
-let mod_act_bookstate_opt_to_json (y)  : json =
-    (match y with
-        | None -> `Null
-        | Some x -> (assoc_filter_nulls ([(("bestBid",float_2_to_json x.mod_f_bookState_bestBid));(("bestAsk",float_2_to_json x.mod_f_bookState_bestAsk))]))
-    )
-;;
-
-let mod_act_bookstate_to_json (x)  : json =
-    assoc_filter_nulls ([(("bestBid",float_2_to_json x.mod_f_bookState_bestBid));(("bestAsk",float_2_to_json x.mod_f_bookState_bestAsk))])
-;;
-
-let mod_act_fill_opt_to_json (y)  : json =
-    (match y with
-        | None -> `Null
-        | Some x -> (assoc_filter_nulls ([(("fill_price",float_2_to_json x.mod_f_fill_fill_price));(("fill_qty",float_6_to_json x.mod_f_fill_fill_qty))]))
-    )
-;;
-
-let mod_act_fill_to_json (x)  : json =
-    assoc_filter_nulls ([(("fill_price",float_2_to_json x.mod_f_fill_fill_price));(("fill_qty",float_6_to_json x.mod_f_fill_fill_qty))])
-;;
 
 [@@@logic]

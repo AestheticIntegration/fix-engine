@@ -1,28 +1,11 @@
 (* Imandra Inc. copyright 2021 *)
 
 
-type full_app_msg_tag =
+type full_app_msg_tag = 
     | Full_Msg_NewOrderSingle_Tag 
-    | Full_Msg_ExecutionReport_Tag 
 ;;
 
-type full_app_field_tag =
-    | Full_Field_ClOrdID_Tag 
-    | Full_Field_Parties_Tag 
-    | Full_Field_Account_Tag 
-    | Full_Field_ExecInst_Tag 
-    | Full_Field_Side_Tag 
-    | Full_Field_TransactTime_Tag 
-    | Full_Field_OrderQtyData_Tag 
-    | Full_Field_OrdType_Tag 
+type full_app_field_tag = 
     | Full_Field_Price_Tag 
-    | Full_Field_SpreadProportion_Tag 
-    | Full_Field_OrderID_Tag 
-    | Full_Field_ExecID_Tag 
-    | Full_Field_ExecType_Tag 
-    | Full_Field_OrdStatus_Tag 
-    | Full_Field_LeavesQty_Tag 
-    | Full_Field_CumQty_Tag 
-    | Full_Field_Text_Tag 
 ;;
 

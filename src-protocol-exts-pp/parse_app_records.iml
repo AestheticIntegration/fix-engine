@@ -1,45 +1,5 @@
 (* Imandra Inc. copyright 2021 *)
 [@@@program]
-[@@@import "../src-protocol-exts/full_app_records.iml"]
-open Full_app_records;;
-[@@@import "../src-core-pp/parse_base_types.iml"]
-open Parse_base_types;;
-[@@@import "../src-core-pp/parse_datetime.iml"]
-open Parse_datetime;;
-[@@@import "../src-core-pp/parser_utils.iml"]
-open Parser_utils.Parser;;
 
-
-let parse_OrderQtyData (msg)  =
-    opt msg "38" parse_float (fun msg f_OrderQtyData_OrderQty -> 
-    (ParseSuccess {
-        f_OrderQtyData_OrderQty = f_OrderQtyData_OrderQty
-    },msg)
-    )
-;;
-
-let parse_PtysSubGrp (msg) (f_PtysSubGrp_NoPartySubIDs)  =
-    opt msg "523" parse_string (fun msg f_PtysSubGrp_PartySubID -> 
-    (ParseSuccess {
-        f_PtysSubGrp_NoPartySubIDs = f_PtysSubGrp_NoPartySubIDs;
-        f_PtysSubGrp_PartySubID = f_PtysSubGrp_PartySubID
-    },msg)
-    )
-;;
-
-let parse_Parties (msg) (f_Parties_NoPartyIDs)  =
-    opt msg "10002" parse_int (fun msg f_Parties_PartyIndex -> 
-    opt msg "448" parse_string (fun msg f_Parties_PartyID -> 
-    repeating msg "802" parse_PtysSubGrp (fun msg f_Parties_PtysSubGrp -> 
-    (ParseSuccess {
-        f_Parties_PtysSubGrp = f_Parties_PtysSubGrp;
-        f_Parties_NoPartyIDs = f_Parties_NoPartyIDs;
-        f_Parties_PartyID = f_Parties_PartyID;
-        f_Parties_PartyIndex = f_Parties_PartyIndex
-    },msg)
-    )
-    )
-    )
-;;
 
 [@@@logic]
